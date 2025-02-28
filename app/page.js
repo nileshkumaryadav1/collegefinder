@@ -1,101 +1,161 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import AboutUs from "./about/page";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [colleges, setColleges] = useState([]);
+  const [exams, setExams] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const fetchColleges = async () => {
+      try {
+        const res = await fetch("/api/colleges");
+        const data = await res.json();
+        setColleges(data);
+      } catch (error) {
+        console.error("Error fetching colleges:", error);
+      }
+      setLoading(false);
+    };
+
+    fetchColleges();
+  }, []);
+
+  useEffect(() => {
+    const fetchExams = async () => {
+      try {
+        const res = await fetch("/api/exams");
+        const data = await res.json();
+        setExams(data);
+      } catch (error) {
+        console.error("Error fetching exams:", error);
+      }
+      setLoading(false);
+    };
+    
+    fetchExams();
+  }, []);
+
+  // if (loading) return <p className="text-center mt-10">Loading colleges...</p>;
+  // if (loading) return <p className="text-center mt-10">Loading exams...</p>;
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      {/* 🔹 Hero Section */}
+      <section
+        className="relative h-[60vh] flex items-center justify-center text-center bg-cover bg-center"
+        style={{ backgroundImage: "url('/hero.jpg')" }}
+      >
+        <div className="p-6 rounded-lg">
+          <h1 className="text-4xl md:text-6xl text-white font-bold mb-4 [text-shadow:_0_4px_8px_rgba(14_165_223_/_0.5)] text-sky-400 text-2xl md:text-2xl leading-snug font-manrope font-extrabold">
+            Find Your Dream College
+          </h1>
+          <p className="text-lg text-white [text-shadow:_0_4px_8px_rgba(14_165_223_/_0.5)] text-sky-400 text-xl md:text-2xl leading-snug font-manrope md:font-extrabold">
+            Explore top colleges & entrance exams all in one place.
+          </p>
+          <Link href="/colleges">
+            <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition">
+              Explore Now
+            </button>
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* 🔹 Featured Colleges */}
+      <section className="max-w-6xl mx-auto p-6">
+        <h2 className="text-3xl font-bold text-center mb-6">Top Colleges</h2>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {/* Example College Card */}
+          {colleges.map((college) => (
+            <div
+              key={college._id}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+            >
+              <img
+                src={college.image}
+                alt={college.name}
+                className="w-full h-40 object-cover"
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-semibold">{college.name}</h2>
+                <p className="text-gray-600">{college.location}</p>
+                <p className="text-gray-800 font-bold">
+                  Ranking: #{college.ranking}
+                </p>
+                <Link
+                  href={`/colleges/${college._id}`}
+                  className="text-blue-500 mt-2 inline-block"
+                >
+                  View Details →
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 🔹 Popular Exams */}
+      <section className="bg-blue-50 py-12">
+        <div className="max-w-6xl mx-auto p-6">
+          <h2 className="text-3xl font-bold text-center mb-6">Popular Exams</h2>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {exams.map((exam) => (
+              <div
+                key={exam._id}
+                className="bg-white rounded-lg shadow-md overflow-hidden"
+              >
+                <img
+                  src={
+                    "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2019/12/exam-1575444923.jpg"
+                  }
+                  alt={exam.name}
+                  className="w-full h-40 object-cover"
+                />
+                <div className="p-4">
+                  <h2 className="text-xl font-semibold">{exam.name}</h2>
+                  <p className="text-gray-600">{exam.date}</p>
+                  <p className="text-gray-600">
+                    Eligibility: {exam.eligibility.slice(0, 20) + "..."}
+                  </p>
+                  <p className="text-gray-600">
+                    Syllabus: {exam.syllabus.slice(0, 20) + "..."}
+                  </p>
+                  <Link
+                    href={`/exams/${exam._id}`}
+                    className="text-blue-500 mt-2 inline-block"
+                  >
+                    View Details →
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 About Section */}
+      <section className="max-w-6xl mx-auto p-6">
+        <h2 className="text-3xl font-bold text-center mb-6">Why Choose Us?</h2>
+        <p className="text-gray-700 text-center max-w-3xl mx-auto">
+          Our platform helps students discover the best colleges, understand
+          entrance exams, and make informed decisions for their future.
+        </p>
+      </section>
+
+      {/* 🔹 Call to Action */}
+      <section className="text-center py-12 bg-gray-900 text-white">
+        <h2 className="text-3xl font-bold">Ready to Explore?</h2>
+        <Link href="/colleges">
+          <button className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-lg shadow-lg transition">
+            Get Started
+          </button>
+        </Link>
+      </section>
+
+      <AboutUs />
     </div>
   );
 }
