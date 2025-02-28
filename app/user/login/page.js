@@ -80,7 +80,7 @@ export default function LoginPage() {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
-        <Link href="/user/register" className="block text-center mt-4 text-blue-500">Don't have an account? Register here.</Link>
+        <Link href="/user/register" className="block text-center mt-4 text-blue-500">Do not have an account? Register here.</Link>
       </div>
     </div>
   );
