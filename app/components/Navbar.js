@@ -32,7 +32,7 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-black">
+        <Link href="/" className="text-2xl font-bold text-black [text-shadow:_0_4px_8px_rgba(14_165_223_/_0.5)] text-sky-400 text-2xl md:text-2xl leading-snug font-manrope font-extrabold">
           College Finder
         </Link>
 

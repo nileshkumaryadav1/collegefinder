@@ -20,7 +20,7 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Tech Stack used-
+## Tech Stack used
 
 1) NextJS - for complete backend and frontend
 2) Mongodb - for storing users, college and exams data
