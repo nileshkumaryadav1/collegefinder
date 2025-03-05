@@ -121,7 +121,6 @@ export default function EditExamPage() {
           value={formData.imageUrl}
           onChange={handleChange}
           className="border p-2 rounded w-full"
-          required
         />
         <button
           type="submit"

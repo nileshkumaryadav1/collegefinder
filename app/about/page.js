@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function AboutUs() {
   return (
-    <div className="h-170 md:h-150 bg-gray-100 dark:bg-gray-900 py-12">
+    <div className="h-auto md:h-150 bg-gray-100 dark:bg-gray-900 md:py-12 py-4">
       <div className="max-w-5xl mx-auto px-6">
         {/* Page Title */}
         <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-8">

@@ -144,7 +144,6 @@ export default function AddExamPage() {
           value={formData.imageUrl}
           onChange={handleChange}
           className="border p-2 rounded w-full"
-          required
         />
         <button
           type="submit"
@@ -185,15 +184,6 @@ export default function AddExamPage() {
                     <td className="border p-2">{exam.eligibility}</td>
                     <td className="border p-2">{exam.syllabus}</td>
                     <td className="border p-2">{exam.website}</td>
-                    {/* {exam.imageUrl && (
-                      <Image
-                        src={exam.imageUrl}
-                        alt={exam.name}
-                        width={500}
-                        height={500}
-                        className="w-full h-40 object-cover"
-                      />
-                    )} */}
                     <td className="border p-2 space-x-2">
                       <button
                         onClick={() => router.push(`/admin/exams/${exam._id}`)}
