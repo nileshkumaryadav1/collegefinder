@@ -7,6 +7,7 @@ const ExamSchema = new mongoose.Schema(
     eligibility: { type: String, required: true },
     syllabus: { type: String, required: true },
     website: { type: String, required: true },
+    imageUrl: { type: String, required: true },
   },
   { timestamps: true }
 );

@@ -1,5 +1,6 @@
 "use client";
 import { Mail, Github, Linkedin } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function AboutUs() {
@@ -20,6 +21,13 @@ export default function AboutUs() {
 
         {/* Developer Section */}
         <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-8 text-center">
+          <Image
+            src="/profile.jpg"
+            alt="Nilesh Kumar"
+            width={100}
+            height={100}
+            className="mx-auto rounded-full mb-4"
+          />
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
             Meet the Developer
           </h2>

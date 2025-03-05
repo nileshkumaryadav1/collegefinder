@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react"; // Icons for the mobile menu
+import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,12 +33,14 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-black [text-shadow:_0_4px_8px_rgba(14_165_223_/_0.5)] text-sky-400 text-2xl md:text-2xl leading-snug font-manrope font-extrabold">
-          College Finder
+        <Link href="/" className="text-2xl font-bold text-black text-blue-500 text-1xl md:text-2xl leading-snug font-manrope font-extrabold flex items-center">
+        <Image src="/favicon.ico" alt="" width={50} height={50} className="mr-2" />
+        <p className="text-blue-500 text-3xl mr-1">College</p>
+        <p className="text-gray-800 text-3xl">Finder</p>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-3">
           <NavLink href="/">Home</NavLink>
           <NavLink href="/colleges">Colleges</NavLink>
           <NavLink href="/exams">Exams</NavLink>

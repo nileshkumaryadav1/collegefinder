@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import AboutUs from "./about/page";
+import Image from "next/image";
 
 export default function Home() {
   const [colleges, setColleges] = useState([]);
@@ -107,13 +108,15 @@ export default function Home() {
                 key={exam._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden"
               >
-                <img
-                  src={
-                    "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2019/12/exam-1575444923.jpg"
-                  }
+                {exam.imageUrl && (
+                <Image
+                  src={exam.imageUrl}
                   alt={exam.name}
+                  width={500}
+                  height={500}
                   className="w-full h-40 object-cover"
                 />
+                )}
                 <div className="p-4">
                   <h2 className="text-xl font-semibold">{exam.name}</h2>
                   <p className="text-gray-600">{exam.date}</p>
