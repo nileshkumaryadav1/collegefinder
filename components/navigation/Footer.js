@@ -1,21 +1,21 @@
 import Link from "next/link";
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-8">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-2">
           {/* Brand Info */}
           <div>
             <h4 className="text-xl font-semibold text-white">College Finder</h4>
-            <p className="mt-2 text-gray-400">Find the best colleges and exams for your future.</p>
+            <p className="mt-2 text-gray-400">College Finder is our go-to platform for discovering top colleges, exams, syllabus & scholarships across various fields. We help students make informed decisions about their academic future with accurate and up-to-date information.</p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h5 className="text-lg font-semibold text-white">Quick Links</h5>
-            <ul className="mt-2 space-y-2">
+            <ul className="mt-2 space-y-1">
               <li>
                 <Link href="/" className="hover:text-blue-400 transition">
                   Home
@@ -32,6 +32,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/scholarships" className="hover:text-blue-400 transition">
+                  scholarships
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-blue-400 transition">
                   About Us
                 </Link>
@@ -43,13 +48,13 @@ const Footer = () => {
           <div>
             <h5 className="text-lg font-semibold text-white">Follow Us</h5>
             <div className="mt-3 flex space-x-4">
-              <a href="https://twitter.com" target="_blank" className="text-gray-400 hover:text-blue-400 transition text-2xl">
-                <FaTwitter />
+              <a href="https://github.com/nileshkumaryadav1" target="_blank" className="text-gray-400 hover:text-blue-400 transition text-2xl">
+                <FaGithub />
               </a>
-              <a href="https://facebook.com" target="_blank" className="text-gray-400 hover:text-blue-400 transition text-2xl">
-                <FaFacebook />
+              <a href="https://linkedin.com/in/nileshkumar123" target="_blank" className="text-gray-400 hover:text-blue-400 transition text-2xl">
+                <FaLinkedin />
               </a>
-              <a href="https://instagram.com" target="_blank" className="text-gray-400 hover:text-blue-400 transition text-2xl">
+              <a href="https://instagram.com/nileshnayan_" target="_blank" className="text-gray-400 hover:text-blue-400 transition text-2xl">
                 <FaInstagram />
               </a>
             </div>
