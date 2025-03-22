@@ -38,7 +38,7 @@ export default function UserCard({ user }) {
 
           {/* Social Links */}
           <div className="flex justify-center gap-6 mt-3">
-            <Link href={user.email} target="_blank">
+            <Link href={`mailto:${user.email || ""}`} target="_blank">
               <Mail
                 className="text-gray-900 dark:text-white hover:text-blue-500 transition"
                 size={28}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Loading from "@/components/custom/Loading";
 
 export default function DashboardLayout({ children }) {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function DashboardLayout({ children }) {
     }
   }, []);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading) return <Loading />;
 
   return <>{children}</>;
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import Loading from "@/components/custom/Loading";
 
 export default function ExamDetailsPage() {
   const { id } = useParams();
@@ -26,7 +27,7 @@ export default function ExamDetailsPage() {
   }, [id]);
 
   if (loading)
-    return <p className="text-center mt-10">Loading exam details...</p>;
+    return <Loading />;
   if (!exam) return <p className="text-center mt-10">Exam not found.</p>;
 
   return (

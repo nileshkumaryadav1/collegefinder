@@ -1,10 +1,10 @@
 "use client";
 
-import ExamsPage from "./exams/page";
-import CollegesPage from "./colleges/page";
 import AboutUs from "./about/page";
 import HomeHero from "@/components/custom/HomeHero";
 import FnQ from "@/components/custom/FnQ";
+import CollegeCard from "@/components/custom/CollegeCard";
+import ExamCard from "@/components/custom/ExamCard";
 import ScholarshipCard from "@/components/custom/ScholarshipCard";
 
 export default function Home() {
@@ -14,14 +14,24 @@ export default function Home() {
       <HomeHero />
 
       {/* Featured Colleges */}
-      <CollegesPage />
+      <div className="container mx-auto mt-10">
+        <h2 className="text-3xl font-bold text-center m-6">
+          Featured Colleges
+        </h2>
+        <CollegeCard query="nit" />
+      </div>
 
       {/* Popular Exams */}
-      <ExamsPage />
+      <div className="container mx-auto mt-10">
+        <h2 className="text-3xl font-bold text-center m-6">Popular Exams</h2>
+        <ExamCard query="" />
+      </div>
 
       {/* Scholarships */}
-      <h2 className="text-3xl font-bold text-center mt-10">Scholarships</h2>
-      <ScholarshipCard />
+      <div className="container mx-auto m-10">
+        <h2 className="text-3xl font-bold text-center m-6">Scholarships</h2>
+        <ScholarshipCard query="" />
+      </div>
 
       {/* F&Q Section */}
       <FnQ />

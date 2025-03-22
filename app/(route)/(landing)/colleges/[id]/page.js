@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Loading from "@/components/custom/Loading";
+import Breadcrumb from "@/components/custom/Breadcrub";
 
 export default function CollegeDetailsPage() {
   const { id } = useParams();
@@ -25,10 +27,12 @@ export default function CollegeDetailsPage() {
   }, [id]);
 
   if (loading)
-    return <p className="text-center mt-10">Loading college details...</p>;
+    return <Loading />;
   if (!college) return <p className="text-center mt-10">College not found.</p>;
 
   return (
+    <>
+    {/* <Breadcrumb /> */}
     <div className="max-w-4xl mx-auto p-6">
       <img
         src={college.image}
@@ -52,5 +56,6 @@ export default function CollegeDetailsPage() {
         ← Back to Colleges
       </Link>
     </div>
+    </>
   );
 }

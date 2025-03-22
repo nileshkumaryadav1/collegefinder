@@ -5,6 +5,7 @@ import { Tabs, Tab } from "@mui/material";
 import UserCard from "@/components/custom/UserCard";
 import LikedItems from "@/components/custom/LikedItem";
 import LikedScholarships from "@/components/custom/LikedScholarhip";
+import Loading from "@/components/custom/Loading";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -42,7 +43,7 @@ export default function Dashboard() {
     fetchUser();
   }, []);
 
-  if (!user) return <p>Loading user...</p>;
+  if (!user) return <Loading />;
 
   return (
     <div className="container mx-auto p-4 flex flex-col md:flex-row gap-6">
