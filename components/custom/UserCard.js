@@ -18,7 +18,7 @@ export default function UserCard({ user }) {
   };
 
   return (
-    <div className="h-auto bg-gray-100 dark:bg-gray-900 md:py-6 py-2">
+    <div className="h-auto bg-gray-200 border border-gray-300 rounded-xl dark:bg-gray-900 md:py-6 py-2">
       <div className="max-w-5xl mx-auto px-4">
         {/* Page Title */}
         <h1 className="text-xl font-bold text-center text-gray-900 dark:text-white mb-5">
@@ -37,7 +37,7 @@ export default function UserCard({ user }) {
           <p className="text-gray-600 dark:text-gray-300 mt-2">{user.bio}</p>
 
           {/* Social Links */}
-          <div className="flex justify-center gap-6 mt-3">
+          <div className="flex justify-center gap-6 mt-3 mb-1">
             <Link href={`mailto:${user.email || ""}`} target="_blank">
               <Mail
                 className="text-gray-900 dark:text-white hover:text-blue-500 transition"

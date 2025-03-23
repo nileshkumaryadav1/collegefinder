@@ -9,9 +9,12 @@ const UserSchema = new mongoose.Schema(
     bio: { type: String },
     instagram: { type: String },
     linkedin: { type: String },
-    likedColleges: [{ type: mongoose.Schema.Types.ObjectId, ref: "College" }],
-    likedExams: [{ type: mongoose.Schema.Types.ObjectId, ref: "Exam" }],
-    likedScholarships: [{ type: mongoose.Schema.Types.ObjectId, ref: "Scholarship" }],
+    likes: [
+      {
+        itemId: mongoose.Schema.Types.ObjectId, // ID of the liked item
+        itemType: String, // "college", "exam", or "scholarship"
+      },
+    ],
   },
   { timestamps: true }
 );

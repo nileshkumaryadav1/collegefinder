@@ -34,7 +34,7 @@ function CollegeCard({ query }) {
         .map((college) => (
           <div
             key={college._id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden"
           >
             <img
               src={college.image}
@@ -45,7 +45,7 @@ function CollegeCard({ query }) {
               <h2 className="text-xl font-semibold">{college.name}</h2>
               <p className="text-gray-600">{college.location}</p>
               <p className="text-gray-800 font-bold">
-                Ranking: #{college.ranking}
+                NIRF Ranking: #{college.ranking}
               </p>
               <Link
                 href={`/colleges/${college._id}`}

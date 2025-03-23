@@ -34,29 +34,29 @@ export default function ScholarshipDetail({ params }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="m-10 p-10 flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold">
-          Scholarship Details
-          <br />
-          {scholarship.about}
+    <div className="mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+      <div className="bg-white container border border-gray-300 grid gap-4 rounded lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 md:mt-10 md:m-10 md:p-10 p-4 mb-2 flex flex-col items-center justify-center">
+        <h2 className="md:text-3xl text-xl font-bold">
+        Scholarship Details:</h2>
+        <h1 className="md:text-2xl font-bold">
+          {scholarship.name}
         </h1>
-        <p className="text-gray-700 mt-2">
-          name: {scholarship.name}
+        <p className="text-gray-700 md:mt-2">
+          Name: {scholarship.name}
           <br />
-          description: {scholarship.description}
+          Description: {scholarship.about}
           <br />
-          amount: {scholarship.amount}
+          Amount: {scholarship.amount}
           <br />
-          deadline: {scholarship.deadline}
+          Deadline/Last Date: {scholarship.deadline}
           <br />
-          type: {scholarship.type}
+          Type: {scholarship.type}
           <br />
-          eligibility: {scholarship.eligibility}
+          Eligibility: {scholarship.eligibility}
           <br />
           <a
             href={scholarship.officialLink}
-            className="text-blue-600 hover:underline"
+            className="text-blue-600 hover:underline mt-2 inline-block text-center border border-blue-600 p-2 rounded hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out"
             target="_blank"
           >
             Official Website
@@ -67,7 +67,7 @@ export default function ScholarshipDetail({ params }) {
           href="/scholarships"
           className="mt-4 inline-block text-blue-600 hover:underline"
         >
-          ← Back to Scholarships
+          ← Back to Scholarships page
         </Link>
       </div>
     </div>

@@ -34,7 +34,7 @@ function ExamCard({ query }) {
         .map((exam) => (
           <div
             key={exam._id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden"
           >
             {exam.imageUrl && (
               <Image

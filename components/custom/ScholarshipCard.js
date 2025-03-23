@@ -22,10 +22,14 @@ export default function ScholarshipCard({ query }) {
     }
   }
 
+  if (scholarships.length === 0) {
+    return <Loading />;
+  }
+
   return (
-    <div className="mt-6 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="mt-6 mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
       {scholarships.length === 0 ? (
-        <Loading />
+        <p className="text-center mt-10">No scholarships found.</p>
       ) : (
         scholarships
           .filter((scholarships) => {
@@ -36,14 +40,14 @@ export default function ScholarshipCard({ query }) {
           .map((scholarship) => (
             <div
               key={scholarship._id}
-              className="bg-gray-800 p-4 rounded shadow mb-3"
+              className="p-4 bg-white rounded border border-gray-300 shadow-xl mb-3"
             >
               <div>
-                <h3 className="text-lg text-gray-100 font-bold">
+                <h3 className="text-lg font-bold">
                   {scholarship.name} - ₹{scholarship.amount}
                 </h3>
-                <p className="text-gray-400">{scholarship.about}</p>
-                <p className="text-green-400">
+                <p className="text-gray-800">{scholarship.about}</p>
+                <p className="text-green-500">
                   Eligibility: {scholarship.eligibility}
                 </p>
                 <p className="text-yellow-400">

@@ -38,7 +38,7 @@ export default function ManageScholarships() {
     setErrorMessage("");
 
     // Validate fields
-    if (Object.values(formData).some((val) => val.trim() === "")) {
+    if (Object.values(formData).some((field) => !field)) {
       setErrorMessage("All fields are required.");
       setLoading(false);
       return;

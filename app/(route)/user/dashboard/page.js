@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import { Tabs, Tab } from "@mui/material";
 import UserCard from "@/components/custom/UserCard";
-import LikedItems from "@/components/custom/LikedItem";
-import LikedScholarships from "@/components/custom/LikedScholarhip";
+import LikedItems from "@/components/custom/like/LikedItem";
 import Loading from "@/components/custom/Loading";
 
 export default function Dashboard() {
@@ -46,7 +45,7 @@ export default function Dashboard() {
   if (!user) return <Loading />;
 
   return (
-    <div className="container mx-auto p-4 flex flex-col md:flex-row gap-6">
+    <div className="p-4 bg-gray-100 flex flex-col md:flex-row gap-6">
       {/* User Info Card */}
       <div className="w-full md:w-1/3">
         <UserCard user={user} />
@@ -54,7 +53,7 @@ export default function Dashboard() {
 
       {/* Liked Colleges, Exams, Scholarships */}
       <div className="w-full md:w-2/3">
-        <Tabs value={tab} onChange={(e, newTab) => setTab(newTab)} centered>
+        <Tabs value={tab} onChange={(e, newTab) => setTab(newTab)} centered variant="fullWidth" className="mb-4">
           <Tab label="Liked Colleges" value="colleges" />
           <Tab label="Liked Exams" value="exams" />
           <Tab label="Liked Scholarships" value="scholarships" />

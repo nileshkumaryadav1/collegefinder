@@ -42,7 +42,7 @@ export default function CollegeDetailsPage() {
       <h1 className="text-3xl font-bold mt-4">{college.name}</h1>
       <p className="text-gray-700">{college.location}</p>
       <p className="text-gray-800 font-bold text-lg mt-2">
-        Ranking: #{college.ranking}
+        NIRF Ranking: #{college.ranking}
       </p>
       <p className="mt-4">{college.description}</p>
       <a

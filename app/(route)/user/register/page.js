@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -22,7 +24,10 @@ export default function RegisterPage() {
 
       const result = await res.json();
       if (res.ok) {
-        setMessage({ type: "success", text: "User registered successfully!" });
+        setMessage({ type: "success", text: "User registered successfully! Redirecting..." });
+        setTimeout(() => {
+          router.push("/user/login"); // Redirect after success
+        }, 1500);
       } else {
         setMessage({ type: "error", text: result.message });
       }
@@ -34,7 +39,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center md:min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>
         

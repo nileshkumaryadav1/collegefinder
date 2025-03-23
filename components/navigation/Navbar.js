@@ -22,8 +22,8 @@ const Navbar = () => {
           <Image
             src="/favicon.ico"
             alt=""
-            width={40}
-            height={40}
+            width={42}
+            height={42}
             className="mr-2 rounded-full"
           />
           <p className="text-gray-200 text-xl mr-1 font-bold">CollegeFinder</p>
@@ -31,36 +31,28 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden sm:flex space-x-1">
-          <NavItem
-            href="/"
-            label="Home"
-            active={pathname === "/"}
-          />
+          <NavItem href="/" label="Home" active={pathname === "/"} />
           <NavItem
             href="/colleges"
             label="Colleges"
             active={pathname === "/colleges"}
           />
-          <NavItem
-            href="/exams"
-            label="Exams"
-            active={pathname === "/exams"}
-          />
+          <NavItem href="/exams" label="Exams" active={pathname === "/exams"} />
           <NavItem
             href="/scholarships"
             label="Scholarships"
             active={pathname === "/scholarships"}
           />
-          <NavItem
-            href="/about"
-            label="About"
-            active={pathname === "/about"}
-          />
+          <NavItem href="/about" label="About" active={pathname === "/about"} />
           <NavItem
             href="/user/dashboard"
             icon={<User size={24} />}
             label="Dashboard"
-            active={pathname === "/user/dashboard" || pathname === "/user/login" || pathname === "/user/register"}
+            active={
+              pathname === "/user/dashboard" ||
+              pathname === "/user/login" ||
+              pathname === "/user/register"
+            }
           />
         </div>
 
@@ -85,9 +77,7 @@ const Navbar = () => {
             href="/"
             className="text-black text-blue-500 leading-snug font-manrope font-extrabold flex items-center"
           >
-            <p className="text-gray-200 text-xl font-bold">
-              CollegeFinder
-            </p>
+            <p className="text-gray-200 text-xl font-bold">CollegeFinder</p>
           </Link>
 
           {/* Close Button */}
@@ -123,7 +113,7 @@ const Navbar = () => {
           />
           <NavItemMobile
             href="/about"
-            icon = {<Database size={24} />}
+            icon={<Database size={24} />}
             label="About"
             active={pathname === "/about"}
           />
@@ -131,7 +121,11 @@ const Navbar = () => {
             href="/user/dashboard"
             icon={<User size={24} />}
             label="Dashboard"
-            active={pathname === "/user/dashboard" || pathname === "/user/login" || pathname === "/user/register"}
+            active={
+              pathname === "/user/dashboard" ||
+              pathname === "/user/login" ||
+              pathname === "/user/register"
+            }
           />
         </div>
       </div>
@@ -145,7 +139,7 @@ const NavItem = ({ href, icon, label, active }) => {
     <Link
       href={href}
       className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
-        active ? "text-blue-400 bg-gray-800" : "text-gray-400 hover:text-white"
+        active ? "text-blue-400 bg-gray-700" : "text-gray-400 hover:text-white"
       }`}
     >
       {icon}

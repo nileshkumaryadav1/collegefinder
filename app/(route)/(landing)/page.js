@@ -18,19 +18,19 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center m-6">
           Featured Colleges
         </h2>
-        <CollegeCard query="nit" />
+        <CollegeCard query="#" />
       </div>
 
       {/* Popular Exams */}
       <div className="container mx-auto mt-10">
         <h2 className="text-3xl font-bold text-center m-6">Popular Exams</h2>
-        <ExamCard query="" />
+        <ExamCard query="#" />
       </div>
 
       {/* Scholarships */}
       <div className="container mx-auto m-10">
         <h2 className="text-3xl font-bold text-center m-6">Scholarships</h2>
-        <ScholarshipCard query="" />
+        <ScholarshipCard query="#" />
       </div>
 
       {/* F&Q Section */}
