@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "tailwindcss";
+@plugin "daisyui";
 
 @theme {
   --font-sans: var(--font-geist-sans);

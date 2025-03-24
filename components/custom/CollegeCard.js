@@ -45,7 +45,7 @@ function CollegeCard({ query }) {
               <h2 className="text-xl font-semibold">{college.name}</h2>
               <p className="text-gray-600">{college.location}</p>
               <p className="text-gray-800 font-bold">
-                NIRF Ranking: #{college.ranking}
+                NIRF Ranking: #{college.nirfRanking}
               </p>
               <Link
                 href={`/colleges/${college._id}`}

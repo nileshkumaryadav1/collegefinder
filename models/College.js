@@ -3,10 +3,21 @@ import mongoose from "mongoose";
 const CollegeSchema = new mongoose.Schema({
   name: String,
   location: String,
-  ranking: Number,
-  image: String,
+  nirfRanking: Number,
+  imageUrl: String,
+  logoUrl: String,
   description: String,
-  website: String,
+  courses: String,
+  affiliation: String,
+  type: String,
+  admissionProcess: String,
+  fees: String,
+  facilities: String,
+  noOfStudents: Number,
+  noOfFaculties: Number,
+  averagePlacement: String,
+  medianSalary: String,
+  websiteUrl: String,
 }, { timestamps: true });
 
 export default mongoose.models.College || mongoose.model("College", CollegeSchema);

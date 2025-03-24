@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Link from "next/link";
 import Loading from "@/components/custom/Loading";
-import Breadcrumb from "@/components/custom/Breadcrub";
+import SingleCollegeCard from "@/components/custom/SingleCollegeCard";
 
-export default function CollegeDetailsPage() {
+export default function DetailCollegeCard() {
   const { id } = useParams();
   const [college, setCollege] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,36 +25,14 @@ export default function CollegeDetailsPage() {
     fetchCollege();
   }, [id]);
 
-  if (loading)
-    return <Loading />;
+  if (loading) return <Loading />;
   if (!college) return <p className="text-center mt-10">College not found.</p>;
 
   return (
-    <>
-    {/* <Breadcrumb /> */}
-    <div className="max-w-4xl mx-auto p-6">
-      <img
-        src={college.image}
-        alt={college.name}
-        className="w-full h-60 object-cover rounded-lg shadow-md"
-      />
-      <h1 className="text-3xl font-bold mt-4">{college.name}</h1>
-      <p className="text-gray-700">{college.location}</p>
-      <p className="text-gray-800 font-bold text-lg mt-2">
-        NIRF Ranking: #{college.ranking}
-      </p>
-      <p className="mt-4">{college.description}</p>
-      <a
-        href={college.website}
-        target="_blank"
-        className="text-blue-500 mt-4 block"
-      >
-        Visit Website
-      </a>
-      <Link href="/colleges" className="text-gray-600 mt-4 block">
-        ← Back to Colleges
-      </Link>
-    </div>
-    </>
+    <section className="text-gray-600 body-font w-full overflow-hidden bg-gray-100">
+      <div className="max-w-11/12 mx-auto p-6">
+        <SingleCollegeCard college={college} />
+      </div>
+    </section>
   );
 }

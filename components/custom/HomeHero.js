@@ -19,7 +19,7 @@ function HomeHero() {
           type="text"
           onClick={() => setIsModalOpen(true)}
           className="bg-white text-black px-6 py-3 rounded-lg shadow-md hover:bg-gray-100 hover:text-black transition w-full mt-6"
-          placeholder="Search Colleges, Exams & Scholarships"
+          placeholder={"Search Colleges, Exams & Scholarships"}
         />
 
         <SearchModal

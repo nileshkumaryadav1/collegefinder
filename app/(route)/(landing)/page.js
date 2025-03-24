@@ -14,7 +14,7 @@ export default function Home() {
       <HomeHero />
 
       {/* Featured Colleges */}
-      <div className="container mx-auto mt-10">
+      <div className="container mx-auto mt-10 p-6">
         <h2 className="text-3xl font-bold text-center m-6">
           Featured Colleges
         </h2>
@@ -22,19 +22,21 @@ export default function Home() {
       </div>
 
       {/* Popular Exams */}
-      <div className="container mx-auto mt-10">
+      <div className="min-h-screen mx-auto mt-10 p-6 flex flex-col items-center justify-center">
         <h2 className="text-3xl font-bold text-center m-6">Popular Exams</h2>
         <ExamCard query="#" />
       </div>
 
       {/* Scholarships */}
-      <div className="container mx-auto m-10">
+      <div className="md:container mx-auto p-6">
         <h2 className="text-3xl font-bold text-center m-6">Scholarships</h2>
         <ScholarshipCard query="#" />
       </div>
 
       {/* F&Q Section */}
-      <FnQ />
+      <div className="min-h-screen mx-auto mt-10 bg-gray-900 flex flex-col items-center justify-center">
+        <FnQ />
+      </div>
 
       {/* About Us */}
       <AboutUs />

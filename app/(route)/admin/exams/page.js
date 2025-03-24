@@ -90,7 +90,7 @@ export default function AddExamPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+    <div className="max-w-6/7 mx-auto p-6 bg-white shadow-md rounded-lg mt-20">
       <h1 className="text-2xl font-bold mb-4">Add a New Exam</h1>
       {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
       <form onSubmit={handleSubmit} className="grid gap-4">
@@ -155,7 +155,7 @@ export default function AddExamPage() {
       </form>
 
       {/* Manage Exams Section */}
-      <div className="mt-10">
+      <div className="mt-10 bg-gray-100 p-4">
         <h2 className="text-xl font-bold mb-4">Manage Exams</h2>
         <div className="overflow-x-auto">
           <table className="w-full border-collapse border border-gray-300">

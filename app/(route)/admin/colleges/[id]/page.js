@@ -11,10 +11,21 @@ export default function EditCollegePage() {
   const [formData, setFormData] = useState({
     name: "",
     location: "",
-    ranking: "",
-    image: "",
+    nirfRanking: "",
+    imageUrl: "",
+    logoUrl: "",
     description: "",
-    website: "",
+    courses: "",
+    affiliation: "",
+    type: "",
+    admissionProcess: "",
+    fees: "",
+    facilities: "",
+    noOfStudents: "",
+    noOfFaculties: "",
+    averagePlacement: "",
+    medianSalary: "",
+    websiteUrl: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -93,18 +104,27 @@ export default function EditCollegePage() {
         />
         <input
           type="number"
-          name="ranking"
-          placeholder="Ranking"
-          value={formData.ranking}
+          name="nirfRanking"
+          placeholder="NIRF Ranking"
+          value={formData.nirfRanking}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required
         />
         <input
-          type="url"
-          name="image"
+          type="text"
+          name="imageUrl"
           placeholder="Image URL"
-          value={formData.image}
+          value={formData.imageUrl}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="logoUrl"
+          placeholder="Logo URL"
+          value={formData.logoUrl}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required
@@ -118,10 +138,99 @@ export default function EditCollegePage() {
           required
         />
         <input
+          type="text"
+          name="courses"
+          placeholder="Courses Offered"
+          value={formData.courses}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="affiliation"
+          placeholder="Affiliation"
+          value={formData.affiliation}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="type"
+          placeholder="Type"
+          value={formData.type}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="facilities"
+          placeholder="Facilities"
+          value={formData.facilities}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="number"
+          name="noOfStudents"
+          placeholder="Number of Students"
+          value={formData.noOfStudents}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="number"
+          name="noOfFaculties"
+          placeholder="Number of Faculties"
+          value={formData.noOfFaculties}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <textarea
+          name="admissionProcess"
+          placeholder="Admission Process"
+          value={formData.admissionProcess}
+          onChange={handleChange}
+          className="border p-2 rounded w-full h-24"
+          required
+        />
+        <input
+          type="text"
+          name="fees"
+          placeholder="Fees"
+          value={formData.fees}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="averagePlacement"
+          placeholder="Average Placement"
+          value={formData.averagePlacement}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="medianSalary"
+          placeholder="Median Salary"
+          value={formData.medianSalary}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
           type="url"
-          name="website"
+          name="websiteUrl"
           placeholder="Website URL"
-          value={formData.website}
+          value={formData.websiteUrl}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required
