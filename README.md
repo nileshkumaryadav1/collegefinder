@@ -26,7 +26,7 @@ To run this project locally, follow these steps:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/collegefinder.git
+   git clone https://github.com/nileshkumaryadav1/collegefinder.git
    cd collegefinder
    ```
 
@@ -72,7 +72,6 @@ Check out our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ## 📬 Contact
 For any questions or support, reach out to us:
 - Email: nileshkumarextra@gmail.com
-- Discord: [Join Our Community](#)
 - GitHub Issues: [Report an Issue](https://github.com/nileshkumaryadav1/collegefinder/issues)
 
 Happy coding! 🎓🚀
