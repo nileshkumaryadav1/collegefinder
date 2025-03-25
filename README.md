@@ -1,41 +1,78 @@
-This is a [Next.js](https://nextjs.org) project with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# College Finder
 
-## Getting Started
+Welcome to **College Finder** – a platform designed to help students research and explore colleges, exams, and scholarships with ease. Our goal is to provide accurate and up-to-date information to assist students in making informed decisions about their education.
 
-First, run the development server:
+🌍 **Live Website:** [College Finder](https://collegefinder.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
+- 🔍 **Search & Explore** – Find colleges based on location, courses, and ranking.
+- 🎓 **Exams Section** – Get details about entrance exams and eligibility criteria.
+- 💰 **Scholarships** – Explore available scholarships for students.
+- ❤️ **Like & Save** – Users can like and save colleges, exams, and scholarships to their profiles.
+- 📝 **Student Registration & Dashboard** – Users can create profiles, manage preferences, and track saved items.
+- 📩 **Email & SMS Notifications** – Receive updates and alerts for important changes.
+- 🛠 **Admin Panel** – Manage colleges, exams, scholarships, and user interactions securely.
+- 🔎 **SEO Optimized** – Built with Next.js for fast performance and better search engine visibility.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Tech Stack
+- **Frontend:** Next.js (App Router), React, Tailwind
+- **Backend:** Express.js, Node.js, MongoDB
+- **Authentication:** JWT-based authentication
+- **Email System:** Brevo (SMTP for emails)
+- **Hosting:** Vercel
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🔧 Installation & Setup
+To run this project locally, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/collegefinder.git
+   cd collegefinder
+   ```
 
-## Tech Stack used
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-1) NextJS - for complete backend and frontend
-2) Mongodb - for storing users, college and exams data
+3. **Set Up Environment Variables** (Create a `.env` file and add the required variables)
+   ```
+   NEXT_PUBLIC_API_URL=your_backend_api_url
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   BREVO_SMTP_HOST=smtp-relay.brevo.com
+   BREVO_SMTP_PORT=587
+   BREVO_SMTP_USER=your_brevo_email
+   BREVO_SMTP_PASS=your_brevo_smtp_key
+   ```
 
-## Learn More
+4. **Run the Development Server**
+   ```bash
+   npm run dev
+   ```
+   The project will be available at **http://localhost:3000**
 
-To learn more about Next.js, take a look at the following resources:
+5. **Build and Deploy**
+   ```bash
+   npm run build
+   npm start
+   ```
+   Or deploy directly to **Vercel**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Contributing
+We welcome contributions! If you’d like to contribute:
+1. **Fork the repository**
+2. **Create a new branch** (`feature-branch`)
+3. **Commit your changes**
+4. **Push to your fork**
+5. **Submit a Pull Request**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Check out our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
-## Deploy on Vercel
+## 📬 Contact
+For any questions or support, reach out to us:
+- Email: nileshkumarextra@gmail.com
+- Discord: [Join Our Community](#)
+- GitHub Issues: [Report an Issue](https://github.com/nileshkumaryadav1/collegefinder/issues)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Happy coding! 🎓🚀
