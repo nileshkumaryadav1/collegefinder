@@ -26,11 +26,11 @@ export default function DetailCollegeCard() {
   }, [id]);
 
   if (loading) return <Loading />;
-  if (!college) return <p className="text-center mt-10">College not found.</p>;
+  if (!college) return <p className="text-center md:mt-10">College not found.</p>;
 
   return (
     <section className="text-gray-600 body-font w-full overflow-hidden bg-gray-100">
-      <div className="max-w-11/12 mx-auto p-6">
+      <div className="md:max-w-11/12 mx-auto md:p-6">
         <SingleCollegeCard college={college} />
       </div>
     </section>

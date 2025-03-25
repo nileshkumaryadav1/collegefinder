@@ -7,26 +7,32 @@ export async function POST(req) {
     const { name, email, password } = await req.json();
 
     if (!name || !email || !password) {
-      return new Response(JSON.stringify({ message: "All fields are required" }), { status: 400 });
+      return new Response(JSON.stringify({ success: false, message: "All fields are required" }), { status: 400 });
     }
 
     await connectToDatabase();
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return new Response(JSON.stringify({ message: "Email already in use" }), { status: 400 });
+    if (await User.findOne({ email })) {
+      return new Response(JSON.stringify({ success: false, message: "Email already in use" }), { status: 400 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    await User.create({ name, email, password: hashedPassword });
 
-    const newUser = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-    });
+    // Fetch API domain from environment variables
+    const API_DOMAIN = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000" || "http://collegefinder.vercel.app";
 
-    return new Response(JSON.stringify({ message: "User registered successfully", user: newUser }), { status: 201 });
+    // Send welcome email (non-blocking)
+    fetch(`${API_DOMAIN}/api/send-welcome-email`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, name }),
+    }).catch((err) => console.error("Failed to send email:", err));
+
+    return new Response(JSON.stringify({ success: true, message: "User registered successfully!" }), { status: 201 });
+
   } catch (error) {
-    return new Response(JSON.stringify({ message: "Internal Server Error" }), { status: 500 });
+    console.error("Register API Error:", error);
+    return new Response(JSON.stringify({ success: false, message: "Internal Server Error" }), { status: 500 });
   }
 }

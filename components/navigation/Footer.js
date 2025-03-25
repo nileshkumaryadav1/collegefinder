@@ -5,11 +5,11 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-8">
       <div className="container mx-auto px-6">
-        <div className="flex justify-between items-start md:flex-row flex-col gap-8">
+        <div className="flex justify-between items-start md:flex-row flex-col gap-2">
           {/* Brand Info */}
-          <div className=" max-w-2/4">
+          <div className="md:max-w-2/4">
             <h4 className="text-xl font-semibold text-white">College Finder</h4>
-            <p className="mt-2 text-gray-400">
+            <p className="mt-2 text-gray-400 md:w-6/7">
               College Finder is our go-to platform for discovering top colleges,
               exams, syllabus & scholarships across various fields. We help
               students make informed decisions about their academic future with
@@ -17,73 +17,81 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h5 className="text-lg font-semibold text-white">Quick Links</h5>
-            <ul className="mt-2 space-y-1">
-              <li>
-                <Link href="/" className="hover:text-blue-400 transition">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/colleges"
-                  className="hover:text-blue-400 transition"
-                >
-                  Colleges
-                </Link>
-              </li>
-              <li>
-                <Link href="/exams" className="hover:text-blue-400 transition">
-                  Exams
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/scholarships"
-                  className="hover:text-blue-400 transition"
-                >
-                  scholarships
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-blue-400 transition">
-                  About Us
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <div className="flex md:flex-row gap-8 w-full md:w-auto flex justify-around">
+            {/* Quick Links */}
+            <div>
+              <h5 className="text-lg font-semibold text-white">Quick Links</h5>
+              <ul className="mt-2 space-y-1">
+                <li>
+                  <Link href="/" className="hover:text-blue-400 transition">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/colleges"
+                    className="hover:text-blue-400 transition"
+                  >
+                    Colleges
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/exams"
+                    className="hover:text-blue-400 transition"
+                  >
+                    Exams
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/scholarships"
+                    className="hover:text-blue-400 transition"
+                  >
+                    scholarships
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/about"
+                    className="hover:text-blue-400 transition"
+                  >
+                    About Us
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Some Links to official sites */}
-          <div>
-            <h5 className="text-lg font-semibold text-white">
-              Important Links
-            </h5>
-            <ul className="mt-2 space-y-1">
-              <li>
-                <a
-                  href="https://www.naukri.com/"
-                  target="_blank"
-                  className="hover:text-blue-400 transition"
-                >
-                  Naukri
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.timesjobs.com/"
-                  target="_blank"
-                  className="hover:text-blue-400 transition"
-                >
-                  TimesJobs
-                </a>
-              </li>
-            </ul>
+            {/* Some Links to official sites */}
+            <div>
+              <h5 className="text-lg font-semibold text-white">
+                Important Links
+              </h5>
+              <ul className="mt-2 space-y-1">
+                <li>
+                  <a
+                    href="https://www.naukri.com/"
+                    target="_blank"
+                    className="hover:text-blue-400 transition"
+                  >
+                    Naukri
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.timesjobs.com/"
+                    target="_blank"
+                    className="hover:text-blue-400 transition"
+                  >
+                    TimesJobs
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Social Media */}
-          <div>
+          <div className="md:mt-4 md:mt-0 w-full flex flex-col items-center md:items-end justify-end">
             <h5 className="text-lg font-semibold text-white">Follow Us</h5>
             <div className="mt-3 flex space-x-4">
               <a
@@ -112,7 +120,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="text-center mt-8 border-t border-gray-700 pt-4 space-y-5">
+        <div className="text-center md:mt-8 mt-3 border-t border-gray-700 pt-4 space-y-4">
           <div>
             <img
               src="/logo.jpg"
