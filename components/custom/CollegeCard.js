@@ -34,7 +34,7 @@ function CollegeCard({ query }) {
         .map((college) => (
           <div
             key={college._id}
-            className="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden"
+            className="bg-white rounded-lg shadow-md overflow-hidden"
           >
             <img
               src={college.image}
@@ -49,7 +49,7 @@ function CollegeCard({ query }) {
               </p>
               <Link
                 href={`/colleges/${college._id}`}
-                className="text-blue-500 mt-2 inline-block"
+                className="btn btn-primary my-1"
               >
                 View Details →
               </Link>

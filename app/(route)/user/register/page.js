@@ -11,6 +11,19 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // Function to send welcome email
+  const sendWelcomeEmail = async (name, email) => {
+    try {
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email }),
+      });
+    } catch (error) {
+      console.error("Failed to send welcome email:", error);
+    }
+  };
+
   const onSubmit = async (data) => {
     setLoading(true);
     setMessage(null);
@@ -25,6 +38,10 @@ export default function RegisterPage() {
       const result = await res.json();
       if (res.ok) {
         setMessage({ type: "success", text: "User registered successfully! Redirecting..." });
+
+        // Send Welcome Email after successful registration
+        await sendWelcomeEmail(data.name, data.email);
+
         setTimeout(() => {
           router.push("/user/login"); // Redirect after success
         }, 1500);

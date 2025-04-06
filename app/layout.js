@@ -43,7 +43,7 @@ export const Metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth" data-theme="cupcake">
       <head>{/* Dynamic SEO */}</head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

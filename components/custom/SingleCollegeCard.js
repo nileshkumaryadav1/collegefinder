@@ -9,6 +9,13 @@ import {
   Users,
   Globe,
   User,
+  BookUser,
+  Notebook,
+  BedSingle,
+  Wallet,
+  Landmark,
+  Building2,
+  School,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -19,12 +26,12 @@ const SingleCollegeCard = ({ college }) => {
     <div className="min-h-screen bg-gray-100">
       {/* College Header Section */}
       <div
-        className="w-full md:min-h-screen bg-white flex flex-col items-center justify-center text-center md:p-12 card bg-base-100 image-full hero md:min-h-screen border border-gray-300 rounded-md"
+        className="w-full bg-white flex flex-col items-center justify-center text-center md:p-10 card bg-base-100 md:min-h-screen border border-gray-300 rounded-md flex-start"
+      >
+        <div className="w-full p-3 bg-white flex flex-col items-center justify-center text-center md:p-12 card bg-base-100 hero       border border-gray-300 rounded-md"
         style={{
           backgroundImage: "url(" + college.imageUrl + ")",
-        }}
-      >
-        <div className="p-3">
+        }}>
           <div className="flex items-center justify-center">
             <img
               src={college.logoUrl}
@@ -32,37 +39,62 @@ const SingleCollegeCard = ({ college }) => {
               className="w-40 h-40 rounded-full md:mb-6"
             />
           </div>
-          <div className="bg-gray-800 md:p-5 border border-gray-900 rounded-lg p-2">
-            <h1 className="md:text-5xl text-lg font-bold md:mb-4 text-gray-200">
-              {college.name}
-            </h1>
-            <p className="md:text-2xl text-gray-400 flex items-center">
-              <MapPin size={24} /> {college.location}
-            </p>
-            <p className="md:text-2xl text-gray-300 md:py-4 py-1">
-              {college.description}
-            </p>
-          </div>
-          <div className="card-actions justify-between md:py-5 py-2">
-            <button
-              onClick={() => setLiked(!liked)}
-              className="text-gray-100 hover:text-red-500"
-            >
-              <Heart size={48} fill={liked ? "red" : "none"} />
-            </button>
+        </div>
+        <div className="md:p-5 rounded-lg">
+          <h1 className="md:text-5xl text-lg font-bold md:mb-4 text-gray-800">
+            {college.name}
+          </h1>
+          <p className="md:text-2xl text-gray-600 flex items-center mx-2">
+            <MapPin size={24} /> {college.location}
+          </p>
+          <p className="md:text-2xl text-gray-400 md:py-4 py-1">
+            {college.description}
+          </p>
+        </div>
+        <div className="card-actions justify-between md:py-5 py-2">
+          <button
+            onClick={() => setLiked(!liked)}
+            className="text-gray-400 hover:text-red-500"
+          >
+            <Heart size={48} fill={liked ? "red" : "none"} />
+          </button>
 
-            <button className="btn btn-primary">
-              <a href={college.websiteUrl} target="_blank">
-                Visit College Site
-              </a>
-            </button>
-          </div>
+          <button className="btn btn-primary">
+            <a href={college.websiteUrl} target="_blank">
+              Visit College Site
+            </a>
+          </button>
+        </div>
+        <div className="flex items-center justify-center bg-base-100 p-2 w-full">
+          <a href="#overview" className="text-gray-600 flex items-center mx-2">
+            <Landmark size={14} /> OVERVIEW
+          </a>
+          <a href="#about" className="text-gray-600 flex items-center mx-2">
+            <BookUser size={14} /> ABOUT
+          </a>
+          <a href="#facilities" className="text-gray-600 flex items-center mx-2">
+            <School size={14} /> FACILITIES
+          </a>
+          <a href="#courses" className="text-gray-600 flex items-center mx-2">
+            <Notebook size={14} /> COURSES
+          </a>
+          <a href="#admission" className="text-gray-600 flex items-center mx-2">
+            <BedSingle size={14} /> ADMISSION PROCESS
+          </a>
+          <a href="#PLACEMENT" className="text-gray-600 flex items-center mx-2">
+            <Wallet size={14} /> PLACEMENT
+          </a>
+          <a href="#RECRUITMENT" className="text-gray-600 flex items-center mx-2">
+            <Building2 size={14} /> PAST RECRUITMENT
+          </a>
         </div>
       </div>
 
       {/* College Details Section */}
       <div className="w-full md:min-h-screen bg-gray-50 flex flex-col items-center justify-center text-center md:p-12 p-4">
-        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">College Details</h2>
+        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">
+          College Details
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 gap-2 p-2 md:text-2xl text-gray-700">
           <p className="flex items-center gap-3">
             <BookOpen size={24} /> <span className="font-semibold">Type:</span>{" "}
@@ -92,8 +124,14 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* College Description Section */}
       <div className="w-full md:min-h-screen bg-white flex flex-col items-center justify-center text-center md:p-12 p-4">
-        <img src={college.imageUrl} alt={college.name} className="md:mb-8 h-50 border border-gray-300 rounded-md" />
-        <h2 className="md:text-4xl font-semibold md:mb-8">About {college.name}</h2>
+        <img
+          src={college.imageUrl}
+          alt={college.name}
+          className="md:mb-8 h-50 border border-gray-300 rounded-md"
+        />
+        <h2 className="md:text-4xl font-semibold md:mb-8">
+          About {college.name}
+        </h2>
         <p className="md:text-2xl text-gray-700 max-w-5xl">
           {college.description}
         </p>
@@ -101,7 +139,9 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* Facilities Section */}
       <div className="w-full md:min-h-screen bg-gray-50 flex flex-col items-center justify-center text-center md:p-12 p-4 py-8">
-        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">Facilities</h2>
+        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">
+          Facilities
+        </h2>
         <ul className="list-disc md:text-2xl text-gray-700 max-w-4xl text-left">
           {college.facilities}
         </ul>
@@ -109,11 +149,14 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* Popular Courses Section */}
       <div className="w-full md:min-h-screen bg-white flex flex-col items-center justify-center text-center md:p-12 p-4">
-        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">Popular Courses</h2>
+        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">
+          Popular Courses
+        </h2>
         <ul className="list-disc md:text-2xl text-gray-700 max-w-4xl text-left p-2">
           <p className="flex items-center md:gap-3">
             <BookOpen size={24} />{" "}
-            <span className="md:font-semibold">Technical:</span> {college.courses}
+            <span className="md:font-semibold">Technical:</span>{" "}
+            {college.courses}
           </p>
         </ul>
       </div>
@@ -121,7 +164,9 @@ const SingleCollegeCard = ({ college }) => {
       {/* Admission section */}
       <div className="md:min-h-screen flex flex-col bg-gray-50 justify-center items-center space-x-4 p-4">
         <div>
-          <h2 className="md:text-4xl text-xl font-bold mt-4">Admission Process</h2>
+          <h2 className="md:text-4xl text-xl font-bold mt-4">
+            Admission Process
+          </h2>
           <p>{college.admissionProcess}</p>
 
           <h2 className="md:text-4xl text-xl font-bold mt-4">Fees</h2>
@@ -134,7 +179,9 @@ const SingleCollegeCard = ({ college }) => {
       {/* table section */}
       <div className="bg-white md:min-h-screen flex flex-col justify-center items-center">
         <div className="p-5">
-          <h2 className="md:text-4xl text-xl text-center mt-2">Courses Offered & Admission</h2>
+          <h2 className="md:text-4xl text-xl text-center mt-2">
+            Courses Offered & Admission
+          </h2>
           <table className="table-auto w-full mt-1">
             <thead>
               <tr>

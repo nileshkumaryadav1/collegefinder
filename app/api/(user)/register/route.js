@@ -32,7 +32,7 @@ export async function POST(req) {
       "http://collegefinder.vercel.app";
 
     try {
-      const response = await fetch(`${API_DOMAIN}/api/send-welcome-email`, {
+      const response = await fetch(`${API_DOMAIN}/api/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -42,7 +42,7 @@ export async function POST(req) {
       });
 
       if (!response.ok) {
-        throw new Error(`Email API failed: ${response.statusText}`);
+        throw new Error(`Email Sending API failed: ${response.statusText}`);
       }
 
       const data = await response.json();
@@ -51,6 +51,7 @@ export async function POST(req) {
       console.error("Failed to send email:", error.message);
     }
 
+    // response
     return new Response(
       JSON.stringify({
         success: true,

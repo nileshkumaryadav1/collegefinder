@@ -40,6 +40,7 @@ export default function Home() {
 
       {/* About Us */}
       <AboutUs />
+
     </div>
   );
 }

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Tabs, Tab } from "@mui/material";
 import UserCard from "@/components/custom/UserCard";
-import LikedItems from "@/components/custom/like/LikedItem";
 import Loading from "@/components/custom/Loading";
 
 export default function Dashboard() {
@@ -95,7 +94,6 @@ export default function Dashboard() {
           <Tab label="Liked Scholarships" value="scholarships" />
         </Tabs>
 
-        <LikedItems type={tab} user={user} />
       </div>
     </div>
   );
