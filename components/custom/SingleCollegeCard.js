@@ -23,221 +23,164 @@ const SingleCollegeCard = ({ college }) => {
   const [liked, setLiked] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="bg-gray-100">
       {/* College Header Section */}
-      <div
-        className="w-full bg-white flex flex-col items-center justify-center text-center md:p-10 card bg-base-100 md:min-h-screen border border-gray-300 rounded-md flex-start"
-      >
-        <div className="w-full p-3 bg-white flex flex-col items-center justify-center text-center md:p-12 card bg-base-100 hero       border border-gray-300 rounded-md"
-        style={{
-          backgroundImage: "url(" + college.imageUrl + ")",
-        }}>
-          <div className="flex items-center justify-center">
-            <img
-              src={college.logoUrl}
-              alt={college.name}
-              className="w-40 h-40 rounded-full md:mb-6"
-            />
-          </div>
+      <div className="w-full bg-white border border-gray-300 rounded-md flex flex-col items-center text-center p-4 md:p-8">
+        <div
+          className="w-full h-60 md:h-96 bg-cover bg-center rounded-md flex justify-center items-center"
+          style={{ backgroundImage: `url(${college.imageUrl})` }}
+        >
+          <img
+            src={college.logoUrl}
+            alt={college.name}
+            className="w-40 h-40 rounded-full border-4 border-white shadow-md"
+          />
         </div>
-        <div className="md:p-5 rounded-lg">
-          <h1 className="md:text-5xl text-lg font-bold md:mb-4 text-gray-800">
+        <div className="py-4">
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-2">
             {college.name}
           </h1>
-          <p className="md:text-2xl text-gray-600 flex items-center mx-2">
-            <MapPin size={24} /> {college.location}
+          <p className="text-gray-600 flex items-center justify-center gap-2 mb-2">
+            <MapPin size={20} /> {college.location}
           </p>
-          <p className="md:text-2xl text-gray-400 md:py-4 py-1">
-            {college.description}
+          <p className="text-gray-500 md:text-lg mb-4">
+            {college.description.slice(0, 200)}...
+            <a href="#about" className="text-blue-600 hover:underline ml-1">
+              Read More
+            </a>
           </p>
-        </div>
-        <div className="card-actions justify-between md:py-5 py-2">
-          <button
-            onClick={() => setLiked(!liked)}
-            className="text-gray-400 hover:text-red-500"
-          >
-            <Heart size={48} fill={liked ? "red" : "none"} />
-          </button>
-
-          <button className="btn btn-primary">
-            <a href={college.websiteUrl} target="_blank">
+          <div className="flex items-center justify-between w-full md:w-1/2 mt-2">
+            <button
+              onClick={() => setLiked(!liked)}
+              className="text-gray-400 hover:text-red-500 transition-colors"
+            >
+              <Heart size={36} fill={liked ? "red" : "none"} />
+            </button>
+            <a
+              href={college.websiteUrl}
+              target="_blank"
+              className="btn btn-primary"
+            >
               Visit College Site
             </a>
-          </button>
+          </div>
         </div>
-        <div className="flex items-center justify-center bg-base-100 p-2 w-full">
-          <a href="#overview" className="text-gray-600 flex items-center mx-2">
-            <Landmark size={14} /> OVERVIEW
-          </a>
-          <a href="#about" className="text-gray-600 flex items-center mx-2">
-            <BookUser size={14} /> ABOUT
-          </a>
-          <a href="#facilities" className="text-gray-600 flex items-center mx-2">
-            <School size={14} /> FACILITIES
-          </a>
-          <a href="#courses" className="text-gray-600 flex items-center mx-2">
-            <Notebook size={14} /> COURSES
-          </a>
-          <a href="#admission" className="text-gray-600 flex items-center mx-2">
-            <BedSingle size={14} /> ADMISSION PROCESS
-          </a>
-          <a href="#PLACEMENT" className="text-gray-600 flex items-center mx-2">
-            <Wallet size={14} /> PLACEMENT
-          </a>
-          <a href="#RECRUITMENT" className="text-gray-600 flex items-center mx-2">
-            <Building2 size={14} /> PAST RECRUITMENT
-          </a>
+
+        {/* Navigation Links */}
+        <div className="flex flex-wrap justify-center bg-base-100 w-full py-3 text-sm md:text-base">
+          {[
+            { id: "overview", label: "OVERVIEW", icon: Landmark },
+            { id: "about", label: "ABOUT", icon: BookUser },
+            { id: "facilities", label: "FACILITIES", icon: School },
+            { id: "courses", label: "COURSES", icon: Notebook },
+            { id: "admission", label: "ADMISSION PROCESS", icon: BedSingle },
+            { id: "placement", label: "PLACEMENT", icon: Wallet },
+            { id: "recruitment", label: "PAST RECRUITMENT", icon: Building2 },
+          ].map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="flex items-center mx-3 text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <item.icon size={16} className="mr-1" /> {item.label}
+            </a>
+          ))}
         </div>
       </div>
 
-      {/* College Details Section */}
-      <div className="w-full md:min-h-screen bg-gray-50 flex flex-col items-center justify-center text-center md:p-12 p-4">
-        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">
-          College Details
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 gap-2 p-2 md:text-2xl text-gray-700">
-          <p className="flex items-center gap-3">
-            <BookOpen size={24} /> <span className="font-semibold">Type:</span>{" "}
-            {college.type}
-          </p>
-          <p className="flex items-center gap-3">
-            <Users size={24} /> <span className="font-semibold">Students:</span>{" "}
-            {college.noOfStudents}
-          </p>
-          <p className="flex items-center gap-3">
-            <User size={24} />{" "}
-            <span className="font-semibold">Facilities:</span>{" "}
-            {college.noOfFaculties}
-          </p>
-          <p className="flex items-center gap-3">
-            <Globe size={24} />{" "}
-            <span className="font-semibold">Affiliation:</span>{" "}
-            {college.affiliation}
-          </p>
-          <p className="flex items-center gap-3">
-            <Star size={24} />{" "}
-            <span className="font-semibold">Nirf Ranking:</span>
-            {college.nirfRanking}
-          </p>
+      {/* Overview */}
+      <Section id="overview" title="College Details">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700 text-lg md:text-2xl">
+          <Detail icon={BookOpen} label="Type" value={college.type} />
+          <Detail icon={Users} label="Students" value={college.noOfStudents} />
+          <Detail icon={User} label="Faculties" value={college.noOfFaculties} />
+          <Detail
+            icon={Globe}
+            label="Affiliation"
+            value={college.affiliation}
+          />
+          <Detail
+            icon={Star}
+            label="NIRF Ranking"
+            value={college.nirfRanking + " (Engineering)"}
+          />
         </div>
-      </div>
+      </Section>
 
-      {/* College Description Section */}
-      <div className="w-full md:min-h-screen bg-white flex flex-col items-center justify-center text-center md:p-12 p-4">
+      {/* About */}
+      <Section id="about" title={`About ${college.name}`}>
         <img
           src={college.imageUrl}
           alt={college.name}
-          className="md:mb-8 h-50 border border-gray-300 rounded-md"
+          className="mb-6 w-full max-w-4xl rounded shadow"
         />
-        <h2 className="md:text-4xl font-semibold md:mb-8">
-          About {college.name}
-        </h2>
-        <p className="md:text-2xl text-gray-700 max-w-5xl">
+        <p className="text-gray-700 md:text-xl max-w-5xl">
           {college.description}
         </p>
-      </div>
+      </Section>
 
-      {/* Facilities Section */}
-      <div className="w-full md:min-h-screen bg-gray-50 flex flex-col items-center justify-center text-center md:p-12 p-4 py-8">
-        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">
-          Facilities
-        </h2>
-        <ul className="list-disc md:text-2xl text-gray-700 max-w-4xl text-left">
+      {/* Facilities */}
+      <Section id="facilities" title="Facilities">
+        <ul className="list-disc text-left text-gray-700 md:text-xl max-w-4xl pl-5">
+          {/* {college.facilities.map((facility, i) => (
+            <li key={i}>{facility}</li>
+          ))} */}
           {college.facilities}
         </ul>
-      </div>
+      </Section>
 
-      {/* Popular Courses Section */}
-      <div className="w-full md:min-h-screen bg-white flex flex-col items-center justify-center text-center md:p-12 p-4">
-        <h2 className="md:text-4xl text-2xl font-semibold md:mb-8">
-          Popular Courses
-        </h2>
-        <ul className="list-disc md:text-2xl text-gray-700 max-w-4xl text-left p-2">
-          <p className="flex items-center md:gap-3">
-            <BookOpen size={24} />{" "}
-            <span className="md:font-semibold">Technical:</span>{" "}
-            {college.courses}
+      {/* Courses */}
+      <Section id="courses" title="Popular Courses">
+        <div className="text-left text-gray-700 md:text-xl max-w-4xl">
+          <p className="flex items-center gap-2">
+            <BookOpen size={24} />
+            <span className="font-semibold">Technical:</span> {college.courses}
           </p>
-        </ul>
-      </div>
-
-      {/* Admission section */}
-      <div className="md:min-h-screen flex flex-col bg-gray-50 justify-center items-center space-x-4 p-4">
-        <div>
-          <h2 className="md:text-4xl text-xl font-bold mt-4">
-            Admission Process
-          </h2>
-          <p>{college.admissionProcess}</p>
-
-          <h2 className="md:text-4xl text-xl font-bold mt-4">Fees</h2>
-          <p>Annual Tutuion fees: {college.fees}</p>
-          <p>Hostel Fees: {college.hostelFees}</p>
-          <p>Other Fees: {college.otherFees}</p>
         </div>
-      </div>
+      </Section>
 
-      {/* table section */}
-      <div className="bg-white md:min-h-screen flex flex-col justify-center items-center">
-        <div className="p-5">
-          <h2 className="md:text-4xl text-xl text-center mt-2">
-            Courses Offered & Admission
-          </h2>
-          <table className="table-auto w-full mt-1">
-            <thead>
-              <tr>
-                <th className="px-4 py-2">Course</th>
-                <th className="px-4 py-2">Admission</th>
-                <th className="px-4 py-2">Fee</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border px-4 py-2">{college.courses}</td>
-                <td className="border px-4 py-2">{college.admissionProcess}</td>
-                <td className="border px-4 py-2">{college.fees}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      {/* Admission */}
+      <Section id="admission" title="Admission Process">
+        <p className="mb-6 text-gray-700">{college.admissionProcess}</p>
+        <h3 className="text-2xl font-bold mt-6 mb-2">Fees</h3>
+        <Table
+          rows={[
+            ["Academic Fee", college.fees],
+            ["Hostel Fee", college.hostelFees],
+            ["Total Fee", college.otherFees],
+          ]}
+        />
+      </Section>
 
-        <div className="p-5 md:mt-10">
-          <h2 className="text-center md:text-4xl text-xl">Placement</h2>
-          <table className="table-auto w-full mt-1">
-            <thead>
-              <tr>
-                <th className="px-4 py-2">Course</th>
-                <th className="px-4 py-2">Average Package</th>
-                <th className="px-4 py-2">Median Package</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border px-4 py-2">{college.courses}</td>
-                <td className="border px-4 py-2">{college.averagePlacement}</td>
-                <td className="border px-4 py-2">{college.medianSalary}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      {/* Courses & Placement */}
+      <Section id="placement" title="Courses Offered & Admission">
+        <Table
+          head={["Course", "Admission", "Fee"]}
+          rows={[[college.courses, college.admissionProcess, college.fees]]}
+        />
+        <h3 className="text-2xl font-bold mt-10 mb-2">Placement</h3>
+        <Table
+          head={["Course", "Average Package", "Median Package"]}
+          rows={[
+            [college.courses, college.averagePlacement, college.medianSalary],
+          ]}
+        />
+      </Section>
 
-      {/*  Past Recruitor */}
-      <div className="bg-gray-50 md:p-4 md:min-h-screen flex flex-col justify-center align-items-center p-4">
-        <h2 className="text-center md:text-4xl text-2xl text-gray-600 font-bold">
-          Past Recruitor
-        </h2>
+      {/* Past Recruiters */}
+      <Section id="recruitment" title="Past Recruiters">
         <img
           src={college.pastRecruitor}
-          alt="Past Recruitor"
-          className="p-5 m-5"
+          alt="Past Recruiters"
+          className="max-w-4xl w-full rounded shadow-md"
         />
-      </div>
+      </Section>
 
-      {/* View More Section */}
-      <div className="w-full bg-white flex flex-col items-center justify-center text-center md:p-12 p-4">
+      {/* View More */}
+      <div className="w-full bg-white flex justify-center py-8">
         <Link
-          href={"/colleges"}
-          className="bg-blue-600 text-white md:text-2xl md:px-12 md:py-4 p-1 md:rounded-lg rounded hover:bg-blue-700"
+          href="/colleges"
+          className="bg-blue-600 text-white text-lg px-6 py-3 rounded hover:bg-blue-700 transition"
         >
           View More Colleges
         </Link>
@@ -245,5 +188,54 @@ const SingleCollegeCard = ({ college }) => {
     </div>
   );
 };
+
+// Reusable section component
+const Section = ({ id, title, children }) => (
+  <section
+    id={id}
+    className="w-full py-12 px-4 md:py-20 flex flex-col items-center bg-white text-center"
+  >
+    <h2 className="text-2xl md:text-4xl font-semibold text-gray-800 mb-8">
+      {title}
+    </h2>
+    {children}
+  </section>
+);
+
+// Reusable detail row
+const Detail = ({ icon: Icon, label, value }) => (
+  <p className="flex items-center gap-3">
+    <Icon size={24} />
+    <span className="font-semibold">{label}:</span> {value}
+  </p>
+);
+
+// Reusable table
+const Table = ({ head = [], rows }) => (
+  <table className="table-auto w-full text-left border border-gray-300 mt-2">
+    {head.length > 0 && (
+      <thead className="bg-gray-100">
+        <tr>
+          {head.map((h, i) => (
+            <th key={i} className="px-4 py-2 border">
+              {h}
+            </th>
+          ))}
+        </tr>
+      </thead>
+    )}
+    <tbody>
+      {rows.map((row, i) => (
+        <tr key={i}>
+          {row.map((cell, j) => (
+            <td key={j} className="px-4 py-2 border">
+              {cell}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
 
 export default SingleCollegeCard;

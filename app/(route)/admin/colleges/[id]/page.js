@@ -20,12 +20,15 @@ export default function EditCollegePage() {
     type: "",
     admissionProcess: "",
     fees: "",
+    hostelFees: "",
+    otherFees: "",
     facilities: "",
     noOfStudents: "",
     noOfFaculties: "",
     averagePlacement: "",
     medianSalary: "",
     websiteUrl: "",
+    pastRecruitor: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -210,6 +213,24 @@ export default function EditCollegePage() {
         />
         <input
           type="text"
+          name="hostelFees"
+          placeholder="Hostel Fees"
+          value={formData.hostelFees}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="otherFees"
+          placeholder="Total Fees"
+          value={formData.otherFees}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
           name="averagePlacement"
           placeholder="Average Placement"
           value={formData.averagePlacement}
@@ -231,6 +252,15 @@ export default function EditCollegePage() {
           name="websiteUrl"
           placeholder="Website URL"
           value={formData.websiteUrl}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="pastRecruitor"
+          placeholder="Past Recruiters Image URL"
+          value={formData.pastRecruitor}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required

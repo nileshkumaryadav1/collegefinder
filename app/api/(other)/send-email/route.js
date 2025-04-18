@@ -16,7 +16,7 @@ export async function POST(req) {
     // ✅ Email options
     const mailOptions = {
       from: `"College Finder" <${process.env.GMAIL_USER}>`,
-      to: email, // Recipient (new user)
+      to: email,
       subject: "Welcome to College Finder!",
       html: `
         <h2>Welcome, ${name}!</h2>

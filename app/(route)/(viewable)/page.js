@@ -9,20 +9,20 @@ import ScholarshipCard from "@/components/custom/ScholarshipCard";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="bg-gray-100">
       {/* Hero Section */}
       <HomeHero />
 
       {/* Featured Colleges */}
-      <div className="container mx-auto mt-10 p-6">
-        <h2 className="text-3xl font-bold text-center m-6">
+      <div className="mx-auto p-6 container">
+        <h2 className="text-3xl font-bold text-center mb-6">
           Featured Colleges
         </h2>
         <CollegeCard query="#" />
       </div>
 
       {/* Popular Exams */}
-      <div className="min-h-screen mx-auto mt-10 p-6 flex flex-col items-center justify-center">
+      <div className="mx-auto p-6 flex flex-col items-center justify-center">
         <h2 className="text-3xl font-bold text-center m-6">Popular Exams</h2>
         <ExamCard query="#" />
       </div>
@@ -40,7 +40,6 @@ export default function Home() {
 
       {/* About Us */}
       <AboutUs />
-
     </div>
   );
 }

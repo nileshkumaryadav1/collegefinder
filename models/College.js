@@ -12,12 +12,15 @@ const CollegeSchema = new mongoose.Schema({
   type: String,
   admissionProcess: String,
   fees: String,
+  hostelFees: String,
+  otherFees: String,
   facilities: String,
   noOfStudents: Number,
   noOfFaculties: Number,
   averagePlacement: String,
   medianSalary: String,
   websiteUrl: String,
+  pastRecruitor: String,
 }, { timestamps: true });
 
 export default mongoose.models.College || mongoose.model("College", CollegeSchema);

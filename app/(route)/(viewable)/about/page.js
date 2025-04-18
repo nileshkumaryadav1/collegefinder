@@ -8,12 +8,12 @@ export default function AboutUs() {
     <div className="h-auto md:h-150 bg-gray-100 dark:bg-gray-900 md:py-12 py-4">
       <div className="max-w-5xl mx-auto px-6">
         {/* Page Title */}
-        <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-8">
+        <h1 className="md:text-4xl text-2xl font-bold text-center text-gray-900 dark:text-white md:mb-8 mb-4">
           About College Finder
         </h1>
 
         {/* Description */}
-        <p className="text-lg text-gray-700 dark:text-gray-300 text-center mb-10">
+        <p className="text-lg text-gray-700 dark:text-gray-300 text-center md:mb-10 mb-4">
           College Finder is your go-to platform for discovering top colleges and exams
           across various fields. We help students make informed decisions 
           about their academic future with accurate and up-to-date information.

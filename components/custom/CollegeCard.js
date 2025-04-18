@@ -37,9 +37,9 @@ function CollegeCard({ query }) {
             className="bg-white rounded-lg shadow-md overflow-hidden"
           >
             <img
-              src={college.image}
+              src={college.imageUrl}
               alt={college.name}
-              className="w-full h-40 object-cover"
+              className="w-full h-40 object-cover rounded-md mb-4"
             />
             <div className="p-4">
               <h2 className="text-xl font-semibold">{college.name}</h2>

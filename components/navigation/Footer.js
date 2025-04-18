@@ -120,13 +120,17 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="text-center md:mt-8 mt-3 border-t border-gray-700 pt-4 space-y-4">
-          <div>
+        <div className="text-center md:mt-8 mt-3 border-t border-gray-700 pt-4 space-y-5 flex flex-col items-center justify-center">
+          <div className="flex items-center">
             <img
               src="/logo.jpg"
               alt="College finder"
-              className="w-12 h-12 rounded-full mx-auto"
+              className="w-12 h-12 rounded-full"
             />
+            <div>
+              <p>College</p>
+              <p>Finder</p>
+            </div>
           </div>
           <p className="text-sm">
             &copy; {new Date().getFullYear()} College Finder. All Rights

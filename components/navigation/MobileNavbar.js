@@ -50,7 +50,7 @@ const NavItem = ({ href, icon: Icon, label, active }) => {
     <Link
       href={href}
       className={`flex flex-col items-center 
-         transition-all p-2 ${
+         transition-all p-3 ${
           active
             ? "text-blue-400 bg-gray-700 rounded-full"
             : "text-gray-400"
