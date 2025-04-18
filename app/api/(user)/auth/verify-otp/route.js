@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import Otp from "@/models/Otp";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
+import Otp from "@/models/Otp";
 import { connectToDatabase } from "@/lib/mongodb";
 import { sendWelcomeEmail } from "@/lib/mailer";
 
@@ -11,54 +11,70 @@ export async function POST(req) {
 
     const { email, otp } = await req.json();
 
-    // Check if email and OTP are provided
+    // 🔒 Validate input
     if (!email || !otp) {
       return NextResponse.json(
-        { error: "Email and OTP are required" },
+        { error: "Email and OTP are required." },
         { status: 400 }
       );
     }
 
-    // Find the latest OTP record for the user
-    const record = await Otp.findOne({ email }).sort({ createdAt: -1 });
+    // 🔍 Get the latest OTP entry
+    const latestOtp = await Otp.findOne({ email }).sort({ createdAt: -1 });
 
-    // If no OTP record is found or it has expired
-    if (!record) {
+    if (!latestOtp) {
       return NextResponse.json(
-        { error: "OTP expired or not found" },
+        { error: "OTP expired or not found." },
         { status: 400 }
       );
     }
 
-    // Compare the provided OTP with the stored hashed OTP
-    const valid = await bcrypt.compare(otp, record.otp);
-    if (!valid) {
-      return NextResponse.json({ error: "Invalid OTP" }, { status: 400 });
+    // 🕒 Optional: Check OTP expiry manually (e.g., 5 minutes validity)
+    const otpAgeInMinutes = (Date.now() - new Date(latestOtp.createdAt).getTime()) / 60000;
+    if (otpAgeInMinutes > 5) {
+      await Otp.deleteMany({ email }); // Clean up
+      return NextResponse.json(
+        { error: "OTP has expired. Please request a new one." },
+        { status: 400 }
+      );
     }
 
-    // Check if the user exists in the database
+    // ✅ Compare OTP
+    const isMatch = await bcrypt.compare(otp, latestOtp.otp);
+    if (!isMatch) {
+      return NextResponse.json({ error: "Invalid OTP." }, { status: 400 });
+    }
+
+    // 👤 Check if user exists, else create
     let user = await User.findOne({ email });
+    let isNewUser = false;
+
     if (!user) {
-      // If the user doesn't exist, create a new user with default values
       user = await User.create({
         email,
-        password: "defaultPassword", // Placeholder password (can be changed later)
-        name: "Anonymous User", // Default name (can be updated later)
+        password: "defaultPassword", // placeholder; ideally, enforce update later
+        name: "Anonymous User",
       });
+      isNewUser = true;
     }
 
-    // Send the welcome email to the user after OTP verification
-    await sendWelcomeEmail(user.email, user.name);
+    // ✉️ Send welcome email (only if newly registered)
+    if (isNewUser) {
+      await sendWelcomeEmail(user.email, user.name);
+    }
 
-    // Delete the used OTP after verification
+    // 🧹 Clean up OTPs
     await Otp.deleteMany({ email });
 
-    // Respond with a success message and the user data
-    return NextResponse.json({ message: "OTP verified successfully.", user });
+    return NextResponse.json({
+      message: "OTP verified successfully.",
+      user,
+      newUser: isNewUser,
+    });
   } catch (err) {
-    console.error("Error during OTP verification:", err);
+    console.error("❌ OTP Verification Error:", err);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error." },
       { status: 500 }
     );
   }

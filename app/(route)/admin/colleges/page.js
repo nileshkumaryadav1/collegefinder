@@ -355,7 +355,8 @@ export default function AddCollegePage() {
 
                 <p className="text-sm text-gray-700 mb-2">
                   <span className="font-semibold">Admission:</span>{" "}
-                  {college.admissionProcess}
+                  {/* {college.admissionProcess} */}
+                  Admission process is to long for shown!
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">

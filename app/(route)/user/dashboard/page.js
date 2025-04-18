@@ -14,7 +14,7 @@ export default function Dashboard() {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        router.push("/user/login");
+        window.location.href = "/user/login";
         return;
       }
 
@@ -29,7 +29,7 @@ export default function Dashboard() {
           setUser(data);
         } else {
           localStorage.removeItem("token");
-          router.push("/user/login");
+          window.location.href = "/user/login";
         }
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -46,7 +46,7 @@ export default function Dashboard() {
       "Are you sure you want to delete your account? This action cannot be undone!"
     );
 
-    if (!confirmDelete) return; // Stop if user cancels
+    if (!confirmDelete) return;
 
     const res = await fetch("/api/user", {
       method: "DELETE",
@@ -60,40 +60,50 @@ export default function Dashboard() {
     if (res.ok) {
       localStorage.removeItem("token");
       sessionStorage.clear();
-      window.location.reload();
+      window.location.href = "/";
     }
   };
 
-  if (!user) return <Loading />;
+  if (loading || !user) return <Loading />;
 
   return (
-    <div className="p-4 bg-gray-100 flex flex-col md:flex-row gap-6">
-      {/* User Info Card */}
-      <div className="w-full md:w-1/3">
-        <UserCard user={user} />
+    <div className="min-h-screen px-4 py-6 bg-gray-50 dark:bg-[#111827] text-gray-800 dark:text-gray-100 transition-colors duration-300">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8">
+        {/* User Info Card */}
+        <div className="w-full md:w-1/3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow p-4">
+          <UserCard user={user} />
+          <button
+            onClick={() => deleteUser(user.email)}
+            className="mt-6 w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition"
+          >
+            Delete Account
+          </button>
+        </div>
 
-        <button
-          onClick={() => deleteUser(user.email)}
-          className="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition w-full mt-4"
-        >
-          Delete Account
-        </button>
-      </div>
+        {/* Tabs Section */}
+        <div className="w-full md:w-2/3">
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow p-4">
+            <Tabs
+              value={tab}
+              onChange={(e, newTab) => setTab(newTab)}
+              variant="fullWidth"
+              centered
+              textColor="primary"
+              indicatorColor="primary"
+            >
+              <Tab label="Liked Colleges" value="colleges" />
+              <Tab label="Liked Exams" value="exams" />
+              <Tab label="Liked Scholarships" value="scholarships" />
+            </Tabs>
 
-      {/* Liked Colleges, Exams, Scholarships */}
-      <div className="w-full md:w-2/3">
-        <Tabs
-          value={tab}
-          onChange={(e, newTab) => setTab(newTab)}
-          centered
-          variant="fullWidth"
-          className="mb-4"
-        >
-          <Tab label="Liked Colleges" value="colleges" />
-          <Tab label="Liked Exams" value="exams" />
-          <Tab label="Liked Scholarships" value="scholarships" />
-        </Tabs>
-
+            <div className="mt-6">
+              {/* Add content display logic here */}
+              {tab === "colleges" && <p className="text-center text-gray-600 dark:text-gray-400">You have not liked any colleges yet.</p>}
+              {tab === "exams" && <p className="text-center text-gray-600 dark:text-gray-400">You have not liked any exams yet.</p>}
+              {tab === "scholarships" && <p className="text-center text-gray-600 dark:text-gray-400">You have not liked any scholarships yet.</p>}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

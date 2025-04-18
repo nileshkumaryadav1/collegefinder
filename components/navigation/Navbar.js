@@ -3,7 +3,15 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, User, Menu, X, Building2, PenBox, Book } from "lucide-react";
+import {
+  Home,
+  User,
+  Menu,
+  X,
+  Building2,
+  PenBox,
+  Book,
+} from "lucide-react";
 import { FaMoneyBillWave } from "react-icons/fa";
 import Image from "next/image";
 
@@ -12,10 +20,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Close menu on outside click
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
         setIsOpen(false);
       }
     };
@@ -34,32 +41,35 @@ const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-gray-900 py-3 shadow-md z-50">
-      <div className="flex justify-between items-center mx-auto md:px-20 px-5">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50 border-b border-gray-200 py-2">
+      <div className="flex justify-between items-center px-4 md:px-20 py-2">
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center space-x-2 text-blue-500 font-extrabold"
-        >
+        <Link href="/" className="flex items-center space-x-2">
           <Image
             src="/logo.jpg"
             alt="CollegeFinder Logo"
-            width={42}
-            height={42}
+            width={36}
+            height={36}
             className="rounded-full"
           />
-          <span className="text-gray-200 text-xl font-bold">CollegeFinder</span>
+          <span className="text-lg font-bold text-gray-800 tracking-tight">
+            CollegeFinder
+          </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden sm:flex space-x-1">
+        {/* Desktop Nav */}
+        <div className="hidden sm:flex space-x-2">
           <NavItem href="/" label="Home" active={pathname === "/"} />
           <NavItem
             href="/colleges"
             label="Colleges"
             active={pathname === "/colleges"}
           />
-          <NavItem href="/exams" label="Exams" active={pathname === "/exams"} />
+          <NavItem
+            href="/exams"
+            label="Exams"
+            active={pathname === "/exams"}
+          />
           <NavItem
             href="/scholarships"
             label="Scholarships"
@@ -68,7 +78,7 @@ const Navbar = () => {
           <NavItem href="/about" label="About" active={pathname === "/about"} />
           <NavItem
             href="/user/dashboard"
-            icon={<User size={20} />}
+            icon={<User size={18} />}
             label="Profile"
             active={pathname.startsWith("/user")}
           />
@@ -77,7 +87,7 @@ const Navbar = () => {
         {/* Hamburger Icon */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="sm:hidden text-white"
+          className="sm:hidden text-gray-800"
           aria-label="Toggle Menu"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -87,62 +97,62 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div
         ref={menuRef}
-        className={`fixed top-0 left-0 h-full w-64 bg-gray-800 shadow-xl transform ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-xl transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-all duration-300 ease-in-out sm:hidden z-50 backdrop-blur-md`}
+        } transition-transform duration-300 ease-in-out sm:hidden z-50`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <Link
             href="/"
             onClick={closeMenu}
-            className="text-gray-200 text-xl font-bold"
+            className="text-lg font-bold text-gray-800"
           >
             CollegeFinder
           </Link>
-          <button onClick={closeMenu} className="text-white">
-            <X size={28} />
+          <button onClick={closeMenu} className="text-gray-800">
+            <X size={26} />
           </button>
         </div>
 
-        <div className="flex flex-col px-4 py-2 space-y-2">
+        <div className="flex flex-col px-4 py-2 space-y-1">
           <NavItemMobile
             href="/"
-            icon={<Home size={20} />}
+            icon={<Home size={18} />}
             label="Home"
             active={pathname === "/"}
             onClick={closeMenu}
           />
           <NavItemMobile
             href="/colleges"
-            icon={<Building2 size={20} />}
+            icon={<Building2 size={18} />}
             label="Colleges"
             active={pathname === "/colleges"}
             onClick={closeMenu}
           />
           <NavItemMobile
             href="/exams"
-            icon={<PenBox size={20} />}
+            icon={<PenBox size={18} />}
             label="Exams"
             active={pathname === "/exams"}
             onClick={closeMenu}
           />
           <NavItemMobile
             href="/scholarships"
-            icon={<FaMoneyBillWave size={20} />}
+            icon={<FaMoneyBillWave size={18} />}
             label="Scholarships"
             active={pathname === "/scholarships"}
             onClick={closeMenu}
           />
           <NavItemMobile
             href="/about"
-            icon={<Book size={20} />}
+            icon={<Book size={18} />}
             label="About"
             active={pathname === "/about"}
             onClick={closeMenu}
           />
           <NavItemMobile
             href="/user/dashboard"
-            icon={<User size={20} />}
+            icon={<User size={18} />}
             label="Profile"
             active={pathname.startsWith("/user")}
             onClick={closeMenu}
@@ -156,12 +166,14 @@ const Navbar = () => {
 const NavItem = ({ href, icon, label, active }) => (
   <Link
     href={href}
-    className={`flex items-center px-4 py-2 rounded-lg transition-all ${
-      active ? "text-blue-700 bg-gray-200" : "text-gray-300 hover:text-white"
+    className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-all ${
+      active
+        ? "bg-blue-100 text-blue-700"
+        : "text-gray-600 hover:text-blue-600 hover:bg-gray-100"
     }`}
   >
     {icon && <span className="mr-2">{icon}</span>}
-    <span className="text-sm font-medium">{label}</span>
+    {label}
   </Link>
 );
 
@@ -169,8 +181,10 @@ const NavItemMobile = ({ href, icon, label, active, onClick }) => (
   <Link
     href={href}
     onClick={onClick}
-    className={`flex items-center space-x-3 p-3 text-base rounded-md transition-colors ${
-      active ? "bg-gray-300 text-blue-700" : "text-gray-300 hover:text-white"
+    className={`flex items-center space-x-3 p-3 text-sm font-medium rounded-md ${
+      active
+        ? "bg-blue-100 text-blue-700"
+        : "text-gray-600 hover:bg-gray-100 hover:text-blue-600"
     }`}
   >
     {icon}

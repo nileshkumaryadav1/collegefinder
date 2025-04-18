@@ -34,7 +34,7 @@ export default function Home() {
       </div>
 
       {/* F&Q Section */}
-      <div className="min-h-screen mx-auto mt-10 bg-gray-900 flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         <FnQ />
       </div>
 

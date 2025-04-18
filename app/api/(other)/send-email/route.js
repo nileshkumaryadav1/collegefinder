@@ -4,7 +4,6 @@ export async function POST(req) {
   try {
     const { email, name } = await req.json();
 
-    // ✅ Set up transporter with Gmail SMTP
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -13,9 +12,8 @@ export async function POST(req) {
       },
     });
 
-    // ✅ Email options
     const mailOptions = {
-      from: `"College Finder" <${process.env.GMAIL_USER}>`,
+      from: `"College Finder" <${process.env.SENDER_EMAIL}>`,
       to: email,
       subject: "Welcome to College Finder!",
       html: `
@@ -28,7 +26,6 @@ export async function POST(req) {
       `,
     };
 
-    // ✅ Send the email
     const info = await transporter.sendMail(mailOptions);
 
     return Response.json({ success: true, info });
