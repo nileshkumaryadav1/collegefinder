@@ -8,14 +8,14 @@ export async function POST(req) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.SENDER_EMAIL, // ✅ Use env variable
-        pass: process.env.SENDER_EMAIL_APP_PASSWORD, // ✅ Use App Password
+        user: process.env.SENDER_EMAIL,
+        pass: process.env.SENDER_EMAIL_APP_PASSWORD,
       },
     });
 
     // ✅ Email options
     const mailOptions = {
-      from: `"College Finder" <${process.env.GMAIL_USER}>`, // Gmail sender (must match the authenticated user)
+      from: `"College Finder" <${process.env.GMAIL_USER}>`,
       to: email, // Recipient (new user)
       subject: "Welcome to College Finder!",
       html: `
