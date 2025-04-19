@@ -71,6 +71,23 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
+
+            {/* News */}
+            <div>
+              <h5 className="text-lg font-semibold text-black dark:text-white">
+                News
+              </h5>
+              <ul className="mt-2 space-y-1">
+                <li>
+                  <Link
+                    href="/news"
+                    className="hover:text-blue-500 dark:hover:text-blue-400 transition"
+                  >
+                    Latest News
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Social Media */}

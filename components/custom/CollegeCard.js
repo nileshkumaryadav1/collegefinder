@@ -89,7 +89,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
             <h2 className="text-xl font-bold mb-1">{college.name}</h2>
           </Link>
           <p className="text-gray-600 text-sm mb-2">{college.location}</p>
-
+          {/* 
           <p className="text-sm text-gray-700 mb-2">
             <span className="font-semibold">Affiliation:</span>{" "}
             {college.affiliation}
@@ -118,8 +118,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
 
           <p className="text-sm text-gray-700 mb-2">
             <span className="font-semibold">Admission:</span>{" "}
-            {/* {college.admissionProcess} */}
-            Admission are done on the basis of....
+            {college.admissionProcess}
           </p>
 
           <p className="text-sm text-gray-700 mb-2">
@@ -136,20 +135,20 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
             <br />
             <span className="font-semibold">Median Salary:</span> ₹
             {college.medianSalary}
-          </p>
+          </p> */}
 
           <p className="text-sm text-gray-700 mb-2">
             <span className="font-semibold">Description:</span>{" "}
             {college.description.slice(0, 100) + "..."}
           </p>
 
-          <div className="my-3">
+          {/* <div className="my-3">
             <img
               src={college.pastRecruitor}
               alt="Past Recruitor"
               className="w-full h-20 object-cover rounded-md"
             />
-          </div>
+          </div>  */}
 
           <div className="mt-auto flex justify-between items-center">
             <a
@@ -164,7 +163,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
               href={`/colleges/${college._id}`}
               className="btn btn-primary my-1"
             >
-              View Details →
+              View full Details →
             </Link>
           </div>
         </div>

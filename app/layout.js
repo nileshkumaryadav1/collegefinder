@@ -7,6 +7,7 @@ import Footer from "@/components/navigation/Footer";
 import MobileNavbar from "@/components/navigation/MobileNavbar";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
+// import ClientThemeWrapper from "@/components/theme/ClientThemeWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,7 +51,10 @@ export default function RootLayout({ children }) {
       >
         <SpeedInsights />
         <Navbar />
-        <main className="mt-16">{children}</main>
+        <main className="mt-16">
+          {/* <ClientThemeWrapper>{children}</ClientThemeWrapper> */}
+          {children}
+        </main>
         <MobileNavbar />
         <Footer />
       </body>

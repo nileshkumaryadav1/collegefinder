@@ -119,7 +119,7 @@ const SingleCollegeCard = ({ college }) => {
             label="NIRF Ranking (Engineering)"
             value={
               college.nirfRanking
-                ? `#${college.nirfRanking} (Engineering)`
+                ? `#${college.nirfRanking}`
                 : "Not Ranked"
             }
           />
@@ -194,7 +194,7 @@ const SingleCollegeCard = ({ college }) => {
                 </td>
               </tr>
               <tr className="border-b">
-                <td className="p-3">Hostel Fee</td>
+                <td className="p-3">Hostel + Mess Fee</td>
                 <td className="p-3 font-medium text-gray-800">
                   ₹{college.hostelFees.toLocaleString()}
                 </td>
@@ -221,7 +221,7 @@ const SingleCollegeCard = ({ college }) => {
       </Section>
 
       {/* past recruiters */}
-      <Section id="recruitment" title="Past Recruiters">
+      <Section id="recruitment" title="Past Recruitments">
         <img
           src={college.pastRecruitor}
           alt="Past Recruiters"

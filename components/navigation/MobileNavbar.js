@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Building2, User, PenBox } from "lucide-react";
@@ -7,6 +8,15 @@ import { FaMoneyBillWave } from "react-icons/fa";
 
 const MobileNavbar = () => {
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check token in localStorage
+  useEffect(() => {
+    const token = typeof window !== "undefined" && localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  if (!isLoggedIn) return null;
 
   return (
     <nav className="fixed bottom-0 left-0 w-full z-40 sm:hidden shadow-t">

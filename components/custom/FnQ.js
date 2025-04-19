@@ -9,7 +9,7 @@ function FnQ() {
       <h2 className="text-4xl font-bold text-black dark:text-gray-200 text-center mb-6">
         Why Choose Us?
       </h2>
-      <p className="text-gray-700 dark:text-gray-300 text-center max-w-3xl mx-auto">
+      <p className="text-gray-700 dark:text-gray-300 text-center max-w-4xl mx-auto px-10">
         Our platform helps students discover the best colleges, understand
         entrance exams, and make informed decisions for their future.
       </p>
