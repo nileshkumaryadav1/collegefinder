@@ -1,25 +1,19 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
-const NewsPage = () => {
-  const searchParams = useSearchParams();
+export default function NewsPage() {
   const [newsData, setNewsData] = useState([]);
-  const [category, setCategory] = useState(searchParams.get("category") || "all");
+  const [category, setCategory] = useState("all");
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
 
-  const fetchNews = async () => {
+  const fetchNews = async (selectedCategory) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/news?page=${page}&category=${category}`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch news");
-      }
+      const res = await fetch(`/api/news?page=1&category=${selectedCategory}`);
       const data = await res.json();
-      setNewsData((prev) => [...prev, ...data.data]);
+      setNewsData(data.data || []);
     } catch (error) {
       console.error("Error fetching news:", error);
     } finally {
@@ -27,93 +21,118 @@ const NewsPage = () => {
     }
   };
 
-  // Effect hook to fetch news when category or page changes
   useEffect(() => {
-    fetchNews();
-  }, [category, page]); // Add category and page as dependencies
+    fetchNews(category);
+  }, [category]);
 
-  const handleCategoryChange = (newCategory) => {
-    setCategory(newCategory);
-    setPage(1); // Reset to the first page when category changes
-    setNewsData([]); // Clear current news data
-  };
+  const categories = [
+    { label: "All", value: "all" },
+    { label: "College News", value: "college" },
+    { label: "Exam Updates", value: "exam" },
+    { label: "Scholarships", value: "scholarship" },
+  ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      {/* Title */}
-      <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-        Latest Education News
+      <h1 className="text-3xl font-bold text-blue-800 mb-8 text-center">
+        Education News & Updates
       </h1>
 
-      {/* Category Filter */}
-      <div className="flex justify-center mb-10">
-        <select
-          className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={category}
-          onChange={(e) => handleCategoryChange(e.target.value)}
-        >
-          <option value="all">All</option>
-          <option value="college">College News</option>
-          <option value="exam">Exam Updates</option>
-          <option value="scholarship">Scholarships</option>
-        </select>
-      </div>
-
-      {/* News Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {newsData.map((news) => (
-          <div
-            key={news._id}
-            className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition duration-200 p-5 flex flex-col justify-between"
+      {/* Category Tabs */}
+      <div className="flex justify-center gap-4 mb-10 flex-wrap">
+        {categories.map((cat) => (
+          <button
+            key={cat.value}
+            onClick={() => setCategory(cat.value)}
+            className={`px-4 py-2 rounded-full text-sm font-medium border ${
+              category === cat.value
+                ? "bg-blue-600 text-white border-blue-600"
+                : "text-gray-700 border-gray-300 hover:bg-gray-100"
+            }`}
           >
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                {news.title}
-              </h3>
-              <p className="text-sm text-gray-600 mb-4 line-clamp-4">
-                {news.description}
-              </p>
-            </div>
-
-            <div className="mt-auto flex justify-between items-center">
-              <a
-                href={news.sourceURL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-blue-600 hover:underline"
-              >
-                Reference
-              </a>
-              <Link
-                href={`/news/${news._id}`}
-                className="text-sm text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md transition"
-              >
-                Read More
-              </Link>
-            </div>
-          </div>
+            {cat.label}
+          </button>
         ))}
       </div>
 
-      {/* Load More */}
-      <div className="flex justify-center mt-10">
-        <button
-          onClick={() => setPage(page + 1)}
-          disabled={loading}
-          className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:opacity-50"
-        >
-          {loading ? "Loading..." : "Load More"}
-        </button>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+        {/* News Cards */}
+        <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {loading ? (
+            <p className="text-center col-span-full text-gray-500">Loading...</p>
+          ) : newsData.length === 0 ? (
+            <p className="text-center col-span-full text-gray-500">
+              No news found in this category.
+            </p>
+          ) : (
+            newsData.map((news) => (
+              <div
+                key={news._id}
+                className="bg-white border rounded-xl shadow hover:shadow-md transition p-4 flex flex-col"
+              >
+                <div>
+                  <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
+                    {news.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+                    {news.description}
+                  </p>
+                </div>
+                <div className="mt-auto flex justify-between items-center pt-4 border-t">
+                  <a
+                    href={news.sourceURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-blue-500 hover:underline"
+                  >
+                    Source
+                  </a>
+                  <Link
+                    href={`/news/${news._id}`}
+                    className="text-sm text-white bg-blue-600 hover:bg-blue-700 px-4 py-1.5 rounded transition"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Advertisement & Promotions */}
+        <div className="hidden lg:block">
+          <div className="bg-white border rounded-xl shadow p-4 mb-6">
+            <h4 className="text-md font-bold text-gray-800 mb-2">Promotions</h4>
+            <ul className="text-sm text-blue-700 list-disc list-inside space-y-2">
+              <li>
+                <a href="#" className="hover:underline">
+                  Top Engineering Colleges in India 2025
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline">
+                  How to Crack JEE Advanced – Strategy Guide
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline">
+                  Free Counseling by Experts
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-4">
+            <h4 className="text-md font-bold text-blue-700 mb-2">Advertisement</h4>
+            <img
+              src="/ads/sample-ad.jpg"
+              alt="Ad Banner"
+              className="rounded-lg w-full h-auto object-cover"
+            />
+            <p className="text-xs text-gray-500 mt-2">Sponsored Content</p>
+          </div>
+        </div>
       </div>
     </div>
-  );
-};
-
-// Wrap the entire component in Suspense
-export default function NewsPageWithSuspense() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <NewsPage />
-    </Suspense>
   );
 }

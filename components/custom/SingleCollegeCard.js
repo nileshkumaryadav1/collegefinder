@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
   Heart,
   MapPin,
@@ -46,7 +46,10 @@ const SingleCollegeCard = ({ college }) => {
             <MapPin size={18} /> {college.location}
           </p>
           <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
-            {college.description.slice(0, 200)}...
+            {college.description
+              ? college.description.slice(0, 200)
+              : "Description not available."}
+            ...
             <a href="#about" className="text-blue-600 hover:underline ml-1">
               Read More
             </a>
@@ -118,9 +121,7 @@ const SingleCollegeCard = ({ college }) => {
             icon={Star}
             label="NIRF Ranking (Engineering)"
             value={
-              college.nirfRanking
-                ? `#${college.nirfRanking}`
-                : "Not Ranked"
+              college.nirfRanking ? `#${college.nirfRanking}` : "Not Ranked"
             }
           />
         </div>
@@ -163,11 +164,11 @@ const SingleCollegeCard = ({ college }) => {
       <Section id="admission" title="Admission Process">
         <div className="text-gray-700 max-w-4xl mx-auto leading-relaxed space-y-2 text-left">
           {college.admissionProcess
-            .split(".")
-            .filter((sentence) => sentence.trim().length > 0)
-            .map((sentence, index) => (
-              <p key={index}>{sentence.trim()}.</p>
-            ))}
+            ? college.admissionProcess
+                .split(".")
+                .filter((sentence) => sentence.trim().length > 0)
+                .map((sentence, index) => <p key={index}>{sentence.trim()}.</p>)
+            : "Admission process information not available."}
         </div>
       </Section>
 
@@ -190,19 +191,19 @@ const SingleCollegeCard = ({ college }) => {
               <tr className="border-b">
                 <td className="p-3">Academic Fee</td>
                 <td className="p-3 font-medium text-gray-800">
-                  ₹{college.fees.toLocaleString()}
+                  ₹{college.fees ? college.fees.toLocaleString() : "Fee information not available."}
                 </td>
               </tr>
               <tr className="border-b">
                 <td className="p-3">Hostel + Mess Fee</td>
                 <td className="p-3 font-medium text-gray-800">
-                  ₹{college.hostelFees.toLocaleString()}
+                  ₹{college.hostelFees ? college.hostelFees.toLocaleString() : "Hostel fee information not available."}
                 </td>
               </tr>
               <tr>
                 <td className="p-3 font-semibold">Total Estimated Fee</td>
                 <td className="p-3 font-semibold text-blue-700">
-                  ₹{college.otherFees.toLocaleString()}
+                  ₹{college.otherFees ? college.otherFees.toLocaleString() : "Other fee information not available."}
                 </td>
               </tr>
             </tbody>

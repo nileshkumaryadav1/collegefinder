@@ -1,6 +1,7 @@
 "use client";
 
 import CollegeCard from "@/components/custom/CollegeCard";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function CollegesPage() {
@@ -10,10 +11,6 @@ export default function CollegesPage() {
   const [sortOrder, setSortOrder] = useState("asc");
 
   const collegeTypes = [
-    "IIT",
-    "NIT",
-    "IIIT",
-    "GFTI",
     "Public",
     "Private",
     "Deemed University",
@@ -24,9 +21,9 @@ export default function CollegesPage() {
 
   const sortFields = [
     { label: "Name", value: "name" },
-    { label: "Rating", value: "rating" },
-    { label: "Fees", value: "fees" },
-    { label: "Placement %", value: "placement" },
+    { label: "Nirf Ranking", value: "nirfRanking" },
+    { label: "Total Fees", value: "otherFees" },
+    { label: "Placement", value: "averagePlacement" },
   ];
 
   const sortOrders = [
@@ -36,16 +33,16 @@ export default function CollegesPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen px-4 md:py-8 py-4 md:px-10 lg:px-20">
-      <h1 className="text-3xl md:text-4xl font-semibold text-center text-gray-800 md:mb-4 mb-2">
+      <h1 className="text-3xl md:text-4xl font-semibold text-center text-gray-800 mb-2">
         Find Your College
       </h1>
-      <p className="text-center text-gray-500 md:mb-10 mb-4 max-w-2xl mx-auto">
+      <p className="text-center text-gray-500 mb-4 max-w-2xl mx-auto">
         Explore detailed information about top engineering colleges in India by
         filtering through institute types, placement stats, fees, and more.
       </p>
 
       {/* Filters Container */}
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 md:p-6 md:mb-8 mb-4">
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 md:p-6 mb-4">
         <h2 className="text-xl font-semibold text-gray-700 mb-4">
           Filter Colleges
         </h2>
@@ -101,12 +98,32 @@ export default function CollegesPage() {
       </div>
 
       {/* Colleges Display Section */}
-      <CollegeCard
-        query={query}
-        collegeType={collegeType}
-        sortBy={sortBy}
-        sortOrder={sortOrder}
-      />
+      <div className="">
+        <CollegeCard
+          query={query}
+          collegeType={collegeType}
+          sortBy={sortBy}
+          sortOrder={sortOrder}
+        />
+      </div>
+
+      {/* Promotion and Monetization Section */}
+      <div className="bg-blue-500 text-white p-6 rounded-xl mt-8">
+        <h3 className="text-2xl font-semibold mb-4">
+          Promote Your College or Service
+        </h3>
+        <p className="text-lg mb-4">
+          Get your college featured on our platform to reach thousands of
+          students across India. Special discounts available for early
+          promoters!
+        </p>
+        <Link
+          href="/promotions"
+          className="bg-white text-blue-500 font-semibold px-6 py-2 rounded-lg inline-block hover:bg-gray-100 transition"
+        >
+          Learn More & Promote Now
+        </Link>
+      </div>
     </div>
   );
 }

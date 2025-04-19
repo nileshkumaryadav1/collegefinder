@@ -28,22 +28,22 @@ const Footer = () => {
               </h4>
               <ul className="md:mt-2 space-y-1">
                 {[
-                  { href: "/colleges/iits", label: "IIT Colleges" },
-                  { href: "/colleges/nits", label: "NIT Colleges" },
+                  { href: "/find-colleges/iits", label: "IIT Colleges" },
+                  { href: "/find-colleges/nits", label: "NIT Colleges" },
                   {
-                    href: "/exams/engineering-entrance",
+                    href: "/find-exams/engineering-entrance",
                     label: "Engineering Entrance",
                   },
                   {
-                    href: "/exams/medical-entrance",
+                    href: "/find-exams/medical-entrance",
                     label: "Medical Entrance",
                   },
                   {
-                    href: "/scholarships/graduation",
+                    href: "/find-scholarships/graduation",
                     label: "Graduation Scholarships",
                   },
                   {
-                    href: "/scholarships/post-graduation",
+                    href: "/find-scholarships/post-graduation",
                     label: "Masters Scholarships",
                   },
                 ].map(({ href, label }) => (
@@ -93,9 +93,9 @@ const Footer = () => {
               <ul className="md:mt-2 space-y-1">
                 {[
                   { href: "/news", label: "Latest News" },
-                  { href: "/news/colleges", label: "Colleges News" },
-                  { href: "/news/exams", label: "Exams News" },
-                  { href: "/news/scholarships", label: "Scholarships News" },
+                  { href: "/find-news/colleges", label: "Colleges News" },
+                  { href: "/find-news/exams", label: "Exams News" },
+                  { href: "/find-news/scholarships", label: "Scholarships News" },
                 ].map(({ href, label }) => (
                   <li key={href}>
                     <Link
