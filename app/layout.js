@@ -1,6 +1,6 @@
 import { defaultSEO } from "@/lib/seo.config";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/navigation/Footer";
@@ -9,15 +9,7 @@ import MobileNavbar from "@/components/navigation/MobileNavbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 // import ClientThemeWrapper from "@/components/theme/ClientThemeWrapper";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const geist = Geist({ subsets: ["latin"] });
 
 export const Metadata = {
   title: defaultSEO.title,
@@ -47,7 +39,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="scroll-smooth" data-theme="cupcake">
       <head>{/* Dynamic SEO */}</head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geist.className} bg-gray-100 dark:bg-gray-900 antialiased`}
       >
         <SpeedInsights />
         <Navbar />
