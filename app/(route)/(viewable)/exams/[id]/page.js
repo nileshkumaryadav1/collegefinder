@@ -26,35 +26,34 @@ export default function ExamDetailsPage() {
     fetchExam();
   }, [id]);
 
-  if (loading)
-    return <Loading />;
+  if (loading) return <Loading />;
   if (!exam) return <p className="text-center mt-10">Exam not found.</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
       {exam.imageUrl && (
-        <Image
+        <img
           src={exam.imageUrl}
           alt={exam.name}
-          width={500}
-          height={500}
-          className="w-full h-40 object-cover"
+          className="w-full object-cover object-center border rounded-lg shadow-md"
         />
       )}
       <h1 className="text-3xl font-bold mt-4">{exam.name}</h1>
       <p className="text-gray-700">{exam.date}</p>
-      <p className="text-gray-700 mt-2">Eligibility: {exam.eligibility}</p>
-      <p className="mt-4">{exam.syllabus}</p>
-      <a
-        href={exam.website}
-        target="_blank"
-        className="text-blue-500 mt-4 block"
-      >
-        Visit Website
-      </a>
-      <Link href="/exams" className="text-gray-600 mt-4 block">
-        ← Back to Exams
-      </Link>
+      <p className="text-gray-700 mt-2 text-justify">Eligibility: {exam.eligibility}</p>
+      <p className="mt-4 text-justify">{exam.syllabus}</p>
+      <div className="flex justify-between">
+        <Link href="/exams" className="text-gray-600 mt-4 py-2 w-2/5 btn btn-primary">
+          ← Back to Exams
+        </Link>
+        <a
+          href={exam.website}
+          target="_blank"
+          className="text-blue-700 mt-4 w-1/2 btn btn-delete"
+        >
+          Visit Website
+        </a>
+      </div>
     </div>
   );
 }

@@ -18,6 +18,14 @@ export async function POST(req) {
       );
     }
 
+    // Check if user already exists
+    if (await User.findOne({ email })) {
+      return NextResponse.json(
+        { error: "Email already in use" },
+        { status: 400 }
+      );
+    }
+
     // Generate a 6-digit OTP and hash it
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const hashedOtp = await bcrypt.hash(otp, 10);

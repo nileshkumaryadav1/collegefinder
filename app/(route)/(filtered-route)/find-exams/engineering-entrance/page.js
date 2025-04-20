@@ -49,13 +49,13 @@ export default function UpcomingEngineeringExamsPage() {
     }
   };
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading) return <div className="text-center p-30">Loading...</div>;
 
   return (
     <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-white text-gray-800">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-green-600 mb-2">
+        <h1 className="md:text-4xl text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
           Upcoming Engineering Exams
         </h1>
         <p className="text-gray-500 text-lg">
@@ -104,8 +104,8 @@ export default function UpcomingEngineeringExamsPage() {
       </div>
 
       {/* Promotion */}
-      <div className="bg-green-100 text-center py-4 mt-10 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold text-green-700">
+      <div className="bg-blue-100 text-center py-6 mt-10 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold text-blue-700">
           Stay Ahead with Engineering Exam Alerts!
         </h2>
         <p className="text-sm mt-2 mb-4 text-gray-700">
@@ -113,7 +113,7 @@ export default function UpcomingEngineeringExamsPage() {
         </p>
         <Link
           href="/sponsors"
-          className="px-8 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition duration-200"
+          className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-green-700 transition duration-200"
         >
           Subscribe Now
         </Link>

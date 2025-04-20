@@ -1,5 +1,5 @@
 "use client";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin, Instagram } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,8 +39,8 @@ export default function AboutUs() {
 
           {/* Social Links */}
           <div className="flex justify-center gap-6 mt-4">
-            <Link href="mailto:nileshkumarextra@gmail.com" target="_blank">
-              <Mail className="text-gray-900 dark:text-white hover:text-blue-500 transition" size={28} />
+            <Link href="https://www.instagram.com/nileshnayan_/" target="_blank">
+              <Instagram className="text-gray-900 dark:text-white hover:text-blue-500 transition" size={28} />
             </Link>
             <Link href="https://github.com/nileshkumaryadav1" target="_blank">
               <Github className="text-gray-900 dark:text-white hover:text-blue-500 transition" size={28} />

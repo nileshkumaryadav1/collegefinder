@@ -42,7 +42,11 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
     return () => clearInterval(interval);
   }, [colleges]);
 
-  if (loading) return <Loading />;
+  if (loading) return (
+    <div className="flex justify-center items-center h-screen">
+      <p>Loading...</p>
+    </div>
+  );
 
   const filteredColleges = colleges
     .filter((college) => {

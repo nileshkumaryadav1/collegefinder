@@ -1,14 +1,11 @@
 "use client";
 
-import { Avatar, Button, Card } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { Mail, Linkedin, Instagram } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import EditProfileModal from "./EditProfileModal";
 
-export default function UserCard({ user }) {
+export default function UserDashboardCard({ user }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -18,76 +15,70 @@ export default function UserCard({ user }) {
   };
 
   return (
-    <div className="h-auto dark:bg-gray-900">
-      <div className="max-w-5xl mx-auto px-4">
-        {/* Page Title */}
-        <h1 className="text-xl font-bold text-center text-gray-900 dark:text-white mb-5">
-          Profile Details
-        </h1>
-
-        {/* user detail Section */}
-        <Card className="p-4 flex flex-col items-center gap-1 shadow-md">
-          {/* Profile Image */}
-          <Avatar
-            src={user.profileImage ? user.profileImage : null}
-            sx={{ width: 80, height: 80 }}
-          />
-          <h2 className="text-xl font-semibold">{user.name}</h2>
-          <p className="text-gray-600">{user.email}</p>
-          <p className="text-gray-600 dark:text-gray-300 mt-2">{user.bio}</p>
-
-          {/* Social Links */}
-          <div className="flex justify-center gap-6 mt-3 mb-1">
-            <Link href={`mailto:${user.email || ""}`} target="_blank">
-              <Mail
-                className="text-gray-900 dark:text-white hover:text-blue-500 transition"
-                size={28}
-              />
-            </Link>
-            <Link href={user.instagram || ""} target="_blank">
-              <Instagram
-                className="text-gray-900 dark:text-white hover:text-blue-500 transition"
-                size={28}
-              />
-            </Link>
-            <Link href={user.linkedin || ""} target="_blank">
-              <Linkedin
-                className="text-gray-900 dark:text-white hover:text-blue-500 transition"
-                size={28}
-              />
-            </Link>
+    <div className="flex justify-center items-center bg-gradient-to-r from-teal-200 to-blue-300 p-3 rounded-lg">
+      <div className="w-full max-w-sm bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+        {/* Profile Section */}
+        <div className="mb-6 text-center">
+          <div className="w-24 h-24 rounded-full border-4 border-teal-500 overflow-hidden mb-4">
+            <img
+              src={user.profileImage ? user.profileImage : "/default-profile.png"}
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
           </div>
+          <h2 className="text-xl font-semibold text-teal-700">{user.name}</h2>
+          <p className="text-sm text-gray-600">{user.email}</p>
+          <p className="mt-2 text-sm text-gray-600">{user.bio || "This user has no bio."}</p>
+        </div>
 
-          {/* Edit Profile Button */}
-          <Button
-            variant="outlined"
-            color="primary"
-            fullWidth
+        {/* Social Links */}
+        <div className="flex justify-center gap-6 mb-6">
+          {user.email && (
+            <Link href={`mailto:${user.email}`}>
+              <button className="text-teal-600 hover:text-teal-800 transition">
+                <span className="font-medium">Email</span>
+              </button>
+            </Link>
+          )}
+          {user.instagram && (
+            <Link href={user.instagram}>
+              <button className="text-teal-600 hover:text-teal-800 transition">
+                <span className="font-medium">Instagram</span>
+              </button>
+            </Link>
+          )}
+          {user.linkedin && (
+            <Link href={user.linkedin}>
+              <button className="text-teal-600 hover:text-teal-800 transition">
+                <span className="font-medium">LinkedIn</span>
+              </button>
+            </Link>
+          )}
+        </div>
+
+        {/* Buttons */}
+        <div className="w-full">
+          <button
+            className="w-full py-2 mb-4 text-white bg-teal-600 rounded-md hover:bg-teal-700 transition"
             onClick={() => setOpen(true)}
           >
-            Update Profile Details
-          </Button>
-
-          {/* Logout Button */}
-          <Button
-            variant="contained"
-            color="error"
-            fullWidth
+            Update Profile
+          </button>
+          <button
+            className="w-full py-2 text-white bg-red-600 rounded-md hover:bg-red-700 transition"
             onClick={handleLogout}
           >
             Logout
-          </Button>
-
-          {/* Edit Profile Modal */}
-          <EditProfileModal
-            open={open}
-            onClose={() => {
-              setOpen(false);
-            }}
-            user={user}
-          />
-        </Card>
+          </button>
+        </div>
       </div>
+
+      {/* Edit Profile Modal */}
+      <EditProfileModal
+        open={open}
+        onClose={() => setOpen(false)}
+        user={user}
+      />
     </div>
   );
 }

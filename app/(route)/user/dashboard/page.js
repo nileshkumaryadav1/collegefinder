@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Tabs, Tab } from "@mui/material";
 import UserCard from "@/components/custom/UserCard";
 import Loading from "@/components/custom/Loading";
 
@@ -67,41 +66,58 @@ export default function Dashboard() {
   if (loading || !user) return <Loading />;
 
   return (
-    <div className="min-h-screen px-4 py-6 bg-gray-50 dark:bg-[#111827] text-gray-800 dark:text-gray-100 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8">
-        {/* User Info Card */}
-        <div className="w-full md:w-1/3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow p-4">
+    <div className="min-h-screen bg-gradient-to-r from-green-800 to-blue-900 md:py-10 flex justify-center items-start">
+      <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg p-6 md:p-10 flex flex-col md:flex-row gap-8">
+        {/* Profile Section */}
+        <div className="md:w-1/3 w-full text-center">
+          <h2 className="text-2xl font-bold text-teal-700 mb-4">Welcome, {user.name}</h2>
           <UserCard user={user} />
-          <button
-            onClick={() => deleteUser(user.email)}
-            className="mt-6 w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition"
-          >
-            Delete Account
-          </button>
         </div>
 
-        {/* Tabs Section */}
-        <div className="w-full md:w-2/3">
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow p-4">
-            <Tabs
-              value={tab}
-              onChange={(e, newTab) => setTab(newTab)}
-              variant="fullWidth"
-              centered
-              textColor="primary"
-              indicatorColor="primary"
+        {/* Right Panel */}
+        <div className="md:w-2/3 w-full flex flex-col gap-6">
+          {/* Delete Button */}
+          <div className="flex justify-end">
+            <button
+              onClick={() => deleteUser(user.email)}
+              className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition"
             >
-              <Tab label="Liked Colleges" value="colleges" />
-              <Tab label="Liked Exams" value="exams" />
-              <Tab label="Liked Scholarships" value="scholarships" />
-            </Tabs>
+              Delete Account
+            </button>
+          </div>
 
-            <div className="mt-6">
-              {/* Add content display logic here */}
-              {tab === "colleges" && <p className="text-center text-gray-600 dark:text-gray-400">You have not liked any colleges yet.</p>}
-              {tab === "exams" && <p className="text-center text-gray-600 dark:text-gray-400">You have not liked any exams yet.</p>}
-              {tab === "scholarships" && <p className="text-center text-gray-600 dark:text-gray-400">You have not liked any scholarships yet.</p>}
-            </div>
+          {/* Tabs */}
+          <div className="flex justify-center gap-4">
+            {["colleges", "exams", "scholarships"].map((item) => (
+              <button
+                key={item}
+                onClick={() => setTab(item)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                  tab === item
+                    ? "bg-teal-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                {item === "colleges"
+                  ? "Liked Colleges"
+                  : item === "exams"
+                  ? "Liked Exams"
+                  : "Liked Scholarships"}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab Content */}
+          <div className="bg-gray-100 rounded-lg p-6 text-center">
+            {tab === "colleges" && (
+              <p className="text-gray-600 text-sm">You have not liked any colleges yet.</p>
+            )}
+            {tab === "exams" && (
+              <p className="text-gray-600 text-sm">You have not liked any exams yet.</p>
+            )}
+            {tab === "scholarships" && (
+              <p className="text-gray-600 text-sm">You have not liked any scholarships yet.</p>
+            )}
           </div>
         </div>
       </div>

@@ -33,13 +33,13 @@ export default function NewsPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-blue-800 mb-8 text-center">
+    <div className="max-w-7xl mx-auto px-4 md:py-10 py-5">
+      <h1 className="text-3xl font-bold text-blue-800 md:mb-8 mb-4 text-center">
         Education News & Updates
       </h1>
 
       {/* Category Tabs */}
-      <div className="flex justify-center gap-4 mb-10 flex-wrap">
+      <div className="flex justify-center gap-4 md:mb-10 mb-4 flex-wrap">
         {categories.map((cat) => (
           <button
             key={cat.value}
@@ -57,7 +57,7 @@ export default function NewsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
         {/* News Cards */}
-        <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:gap-6 gap-4">
           {loading ? (
             <p className="text-center col-span-full text-gray-500">
               Loading...
@@ -73,9 +73,11 @@ export default function NewsPage() {
                 className="bg-white border rounded-xl shadow hover:shadow-md transition p-4 flex flex-col"
               >
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
-                    {news.title}
-                  </h3>
+                  <Link href={`/news/${news._id}`}>
+                    <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
+                      {news.title}
+                    </h3>
+                  </Link>
                   <p className="text-sm text-gray-600 mt-2 line-clamp-3">
                     {news.description}
                   </p>
@@ -102,7 +104,7 @@ export default function NewsPage() {
         </div>
 
         {/* Advertisement & Promotions */}
-        <div className="hidden lg:block">
+        <div className="lg:block">
           <div className="bg-white border rounded-xl shadow p-4 mb-6">
             <h4 className="text-md font-bold text-gray-800 mb-2">Promotions</h4>
             <ul className="text-sm text-blue-700 list-disc list-inside space-y-2">

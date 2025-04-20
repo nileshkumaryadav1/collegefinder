@@ -52,14 +52,8 @@ export default function NewsDetailPage({ params: rawParams }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 bg-white rounded-2xl shadow-md border border-gray-200">
-      <Link
-        href="/news"
-        className="text-sm text-blue-600 hover:text-blue-800 mb-6 inline-block transition-colors"
-      >
-        ← Back to News
-      </Link>
-
+    <section className="bg-gray-100 md:py-10">
+    <div className="max-w-4xl mx-auto px-6 md:py-10 py-5 md:px-10 bg-white rounded-2xl shadow-md border border-gray-200">
       <h1 className="text-3xl font-semibold text-gray-900 mb-4 leading-snug">
         {news.title}
       </h1>
@@ -82,15 +76,22 @@ export default function NewsDetailPage({ params: rawParams }) {
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
             >
-              {news.sourceURL}
+              {/* {news.sourceURL} */}
+              Source
             </a>
           </p>
         )}
       </div>
 
-      <div className="prose max-w-none prose-gray">
-        {news.description}
-      </div>
+      <div className="prose max-w-none prose-gray text-justify">{news.description}</div>
+
+      <Link
+        href="/news"
+        className="text-sm text-blue-600 hover:text-blue-800 mt-3 transition-colors w-full btn btn-primary"
+      >
+        ← Back to News
+      </Link>
     </div>
+    </section>
   );
 }

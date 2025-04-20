@@ -1,99 +1,51 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function RegisterPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm();
-  const [step, setStep] = useState(1);
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
-  const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const showMessage = (type, text) => {
-    setMessage({ type, text });
-    setTimeout(() => setMessage(null), 6000); // Auto-hide message after 6 seconds
-  };
-
-  const handleGenerateOtp = async () => {
-    const { email } = getValues();
-
-    if (!email || !email.trim()) {
-      showMessage("error", "Please enter a valid email");
-      return;
-    }
-
+  const onSubmit = async (data) => {
+    if (loading) return;
     setLoading(true);
     setMessage(null);
 
     try {
-      const res = await fetch("/api/auth/generate-otp", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
+        body: JSON.stringify(data),
       });
 
-      const data = await res.json();
+      const result = await res.json();
 
-      if (!res.ok)
-        throw new Error(data.message || data.error || "Failed to send OTP");
-
-      setStep(2);
-      showMessage("success", "OTP sent to your email");
-    } catch (err) {
-      showMessage("error", err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRegister = async () => {
-    const { name, email, password } = getValues();
-
-    if (!otp || !otp.trim()) {
-      showMessage("error", "Please enter the OTP");
-      return;
-    }
-
-    setLoading(true);
-    setMessage(null);
-
-    try {
-      const res = await fetch("/api/auth/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
-          password,
-          otp: otp.trim(),
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok)
-        throw new Error(data.message || data.error || "Registration failed");
-
-      showMessage("success", "Registered successfully! Redirecting...");
-      setTimeout(() => router.push("/user/login"), 1500);
-    } catch (err) {
-      showMessage("error", err.message);
+      if (res.ok) {
+        setMessage({
+          type: "success",
+          text: "User registered successfully! Redirecting...",
+        });
+        setTimeout(() => router.push("/user/login"), 1500);
+      } else {
+        setMessage({ type: "error", text: result.message });
+      }
+    } catch (error) {
+      setMessage({ type: "error", text: "Something went wrong!" });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    // <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex flex-col lg:flex-row items-center justify-center px-6 py-10 gap-10 lg:gap-20">
       {/* Features Section */}
       <div className="w-full lg:w-1/2 max-w-xl text-center lg:text-left">
@@ -151,86 +103,72 @@ export default function RegisterPage() {
       </div>
 
       {/* Form Section */}
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
+      <div className="w-full lg:w-1/2 max-w-md bg-white p-8 rounded-xl shadow-xl">
+        <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
+          Register
+        </h2>
 
         {message && (
           <div
-            className={`mb-4 p-2 rounded text-center text-sm ${message.type === "error" ? "bg-red-100 text-red-600" : "bg-green-100 text-green-600"}`}
+            className={`p-2 mb-4 text-white text-center rounded ${message.type === "success" ? "bg-green-500" : "bg-red-500"}`}
           >
             {message.text}
           </div>
         )}
 
-        <form
-          onSubmit={handleSubmit(
-            step === 1 ? handleGenerateOtp : handleRegister
-          )}
-          className="space-y-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Name */}
           <div>
-            <label className="text-sm font-medium block">Name</label>
+            <label className="block text-gray-700 font-medium">Name</label>
             <input
               type="text"
               {...register("name", { required: "Name is required" })}
-              className="w-full border px-3 py-2 rounded"
-              disabled={step === 2}
+              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {errors.name && (
               <p className="text-red-500 text-sm">{errors.name.message}</p>
             )}
           </div>
 
+          {/* Email */}
           <div>
-            <label className="text-sm font-medium block">Email</label>
+            <label className="block text-gray-700 font-medium">Email</label>
             <input
               type="email"
               {...register("email", { required: "Email is required" })}
-              className="w-full border px-3 py-2 rounded"
-              disabled={step === 2}
+              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>
             )}
           </div>
 
+          {/* Password */}
           <div>
-            <label className="text-sm font-medium block">Password</label>
+            <label className="block text-gray-700 font-medium">Password</label>
             <input
               type="password"
               {...register("password", {
                 required: "Password is required",
                 minLength: {
                   value: 6,
-                  message: "Password must be at least 6 characters",
+                  message: "Minimum 6 characters",
                 },
               })}
-              className="w-full border px-3 py-2 rounded"
-              disabled={step === 2}
+              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
           </div>
 
-          {step === 2 && (
-            <div>
-              <label className="text-sm font-medium block">OTP</label>
-              <input
-                type="text"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                className="w-full border px-3 py-2 rounded"
-              />
-            </div>
-          )}
-
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded disabled:opacity-60"
+            className={`w-full p-2 text-white rounded transition ${loading ? "bg-blue-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}`}
             disabled={loading}
           >
-            {loading ? "Processing..." : step === 1 ? "Send OTP" : "Register"}
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
 
@@ -249,8 +187,8 @@ export default function RegisterPage() {
             Forgot password?
           </Link>
         </p>
-        
       </div>
     </div>
   );
 }
+

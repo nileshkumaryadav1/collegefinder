@@ -6,7 +6,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function LoginPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -24,7 +28,10 @@ export default function LoginPage() {
 
       const result = await res.json();
       if (res.ok) {
-        setMessage({ type: "success", text: "Login successful! Redirecting..." });
+        setMessage({
+          type: "success",
+          text: "Login successful! Redirecting...",
+        });
         localStorage.setItem("token", result.token);
         setTimeout(() => router.push("/user/dashboard"), 1500);
       } else {
@@ -38,49 +45,123 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center md:min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
-        
-        {message && (
-          <div className={`p-2 mb-4 text-white text-center rounded ${message.type === "success" ? "bg-green-500" : "bg-red-500"}`}>
-            {message.text}
-          </div>
-        )}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4 py-10">
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
+        {/* Left - Login Form */}
+        <div className="w-full md:w-1/2 p-8">
+          <h2 className="text-3xl font-bold text-center text-blue-600 mb-2">
+            Welcome Back
+          </h2>
+          <p className="text-center text-gray-500 mb-6">
+            Login to your College Finder account
+          </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Email Field */}
-          <div>
-            <label className="block text-gray-700">Email</label>
-            <input
-              type="email"
-              {...register("email", { required: "Email is required" })}
-              className="w-full p-2 border rounded"
-            />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-          </div>
+          {message && (
+            <div
+              className={`p-3 text-white text-center font-medium rounded ${
+                message.type === "success" ? "bg-green-500" : "bg-red-500"
+              }`}
+            >
+              {message.text}
+            </div>
+          )}
 
-          {/* Password Field */}
-          <div>
-            <label className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              {...register("password", { required: "Password is required" })}
-              className="w-full p-2 border rounded"
-            />
-            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {/* Email */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                {...register("email", { required: "Email is required" })}
+                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.email && (
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-            disabled={loading}
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
-        <Link href="/user/register" className="block text-center mt-4 text-blue-500">Do not have an account? Register here.</Link>
+            {/* Password */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                {...register("password", { required: "Password is required" })}
+                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.password && (
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition duration-200"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
+
+          <p className="text-sm text-center mt-4">
+            <Link
+              href="/forgot-password"
+              className="text-blue-600 hover:underline"
+            >
+              Forgot Password?
+            </Link>
+          </p>
+          <p className="text-sm text-center mt-4">
+            Do not have an account?{" "}
+            <Link
+              href="/user/register"
+              className="text-blue-600 hover:underline"
+            >
+              Register here
+            </Link>
+          </p>
+        </div>
+
+        {/* Right - Features */}
+        <div className="w-full md:w-1/2 bg-blue-50 p-8 flex flex-col justify-center">
+          <h3 className="text-xl font-semibold text-gray-700 mb-4 text-center">
+            ✨ What you will get after signing in
+          </h3>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+            <li className="flex items-center gap-2">
+              <span className="text-blue-500">📬</span>
+              Regular Exam Notifications
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-green-500">🎓</span>
+              College Admission Alerts
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-purple-500">📊</span>
+              Personalized College Recommendations
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-yellow-500">📰</span>
+              Education News & Updates
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-red-500">💾</span>
+              Save Favorite Colleges
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-pink-500">⚙️</span>
+              Dashboard Access & More!
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

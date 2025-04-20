@@ -16,6 +16,7 @@ import {
   Landmark,
   Building2,
   School,
+  Building,
 } from "lucide-react";
 import Link from "next/link";
 import CollegeCardForHome from "./CollegeCardForHome";
@@ -84,8 +85,8 @@ const SingleCollegeCard = ({ college }) => {
             { id: "facilities", label: "Facilities", icon: School },
             { id: "courses", label: "Courses", icon: Notebook },
             { id: "admission", label: "Admission", icon: BedSingle },
+            { id: "fees", label: "Fees", icon: Wallet },
             { id: "placement", label: "Placement", icon: Wallet },
-            { id: "recruitment", label: "Recruiters", icon: Building2 },
           ].map((item) => (
             <a
               key={item.id}
@@ -182,7 +183,7 @@ const SingleCollegeCard = ({ college }) => {
                 .map((sentence, index) => <p key={index}>{sentence.trim()}.</p>)
             : "Promotion information not available."} */}
           <div className="bg-blue-50 border border-blue-200 rounded-xl md:w-4/6 mx-auto shadow md:p-10 p-5">
-            <h4 className="text-2xl font-bold text-gray-800 md:mb-5 text-center">
+            <h4 className="text-2xl font-bold text-gray-800 md:mb-5 mb-3 text-center">
               Promotions
             </h4>
             <ul className="text-sm text-blue-700 list-disc list-inside space-y-2">
@@ -238,18 +239,22 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* admission process */}
       <Section id="admission" title="Admission Process">
-        <div className="text-gray-700 max-w-4xl mx-auto leading-relaxed space-y-2 text-left">
+        <div className="text-gray-700 max-w-4xl mx-3 leading-relaxed text-left">
           {college.admissionProcess
             ? college.admissionProcess
                 .split(".")
                 .filter((sentence) => sentence.trim().length > 0)
-                .map((sentence, index) => <p key={index}>{sentence.trim()}.</p>)
+                .map((sentence, index) => (
+                  <p key={index} className="mb-3 text-gray-800 text-justify">
+                    {sentence.trim()}.
+                  </p>
+                ))
             : "Admission process information not available."}
         </div>
       </Section>
 
       {/* fee structure */}
-      <Section id="admission" title="Fees Structure">
+      <Section id="fees" title="Fees Structure">
         <p className="text-gray-700 text-sm mb-4 italic">
           * Fees are indicative and may vary. Annual academic and hostel charges
           for all categories are listed below.
@@ -314,15 +319,25 @@ const SingleCollegeCard = ({ college }) => {
             ],
           ]}
         />
-      </Section>
 
-      {/* past recruiters */}
-      <Section id="recruitment" title="Past Recruitments">
+        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto mb-2 mt-5">
+          <div className="flex items-center">
+            <Users size={24} />
+            <span className="font-semibold">Placement Ratio:</span>
+          </div>
+        </p>
         <img
           src={college.placementRatio}
           alt="Past Recruiters"
-          className="rounded-md shadow max-w-4/5 mx-auto"
+          className="rounded-md shadow max-w-4/5 mx-auto mb-8"
         />
+
+        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto mb-2">
+          <div className="flex items-center">
+            <Building size={24} />
+            <span className="font-semibold">Past Recruiters:</span>
+          </div>
+        </p>
         <img
           src={college.pastRecruitor}
           alt="Past Recruiters"

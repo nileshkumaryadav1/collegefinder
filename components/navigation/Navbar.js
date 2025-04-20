@@ -1,5 +1,7 @@
 "use client";
 
+import { Plaster, Unbounded } from "next/font/google";
+
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +18,9 @@ import {
 import { FaMoneyBillWave } from "react-icons/fa";
 import Image from "next/image";
 // import ThemeToggle from "@/components/theme/ThemeBtn";
+
+const unbounded = Unbounded({ weight: "400", subsets: ["latin"] });
+const plaster = Plaster({ weight: "400", subsets: ["latin"] });
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -74,7 +79,9 @@ const Navbar = () => {
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="flex justify-between items-center px-4 md:px-20 py-2">
+        <div
+          className={`max-w-8xl mx-auto px-4 md:px-20 py-1.5 h-full flex justify-between items-center  ${unbounded.className}`}
+        >
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image
@@ -85,7 +92,7 @@ const Navbar = () => {
               className="rounded-full"
             />
             <span className="text-lg font-bold text-gray-800 tracking-tight">
-              CollegeFinder
+              COLLEGE FINDER
             </span>
           </Link>
 
@@ -107,11 +114,7 @@ const Navbar = () => {
               label="Scholarships"
               active={pathname === "/scholarships"}
             />
-            <NavItem
-              href="/news"
-              label="News"
-              active={pathname === "/news"}
-            />
+            <NavItem href="/news" label="News" active={pathname === "/news"} />
             <NavItem
               href="/about"
               label="About"

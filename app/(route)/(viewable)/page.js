@@ -103,7 +103,9 @@ export default function Home() {
       {/* Featured Categories */}
       <section className="md:py-12 py-6 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-semibold mb-8 underline decoration-sky-500/30 hover:decoration-sky-500">Start Exploring</h2>
+          <h2 className="text-2xl font-semibold mb-8 underline decoration-sky-500/30 hover:decoration-sky-500">
+            Start Exploring
+          </h2>
           <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6">
             {exploreData.map((i) => (
               <Link
@@ -127,7 +129,9 @@ export default function Home() {
       <section className="md:py-12 py-6 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center md:mb-6">
-            <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">Latest News</h2>
+            <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
+              Latest News
+            </h2>
             <Link href="/news" className="text-blue-600 hover:underline">
               View All
             </Link>
@@ -140,7 +144,9 @@ export default function Home() {
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">Popular Colleges</h2>
+            <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
+              Popular Colleges
+            </h2>
             <Link href="/colleges" className="text-blue-600 hover:underline">
               Browse All
             </Link>
@@ -150,16 +156,56 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-blue-50 dark:bg-gray-900 py-12 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-semibold mb-6 underline decoration-sky-500/30 hover:decoration-sky-500">What Students Say</h2>
-          <blockquote className="italic">
-            “College Finder helped me compare IITs, track JEE updates, and even
-            find a scholarship I did not know existed!”
-          </blockquote>
-          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            Nilesh Kumar, B.Tech Student
-          </p>
+      <section className="bg-blue-50 dark:bg-gray-900 py-12 px-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-8 text-center underline decoration-sky-500/30 hover:decoration-sky-500 text-gray-800 dark:text-white">
+            What Students Say
+          </h2>
+
+          <div className="relative w-full overflow-hidden flex items-center justify-center">
+            {/* <div className="flex space-x-4 sm:space-x-6 md:space-x-8 w-max animate-scroll"> */}
+            <div>
+              {[
+                {
+                  quote:
+                    "College Finder helped me compare IITs, track JEE updates, and even find a scholarship I did not know existed!",
+                  name: "Nilesh Kumar",
+                  detail: "B.Tech Student",
+                },
+                // {
+                //   quote:
+                //     "It is the only platform I trust for entrance updates and reliable college information.",
+                //   name: "Ananya Singh",
+                //   detail: "Medical Aspirant",
+                // },
+                // {
+                //   quote:
+                //     "Beautifully designed and easy to use. Helped me shortlist my dream NIT.",
+                //   name: "Rajat Verma",
+                //   detail: "JEE Mains Qualified",
+                // },
+                // {
+                //   quote:
+                //     "Clean UI, quick filters, and accurate data – everything a student needs.",
+                //   name: "Rahul Mehra",
+                //   detail: "12th Student",
+                // },
+              ].map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="min-w-[280px] sm:min-w-[500px] max-w-[500px] dark:bg-gray-800 p-4 sm:p-5 rounded-lg flex flex-col justify-center items-center"
+                >
+                  <p className="italic text-gray-700 dark:text-gray-300 text-sm mb-2 text-justify">
+                    “{testimonial.quote}”
+                  </p>
+                  <p className="md:mt-1 text-sm text-blue-900 dark:text-white">
+                    {testimonial.name} - {""}
+                    {testimonial.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </main>
