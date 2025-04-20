@@ -115,14 +115,12 @@ function Page() {
         <p className="text-sm mt-2 mb-4">
           Find the best college news, rankings, and more.
         </p>
-        <a
-          href="https://www.example.com"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href="/colleges"
           className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
         >
           Explore Colleges
-        </a>
+        </Link>
       </div>
     </div>
   );

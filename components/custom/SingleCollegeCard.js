@@ -18,6 +18,8 @@ import {
   School,
 } from "lucide-react";
 import Link from "next/link";
+import CollegeCardForHome from "./CollegeCardForHome";
+import NewsCardForHome from "./NewsCardForHome";
 
 const SingleCollegeCard = ({ college }) => {
   const [liked, setLiked] = useState(false);
@@ -43,7 +45,8 @@ const SingleCollegeCard = ({ college }) => {
         <div className="pt-16 pb-8 px-4 md:px-8 text-center">
           <h1 className="text-2xl md:text-4xl font-bold">{college.name}</h1>
           <p className="text-gray-600 mt-2 flex justify-center items-center gap-2">
-            <MapPin size={18} /> {college.location}
+            <MapPin size={18} />
+            {college.slug}, {college.location}
           </p>
           <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
             {college.description
@@ -141,23 +144,96 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* facilities */}
       <Section id="facilities" title="Facilities">
-        <ul className="list-disc pl-6 max-w-4xl text-center text-gray-700 space-y-2 md:text-lg mb-4">
+        <ul className="list-disc pl-6 max-w-4xl text-center text-gray-700 space-y-2 md:text-lg">
           {/* {college.facilities.map((facility, i) => <li key={i}>{facility}</li>)} */}
-          {college.facilities}
+          {/* {college.facilities} */}
+          {/* <ul>
+            {college.facilities.split(",").map((item, index) => (
+              <li key={index}>{item.trim()}</li>
+            ))}
+          </ul> */}
         </ul>
+        <Table
+          head={["Campus Facilities"]}
+          rows={[
+            [
+              <ul key="facilities-list">
+                {college.facilities.split(",").map((item, i) => (
+                  <li key={i}>{item.trim()}</li>
+                ))}
+              </ul>,
+            ],
+          ]}
+        />
         <img
           src="https://avit.ac.in/wp-content/uploads/2024/11/facilities-img.webp"
           alt={college.name}
-          className="mb-3 rounded-lg shadow md:w-5/6 mx-auto"
+          className="mt-6 rounded-lg shadow md:w-5/6 mx-auto"
         />
+      </Section>
+
+      {/* promotion */}
+      <Section id="promotion" title="">
+        <div className="text-gray-700 max-w-4xl mx-auto leading-relaxed space-y-2 text-left">
+          {/* {college.promotion
+            ? college.promotion
+                .split(".")
+                .filter((sentence) => sentence.trim().length > 0)
+                .map((sentence, index) => <p key={index}>{sentence.trim()}.</p>)
+            : "Promotion information not available."} */}
+          <div className="bg-blue-50 border border-blue-200 rounded-xl md:w-4/6 mx-auto shadow md:p-10 p-5">
+            <h4 className="text-2xl font-bold text-gray-800 md:mb-5 text-center">
+              Promotions
+            </h4>
+            <ul className="text-sm text-blue-700 list-disc list-inside space-y-2">
+              <li>
+                <Link href="/colleges" className="hover:underline">
+                  Top Engineering Colleges in India 2025
+                </Link>
+              </li>
+              <li>
+                <Link href="/exams" className="hover:underline">
+                  How to Crack JEE Advanced – Strategy Guide
+                </Link>
+              </li>
+              <li>
+                <Link href="/sponsors" className="hover:underline">
+                  Free Counseling by Experts
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
       </Section>
 
       {/* popular courses */}
       <Section id="courses" title="Popular Courses">
-        <p className="text-gray-700 md:text-lg flex items-center justify-center gap-2 max-w-4xl mx-auto">
-          <BookOpen size={24} />
-          <span className="font-semibold">Technical:</span> {college.courses}
+        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto">
+          {/* <div className="flex items-center">
+            <BookOpen size={24} />
+            <span className="font-semibold">Technical:</span>
+          </div> */}
+
+          {/* {college.courses} */}
+          {/* <ul>
+            {college.courses.split(",").map((item, index) => (
+              <li key={index}>{item.trim()}</li>
+            ))}
+          </ul> */}
         </p>
+        <Table
+          head={["Technical", "Research"]}
+          rows={[
+            [
+              <ul key="courses-list">
+                {college.courses.split(",").map((item, index) => (
+                  <li key={index}>{item.trim()}</li>
+                ))}
+              </ul>,
+              null, // or <div key="empty-cell" /> to avoid warning
+            ],
+          ]}
+        />
       </Section>
 
       {/* admission process */}
@@ -191,19 +267,28 @@ const SingleCollegeCard = ({ college }) => {
               <tr className="border-b">
                 <td className="p-3">Academic Fee</td>
                 <td className="p-3 font-medium text-gray-800">
-                  ₹{college.fees ? college.fees.toLocaleString() : "Fee information not available."}
+                  ₹
+                  {college.fees
+                    ? college.fees.toLocaleString()
+                    : "Fee information not available."}
                 </td>
               </tr>
               <tr className="border-b">
                 <td className="p-3">Hostel + Mess Fee</td>
                 <td className="p-3 font-medium text-gray-800">
-                  ₹{college.hostelFees ? college.hostelFees.toLocaleString() : "Hostel fee information not available."}
+                  ₹
+                  {college.hostelFees
+                    ? college.hostelFees.toLocaleString()
+                    : "Hostel fee information not available."}
                 </td>
               </tr>
               <tr>
                 <td className="p-3 font-semibold">Total Estimated Fee</td>
                 <td className="p-3 font-semibold text-blue-700">
-                  ₹{college.otherFees ? college.otherFees.toLocaleString() : "Other fee information not available."}
+                  ₹
+                  {college.otherFees
+                    ? college.otherFees.toLocaleString()
+                    : "Other fee information not available."}
                 </td>
               </tr>
             </tbody>
@@ -214,9 +299,19 @@ const SingleCollegeCard = ({ college }) => {
       {/* placement stats */}
       <Section id="placement" title="Placement Stats">
         <Table
-          head={["Course", "Average Package", "Median Package"]}
+          head={[
+            "Course",
+            "Highest Package",
+            "Average Package",
+            "Median Package",
+          ]}
           rows={[
-            [college.courses, college.averagePlacement, college.medianSalary],
+            [
+              college.courses,
+              college.highestPlacement,
+              college.averagePlacement,
+              college.medianSalary,
+            ],
           ]}
         />
       </Section>
@@ -224,20 +319,129 @@ const SingleCollegeCard = ({ college }) => {
       {/* past recruiters */}
       <Section id="recruitment" title="Past Recruitments">
         <img
+          src={college.placementRatio}
+          alt="Past Recruiters"
+          className="rounded-md shadow max-w-4/5 mx-auto"
+        />
+        <img
           src={college.pastRecruitor}
           alt="Past Recruiters"
           className="rounded-md shadow max-w-4/5 mx-auto"
         />
       </Section>
 
-      <div className="w-full text-center py-12">
+      {/* <div className="w-full text-center py-12">
         <Link
           href="/colleges"
           className="inline-block px-6 py-3 bg-blue-600 text-white rounded-md text-lg hover:bg-blue-700 transition"
         >
           View More Colleges
         </Link>
+      </div> */}
+
+      {/* Advertisement & Promotions */}
+      <h2 className="text-2xl font-semibold text-gray-800 bg-white text-center hidden">
+        Advertisement
+      </h2>
+      <div className="flex flex-col md:flex-row justify-around gap-4 p-5 bg-white">
+        <div className="bg-white border rounded-xl shadow p-4 mb-6 hidden">
+          <h4 className="text-md font-bold text-gray-800 mb-2">Promotions</h4>
+          <ul className="text-sm text-blue-700 list-disc list-inside space-y-2">
+            <li>
+              <Link href="/colleges" className="hover:underline">
+                Top Engineering Colleges in India 2025
+              </Link>
+            </li>
+            <li>
+              <Link href="/exams" className="hover:underline">
+                How to Crack JEE Advanced – Strategy Guide
+              </Link>
+            </li>
+            <li>
+              <Link href="/sponsors" className="hover:underline">
+                Free Counseling by Experts
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-blue-50 border border-blue-200 rounded-xl md:w-1/2 shadow p-4">
+          <h4 className="text-md font-bold text-blue-700 mb-2 text-center">
+            Advertisement
+          </h4>
+          <Link href="/sponsors" className="hover:underline">
+            <img
+              src="/sponsors.jpg"
+              alt="Ad Banner"
+              className="rounded-lg w-full h-auto object-cover"
+            />
+          </Link>
+          <p className="text-xs text-gray-500 mt-2">Sponsored Content</p>
+        </div>
       </div>
+
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            Frequently Asked Questions
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            {/* <Accordion data={college.faq} /> */}
+            <h2>FAQs are not available for this college.</h2>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            Reviews
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            {/* <Reviews data={college.reviews} /> */}
+            <h2>Reviews are not available for this college.</h2>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            Similar Colleges
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            <CollegeCardForHome
+              query="#"
+              collegeType=""
+              sortBy=""
+              sortOrder=""
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            Similar Courses
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            {/* <SimilarCourses data={college.similarCourses} /> */}
+            <h2>Similar courses are not available for this college.</h2>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            Important News
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            <NewsCardForHome category="Important" />
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

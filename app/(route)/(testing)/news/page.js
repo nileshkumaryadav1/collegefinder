@@ -59,7 +59,9 @@ export default function NewsPage() {
         {/* News Cards */}
         <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {loading ? (
-            <p className="text-center col-span-full text-gray-500">Loading...</p>
+            <p className="text-center col-span-full text-gray-500">
+              Loading...
+            </p>
           ) : newsData.length === 0 ? (
             <p className="text-center col-span-full text-gray-500">
               No news found in this category.
@@ -105,30 +107,34 @@ export default function NewsPage() {
             <h4 className="text-md font-bold text-gray-800 mb-2">Promotions</h4>
             <ul className="text-sm text-blue-700 list-disc list-inside space-y-2">
               <li>
-                <a href="#" className="hover:underline">
+                <Link href="/colleges" className="hover:underline">
                   Top Engineering Colleges in India 2025
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <Link href="/exams" className="hover:underline">
                   How to Crack JEE Advanced – Strategy Guide
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <Link href="/sponsors" className="hover:underline">
                   Free Counseling by Experts
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
           <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-4">
-            <h4 className="text-md font-bold text-blue-700 mb-2">Advertisement</h4>
-            <img
-              src="/ads/sample-ad.jpg"
-              alt="Ad Banner"
-              className="rounded-lg w-full h-auto object-cover"
-            />
+            <h4 className="text-md font-bold text-blue-700 mb-2">
+              Advertisement
+            </h4>
+            <Link href="/sponsors" className="hover:underline">
+              <img
+                src="/sponsors.jpg"
+                alt="Ad Banner"
+                className="rounded-lg w-full h-auto object-cover"
+              />
+            </Link>
             <p className="text-xs text-gray-500 mt-2">Sponsored Content</p>
           </div>
         </div>

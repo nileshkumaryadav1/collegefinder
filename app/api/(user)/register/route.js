@@ -46,9 +46,9 @@ export async function POST(req) {
       }
 
       const data = await response.json();
-      console.log("Email Sent Successfully:", data.message);
+      console.log("Email Sent Successfully to:", data.info.accepted);
     } catch (error) {
-      console.error("Failed to send email:", error.message);
+      console.error("Failed to send email from API:", error.message);
     }
 
     // response

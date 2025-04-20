@@ -110,14 +110,12 @@ function Page() {
         <p className="text-sm mt-2 mb-4">
           Get top study materials and tips curated by toppers!
         </p>
-        <a
-          href="https://example.com/exam-prep"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href="/sponsors"
           className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
         >
           Start Now
-        </a>
+        </Link>
       </div>
     </div>
   );

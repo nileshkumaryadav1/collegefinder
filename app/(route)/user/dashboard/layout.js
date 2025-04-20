@@ -15,7 +15,7 @@ export default function DashboardLayout({ children }) {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   if (loading) return <Loading />;
 

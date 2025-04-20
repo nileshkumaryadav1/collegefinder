@@ -100,11 +100,13 @@ function Page() {
                 <h2 className="text-xl font-semibold text-blue-600">
                   {college.name}
                 </h2>
-                <p className="text-gray-600 mb-2">{college.location}</p>
-                <p className="text-gray-600 mb-2">Fees: ₹{college.fees}</p>
-                <p className="text-gray-600 mb-2">Rating: {college.rating}</p>
+                <p className="text-gray-600 text-sm mb-2">{college.location}</p>
+                <p className="text-gray-600 text-sm">Total Fees: ₹{college.otherFees}</p>
+                <p className="text-gray-600 text-sm">Nirf Ranking: 
+                  <a className="btn btn-link">{college.nirfRanking}</a>
+                </p>
                 <p className="text-gray-500 text-sm">
-                  Best for: Engineering Programs
+                  Best for: {college.courses}
                 </p>
               </div>
             </div>
@@ -120,14 +122,12 @@ function Page() {
         <p className="text-sm mt-2 mb-4">
           Get exclusive discounts on IIT courses when you apply today!
         </p>
-        <a
-          href="https://www.example.com" // Example link for the promotion
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href="/sponsors"
           className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
         >
           Apply Now
-        </a>
+        </Link>
       </div>
 
       {/* Footer Section */}

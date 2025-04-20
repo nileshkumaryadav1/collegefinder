@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }) {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
 

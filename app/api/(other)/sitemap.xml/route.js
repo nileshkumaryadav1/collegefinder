@@ -1,29 +1,19 @@
+// app/api/(other)/sitemap.xml/route.js
+import { connectToDatabase } from "@/lib/mongodb";
+import mongoose from "mongoose";
 
-import { MongoClient } from "mongodb";
-
-// MongoDB URI and database name
-const client = new MongoClient(process.env.MONGODB_URI);
-const dbName = "test-1";  // Replace with your actual database name
-
-// MongoDB connection function
-async function connectToDatabase() {
-  if (!client.isConnected()) {
-    await client.connect();
-  }
-  return client.db(dbName);  // Return the database instance
-}
-
-export async function GET(req) {
+export async function GET() {
   try {
-    // Get the database connection
-    const db = await connectToDatabase();
+    await connectToDatabase();
 
-    // Fetch data from MongoDB collections
-    const colleges = await db.collection("colleges").find().toArray();
-    const exams = await db.collection("exams").find().toArray();
-    const scholarships = await db.collection("scholarships").find().toArray();
+    const College = mongoose.connection.db.collection("colleges");
+    const Exam = mongoose.connection.db.collection("exams");
+    const Scholarship = mongoose.connection.db.collection("scholarships");
 
-    // Prepare pages for the sitemap
+    const colleges = await College.find().toArray();
+    const exams = await Exam.find().toArray();
+    const scholarships = await Scholarship.find().toArray();
+
     const pages = [
       { loc: "https://collegefinder.vercel.app/", priority: 1.0 },
       { loc: "https://collegefinder.vercel.app/colleges", priority: 0.8 },
@@ -43,7 +33,6 @@ export async function GET(req) {
       })),
     ];
 
-    // Generate the XML sitemap
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       ${pages
@@ -54,7 +43,6 @@ export async function GET(req) {
         .join("\n")}
     </urlset>`;
 
-    // Set the response header and return the sitemap XML
     return new Response(sitemap, {
       headers: {
         "Content-Type": "application/xml",

@@ -10,6 +10,7 @@ export default function EditCollegePage() {
 
   const [formData, setFormData] = useState({
     name: "",
+    slug: "",
     location: "",
     nirfRanking: "",
     imageUrl: "",
@@ -25,9 +26,11 @@ export default function EditCollegePage() {
     facilities: "",
     noOfStudents: "",
     noOfFaculties: "",
+    highestPlacement: "",
     averagePlacement: "",
     medianSalary: "",
     websiteUrl: "",
+    placementRatio: "",
     pastRecruitor: "",
   });
 
@@ -92,6 +95,15 @@ export default function EditCollegePage() {
           name="name"
           placeholder="College Name"
           value={formData.name}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="slug"
+          placeholder="Slug" // Add placeholder for slug field
+          value={formData.slug}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required
@@ -231,6 +243,15 @@ export default function EditCollegePage() {
         />
         <input
           type="text"
+          name="highestPlacement"
+          placeholder="Highest Placement"
+          value={formData.highestPlacement}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
           name="averagePlacement"
           placeholder="Average Placement"
           value={formData.averagePlacement}
@@ -252,6 +273,15 @@ export default function EditCollegePage() {
           name="websiteUrl"
           placeholder="Website URL"
           value={formData.websiteUrl}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="placementRatio"
+          placeholder="Placement Ratio"
+          value={formData.placementRatio}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required

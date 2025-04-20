@@ -1,6 +1,7 @@
 "use client";
 
 import ScholarshipCard from "@/components/custom/ScholarshipCard";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Scholarships() {
@@ -39,12 +40,12 @@ export default function Scholarships() {
               <p className="text-gray-600 mt-2">
                 Check out this exclusive scholarship opportunity for students in the tech field.
               </p>
-              <a
-                href="#"
+              <Link
+                href="/sponsors"
                 className="text-blue-500 hover:underline mt-2 inline-block"
               >
                 Learn More
-              </a>
+              </Link>
             </div>
 
             <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4">
@@ -52,12 +53,12 @@ export default function Scholarships() {
               <p className="text-gray-600 mt-2">
                 Do not miss out on the chance to apply for this amazing scholarship with a full tuition fee cover!
               </p>
-              <a
-                href="#"
+              <Link
+                href="/sponsors"
                 className="text-yellow-500 hover:underline mt-2 inline-block"
               >
                 Apply Now
-              </a>
+              </Link>
             </div>
           </div>
         </div>

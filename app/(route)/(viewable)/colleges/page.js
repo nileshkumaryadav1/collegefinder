@@ -118,7 +118,7 @@ export default function CollegesPage() {
           promoters!
         </p>
         <Link
-          href="/promotions"
+          href="/sponsors"
           className="bg-white text-blue-500 font-semibold px-6 py-2 rounded-lg inline-block hover:bg-gray-100 transition"
         >
           Learn More & Promote Now

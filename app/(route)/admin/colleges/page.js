@@ -9,6 +9,7 @@ export default function AddCollegePage() {
 
   const [formData, setFormData] = useState({
     name: "",
+    slug: "",
     location: "",
     nirfRanking: "",
     imageUrl: "",
@@ -24,9 +25,11 @@ export default function AddCollegePage() {
     facilities: "",
     noOfStudents: "",
     noOfFaculties: "",
+    highestPlacement: "",
     averagePlacement: "",
     medianSalary: "",
     websiteUrl: "",
+    placementRatio: "",
     pastRecruitor: "",
   });
   const [loading, setLoading] = useState(false);
@@ -54,6 +57,7 @@ export default function AddCollegePage() {
       if (res.ok) {
         setFormData({
           name: "",
+          slug: "",
           location: "",
           nirfRanking: "",
           imageUrl: "",
@@ -69,9 +73,11 @@ export default function AddCollegePage() {
           facilities: "",
           noOfStudents: "",
           noOfFaculties: "",
+          highestPlacement: "",
           averagePlacement: "",
           medianSalary: "",
           websiteUrl: "",
+          placementRatio: "",
           pastRecruitor: "",
         });
       }
@@ -111,6 +117,15 @@ export default function AddCollegePage() {
             name="name"
             placeholder="College Name"
             value={formData.name}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+          <input
+            type="text"
+            name="slug"
+            placeholder="Slug"
+            value={formData.slug}
             onChange={handleChange}
             className="border p-2 rounded w-full"
             required
@@ -250,6 +265,15 @@ export default function AddCollegePage() {
           />
           <input
             type="text"
+            name="highestPlacement"
+            placeholder="Highest Placement"
+            value={formData.highestPlacement}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+          <input
+            type="text"
             name="averagePlacement"
             placeholder="Average Placement"
             value={formData.averagePlacement}
@@ -271,6 +295,15 @@ export default function AddCollegePage() {
             name="websiteUrl"
             placeholder="Website URL"
             value={formData.websiteUrl}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+          <input
+            type="url"
+            name="placementRatio"
+            placeholder="Placement Ratio Image URL"
+            value={formData.placementRatio}
             onChange={handleChange}
             className="border p-2 rounded w-full"
             required
@@ -325,6 +358,9 @@ export default function AddCollegePage() {
 
                 <h2 className="text-xl font-bold mb-1">{college.name}</h2>
                 <p className="text-gray-600 text-sm mb-2">{college.location}</p>
+                <p className="text-gray-600 text-sm mb-2">
+                  <strong>Slug:</strong> {college.slug}
+                </p>
 
                 <p className="text-sm text-gray-700 mb-2">
                   <span className="font-semibold">Affiliation:</span>{" "}
@@ -370,6 +406,9 @@ export default function AddCollegePage() {
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">
+                  <span className="font-semibold">Highest Placement:</span>{" "}
+                  {college.highestPlacement}
+                  <br />
                   <span className="font-semibold">Placement:</span>{" "}
                   {college.averagePlacement}
                   <br />
@@ -383,6 +422,11 @@ export default function AddCollegePage() {
                 </p>
 
                 <div className="my-3">
+                  <img
+                    src={college.placementRatio}
+                    alt="Placement Ratio"
+                    className="w-full h-20 object-cover rounded-md"
+                  />
                   <img
                     src={college.pastRecruitor}
                     alt="Past Recruitor"

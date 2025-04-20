@@ -1,6 +1,7 @@
 "use client";
 
 import ExamCard from "@/components/custom/ExamCard";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function ExamsPage() {
@@ -41,12 +42,12 @@ export default function ExamsPage() {
               <p className="text-gray-600 mt-2">
                 Prepare for competitive exams with our expert-led courses designed for success.
               </p>
-              <a
-                href="#"
+              <Link
+                href="/sponsors"
                 className="text-blue-500 hover:underline mt-2 inline-block"
               >
                 Learn More
-              </a>
+              </Link>
             </div>
 
             {/* Apply Now Advertisement */}
@@ -55,12 +56,12 @@ export default function ExamsPage() {
               <p className="text-gray-600 mt-2">
                 Don&apos;t miss out! Register now for the biggest exam of the year.
               </p>
-              <a
-                href="#"
+              <Link
+                href="/sponsors"
                 className="text-yellow-500 hover:underline mt-2 inline-block"
               >
                 Apply Now
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -69,7 +70,7 @@ export default function ExamsPage() {
       {/* Footer Section */}
       <footer className="mt-12 text-center text-gray-600">
         <p className="text-sm">
-          Sponsored by <strong>EduTech Solutions</strong> | Helping you achieve your career goals.
+          Sponsored by <strong>College Finder</strong> | Helping you achieve your career goals.
         </p>
       </footer>
     </div>

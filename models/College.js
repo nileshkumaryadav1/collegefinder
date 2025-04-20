@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const CollegeSchema = new mongoose.Schema({
   name: String,
+  slug: { type: String, unique: true },
   location: String,
   nirfRanking: Number,
   imageUrl: String,
@@ -17,9 +18,11 @@ const CollegeSchema = new mongoose.Schema({
   facilities: String,
   noOfStudents: Number,
   noOfFaculties: Number,
+  highestPlacement: String,
   averagePlacement: String,
   medianSalary: String,
   websiteUrl: String,
+  placementRatio: String,
   pastRecruitor: String,
 }, { timestamps: true });
 

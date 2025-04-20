@@ -11,20 +11,9 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // Function to send welcome email
-  const sendWelcomeEmail = async (name, email) => {
-    try {
-      await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email }),
-      });
-    } catch (error) {
-      console.error("Failed to send welcome email:", error);
-    }
-  };
-
+  // 🔹 On form submission
   const onSubmit = async (data) => {
+    if (loading) return; // 🛡️ Prevent duplicate submission
     setLoading(true);
     setMessage(null);
 
@@ -36,30 +25,29 @@ export default function RegisterPage() {
       });
 
       const result = await res.json();
+
       if (res.ok) {
         setMessage({ type: "success", text: "User registered successfully! Redirecting..." });
 
-        // Send Welcome Email after successful registration
-        await sendWelcomeEmail(data.name, data.email);
-
+        // ⏳ Redirect to login after short delay
         setTimeout(() => {
-          router.push("/user/login"); // Redirect after success
+          router.push("/user/login");
         }, 1500);
       } else {
         setMessage({ type: "error", text: result.message });
       }
     } catch (error) {
       setMessage({ type: "error", text: "Something went wrong!" });
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <div className="flex items-center justify-center md:min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>
-        
+
         {message && (
           <div className={`p-2 mb-4 text-white text-center rounded ${message.type === "success" ? "bg-green-500" : "bg-red-500"}`}>
             {message.text}
@@ -103,12 +91,13 @@ export default function RegisterPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+            className={`w-full p-2 rounded text-white ${loading ? "bg-blue-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}`}
             disabled={loading}
           >
             {loading ? "Registering..." : "Register"}
           </button>
         </form>
+
         <Link href="/user/login" className="text-center block mt-4 text-blue-500">Already have an account? Login</Link>
       </div>
     </div>
