@@ -50,8 +50,6 @@ function Page() {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-
   return (
     <div
       className={`min-h-screen px-4 md:py-8 py-4 md:px-10 lg:px-20 ${
@@ -83,6 +81,9 @@ function Page() {
       <div className="text-center text-lg font-medium text-gray-700 mb-6">
         <p>Total Exam News: {filteredNews.length}</p>
       </div>
+
+      {/* Loading Indicator */}
+      {loading && <p className="text-center p-30">Loading...</p>}
 
       {/* News Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

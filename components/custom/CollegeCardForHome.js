@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Loading from "@/components/custom/Loading";
 
 function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
   const [colleges, setColleges] = useState([]);
@@ -42,12 +41,6 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
     return () => clearInterval(interval);
   }, [colleges]);
 
-  if (loading) return (
-    <div className="flex justify-center items-center h-screen">
-      <p>Loading...</p>
-    </div>
-  );
-
   const filteredColleges = colleges
     .filter((college) => {
       const matchesQuery = college.name
@@ -86,6 +79,9 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
         ref={scrollContainerRef}
         className="flex md:hidden gap-4 overflow-x-auto px-2 pb-4 scroll-smooth"
       >
+        {/* loading indicator */}
+        {loading && <p className="text-center p-30 hidden">Loading...</p>}
+
         {filteredColleges.map((college) => (
           <div
             key={college._id}
@@ -115,6 +111,9 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
       </div>
 
       {/* Desktop View: Grid */}
+      {/* loading indicator */}
+      {loading && <p className="text-center p-30">Loading...</p>}
+
       <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredColleges.map((college) => (
           <div

@@ -33,22 +33,23 @@ export default function NewsPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:py-10 py-5">
-      <h1 className="text-3xl font-bold text-blue-800 md:mb-8 mb-4 text-center">
+    <div className="max-w-7xl mx-auto px-4 md:py-10 py-6">
+      <h1 className="text-3xl md:text-4xl font-bold text-blue-800 mb-6 text-center">
         Education News & Updates
       </h1>
 
       {/* Category Tabs */}
-      <div className="flex justify-center gap-4 md:mb-10 mb-4 flex-wrap">
+      <div className="flex justify-center gap-3 flex-wrap mb-10">
         {categories.map((cat) => (
           <button
             key={cat.value}
             onClick={() => setCategory(cat.value)}
-            className={`px-4 py-2 rounded-full text-sm font-medium border ${
+            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
               category === cat.value
-                ? "bg-blue-600 text-white border-blue-600"
+                ? "bg-blue-600 text-white border-blue-600 shadow-sm"
                 : "text-gray-700 border-gray-300 hover:bg-gray-100"
             }`}
+            aria-label={`Filter news by ${cat.label}`}
           >
             {cat.label}
           </button>
@@ -57,10 +58,10 @@ export default function NewsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
         {/* News Cards */}
-        <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:gap-6 gap-4">
+        <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
           {loading ? (
             <p className="text-center col-span-full text-gray-500">
-              Loading...
+              Loading news articles...
             </p>
           ) : newsData.length === 0 ? (
             <p className="text-center col-span-full text-gray-500">
@@ -72,9 +73,9 @@ export default function NewsPage() {
                 key={news._id}
                 className="bg-white border rounded-xl shadow hover:shadow-md transition p-4 flex flex-col"
               >
-                <div>
+                <div className="mb-3">
                   <Link href={`/news/${news._id}`}>
-                    <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
+                    <h3 className="text-lg font-semibold text-gray-800 line-clamp-2 hover:underline">
                       {news.title}
                     </h3>
                   </Link>
@@ -87,13 +88,13 @@ export default function NewsPage() {
                     href={news.sourceURL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-blue-500 hover:underline"
+                    className="text-sm text-blue-600 hover:underline"
                   >
                     Source
                   </a>
                   <Link
                     href={`/news/${news._id}`}
-                    className="text-sm text-white bg-blue-600 hover:bg-blue-700 px-4 py-1.5 rounded transition"
+                    className="text-sm bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 transition"
                   >
                     Read More
                   </Link>
@@ -103,10 +104,11 @@ export default function NewsPage() {
           )}
         </div>
 
-        {/* Advertisement & Promotions */}
+        {/* Sidebar: Promotions + Ads */}
         <div className="lg:block">
-          <div className="bg-white border rounded-xl shadow p-4 mb-6">
-            <h4 className="text-md font-bold text-gray-800 mb-2">Promotions</h4>
+          {/* Promotions */}
+          <div className="bg-white border rounded-xl shadow p-5 mb-6">
+            <h4 className="text-lg font-bold text-gray-800 mb-3">Promotions</h4>
             <ul className="text-sm text-blue-700 list-disc list-inside space-y-2">
               <li>
                 <Link href="/colleges" className="hover:underline">
@@ -126,14 +128,15 @@ export default function NewsPage() {
             </ul>
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-4">
-            <h4 className="text-md font-bold text-blue-700 mb-2">
+          {/* Advertisement */}
+          <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-5">
+            <h4 className="text-lg font-bold text-blue-700 mb-3">
               Advertisement
             </h4>
-            <Link href="/sponsors" className="hover:underline">
+            <Link href="/sponsors" className="block hover:opacity-90 transition">
               <img
                 src="/sponsors.jpg"
-                alt="Ad Banner"
+                alt="Sponsored Ad"
                 className="rounded-lg w-full h-auto object-cover"
               />
             </Link>

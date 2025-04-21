@@ -50,6 +50,7 @@ import Link from "next/link";
 import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 import NewsCardForHome from "@/components/custom/NewsCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
+import Image from "next/image";
 
 export default function Home() {
   const exploreData = [
@@ -208,6 +209,54 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Advertisement */}
+      <section className="md:py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-semibold mb-8 underline decoration-sky-500/30 hover:decoration-sky-500 text-gray-800 dark:text-white">
+            {/* Sponsored by */}
+          </h2>
+          <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-4 mx-auto">
+            <h4 className="text-md font-bold text-blue-700 mb-2 text-center">
+              Advertisement
+            </h4>
+            <Link href="/sponsors" className="hover:underline md:flex gap-4">
+              <Image
+                src="/sponsors.jpg"
+                alt="Ad Banner"
+                width={300}
+                height={150}
+                className="rounded-lg object-cover mx-auto pb-4 md:pb-0"
+              />
+              <Image
+                src="/sponsors.jpg"
+                alt="Ad Banner"
+                width={300}
+                height={150}
+                className="rounded-lg object-cover mx-auto pb-4 md:pb-0 hidden md:block"
+              />
+              <Image
+                src="/sponsors.jpg"
+                alt="Ad Banner"
+                width={300}
+                height={150}
+                className="rounded-lg object-cover mx-auto pb-4 md:pb-0 hidden md:block"
+              />
+            </Link>
+            <p className="text-xs text-gray-500 mt-2 text-center">
+              Sponsored Content
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="mt-12 text-center text-gray-600">
+        <p className="text-sm">
+          Sponsored by <strong>College Finder</strong> | Helping you achieve
+          your career goals.
+        </p>
+      </footer>
     </main>
   );
 }

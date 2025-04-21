@@ -43,7 +43,8 @@ export default function UpcomingDelhiEngineeringExamsPage() {
       setFilteredExams(exams);
     } else {
       const filtered = exams.filter((exam) =>
-        exam.name.toLowerCase().includes(query.toLowerCase())
+        exam.name.toLowerCase().includes(query.toLowerCase()) ||
+        exam.category.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredExams(filtered);
     }

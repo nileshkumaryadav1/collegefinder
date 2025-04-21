@@ -19,7 +19,8 @@ export default function UpcomingEngineeringExamsPage() {
         const examList = Array.isArray(data) ? data : data.exams || [];
 
         const engineeringExams = examList.filter((exam) => {
-          const combined = `${exam.name} ${exam.category} ${exam.tags?.join(" ")}`.toLowerCase();
+          const combined =
+            `${exam.name} ${exam.category} ${exam.tags?.join(" ")}`.toLowerCase();
           return combined.includes("engineering");
         });
 
@@ -43,13 +44,12 @@ export default function UpcomingEngineeringExamsPage() {
       setFilteredExams(exams);
     } else {
       const filtered = exams.filter((exam) =>
-        exam.name.toLowerCase().includes(query.toLowerCase())
+        exam.name.toLowerCase().includes(query.toLowerCase()) ||
+        exam.category.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredExams(filtered);
     }
   };
-
-  if (loading) return <div className="text-center p-30">Loading...</div>;
 
   return (
     <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-white text-gray-800">
@@ -59,7 +59,8 @@ export default function UpcomingEngineeringExamsPage() {
           Upcoming Engineering Exams
         </h1>
         <p className="text-gray-500 text-lg">
-          Find the latest upcoming engineering entrance exams and important dates.
+          Find the latest upcoming engineering entrance exams and important
+          dates.
         </p>
       </div>
 
@@ -78,6 +79,9 @@ export default function UpcomingEngineeringExamsPage() {
       <div className="text-center text-lg font-medium text-gray-700 mb-6">
         Total Upcoming Exams: {filteredExams.length}
       </div>
+
+      {/* Loading indicator */}
+      {loading && <div className="text-center p-30">Loading...</div>}
 
       {/* Exam Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

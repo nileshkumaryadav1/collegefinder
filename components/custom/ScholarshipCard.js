@@ -23,7 +23,7 @@ export default function ScholarshipCard({ query }) {
   }
 
   if (scholarships.length === 0) {
-    return <Loading />;
+    return <p className="text-center p-30">Loading...</p>;
   }
 
   return (

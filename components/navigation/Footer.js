@@ -10,13 +10,17 @@ const Footer = () => {
           <div className="w-full max-w-6xl mx-auto md:px-4 space-y-6">
             {/* Explore Section - Full Width */}
             <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4 shadow-sm bg-white dark:bg-gray-900">
-              <h4 className="text-lg font-bold text-gray-800 dark:text-white border-b pb-2 mb-3">
+              <h4 className="text-lg font-bold text-gray-800 dark:text-white border-b pb-2 mb-3 text-center">
                 Explore
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-2 text-sm text-gray-700 dark:text-gray-300">
                 {[
                   { href: "/find-colleges/iits", label: "IIT Colleges" },
                   { href: "/find-colleges/nits", label: "NIT Colleges" },
+                  {
+                    href: "/find-colleges/state-wise",
+                    label: "State-wise Colleges",
+                  },
                   {
                     href: "/find-exams/engineering-entrance",
                     label: "Engineering Entrance",
@@ -153,8 +157,8 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="text-center md:mt-8 mt-3 border-t border-gray-300 dark:border-gray-700 pt-4 space-y-5 flex flex-col items-center justify-center">
-          <div className="flex items-center gap-3">
+        <div className="text-center md:mt-8 mt-3 border-t border-gray-300 dark:border-gray-700 pt-4 flex flex-col items-center justify-center">
+          <div className="flex items-center gap-3 mb-4">
             <Link href="/">
               <img
                 src="/logo.jpg"
@@ -172,6 +176,21 @@ const Footer = () => {
               </Link>
             </div>
           </div>
+          <p>
+            <Link
+              href="/terms"
+              className="underline text-blue-600 hover:text-blue-800 text-xs"
+            >
+              Terms & Conditions
+            </Link>{" "}
+            |{" "}
+            <Link
+              href="/privacy"
+              className="underline text-blue-600 hover:text-blue-800 text-xs"
+            >
+              Privacy Policy
+            </Link>
+          </p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
             &copy; {new Date().getFullYear()} College Finder. All Rights
             Reserved.

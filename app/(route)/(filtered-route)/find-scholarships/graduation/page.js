@@ -37,14 +37,14 @@ export default function GraduationScholarshipsPage() {
     if (query === "") {
       setFilteredScholarships(scholarships);
     } else {
-      const filtered = scholarships.filter((scholarship) =>
-        scholarship.name.toLowerCase().includes(query.toLowerCase())
+      const filtered = scholarships.filter(
+        (scholarship) =>
+          scholarship.name.toLowerCase().includes(query.toLowerCase()) ||
+          scholarship.description.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredScholarships(filtered);
     }
   };
-
-  if (loading) return <div className="text-center py-10">Loading...</div>;
 
   return (
     <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-white text-gray-800">
@@ -54,7 +54,8 @@ export default function GraduationScholarshipsPage() {
           Graduation Scholarships in India
         </h1>
         <p className="text-gray-500 text-lg">
-          Find the best scholarships for undergraduate/graduation-level students.
+          Find the best scholarships for undergraduate/graduation-level
+          students.
         </p>
       </div>
 
@@ -74,15 +75,24 @@ export default function GraduationScholarshipsPage() {
         Total Scholarships: {filteredScholarships.length}
       </div>
 
+      {/* loading indicator */}
+      {loading && <p className="text-center p-30>">Loading...</p>}
+
       {/* Scholarships Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredScholarships.map((item) => (
           <Link key={item._id} href={`/scholarships/${item._id}`}>
             <div className="border rounded-lg shadow hover:shadow-lg p-6 cursor-pointer transition-transform hover:scale-105">
-              <h2 className="text-xl font-semibold text-blue-700 mb-2">{item.name}</h2>
-              <p className="text-gray-600 mb-1">{item.description?.slice(0, 100)}...</p>
+              <h2 className="text-xl font-semibold text-blue-700 mb-2">
+                {item.name}
+              </h2>
+              <p className="text-gray-600 mb-1">
+                {item.description?.slice(0, 100)}...
+              </p>
               <p className="text-sm text-gray-500">Level: {item.level}</p>
-              <p className="text-sm text-gray-500">Deadline: {item.deadline || "N/A"}</p>
+              <p className="text-sm text-gray-500">
+                Deadline: {item.deadline || "N/A"}
+              </p>
             </div>
           </Link>
         ))}
@@ -90,7 +100,9 @@ export default function GraduationScholarshipsPage() {
 
       {/* Promo Section */}
       <div className="bg-yellow-500 text-black text-center py-4 mt-10 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold">Do not Miss Out on Graduation Funding!</h2>
+        <h2 className="text-xl font-semibold">
+          Do not Miss Out on Graduation Funding!
+        </h2>
         <p className="text-sm mt-2 mb-4">
           Apply now for the best graduation-level scholarships across India.
         </p>

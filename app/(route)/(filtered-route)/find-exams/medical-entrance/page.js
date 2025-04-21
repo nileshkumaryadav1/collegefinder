@@ -19,7 +19,8 @@ export default function UpcomingMedicalExamsPage() {
         const examList = Array.isArray(data) ? data : data.exams || [];
 
         const medicalExams = examList.filter((exam) => {
-          const combined = `${exam.name} ${exam.category} ${exam.tags?.join(" ")}`.toLowerCase();
+          const combined =
+            `${exam.name} ${exam.category} ${exam.tags?.join(" ")}`.toLowerCase();
           return combined.includes("medical");
         });
 
@@ -42,14 +43,14 @@ export default function UpcomingMedicalExamsPage() {
     if (!query.trim()) {
       setFilteredExams(exams);
     } else {
-      const filtered = exams.filter((exam) =>
-        exam.name.toLowerCase().includes(query.toLowerCase())
+      const filtered = exams.filter(
+        (exam) =>
+          exam.name.toLowerCase().includes(query.toLowerCase()) ||
+          exam.category.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredExams(filtered);
     }
   };
-
-  if (loading) return <div className="text-center p-30">Loading...</div>;
 
   return (
     <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-white text-gray-800">
@@ -78,6 +79,9 @@ export default function UpcomingMedicalExamsPage() {
       <div className="text-center text-lg font-medium text-gray-700 mb-6">
         Total Upcoming Exams: {filteredExams.length}
       </div>
+
+      {/* loading indicator */}
+      {loading && <p className="text-center p-30>">Loading...</p>}
 
       {/* Exam Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

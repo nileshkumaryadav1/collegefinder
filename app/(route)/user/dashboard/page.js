@@ -1,13 +1,15 @@
 "use client";
 
+import { Settings } from "lucide-react";
 import { useState, useEffect } from "react";
-import UserCard from "@/components/custom/UserCard";
-import Loading from "@/components/custom/Loading";
+import UserCardAlt from "@/components/custom/NewUserCard";
+import Link from "next/link";
 
-export default function Dashboard() {
+const DashboardPage = () => {
   const [user, setUser] = useState(null);
-  const [tab, setTab] = useState("colleges");
   const [loading, setLoading] = useState(true);
+
+  const [openSettings, setOpenSettings] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -63,64 +65,152 @@ export default function Dashboard() {
     }
   };
 
-  if (loading || !user) return <Loading />;
+  if (loading || !user)
+    return (
+      <>
+        <div className="md:min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4 py-10">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
+            {/* Right - Features */}
+            <div className="w-full bg-blue-50 py-20 flex flex-col justify-center">
+              <h3 className="md:text-3xl text-2xl font-semibold text-gray-700 md:mb-4 text-center">
+                ✨ What you will get after signing in
+              </h3>
+              <ul className="flex flex-col md:items-center gap-2 text-md text-gray-700 p-4">
+                <li className="flex items-center gap-2">
+                  <span className="text-blue-500">📬</span>
+                  Regular Exam Notifications
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">🎓</span>
+                  College Admission Alerts
+                </li>
+                <li className="flex md:items-center gap-2">
+                  <span className="text-purple-500">📊</span>
+                  Personalized College Recommendations
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-yellow-500">📰</span>
+                  Education News & Updates
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-red-500">💾</span>
+                  Save Favorite Colleges
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-pink-500">⚙️</span>
+                  Dashboard Access & More!
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </>
+    );
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-800 to-blue-900 md:py-10 flex justify-center items-start">
-      <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg p-6 md:p-10 flex flex-col md:flex-row gap-8">
-        {/* Profile Section */}
-        <div className="md:w-1/3 w-full text-center">
-          <h2 className="text-2xl font-bold text-teal-700 mb-4">Welcome, {user.name}</h2>
-          <UserCard user={user} />
+    <main className="min-h-screen bg-gray-50 md:py-5 py-4 px-4 max-w-6xl mx-auto space-y-6">
+      {/* title and setting btn */}
+      <section className="flex justify-between items-center px-4">
+        {/* title */}
+        <h2 className="text-xl font-bold flex gap-1">
+          Welcome <p className="text-blue-700">{user.name}</p>😊!
+        </h2>
+
+        {/* Settings */}
+        <div className="">
+          <button
+            onClick={() => setOpenSettings(!openSettings)}
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 cursor-pointer"
+          >
+            <Settings size={22} />
+          </button>
+
+          {openSettings && (
+            <div className="absolute right-0 md:mt-2 w-48 bg-white border shadow-lg rounded-md z-10">
+              {/* Delete Button */}
+              <div className="">
+                <button
+                  onClick={() => deleteUser(user.email)}
+                  className="pr-18 pt-2 pb-2 pl-4 text-sm hover:bg-gray-100 cursor-pointer"
+                >
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-
-        {/* Right Panel */}
-        <div className="md:w-2/3 w-full flex flex-col gap-6">
-          {/* Delete Button */}
-          <div className="flex justify-end">
-            <button
-              onClick={() => deleteUser(user.email)}
-              className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition"
-            >
-              Delete Account
-            </button>
-          </div>
-
-          {/* Tabs */}
-          <div className="flex justify-center gap-4">
-            {["colleges", "exams", "scholarships"].map((item) => (
-              <button
-                key={item}
-                onClick={() => setTab(item)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                  tab === item
-                    ? "bg-teal-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {item === "colleges"
-                  ? "Liked Colleges"
-                  : item === "exams"
-                  ? "Liked Exams"
-                  : "Liked Scholarships"}
-              </button>
-            ))}
-          </div>
-
-          {/* Tab Content */}
-          <div className="bg-gray-100 rounded-lg p-6 text-center">
-            {tab === "colleges" && (
-              <p className="text-gray-600 text-sm">You have not liked any colleges yet.</p>
-            )}
-            {tab === "exams" && (
-              <p className="text-gray-600 text-sm">You have not liked any exams yet.</p>
-            )}
-            {tab === "scholarships" && (
-              <p className="text-gray-600 text-sm">You have not liked any scholarships yet.</p>
-            )}
-          </div>
-        </div>
+      </section>
+      {/* usercard */}
+      <div
+        className="flex justify-between items-start flex-wrap gap-2"
+        onClick={() => setOpenSettings(false)}
+      >
+        <UserCardAlt user={user} />
       </div>
-    </div>
+      {/* Email Opt-In */}
+      <div className="bg-white p-6 rounded-xl shadow-md border">
+        <h3 className="text-xl font-semibold mb-2">Get Regular Updates</h3>
+        <p className="text-gray-600 mb-4">
+          Subscribe to receive emails about new colleges, exams, and
+          scholarships.
+        </p>
+        <form className="flex flex-col sm:flex-row gap-3">
+          <input
+            name=""
+            // value={email}
+            type="email"
+            placeholder="Enter your email"
+            className="flex-1 px-4 py-2 border rounded-md"
+          />
+          <p className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700">
+            Subscribe
+          </p>
+        </form>
+      </div>
+      {/* Favorites Section */}
+      <div className="grid md:grid-cols-3 gap-4">
+        {["Colleges", "Exams", "Scholarships"].map((item) => (
+          <div key={item} className="bg-white p-4 rounded-xl shadow-md border">
+            <h4 className="text-lg font-semibold mb-2">Favorite {item}</h4>
+            <p className="text-gray-600">
+              You have not saved any {item.toLowerCase()} yet.
+            </p>
+          </div>
+        ))}
+      </div>
+      {/* Counseling Section */}
+      <div className="bg-white p-6 rounded-xl shadow-md border">
+        <h3 className="text-xl font-semibold mb-2">Personalized Counseling</h3>
+        <p className="text-gray-600 mb-4">
+          Need help finding the right college? Book a session with our
+          counselor.
+        </p>
+        <Link
+          href={"/sponsors"}
+          className="bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700"
+        >
+          Book a Counseling Session
+        </Link>
+      </div>
+      {/* Helpful Links */}
+      <div className="bg-white p-6 rounded-xl shadow-md border">
+        <h3 className="text-xl font-semibold mb-4">Useful Links</h3>
+        <ul className="grid sm:grid-cols-2 gap-3 text-blue-600">
+          {[
+            "Help",
+            "Contact CollegeFinder",
+            "Privacy Policy",
+            "Terms of Service",
+            "Share Profile",
+          ].map((link) => (
+            <li key={link}>
+              <button className="hover:underline">{link}</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </main>
   );
-}
+};
+
+export default DashboardPage;

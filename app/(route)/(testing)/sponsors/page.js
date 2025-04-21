@@ -94,7 +94,7 @@ export default function SponsorsPage() {
       </div>
 
       {/* Promotional Section */}
-      <div className="bg-yellow-100 text-center py-4 mt-10 rounded-lg shadow-lg">
+      <div className="bg-yellow-100 text-center py-6 mt-10 rounded-lg shadow-lg">
         <h2 className="text-xl font-semibold text-yellow-700">
           Want to become a sponsor?
         </h2>

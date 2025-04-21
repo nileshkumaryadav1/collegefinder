@@ -23,8 +23,6 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
     fetchColleges();
   }, []);
 
-  if (loading) return <Loading />;
-
   const filteredColleges = colleges
     .filter((college) => {
       const q = query.toLowerCase();
@@ -32,7 +30,9 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
       const matchesQuery =
         college.name.toLowerCase().includes(q) ||
         college.location.toLowerCase().includes(q) ||
-        college.type.toLowerCase().includes(q);
+        college.type.toLowerCase().includes(q) ||
+        college.description.toLowerCase().includes(q) ||
+        college.courses.toLowerCase().includes(q);
 
       const matchesType = collegeType
         ? college.type.toLowerCase().includes(collegeType.toLowerCase())
@@ -69,6 +69,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
       <div className="text-center text-lg font-medium text-gray-700 mb-2">
         <p>Total Colleges: {filteredColleges.length}</p>
       </div>
+      {loading && <p className="text-center p-10">Loading Colleges...</p>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredColleges.map((college) => (
           <div

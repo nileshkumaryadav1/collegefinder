@@ -17,6 +17,8 @@ import {
   Building2,
   School,
   Building,
+  Phone,
+  Mail,
 } from "lucide-react";
 import Link from "next/link";
 import CollegeCardForHome from "./CollegeCardForHome";
@@ -141,6 +143,31 @@ const SingleCollegeCard = ({ college }) => {
         <p className="text-gray-700 leading-relaxed md:text-lg max-w-4xl mx-auto text-justify">
           {college.description}
         </p>
+      </Section>
+
+      {/* address and traveling options */}
+      <Section id="address" title="Address and Reaching Options">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-base md:text-lg text-gray-800">
+          <Detail
+            icon={MapPin}
+            label="Address"
+            value={`${college.slug}, ${college.location}`}
+          />
+          <Detail icon={Phone} label="Phone" value={college.phone} />
+          <Detail icon={Mail} label="Email" value={college.email} />
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-center mt-6">
+          <p>Travel Options:</p>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              college.location
+            )}`}
+            target="_blank"
+            className="btn btn-primary"
+          >
+            Open in Google Maps
+          </a>
+        </div>
       </Section>
 
       {/* facilities */}
@@ -300,6 +327,64 @@ const SingleCollegeCard = ({ college }) => {
           </table>
         </div>
       </Section>
+
+      {/* fee waiver */}
+      <Section id="feeWaiver" title="Fee Waiver">
+        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto">
+          {college.feeWaiver
+            ? college.feeWaiver
+                .split(".")
+                .filter((sentence) => sentence.trim().length > 0)
+                .map((sentence, index) => (
+                  <p key={index} className="mb-3 text-gray-800 text-justify">
+                    {sentence.trim()}.
+                  </p>
+                ))
+            : "Fee waiver information not available."}
+        </p>
+      </Section>
+
+      {/* Cutoff section */}
+      {college.cutOff ? (
+        <Section id="cutoff" title="Cutoff Details">
+          <p className="text-gray-700 text-sm mb-4 italic">
+            * Year 2024 cutoffs are listed below.
+          </p>
+          <Table
+            head={["Category", "Cutoff"]}
+            rows={[
+              [
+                "General",
+                college?.cutOff?.general ? college.cutOff.general : "--",
+              ],
+              [
+                "General-EWS",
+                college?.cutOff?.["general-ews"]
+                  ? college.cutOff["general-ews"]
+                  : "--",
+              ],
+              [
+                "Other Backward Caste",
+                college?.cutOff?.obc ? college.cutOff.obc : "--",
+              ],
+              [
+                "Scheduled Caste",
+                college?.cutOff?.sc ? college.cutOff.sc : "--",
+              ],
+              [
+                "Scheduled Tribes",
+                college?.cutOff?.st ? college.cutOff.st : "--",
+              ],
+            ]}
+          />
+        </Section>
+      ) : (
+        <Section id="cutoff" title="Cutoff Details">
+          <p className="text-gray-500 italic text-sm">
+            Cutoff data is currently not available.
+          </p>
+        </Section>
+      )}
 
       {/* placement stats */}
       <Section id="placement" title="Placement Stats">

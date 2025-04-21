@@ -11,6 +11,8 @@ export default function AddCollegePage() {
     name: "",
     slug: "",
     location: "",
+    phone: "",
+    email: "",
     nirfRanking: "",
     imageUrl: "",
     logoUrl: "",
@@ -22,6 +24,8 @@ export default function AddCollegePage() {
     fees: "",
     hostelFees: "",
     otherFees: "",
+    feeWaiver: "",
+    cutOff: "",
     facilities: "",
     noOfStudents: "",
     noOfFaculties: "",
@@ -59,6 +63,8 @@ export default function AddCollegePage() {
           name: "",
           slug: "",
           location: "",
+          phone: "",
+          email: "",
           nirfRanking: "",
           imageUrl: "",
           logoUrl: "",
@@ -70,6 +76,8 @@ export default function AddCollegePage() {
           fees: "",
           hostelFees: "",
           otherFees: "",
+          feeWaiver: "",
+          cutOff: "",
           facilities: "",
           noOfStudents: "",
           noOfFaculties: "",
@@ -135,6 +143,24 @@ export default function AddCollegePage() {
             name="location"
             placeholder="Location"
             value={formData.location}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="College Phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
             onChange={handleChange}
             className="border p-2 rounded w-full"
             required
@@ -263,6 +289,22 @@ export default function AddCollegePage() {
             className="border p-2 rounded w-full"
             required
           />
+          <textarea
+            name="feeWaiver"
+            placeholder="Fee Waiver"
+            value={formData.feeWaiver}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+          <textarea
+          name="cutOff"
+          placeholder="Cut Off Array"
+          value={formData.cutOff}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
           <input
             type="text"
             name="highestPlacement"
@@ -358,6 +400,8 @@ export default function AddCollegePage() {
 
                 <h2 className="text-xl font-bold mb-1">{college.name}</h2>
                 <p className="text-gray-600 text-sm mb-2">{college.location}</p>
+                <p className="text-gray-600 text-sm mb-2">{college.phone}</p>
+                <p className="text-gray-600 text-sm mb-2">{college.email}</p>
                 <p className="text-gray-600 text-sm mb-2">
                   <strong>Slug:</strong> {college.slug}
                 </p>
@@ -403,6 +447,16 @@ export default function AddCollegePage() {
                   <br />
                   <span className="font-semibold">Other:</span> ₹
                   {college.otherFees}
+                </p>
+
+                <p className="text-sm text-gray-700 mb-2">
+                  <span className="font-semibold">Fee Waiver:</span>{" "}
+                  {college.feeWaiver}
+                </p>
+
+                <p className="text-sm text-gray-700 mb-2">
+                  <span className="font-semibold">Cut Off:</span>{" "}
+                  {college.cutOff.map((cutOff) => `${cutOff.category}: ${cutOff.cutOff}`).join(", ")}
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">

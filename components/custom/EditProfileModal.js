@@ -92,7 +92,7 @@ export default function EditProfileModal({ open, onClose, user }) {
         <TextField
           fullWidth
           margin="dense"
-          label="Bio"
+          label="Describe yourself"
           name="bio"
           value={formData.bio}
           onChange={handleChange}
@@ -100,7 +100,7 @@ export default function EditProfileModal({ open, onClose, user }) {
         <TextField
           fullWidth
           margin="dense"
-          label="Instagram"
+          label="Instagram Profile URL"
           name="instagram"
           value={formData.instagram}
           onChange={handleChange}
@@ -108,7 +108,7 @@ export default function EditProfileModal({ open, onClose, user }) {
         <TextField
           fullWidth
           margin="dense"
-          label="LinkedIn"
+          label="LinkedIn Profile URL"
           name="linkedin"
           value={formData.linkedin}
           onChange={handleChange}

@@ -45,8 +45,6 @@ export default function ScholarshipsNewsPage() {
     }
   };
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
-
   return (
     <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-white text-gray-800">
       {/* Header */}
@@ -74,6 +72,9 @@ export default function ScholarshipsNewsPage() {
       <div className="text-center text-lg font-medium text-gray-700 mb-6">
         Total News Updates: {filteredNews.length}
       </div>
+
+      {/* Loading Indicator */}
+      {loading && <div className="text-center p-30">Loading...</div>}
 
       {/* News Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -106,7 +107,8 @@ export default function ScholarshipsNewsPage() {
           Do Not Miss Out on Latest Scholarship Alerts!
         </h2>
         <p className="text-sm mt-2 mb-4">
-          Subscribe now to get regular scholarship updates straight to your inbox.
+          Subscribe now to get regular scholarship updates straight to your
+          inbox.
         </p>
         <Link
           href="/sponsors"

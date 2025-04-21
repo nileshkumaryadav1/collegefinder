@@ -22,8 +22,8 @@ export default function CollegesPage() {
   const sortFields = [
     { label: "Name", value: "name" },
     { label: "Nirf Ranking", value: "nirfRanking" },
-    { label: "Total Fees", value: "otherFees" },
-    { label: "Placement", value: "averagePlacement" },
+    // { label: "Total Fees", value: "otherFees" },
+    // { label: "Placement", value: "averagePlacement" },
   ];
 
   const sortOrders = [

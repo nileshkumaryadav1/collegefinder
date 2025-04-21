@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link"; // Import the Link component from Next.js
+import Loading from "@/components/custom/Loading";
 
 function Page() {
   const [colleges, setColleges] = useState([]);
@@ -19,7 +20,9 @@ function Page() {
 
         // Filter colleges that have 'NIT' in their name (case-insensitive)
         const nitColleges = data.filter((college) =>
-          college.name.toLowerCase().includes("nit")
+          college.name
+            .toLowerCase()
+            .includes("national institute of technology")
         );
         setColleges(nitColleges);
         setFilteredColleges(nitColleges); // Initialize filtered colleges with NIT list
@@ -45,8 +48,6 @@ function Page() {
       setFilteredColleges(filtered);
     }
   };
-
-  if (loading) return <div>Loading...</div>;
 
   return (
     <div
@@ -90,6 +91,9 @@ function Page() {
       <div className="text-center text-lg font-medium text-gray-700 mb-6">
         <p>Total NIT Colleges: {filteredColleges.length}</p>
       </div>
+
+      {/* Loading Indicator */}
+      {loading && <p className="text-center p-30">Loading...</p>}
 
       {/* College Listings Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

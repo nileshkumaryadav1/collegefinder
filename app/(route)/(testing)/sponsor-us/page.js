@@ -76,11 +76,11 @@ export default function SponsorUsPage() {
       {/* Sponsorship Benefits */}
       <div className="mb-12 text-center">
         <h2 className="text-2xl font-semibold text-blue-700 mb-4">Why Sponsor Us?</h2>
-        <ul className="text-gray-600 list-disc list-inside">
-          <li>Reach thousands of engaged participants across various events</li>
-          <li>Showcase your brand and services to a wide, diverse audience</li>
-          <li>Benefit from marketing and promotional opportunities before, during, and after the event</li>
-          <li>Get premium exposure on all our media channels, including social media and event materials</li>
+        <ul className="text-gray-600 text-left md:text-center px-2">
+          <li className="mb-2">Reach thousands of engaged participants across various events.</li>
+          <li className="mb-2">Showcase your brand and services to a wide, diverse audience.</li>
+          <li className="mb-2">Benefit from marketing and promotional opportunities before, during, and after the event.</li>
+          <li className="mb-2">Get premium exposure on all our media channels, including social media and event materials.</li>
         </ul>
       </div>
 

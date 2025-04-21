@@ -12,6 +12,8 @@ export default function EditCollegePage() {
     name: "",
     slug: "",
     location: "",
+    phone: "",
+    email: "",
     nirfRanking: "",
     imageUrl: "",
     logoUrl: "",
@@ -23,6 +25,8 @@ export default function EditCollegePage() {
     fees: "",
     hostelFees: "",
     otherFees: "",
+    feeWaiver: "",
+    cutOff: "",
     facilities: "",
     noOfStudents: "",
     noOfFaculties: "",
@@ -113,6 +117,24 @@ export default function EditCollegePage() {
           name="location"
           placeholder="Location"
           value={formData.location}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone"
+          value={formData.phone}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required
@@ -237,6 +259,22 @@ export default function EditCollegePage() {
           name="otherFees"
           placeholder="Total Fees"
           value={formData.otherFees}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <textarea
+          name="feeWaver"
+          placeholder="Fee Waiver"
+          value={formData.feeWaiver}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <textarea
+          name="cutOff"
+          placeholder="Cut-off"
+          value={formData.cutOff}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required
