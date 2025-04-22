@@ -22,53 +22,72 @@ export default function ScholarshipDetail({ params }) {
       setLoading(false);
     };
 
-    fetchScholarship();
+    if (id) fetchScholarship();
   }, [id]);
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
-  if (!id) {
-    return <p className="text-center mt-10">Scholarship not found.</p>;
+  if (!id || !scholarship) {
+    return (
+      <p className="text-center mt-10 text-lg text-red-600">
+        Scholarship not found.
+      </p>
+    );
   }
 
   return (
-    <div className="mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
-      <div className="bg-white container border border-gray-300 grid gap-4 rounded lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 md:mt-10 md:m-10 md:p-10 p-4 mb-2 flex flex-col items-center justify-center">
-        <h2 className="md:text-3xl text-xl font-bold">
-        Scholarship Details:</h2>
-        <h1 className="md:text-2xl font-bold">
+    <div className="max-w-5xl mx-auto px-4 py-10">
+      <div className="bg-white shadow-xl rounded-xl p-8 border border-gray-200">
+        <h1 className="text-3xl font-bold mb-2 text-blue-800">
           {scholarship.name}
         </h1>
-        <p className="text-gray-700 md:mt-2">
-          Name: {scholarship.name}
-          <br />
-          Description: {scholarship.about}
-          <br />
-          Amount: {scholarship.amount}
-          <br />
-          Deadline/Last Date: {scholarship.deadline}
-          <br />
-          Type: {scholarship.type}
-          <br />
-          Eligibility: {scholarship.eligibility}
-          <br />
+        <p className="text-gray-700 mb-6">{scholarship.about}</p>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 mb-1">Amount</h2>
+            <p className="text-gray-600">{scholarship.amount}</p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 mb-1">
+              Deadline
+            </h2>
+            <p className="text-gray-600">
+              {scholarship.deadline?.slice(0, 10)}
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 mb-1">Type</h2>
+            <p className="text-gray-600">{scholarship.type}</p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 mb-1">
+              Eligibility
+            </h2>
+            <p className="text-gray-600">{scholarship.eligibility}</p>
+          </div>
+        </div>
+
+        <div className="mt-6 flex justify-between items-center">
+          <Link
+            href="/scholarships"
+            className="text-gray-700 hover:text-white text-sm btn btn-primary"
+          >
+            ← Back to Scholarships page
+          </Link>
+
           <a
             href={scholarship.officialLink}
-            className="text-blue-600 hover:underline mt-2 inline-block text-center border border-blue-600 p-2 rounded hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out"
             target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition"
           >
-            Official Website
+            Visit Official Website
           </a>
-          <br />
-        </p>
-        <Link
-          href="/scholarships"
-          className="mt-4 inline-block text-blue-600 hover:underline"
-        >
-          ← Back to Scholarships page
-        </Link>
+        </div>
       </div>
     </div>
   );

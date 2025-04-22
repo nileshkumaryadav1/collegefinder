@@ -32,7 +32,7 @@ export default function Scholarships() {
         </div>
 
         {/* Right Column: Promotions / Advertisement */}
-        <div className="hidden lg:block">
+        <div className="">
           <div className="bg-white rounded-lg p-4 shadow-lg">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Sponsored</h2>
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">

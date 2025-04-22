@@ -152,7 +152,8 @@ export default function RegisterPage() {
 
       {/* Form Section */}
       <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
+        <h2 className="text-2xl font-bold text-center text-blue-500 mb-1">Welcome!</h2>
+        <p className="text-sm mb-5 text-center text-gray-600">Please fill in the form below to <strong>Register</strong>.</p>
 
         {message && (
           <div

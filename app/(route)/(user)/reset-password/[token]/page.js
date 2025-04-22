@@ -1,7 +1,9 @@
 "use client";
+
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function ResetPasswordPage() {
   const { token } = useParams();
@@ -36,77 +38,97 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
-        <h2 className="text-xl font-semibold mb-4">Reset Your Password</h2>
-        <form onSubmit={handleReset}>
-          <input
-            type="password"
-            className="w-full border p-2 rounded mb-4"
-            placeholder="Enter new password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={loading}
-            required
-            aria-label="New password"
-            aria-describedby="passwordHelp"
-          />
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-            disabled={loading}
-          >
-            {loading ? "Resetting..." : "Reset Password"}
-          </button>
-        </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md md:max-w-4xl bg-white p-6 md:p-10 rounded-xl md:rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10"
+      >
+        {/* Reset Password Form */}
+        <div>
+          <h2 className="text-2xl font-bold text-green-700 mb-3 text-center md:text-left">
+            Reset Your Password
+          </h2>
+          <p className="text-gray-600 text-sm mb-4 text-center md:text-left">
+            Set a new password for your account.
+          </p>
 
-        {msg && <p className="mt-4 text-green-600 text-sm">{msg}</p>}
-        {error && <p className="mt-4 text-red-600 text-sm">{error}</p>}
+          <form onSubmit={handleReset}>
+            <input
+              type="password"
+              className="w-full border border-gray-300 rounded px-4 py-2 mb-4 focus:ring-2 focus:ring-green-500 focus:outline-none"
+              placeholder="Enter new password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={loading}
+              required
+              aria-label="New password"
+            />
+            <button
+              type="submit"
+              className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+              disabled={loading}
+            >
+              {loading ? "Resetting..." : "Reset Password"}
+            </button>
+          </form>
 
-        <p className="text-sm text-center mt-2">
-          Do you remember your password?{" "}
-          <Link href="/user/login" className="text-blue-600 hover:underline">
-            Login here
-          </Link>
-          .
-        </p>
+          {msg && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 p-3 text-green-700 text-sm bg-green-100 rounded"
+            >
+              ✅ {msg}
+            </motion.div>
+          )}
+          {error && (
+            <p className="mt-4 text-red-600 text-sm bg-red-50 p-3 rounded">
+              {error}
+            </p>
+          )}
 
-        {/* Helpful sections */}
-        <div className="mt-6 grid gap-6 text-sm text-gray-600">
-          {/* Post-reset tips */}
-          <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+          <p className="text-sm text-center mt-4 text-gray-700">
+            Remembered your password?{" "}
+            <Link href="/user/login" className="text-blue-600 hover:underline">
+              Login here
+            </Link>
+            .
+          </p>
+        </div>
+
+        {/* Desktop & mobile shared Helpful Sections */}
+        <div className="text-sm text-gray-700 space-y-4">
+          <div className="bg-blue-50 border border-blue-200 p-5 rounded-lg">
             <h3 className="text-blue-700 font-semibold mb-2">
               ✅ After Password Reset
             </h3>
             <ul className="list-disc list-inside space-y-1">
-              <li>You&apos;ll be redirected to the login page automatically</li>
+              <li>You will be redirected to login page automatically</li>
               <li>Use your new password to log in</li>
               <li>
-                If you don&apos;t get redirected,{" "}
-                <Link
-                  href="/user/login"
-                  className="text-blue-600 hover:underline"
-                >
+                If not redirected,{" "}
+                <Link href="/user/login" className="text-blue-600 hover:underline">
                   click here
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Tips to choose a strong password */}
-          <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+          <div className="bg-yellow-50 border border-yellow-200 p-5 rounded-lg">
             <h3 className="text-yellow-700 font-semibold mb-2">
-              🛡️ Tips for a Strong Password
+              🛡️ Strong Password Tips
             </h3>
             <ul className="list-disc list-inside space-y-1">
-              <li>Use a mix of uppercase, lowercase, numbers, and symbols</li>
-              <li>Don&apos;t reuse passwords from other sites</li>
-              <li>Use a password manager to safely store passwords</li>
-              <li>Make it at least 8 characters long</li>
+              <li>Use uppercase, lowercase, numbers & symbols</li>
+              <li>Don not reuse old passwords</li>
+              <li>Use a password manager to store safely</li>
+              <li>Keep it at least 8 characters long</li>
             </ul>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -7,14 +7,14 @@ export async function POST(req) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.SENDER_EMAIL,
-        pass: process.env.SENDER_EMAIL_APP_PASSWORD,
+        user: process.env.SENDER_EMAIL || process.env.EMAIL_USER,
+        pass: process.env.SENDER_EMAIL_APP_PASSWORD || process.env.EMAIL_PASS,
       },
     });
 
     const mailOptions = {
-      from: `"College Finder" <${process.env.SENDER_EMAIL}>`,
-      to: "kumarnileshayan@gmail.com",
+      from: `"College Finder" <${process.env.SENDER_EMAIL || process.env.EMAIL_USER}>`,
+      to: process.env.RECIPIENT_EMAIL || "kumarnileshayan@gmail.com",
       subject: "📩 New Sponsor Form Submission",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #f1f3f5; padding: 20px;">
@@ -47,11 +47,17 @@ export async function POST(req) {
 
     const info = await transporter.sendMail(mailOptions);
 
-    return Response.json({ success: true, info });
+    return new Response(JSON.stringify({ success: true, info }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    return Response.json(
-      { success: false, error: error.message },
-      { status: 500 }
+    return new Response(
+      JSON.stringify({ success: false, error: error.message }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 }

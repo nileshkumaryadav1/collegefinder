@@ -1,15 +1,5 @@
 import mongoose from "mongoose";
 
-// cut off entry theme/type
-// cutOff: [{ category: "General", cutOff: "90" }]
-// cutOff: {
-//   general: String,
-//   "general-ews": String,
-//   obc: String,
-//   sc: String,
-//   st: String,
-// }
-
 const CollegeSchema = new mongoose.Schema({
   name: String,
   slug: { type: String, unique: true },
@@ -28,7 +18,7 @@ const CollegeSchema = new mongoose.Schema({
   hostelFees: String,
   otherFees: String,
   feeWaiver: String,
-  cutOff:[String],
+  cutOff:String,
   facilities: String,
   noOfStudents: Number,
   noOfFaculties: Number,

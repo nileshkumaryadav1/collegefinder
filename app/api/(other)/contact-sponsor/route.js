@@ -10,10 +10,7 @@ export async function POST(req) {
 
   // Fetch API domain from environment variables
   const API_DOMAIN =
-    process.env.NEXT_PUBLIC_API_URL ||
-    "http://localhost:3000" ||
-    "http://collegefinder.vercel.app";
-
+    process.env.NEXT_PUBLIC_BASE_URL;
   try {
     const response = await fetch(`${API_DOMAIN}/api/sponsor-detail-email`, {
       method: "POST",

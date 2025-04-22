@@ -90,7 +90,7 @@ export default function EditCollegePage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
       <h1 className="text-2xl font-bold mb-4">Edit College</h1>
       {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
@@ -106,7 +106,7 @@ export default function EditCollegePage() {
         <input
           type="text"
           name="slug"
-          placeholder="Slug" // Add placeholder for slug field
+          placeholder="Slug"
           value={formData.slug}
           onChange={handleChange}
           className="border p-2 rounded w-full"
@@ -171,7 +171,7 @@ export default function EditCollegePage() {
           placeholder="Description"
           value={formData.description}
           onChange={handleChange}
-          className="border p-2 rounded w-full h-24"
+          className="border p-2 rounded w-full h-70"
           required
         />
         <input
@@ -233,7 +233,7 @@ export default function EditCollegePage() {
           placeholder="Admission Process"
           value={formData.admissionProcess}
           onChange={handleChange}
-          className="border p-2 rounded w-full h-24"
+          className="border p-2 rounded w-full h-50"
           required
         />
         <input
@@ -263,12 +263,13 @@ export default function EditCollegePage() {
           className="border p-2 rounded w-full"
           required
         />
-        <textarea
-          name="feeWaver"
+        <input
+          type="text"
+          name="feeWaiver"
           placeholder="Fee Waiver"
           value={formData.feeWaiver}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full h-25"
           required
         />
         <textarea
@@ -276,7 +277,7 @@ export default function EditCollegePage() {
           placeholder="Cut-off"
           value={formData.cutOff}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full h-50"
           required
         />
         <input

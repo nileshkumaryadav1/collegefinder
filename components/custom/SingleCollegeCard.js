@@ -23,6 +23,10 @@ import {
 import Link from "next/link";
 import CollegeCardForHome from "./CollegeCardForHome";
 import NewsCardForHome from "./NewsCardForHome";
+import ExamCard from "./ExamCard";
+import ExamCardSmall from "./ExamCardSmall";
+import FAQs from "./FaQs";
+import ReviewRating from "./ReviewRating";
 
 const SingleCollegeCard = ({ college }) => {
   const [liked, setLiked] = useState(false);
@@ -186,7 +190,7 @@ const SingleCollegeCard = ({ college }) => {
           rows={[
             [
               <ul key="facilities-list">
-                {college.facilities.split(",").map((item, i) => (
+                {college.facilities?.split(",").map((item, i) => (
                   <li key={i}>{item.trim()}</li>
                 ))}
               </ul>,
@@ -237,19 +241,19 @@ const SingleCollegeCard = ({ college }) => {
       {/* popular courses */}
       <Section id="courses" title="Popular Courses">
         <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto">
-          {/* <div className="flex items-center">
+          <div className="flex items-center">
             <BookOpen size={24} />
             <span className="font-semibold">Technical:</span>
-          </div> */}
+          </div>
 
-          {/* {college.courses} */}
+          {college.courses}
           {/* <ul>
             {college.courses.split(",").map((item, index) => (
               <li key={index}>{item.trim()}</li>
             ))}
           </ul> */}
         </p>
-        <Table
+        {/* <Table
           head={["Technical", "Research"]}
           rows={[
             [
@@ -261,7 +265,7 @@ const SingleCollegeCard = ({ college }) => {
               null, // or <div key="empty-cell" /> to avoid warning
             ],
           ]}
-        />
+        /> */}
       </Section>
 
       {/* admission process */}
@@ -273,7 +277,7 @@ const SingleCollegeCard = ({ college }) => {
                 .filter((sentence) => sentence.trim().length > 0)
                 .map((sentence, index) => (
                   <p key={index} className="mb-3 text-gray-800 text-justify">
-                    {sentence.trim()}.
+                    🌟{sentence.trim()}.
                   </p>
                 ))
             : "Admission process information not available."}
@@ -330,14 +334,14 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* fee waiver */}
       <Section id="feeWaiver" title="Fee Waiver">
-        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto">
+        <p className="text-gray-700 md:text-lg gap-2 max-w-4xl mx-auto">
           {college.feeWaiver
             ? college.feeWaiver
                 .split(".")
                 .filter((sentence) => sentence.trim().length > 0)
                 .map((sentence, index) => (
                   <p key={index} className="mb-3 text-gray-800 text-justify">
-                    {sentence.trim()}.
+                    🌟{sentence.trim()}.
                   </p>
                 ))
             : "Fee waiver information not available."}
@@ -347,33 +351,42 @@ const SingleCollegeCard = ({ college }) => {
       {/* Cutoff section */}
       {college.cutOff ? (
         <Section id="cutoff" title="Cutoff Details">
-          <p className="text-gray-700 text-sm mb-4 italic">
-            * Year 2024 cutoffs are listed below.
+          <p className="text-gray-700 text-sm italic">
+            * Below are the JOSAA 2024 round 5 closing ranks for male-only
+            candidates, specific to the CSE (B.Tech) program.
           </p>
+          <p className="text-gray-700 text-sm mb-4 italic">
+            * All mentioned ranks are category-wise.
+          </p>
+
           <Table
-            head={["Category", "Cutoff"]}
+            head={["Category", "Cut Offs"]}
             rows={[
               [
-                "General",
-                college?.cutOff?.general ? college.cutOff.general : "--",
-              ],
-              [
-                "General-EWS",
-                college?.cutOff?.["general-ews"]
-                  ? college.cutOff["general-ews"]
-                  : "--",
-              ],
-              [
-                "Other Backward Caste",
-                college?.cutOff?.obc ? college.cutOff.obc : "--",
-              ],
-              [
-                "Scheduled Caste",
-                college?.cutOff?.sc ? college.cutOff.sc : "--",
-              ],
-              [
-                "Scheduled Tribes",
-                college?.cutOff?.st ? college.cutOff.st : "--",
+                <ul key="courses-list">
+                  {["General", "OBC", "EWS", "SC", "ST"].map(
+                    (category, index) => (
+                      <li key={index} className="border-b mb-1">
+                        {category}
+                      </li>
+                    )
+                  )}
+                </ul>,
+                <ul key="courses-list">
+                  {college.cutOff
+                    ? college.cutOff
+                        .split(",")
+                        .filter((sentence) => sentence.trim().length > 0)
+                        .map((sentence, index) => (
+                          <p
+                            key={index}
+                            className="text-gray-800 border-b mb-1"
+                          >
+                            {sentence.trim()}
+                          </p>
+                        ))
+                    : "Cut off information not available."}
+                </ul>,
               ],
             ]}
           />
@@ -482,34 +495,40 @@ const SingleCollegeCard = ({ college }) => {
 
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+          {/* <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            Reviews
+          </h2> */}
+          <div className="max-w-4xl mx-auto">
+            <ReviewRating collegeId={college._id} />
+            {/* <Reviews data={college.reviews} /> */}
+            {/* <h2>Reviews are not available for this college.</h2> */}
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-6 px-4 md:px-8 bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          {/* <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
             Frequently Asked Questions
-          </h2>
+          </h2> */}
+          <FAQs data={college.faq} />
           <div className="max-w-4xl mx-auto">
             {/* <Accordion data={college.faq} /> */}
-            <h2>FAQs are not available for this college.</h2>
+            {/* <h2>FAQs are not available for this college.</h2> */}
           </div>
         </div>
       </section>
 
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-            Reviews
-          </h2>
-          <div className="max-w-4xl mx-auto">
-            {/* <Reviews data={college.reviews} /> */}
-            <h2>Reviews are not available for this college.</h2>
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
             Similar Colleges
           </h2>
-          <div className="max-w-4xl mx-auto">
+
+          <Link href="/colleges" className="btn btn-link">
+            View all
+          </Link>
+          <div className="max-w-4xl mx-auto mt-4">
             <CollegeCardForHome
               query="#"
               collegeType=""
@@ -520,7 +539,7 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </section>
 
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200 hidden">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
             Similar Courses
@@ -532,11 +551,30 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </section>
 
+      {/* similar exam section */}
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
+            Entrance Exams
+          </h2>
+          <Link href="/exams" className="btn btn-link">
+            View all
+          </Link>
+          <div className="max-w-4xl mx-auto mt-4">
+            <ExamCardSmall query="" />
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
             Important News
           </h2>
+
+          <Link href="/news" className="btn btn-link">
+            View Updates
+          </Link>
           <div className="max-w-4xl mx-auto">
             <NewsCardForHome category="Important" />
           </div>

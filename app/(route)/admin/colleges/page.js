@@ -112,7 +112,7 @@ export default function AddCollegePage() {
     fetchColleges();
   }, []);
 
-  if (loading) return <p className="text-center mt-10">Loading colleges...</p>;
+  if (loading) return <p className="text-center p-30">Loading colleges...</p>;
 
   return (
     <section className="bg-gray-100">
@@ -254,7 +254,8 @@ export default function AddCollegePage() {
             className="border p-2 rounded w-full"
             required
           />
-          <textarea
+          <input
+            type="text"
             name="admissionProcess"
             placeholder="Admission Process"
             value={formData.admissionProcess}
@@ -265,7 +266,7 @@ export default function AddCollegePage() {
           <input
             type="text"
             name="fees"
-            placeholder="Fees"
+            placeholder="Academic Fees"
             value={formData.fees}
             onChange={handleChange}
             className="border p-2 rounded w-full"
@@ -289,7 +290,8 @@ export default function AddCollegePage() {
             className="border p-2 rounded w-full"
             required
           />
-          <textarea
+          <input
+            type="text"
             name="feeWaiver"
             placeholder="Fee Waiver"
             value={formData.feeWaiver}
@@ -298,13 +300,13 @@ export default function AddCollegePage() {
             required
           />
           <textarea
-          name="cutOff"
-          placeholder="Cut Off Array"
-          value={formData.cutOff}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
+            name="cutOff"
+            placeholder="Cut Off"
+            value={formData.cutOff}
+            onChange={handleChange}
+            className="border p-2 rounded w-full h-24"
+            required
+          />
           <input
             type="text"
             name="highestPlacement"
@@ -435,28 +437,28 @@ export default function AddCollegePage() {
 
                 <p className="text-sm text-gray-700 mb-2">
                   <span className="font-semibold">Admission:</span>{" "}
-                  {college.admissionProcess}
-                  {/* Admission process is to long for shown! */}
+                  {/* {college.admissionProcess} */}
+                  {college.admissionProcess?.slice(0, 100) + "..."}
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">
-                  <span className="font-semibold">Fees:</span> ₹{college.fees}
+                  <span className="font-semibold">Academic:</span> ₹{college.fees}
                   <br />
                   <span className="font-semibold">Hostel:</span> ₹
                   {college.hostelFees}
                   <br />
-                  <span className="font-semibold">Other:</span> ₹
+                  <span className="font-semibold">Total:</span> ₹
                   {college.otherFees}
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">
                   <span className="font-semibold">Fee Waiver:</span>{" "}
-                  {college.feeWaiver}
+                  {college.feeWaiver?.slice(0,50)+"..."}
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">
                   <span className="font-semibold">Cut Off:</span>{" "}
-                  {college.cutOff.map((cutOff) => `${cutOff.category}: ${cutOff.cutOff}`).join(", ")}
+                  {college.cutOff?.slice(0, 50) + "..."}
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">
@@ -472,7 +474,7 @@ export default function AddCollegePage() {
 
                 <p className="text-sm text-gray-700 mb-2">
                   <span className="font-semibold">Description:</span>{" "}
-                  {college.description.slice(0, 100) + "..."}
+                  {college.description?.slice(0, 50) + "..."}
                 </p>
 
                 <div className="my-3">

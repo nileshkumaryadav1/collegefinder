@@ -28,7 +28,7 @@ function ExamCard({ query }) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {exams
         .filter((exam) => {
-          return exam.name.toLowerCase().includes(query.toLowerCase());
+          return exam.name?.toLowerCase().includes(query.toLowerCase());
         })
         .map((exam) => (
           <div

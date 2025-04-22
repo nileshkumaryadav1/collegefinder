@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Loading from "@/components/custom/Loading";
 
 function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
   const [colleges, setColleges] = useState([]);
@@ -28,14 +27,14 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
       const q = query.toLowerCase();
 
       const matchesQuery =
-        college.name.toLowerCase().includes(q) ||
-        college.location.toLowerCase().includes(q) ||
-        college.type.toLowerCase().includes(q) ||
-        college.description.toLowerCase().includes(q) ||
-        college.courses.toLowerCase().includes(q);
+        college.name?.toLowerCase().includes(q) ||
+        college.location?.toLowerCase().includes(q) ||
+        college.type?.toLowerCase().includes(q) ||
+        college.description?.toLowerCase().includes(q) ||
+        college.courses?.toLowerCase().includes(q);
 
       const matchesType = collegeType
-        ? college.type.toLowerCase().includes(collegeType.toLowerCase())
+        ? college.type?.toLowerCase().includes(collegeType.toLowerCase())
         : true;
 
       return matchesQuery && matchesType;
@@ -106,7 +105,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
             <p className="text-sm text-gray-700 mb-2">
               <span className="font-semibold">Description:</span>{" "}
               {college.description
-                ? college.description.slice(0, 100) + "..."
+                ? college.description?.slice(0, 100) + "..."
                 : "No description available."}
             </p>
 

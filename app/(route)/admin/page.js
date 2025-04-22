@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
@@ -32,10 +33,17 @@ export default function AdminDashboard() {
 
         <button
           onClick={() => router.push("/admin/news")}
-          className="btn btn-primary text-lg text-white font-semibold px-6 py-4 rounded-lg shadow-md transition"
+          className="bg-red-500 hover:bg-red-600 text-lg text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"
         >
           Manage News
         </button>
+
+        <Link
+          href="/admin/reviews"
+          className="bg-purple-500 hover:bg-purple-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
+        >
+          Manage Reviews
+        </Link>
       </div>
     </div>
   );

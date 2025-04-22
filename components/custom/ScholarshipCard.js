@@ -1,76 +1,83 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Loading from "./Loading";
 import Link from "next/link";
 
 export default function ScholarshipCard({ query }) {
   const [scholarships, setScholarships] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    const fetchScholarships = async () => {
+      try {
+        const res = await fetch("/api/scholarships");
+        if (!res.ok) throw new Error("Failed to fetch scholarships");
+        const data = await res.json();
+        setScholarships(data.data || []);
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
+    };
+
     fetchScholarships();
   }, []);
 
-  async function fetchScholarships() {
-    try {
-      const res = await fetch("/api/scholarships");
-      if (!res.ok) throw new Error("Failed to fetch scholarships");
-      const data = await res.json();
-      setScholarships(data.data); // Fix: Use `data.data`
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
+  const filteredScholarships = scholarships.filter((scholarship) =>
+    scholarship.name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  if (errorMessage) {
+    return (
+      <p className="text-center text-red-500 mt-10">
+        Error: {errorMessage}
+      </p>
+    );
   }
 
-  if (scholarships.length === 0) {
-    return <p className="text-center p-30">Loading...</p>;
+  if (!scholarships.length) {
+    return <p className="text-center mt-10 text-gray-500">Loading scholarships...</p>;
+  }
+
+  if (filteredScholarships.length === 0) {
+    return <p className="text-center mt-10 text-gray-500">No scholarships match your search.</p>;
   }
 
   return (
-    <div className="mt-6 mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-      {scholarships.length === 0 ? (
-        <p className="text-center mt-10">No scholarships found.</p>
-      ) : (
-        scholarships
-          .filter((scholarships) => {
-            return scholarships.name
-              .toLowerCase()
-              .includes(query.toLowerCase());
-          })
-          .map((scholarship) => (
-            <div
-              key={scholarship._id}
-              className="p-4 bg-white rounded border border-gray-300 shadow-xl mb-3"
+    <div className="mt-6 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {filteredScholarships.map((scholarship) => (
+        <div
+          key={scholarship._id}
+          className="bg-white border border-gray-200 rounded-xl shadow-md p-6 flex flex-col justify-between"
+        >
+          <div>
+            <h3 className="text-xl font-semibold text-blue-800 mb-1">
+              {scholarship.name}
+            </h3>
+            <p className="text-gray-700 mb-2">{scholarship.about}</p>
+            <p className="text-sm text-green-600 mb-1">
+              Eligibility: {scholarship.eligibility}
+            </p>
+            <p className="text-sm text-yellow-600 mb-2">
+              Deadline: {scholarship.deadline?.slice(0, 10)}
+            </p>
+            <a
+              href={scholarship.officialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline text-sm"
             >
-              <div>
-                <h3 className="text-lg font-bold">
-                  {scholarship.name} - ₹{scholarship.amount}
-                </h3>
-                <p className="text-gray-800">{scholarship.about}</p>
-                <p className="text-green-500">
-                  Eligibility: {scholarship.eligibility}
-                </p>
-                <p className="text-yellow-400">
-                  Deadline: {scholarship.deadline}
-                </p>
-                <a
-                  href={scholarship.officialLink}
-                  className="text-blue-400 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Official Website
-                </a>
-              </div>
-              <Link
-                className="bg-blue-500 text-white px-2 py-2 rounded mt-2 inline-block w-3/3 text-center"
-                href={`/scholarships/${scholarship._id}`}
-              >
-                View Details
-              </Link>
-            </div>
-          ))
-      )}
+              Visit Official Website
+            </a>
+          </div>
+
+          <Link
+            href={`/scholarships/${scholarship._id}`}
+            className="mt-4 bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700 transition"
+          >
+            View Details
+          </Link>
+        </div>
+      ))}
     </div>
   );
 }

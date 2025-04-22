@@ -11,9 +11,13 @@ export default function NewsPage() {
   const fetchNews = async (selectedCategory) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/news?page=1&category=${selectedCategory}`);
+      const url =
+        selectedCategory === "all"
+          ? `/api/news?page=1`
+          : `/api/news?page=1&category=${selectedCategory}`;
+      const res = await fetch(url);
       const data = await res.json();
-      setNewsData(data.data || []);
+      setNewsData(Array.isArray(data.data) ? data.data : []);
     } catch (error) {
       console.error("Error fetching news:", error);
     } finally {
@@ -27,9 +31,9 @@ export default function NewsPage() {
 
   const categories = [
     { label: "All", value: "all" },
-    { label: "College News", value: "college" },
-    { label: "Exam Updates", value: "exam" },
-    { label: "Scholarships", value: "scholarship" },
+    { label: "College News", value: "College" },
+    { label: "Exam Updates", value: "Exam" },
+    { label: "Scholarships", value: "Scholarship" },
   ];
 
   return (
@@ -133,7 +137,10 @@ export default function NewsPage() {
             <h4 className="text-lg font-bold text-blue-700 mb-3">
               Advertisement
             </h4>
-            <Link href="/sponsors" className="block hover:opacity-90 transition">
+            <Link
+              href="/sponsors"
+              className="block hover:opacity-90 transition"
+            >
               <img
                 src="/sponsors.jpg"
                 alt="Sponsored Ad"
