@@ -8,10 +8,14 @@ export default function Scholarships() {
   const [query, setQuery] = useState("");
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:px-16 lg:px-32">
-      <h1 className="text-4xl font-semibold text-gray-800 text-center mb-8">
+    <div className="min-h-screen bg-white p-6 md:px-16 lg:px-32">
+      <h1 className="text-4xl font-semibold text-blue-600 dark:text-blue-400 text-center">
         Explore Scholarships
       </h1>
+
+      <p className="text-gray-500 text-lg text-center mb-8">
+        Find a <strong>Scholarship</strong> that fits your needs and apply to it now!
+      </p>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Left Column: Search & Scholarships */}

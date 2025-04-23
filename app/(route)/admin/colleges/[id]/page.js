@@ -36,6 +36,7 @@ export default function EditCollegePage() {
     websiteUrl: "",
     placementRatio: "",
     pastRecruitor: "",
+    nirfPdf: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -330,6 +331,15 @@ export default function EditCollegePage() {
           name="pastRecruitor"
           placeholder="Past Recruiters Image URL"
           value={formData.pastRecruitor}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="url"
+          name="nirfPdf"
+          placeholder="NIRF PDF URL"
+          value={formData.nirfPdf}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required

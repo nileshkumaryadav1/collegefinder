@@ -8,6 +8,7 @@ export default function EditExamPage() {
   const { id } = useParams(); // Get exam ID from URL params
   const [formData, setFormData] = useState({
     name: "",
+    type: "",
     date: "",
     eligibility: "",
     syllabus: "",
@@ -67,7 +68,7 @@ export default function EditExamPage() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10 m-10">
       <h1 className="text-2xl font-bold mb-4">Edit Exam</h1>
       {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
       <form onSubmit={handleSubmit} className="grid gap-4">
@@ -80,6 +81,18 @@ export default function EditExamPage() {
           className="border p-2 rounded w-full"
           required
         />
+        <select
+          name="type"
+          value={formData.type}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        >
+          <option value="">Select Type</option>
+          <option value="engineering">Engineering</option>
+          <option value="medical">Medical</option>
+          <option value="management">Management</option>
+        </select>
         <input
           type="text"
           name="date"
@@ -122,10 +135,7 @@ export default function EditExamPage() {
           onChange={handleChange}
           className="border p-2 rounded w-full"
         />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-lg"
-        >
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg">
           Update Exam
         </button>
       </form>

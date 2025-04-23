@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const ExamSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    type: { type: String, required: true },
     date: { type: String, required: true },
     eligibility: { type: String, required: true },
-    achievement: { type: String, required: true },
     syllabus: { type: String, required: true },
     websiteUrl: { type: String, required: true },
     imageUrl: { type: String, required: true },

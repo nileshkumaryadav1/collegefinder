@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link"; // Import the Link component from Next.js
 import Loading from "@/components/custom/Loading";
+import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 
 function Page() {
   const [colleges, setColleges] = useState([]);
@@ -96,29 +97,38 @@ function Page() {
       {loading && <p className="text-center p-30">Loading...</p>}
 
       {/* College Listings Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 hidden">
         {filteredColleges.map((college) => (
           <Link key={college._id} href={`/colleges/${college._id}`}>
-            <div className="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden transition transform hover:scale-105 hover:shadow-xl cursor-pointer">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-blue-400 transition-transform transform hover:scale-[1.03] duration-200 ease-in-out overflow-hidden cursor-pointer">
               <div className="p-6">
-                <h2 className="text-xl font-semibold text-blue-600">
+                <img
+                  src={college.image}
+                  alt={college.name}
+                  className="mb-4 w-full"
+                />
+                <h2 className="text-2xl font-bold text-blue-700 mb-1">
                   {college.name}
                 </h2>
-                <p className="text-gray-600 mb-2">{college.location}</p>
-                <p className="text-gray-600 text-sm">
-                  Total Fees: ₹{college.otherFees}
-                </p>
-                <p className="text-gray-600 text-sm">
-                  Nirf Rank:{" "}
-                  <a className="btn btn-link">{college.nirfRanking}</a>
-                </p>
-                <p className="text-gray-500 text-sm">
-                  Best for: {college.courses}
-                </p>
+                <p className="text-sm text-gray-500 mb-2">{college.location}</p>
+                <div className="text-sm text-gray-700 space-y-1">
+                  <p className="text-blue-500 px-2 py-1 text-md rounded-lg border">
+                    <span className="font-medium text-gray-800">
+                      NIRF Ranking:
+                    </span>{" "}
+                    <span className="text-blue-500">
+                      {college.nirfRanking || "NA"}
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
           </Link>
         ))}
+      </div>
+
+      <div>
+        <CollegeCardForHome query={'national institute of technology'} collegeType={''} sortBy={''} sortOrder={''} />
       </div>
 
       {/* Ad Banner Promotion Section */}

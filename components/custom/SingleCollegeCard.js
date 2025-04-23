@@ -19,14 +19,15 @@ import {
   Building,
   Phone,
   Mail,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import CollegeCardForHome from "./CollegeCardForHome";
 import NewsCardForHome from "./NewsCardForHome";
-import ExamCard from "./ExamCard";
 import ExamCardSmall from "./ExamCardSmall";
 import FAQs from "./FaQs";
 import ReviewRating from "./ReviewRating";
+import SmallCardOfInsights from "./SmallCardOfInsights";
 
 const SingleCollegeCard = ({ college }) => {
   const [liked, setLiked] = useState(false);
@@ -144,14 +145,14 @@ const SingleCollegeCard = ({ college }) => {
           alt={college.name}
           className="mb-3 rounded-lg shadow md:w-5/6 mx-auto"
         />
-        <p className="text-gray-700 leading-relaxed md:text-lg max-w-4xl mx-auto text-justify">
+        <p className="text-gray-700 leading-relaxed md:text-lg max-w-5xl mx-auto text-justify">
           {college.description}
         </p>
       </Section>
 
       {/* address and traveling options */}
       <Section id="address" title="Address and Reaching Options">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-base md:text-lg text-gray-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-base md:text-lg text-gray-800 mx-auto max-w-4xl">
           <Detail
             icon={MapPin}
             label="Address"
@@ -200,13 +201,13 @@ const SingleCollegeCard = ({ college }) => {
         <img
           src="https://avit.ac.in/wp-content/uploads/2024/11/facilities-img.webp"
           alt={college.name}
-          className="mt-6 rounded-lg shadow md:w-5/6 mx-auto"
+          className="mt-6 rounded-lg shadow md:w-7/9 mx-auto"
         />
       </Section>
 
       {/* promotion */}
       <Section id="promotion" title="">
-        <div className="text-gray-700 max-w-4xl mx-auto leading-relaxed space-y-2 text-left">
+        <div className="text-gray-700 mx-auto leading-relaxed space-y-2 text-left">
           {/* {college.promotion
             ? college.promotion
                 .split(".")
@@ -270,7 +271,7 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* admission process */}
       <Section id="admission" title="Admission Process">
-        <div className="text-gray-700 max-w-4xl mx-3 leading-relaxed text-left">
+        <div className="text-gray-700 max-w-4xl mx-auto leading-relaxed text-left">
           {college.admissionProcess
             ? college.admissionProcess
                 .split(".")
@@ -292,7 +293,7 @@ const SingleCollegeCard = ({ college }) => {
         </p>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm md:text-base text-left border border-gray-200 rounded-lg shadow-sm">
+          <table className="w-6/8 mx-auto text-sm md:text-base text-left border border-gray-200 rounded-lg shadow-sm">
             <thead className="bg-gray-100 text-gray-700">
               <tr>
                 <th className="p-3 border-b border-gray-200">Particulars</th>
@@ -418,6 +419,17 @@ const SingleCollegeCard = ({ college }) => {
           ]}
         />
 
+        <a
+          href={college.nirfPdf}
+          rel="noopener noreferrer"
+          className="text-gray-700 md:text-md flex items-center justify-center gap-2 md:w-1/7 w-1/2 mx-auto mb-2 mt-5 btn"
+        >
+          <div className="flex items-center">
+            <FileText size={24} />
+            <span className="font-semibold">NIRF Report</span>
+          </div>
+        </a>
+
         <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto mb-2 mt-5">
           <div className="flex items-center">
             <Users size={24} />
@@ -442,15 +454,6 @@ const SingleCollegeCard = ({ college }) => {
           className="rounded-md shadow max-w-4/5 mx-auto"
         />
       </Section>
-
-      {/* <div className="w-full text-center py-12">
-        <Link
-          href="/colleges"
-          className="inline-block px-6 py-3 bg-blue-600 text-white rounded-md text-lg hover:bg-blue-700 transition"
-        >
-          View More Colleges
-        </Link>
-      </div> */}
 
       {/* Advertisement & Promotions */}
       <h2 className="text-2xl font-semibold text-gray-800 bg-white text-center hidden">
@@ -569,14 +572,15 @@ const SingleCollegeCard = ({ college }) => {
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
-            Important News
+            Important Insights
           </h2>
 
           <Link href="/news" className="btn btn-link">
             View Updates
           </Link>
           <div className="max-w-4xl mx-auto">
-            <NewsCardForHome category="Important" />
+            {/* <NewsCardForHome category="Important" /> */}
+            <SmallCardOfInsights />
           </div>
         </div>
       </section>
@@ -590,7 +594,7 @@ const Section = ({ id, title, children }) => (
     className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200"
   >
     <div className="max-w-6xl mx-auto text-center">
-      <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+      <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8 hover:underline decoration-sky-500/30 hover:decoration-sky-500 text-gray-800 dark:text-white">
         {title}
       </h2>
       {children}

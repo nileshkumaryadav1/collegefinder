@@ -102,11 +102,11 @@ function Page() {
       }`}
     >
       <header className="text-center mb-8">
-        <h1 className="md:text-4xl text-3xl font-bold text-blue-600 mb-4">
-          Colleges in {selectedState} 🏫
+        <h1 className="md:text-4xl text-3xl font-bold text-blue-600 mb-2">
+          {selectedState} Colleges 🏫
         </h1>
         <p className="text-gray-500 text-lg mb-4">
-          Explore and find top colleges in {selectedState}. Filter by name,
+          Explore and find top {selectedState} Colleges. Filter by name,
           location, and more.
         </p>
       </header>
@@ -141,42 +141,51 @@ function Page() {
 
       {loading && <p className="text-center p-30">Loading...</p>}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* colleges card */}
+      <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredColleges.map((college) => (
-          <Link key={college._id} href={`/colleges/${college._id}`}>
-            <div className="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden transition transform hover:scale-105 hover:shadow-xl cursor-pointer">
-              <div className="p-6">
-                <h2 className="text-xl font-semibold text-blue-600">
-                  {college.name}
-                </h2>
-                <p className="text-gray-600 mb-2">{college.location}</p>
-                <p className="text-gray-600 mb-2">Fees: ₹{college.fees}</p>
-                <p className="text-gray-600 mb-2">Rating: {college.rating}</p>
-                <p className="text-gray-500 text-sm">
-                  Known for academic excellence in {selectedState}.
-                </p>
+          <div
+            key={college._id}
+            className="bg-white rounded-lg shadow-md p-4 flex flex-col"
+          >
+            <Link href={`/colleges/${college._id}`}>
+              <div className="flex items-center justify-between mb-4">
+                <img
+                  src={college.logoUrl}
+                  alt={`${college.name} logo`}
+                  className="w-16 h-16 object-contain rounded"
+                />
+                <span className="text-sm font-medium text-gray-600 btn btn-primary">
+                  #{college.nirfRanking}
+                </span>
               </div>
-            </div>
-          </Link>
+              <img
+                src={college.imageUrl}
+                alt={college.name}
+                className="w-full h-40 object-cover rounded-md mb-4"
+              />
+              <h2 className="text-md font-bold mb-1">{college.name}</h2>
+              <p className="text-gray-600 text-sm mb-2">{college.location}</p>
+            </Link>
+          </div>
         ))}
       </div>
 
       <div className="bg-yellow-500 text-black text-center py-4 my-8 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold">
+        <h2 className="text-xl md:text-3xl font-semibold text-black">
           Apply to Top {selectedState} Colleges Today!
         </h2>
         <p className="text-sm mt-2 mb-4">
           Explore top-rated institutions in {selectedState} and secure your
           future now.
         </p>
-        <a
-          href="https://www.example.com"
-          target="_blank"
+        <Link
+          href="/sponsors"
           rel="noopener noreferrer"
           className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
         >
           Apply Now
-        </a>
+        </Link>
       </div>
     </div>
   );

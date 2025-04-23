@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Loading from "@/components/custom/Loading";
 
 function ExamCard({ query }) {
   const [exams, setExams] = useState([]);
@@ -28,7 +27,9 @@ function ExamCard({ query }) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {exams
         .filter((exam) => {
-          return exam.name?.toLowerCase().includes(query.toLowerCase());
+          return (
+            exam.name?.toLowerCase().includes(query.toLowerCase())
+          );
         })
         .map((exam) => (
           <div
@@ -38,12 +39,10 @@ function ExamCard({ query }) {
             <Link href={`/exams/${exam._id}`}>
               {/* Conditionally rendering image */}
               {exam.imageUrl ? (
-                <Image
+                <img
                   src={exam.imageUrl}
                   alt={exam.name}
-                  width={500}
-                  height={300}
-                  className="w-full object-cover"
+                  className="h-40 mx-auto mt-2 rounded object-cover"
                 />
               ) : (
                 <div className="w-full h-40 bg-gray-200 flex justify-center items-center">
@@ -51,19 +50,22 @@ function ExamCard({ query }) {
                 </div>
               )}
 
-              <div className="p-6">
+              <div className="px-6 py-3">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-2">
                   {exam.name}
                 </h2>
                 <p className="text-gray-600 text-sm mb-2">
                   <strong>Date:</strong> {exam.date}
                 </p>
+                <p className="text-gray-600 text-sm mb-2">
+                  <strong>Category:</strong> {exam.type}
+                </p>
                 <p className="text-gray-600 text-sm mb-4">
-                  <strong>Eligibility:</strong> {exam.eligibility.slice(0, 40)}
+                  <strong>Eligibility:</strong> {exam.eligibility?.slice(0, 40)}
                   ...
                 </p>
                 <p className="text-gray-600 text-sm mb-4">
-                  <strong>Syllabus:</strong> {exam.syllabus.slice(0, 40)}...
+                  <strong>Syllabus:</strong> {exam.syllabus?.slice(0, 40)}...
                 </p>
 
                 {/* View Details Link */}

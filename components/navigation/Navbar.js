@@ -114,7 +114,11 @@ const Navbar = () => {
               label="Scholarships"
               active={pathname === "/scholarships"}
             />
-            <NavItem href="/news" label="News" active={pathname === "/news"} />
+            <NavItem
+              href="/insights"
+              label="Insights"
+              active={pathname === "/insights"}
+            />
             <NavItem
               href="/about"
               label="About"
@@ -189,10 +193,10 @@ const Navbar = () => {
               onClick={closeMenu}
             />
             <NavItemMobile
-              href="/news"
+              href="/insights"
               icon={<Newspaper size={18} />}
-              label="News"
-              active={pathname === "/news"}
+              label="Insights"
+              active={pathname === "/insights"}
               onClick={closeMenu}
             />
             <NavItemMobile

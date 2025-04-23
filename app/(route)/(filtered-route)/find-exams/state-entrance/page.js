@@ -1,107 +1,44 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import ExamCard from "@/components/custom/ExamCard";
 import Link from "next/link";
+import { useState } from "react";
 
-export default function UpcomingDelhiEngineeringExamsPage() {
-  const [exams, setExams] = useState([]);
-  const [filteredExams, setFilteredExams] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchExams = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch("/api/exams");
-        const data = await res.json();
-
-        const examList = Array.isArray(data) ? data : data.exams || [];
-
-        const delhiEngExams = examList.filter((exam) => {
-          const combined = `${exam.name} ${exam.category} ${exam.tags?.join(" ")} ${exam.location || ""}`.toLowerCase();
-          return combined.includes("engineering") && combined.includes("delhi");
-        });
-
-        setExams(delhiEngExams);
-        setFilteredExams(delhiEngExams);
-      } catch (error) {
-        console.error("Error fetching exams:", error);
-        setExams([]);
-        setFilteredExams([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchExams();
-  }, []);
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    if (!query.trim()) {
-      setFilteredExams(exams);
-    } else {
-      const filtered = exams.filter((exam) =>
-        exam.name.toLowerCase().includes(query.toLowerCase()) ||
-        exam.category.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredExams(filtered);
-    }
-  };
-
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+export default function ExamsPage() {
+  const [query, setQuery] = useState("");
 
   return (
     <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-white text-gray-800">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-blue-600 mb-2">
-          Delhi Engineering Entrance Exams
+        State-Wise Engineering Entrance Exams
         </h1>
         <p className="text-gray-500 text-lg">
-          Explore upcoming engineering exams specifically held in Delhi.
+          Explore upcoming engineering exams specifically held in your state.
         </p>
       </div>
 
       {/* Search Bar */}
-      <div className="flex justify-center mb-6">
+      <div className="mb-8 flex justify-center">
         <input
           type="text"
-          placeholder="Search exams..."
-          value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
-          className="w-2/3 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Search Exams..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="border px-3 py-2 rounded w-full shadow"
         />
       </div>
 
       {/* Count */}
       <div className="text-center text-lg font-medium text-gray-700 mb-6">
-        Total Delhi Engineering Exams: {filteredExams.length}
+        Total Engineering Exams:
+        {/* {filteredExams.length} */}
       </div>
 
       {/* Exam Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredExams.map((exam) => (
-          <Link key={exam._id} href={`/exams/${exam._id}`}>
-            <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer">
-              <h2 className="text-xl font-bold text-blue-700 mb-2">
-                {exam.name}
-              </h2>
-              <p className="text-gray-600 text-sm mb-2">
-                {exam.description?.slice(0, 120)}...
-              </p>
-              <p className="text-sm text-gray-500">
-                <span className="font-medium">Location:</span>{" "}
-                {exam.location || "N/A"}
-              </p>
-              <p className="text-sm text-gray-500">
-                <span className="font-medium">Exam Date:</span>{" "}
-                {exam.examDate || "N/A"}
-              </p>
-            </div>
-          </Link>
-        ))}
+      <div className="lg:col-span-3">
+        <ExamCard query={query} />
       </div>
 
       {/* Promotional Section */}

@@ -45,6 +45,7 @@ export async function POST(req) {
       websiteUrl,
       placementRatio,
       pastRecruitor,
+      nirfPdf,
     } = body;
 
     if (
@@ -74,7 +75,8 @@ export async function POST(req) {
       !medianSalary ||
       !websiteUrl ||
       !placementRatio ||
-      !pastRecruitor
+      !pastRecruitor ||
+      !nirfPdf
     ) {
       return new Response(
         JSON.stringify({ message: "All fields are required" }),
@@ -111,6 +113,7 @@ export async function POST(req) {
       websiteUrl,
       placementRatio,
       pastRecruitor,
+      nirfPdf,
     });
     await newCollege.save();
 

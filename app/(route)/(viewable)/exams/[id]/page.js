@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import Loading from "@/components/custom/Loading";
 
 export default function ExamDetailsPage() {
@@ -40,18 +39,25 @@ export default function ExamDetailsPage() {
       )}
       <h1 className="text-3xl font-bold mt-4">{exam.name}</h1>
       <p className="text-gray-700">{exam.date}</p>
-      <p className="text-gray-700 mt-2 text-justify">Eligibility: {exam.eligibility}</p>
-      <p className="mt-4 text-justify">{exam.syllabus}</p>
+      <p className="text-gray-700 mt-2">Category: {exam.type}</p>
+      <p className="text-gray-800 mt-2 text-justify">
+        Eligibility: {exam.eligibility}
+      </p>
+      <p className="mt-4 text-justify">Syllabus: {exam.syllabus}</p>
       <div className="flex justify-between">
-        <Link href="/exams" className="text-gray-600 mt-4 py-2 w-2/5 btn btn-primary">
+        <Link
+          href="/exams"
+          className="text-gray-600 mt-4 py-2 w-2/5 btn btn-primary"
+        >
           ← Back to Exams
         </Link>
         <a
-          href={exam.website}
+          href={exam.websiteUrl}
           target="_blank"
-          className="text-blue-700 mt-4 w-1/2 btn btn-delete"
+          rel="noopener noreferrer"
+          className="text-blue-700 mt-4 w-1/2 btn btn-link"
         >
-          Visit Website
+          Visit Official Website
         </a>
       </div>
     </div>

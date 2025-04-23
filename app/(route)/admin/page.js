@@ -44,6 +44,13 @@ export default function AdminDashboard() {
         >
           Manage Reviews
         </Link>
+
+        <Link
+          href="/admin/insights"
+          className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
+        >
+          Manage Insights
+        </Link>
       </div>
     </div>
   );

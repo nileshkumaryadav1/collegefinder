@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Building2, User, PenBox } from "lucide-react";
+import { Home, Building2, User, PenBox, Newspaper } from "lucide-react";
 import { FaMoneyBillWave } from "react-icons/fa";
 
 const MobileNavbar = () => {
@@ -12,7 +12,8 @@ const MobileNavbar = () => {
 
   // Check token in localStorage
   useEffect(() => {
-    const token = typeof window !== "undefined" && localStorage.getItem("token");
+    const token =
+      typeof window !== "undefined" && localStorage.getItem("token");
     setIsLoggedIn(!!token);
   }, []);
 
@@ -21,12 +22,7 @@ const MobileNavbar = () => {
   return (
     <nav className="fixed bottom-0 left-0 w-full z-40 sm:hidden shadow-t">
       <div className="flex justify-around items-center bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-2">
-        <NavItem
-          href="/"
-          icon={Home}
-          label="Home"
-          active={pathname === "/"}
-        />
+        <NavItem href="/" icon={Home} label="Home" active={pathname === "/"} />
         <NavItem
           href="/colleges"
           icon={Building2}
@@ -39,11 +35,17 @@ const MobileNavbar = () => {
           label="Exams"
           active={pathname === "/exams"}
         />
-        <NavItem
+        {/* <NavItem
           href="/scholarships"
           icon={FaMoneyBillWave}
           label="Scholarships"
           active={pathname.startsWith("/scholarships")}
+        /> */}
+        <NavItem
+          href="/insights"
+          icon={Newspaper}
+          label="Insights"
+          active={pathname === "/insights"}
         />
         <NavItem
           href="/user/dashboard"
@@ -61,9 +63,10 @@ const NavItem = ({ href, icon: Icon, label, active }) => {
     <Link
       href={href}
       className={`flex flex-col items-center justify-center px-3 py-1.5 rounded-xl transition-all duration-200
-        ${active
-          ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-400"
-          : "text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white"
+        ${
+          active
+            ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-400"
+            : "text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white"
         }`}
     >
       <Icon size={20} />

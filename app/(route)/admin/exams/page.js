@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function AddExamPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
+    type: "",
     date: "",
     eligibility: "",
     syllabus: "",
@@ -56,6 +56,7 @@ export default function AddExamPage() {
       // Reset form
       setFormData({
         name: "",
+        type: "",
         date: "",
         eligibility: "",
         syllabus: "",
@@ -90,10 +91,11 @@ export default function AddExamPage() {
   };
 
   return (
-    <div className="max-w-6/7 mx-auto p-6 bg-white shadow-md rounded-lg mt-20">
-      <h1 className="text-2xl font-bold mb-4">Add a New Exam</h1>
-      {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
-      <form onSubmit={handleSubmit} className="grid gap-4">
+    <div className="max-w-6/7 mx-auto p-6 bg-white shadow-md rounded-lg py-10 my-10">
+      {/* Add Exam Form */}
+      <form onSubmit={handleSubmit} className="grid gap-4 bg-gray-100 p-6 rounded">
+        <h1 className="text-2xl font-bold mb-4 text-center">Add a New Exam</h1>
+        {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
         <input
           type="text"
           name="name"
@@ -103,6 +105,18 @@ export default function AddExamPage() {
           className="border p-2 rounded w-full"
           required
         />
+        <select
+          name="type"
+          value={formData.type}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        >
+          <option value="">Select Exam Type</option>
+          <option value="engineering">Engineering</option>
+          <option value="medical">Medical</option>
+          <option value="management">Management</option>
+        </select>
         <input
           type="text"
           name="date"
@@ -155,55 +169,65 @@ export default function AddExamPage() {
       </form>
 
       {/* Manage Exams Section */}
-      <div className="mt-10 bg-gray-100 p-4">
-        <h2 className="text-xl font-bold mb-4">Manage Exams</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border p-2">Name</th>
-                <th className="border p-2">Date</th>
-                <th className="border p-2">Eligibility</th>
-                <th className="border p-2">Syllabus</th>
-                <th className="border p-2">Website</th>
-                <th className="border p-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exams.length === 0 ? (
-                <tr>
-                  <td colSpan="3" className="text-center p-4">
-                    No exams found.
-                  </td>
-                </tr>
-              ) : (
-                exams.map((exam) => (
-                  <tr key={exam._id} className="border-b">
-                    <td className="border p-2">{exam.name}</td>
-                    <td className="border p-2">{exam.date}</td>
-                    <td className="border p-2">{exam.eligibility}</td>
-                    <td className="border p-2">{exam.syllabus}</td>
-                    <td className="border p-2">{exam.website}</td>
-                    <td className="border p-2 space-x-2">
-                      <button
-                        onClick={() => router.push(`/admin/exams/${exam._id}`)}
-                        className="bg-yellow-500 text-white px-2 py-1 rounded"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(exam._id)}
-                        className="bg-red-500 text-white px-2 py-1 rounded"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+      <div className="mt-12 bg-gray-100 p-2 rounded">
+        <h2 className="text-2xl font-bold my-6 text-center border-t">Manage Exams</h2>
+        {exams.length === 0 ? (
+          <p className="text-center text-gray-500">No exams found.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {exams.map((exam) => (
+              <div
+                key={exam._id}
+                className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex flex-col"
+              >
+                {exam.imageUrl && (
+                  <img
+                    src={exam.imageUrl}
+                    alt={exam.name}
+                    className="h-40 w-full object-cover rounded mb-4"
+                  />
+                )}
+                <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                  {exam.name}
+                </h3>
+                <p className="text-sm text-gray-500 mb-1">
+                  <strong>Type:</strong> {exam.type}
+                </p>
+                <p className="text-sm text-gray-500 mb-1">
+                  <strong>Date:</strong> {exam.date}
+                </p>
+                <p className="text-sm text-gray-500 mb-1">
+                  <strong>Eligibility:</strong> {exam.eligibility?.slice(0, 80)+"..."}
+                </p>
+                <p className="text-sm text-gray-500 mb-1">
+                  <strong>Syllabus:</strong> {exam.syllabus?.slice(0, 80)+"..."}
+                </p>
+                <a
+                  href={exam.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 text-sm mt-2 hover:underline"
+                >
+                  Visit Official Site
+                </a>
+                <div className="mt-4 flex justify-end space-x-2">
+                  <button
+                    onClick={() => router.push(`/admin/exams/${exam._id}`)}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(exam._id)}
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

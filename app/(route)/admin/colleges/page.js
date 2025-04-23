@@ -35,6 +35,7 @@ export default function AddCollegePage() {
     websiteUrl: "",
     placementRatio: "",
     pastRecruitor: "",
+    nirfPdf: "",
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -87,6 +88,7 @@ export default function AddCollegePage() {
           websiteUrl: "",
           placementRatio: "",
           pastRecruitor: "",
+          nirfPdf: "",
         });
       }
     } catch (error) {
@@ -361,6 +363,15 @@ export default function AddCollegePage() {
             className="border p-2 rounded w-full"
             required
           />
+          <input
+            type="url"
+            name="nirfPdf"
+            placeholder="Nirf Data"
+            value={formData.nirfPdf}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
           <button
             type="submit"
             className="bg-blue-500 text-white p-2 rounded-lg"
@@ -442,7 +453,8 @@ export default function AddCollegePage() {
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">
-                  <span className="font-semibold">Academic:</span> ₹{college.fees}
+                  <span className="font-semibold">Academic:</span> ₹
+                  {college.fees}
                   <br />
                   <span className="font-semibold">Hostel:</span> ₹
                   {college.hostelFees}
@@ -453,7 +465,7 @@ export default function AddCollegePage() {
 
                 <p className="text-sm text-gray-700 mb-2">
                   <span className="font-semibold">Fee Waiver:</span>{" "}
-                  {college.feeWaiver?.slice(0,50)+"..."}
+                  {college.feeWaiver?.slice(0, 50) + "..."}
                 </p>
 
                 <p className="text-sm text-gray-700 mb-2">
@@ -498,6 +510,14 @@ export default function AddCollegePage() {
                     className="text-blue-600 font-medium hover:underline"
                   >
                     Visit Website
+                  </a>
+                  <a
+                    href={college.nirfPdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-link font-medium hover:underline"
+                  >
+                    NIRF Report
                   </a>
                   <button
                     onClick={() =>

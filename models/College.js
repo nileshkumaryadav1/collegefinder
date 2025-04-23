@@ -28,6 +28,7 @@ const CollegeSchema = new mongoose.Schema({
   websiteUrl: String,
   placementRatio: String,
   pastRecruitor: String,
+  nirfPdf: String,
 }, { timestamps: true });
 
 export default mongoose.models.College || mongoose.model("College", CollegeSchema);
