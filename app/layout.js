@@ -5,6 +5,7 @@ import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/navigation/Footer";
 import MobileNavbar from "@/components/navigation/MobileNavbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 const geist = Geist({ subsets: ["latin"] });
 
@@ -46,28 +47,40 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content={defaultSEO.openGraph.type} />
         <meta property="og:url" content={defaultSEO.openGraph.url} />
         <meta property="og:title" content={defaultSEO.openGraph.title} />
-        <meta property="og:description" content={defaultSEO.openGraph.description} />
+        <meta
+          property="og:description"
+          content={defaultSEO.openGraph.description}
+        />
         <meta property="og:image" content={defaultSEO.openGraph.image} />
 
         {/* Twitter Card Meta */}
         <meta name="twitter:card" content={defaultSEO.twitter.card} />
         <meta name="twitter:site" content={defaultSEO.twitter.site} />
         <meta name="twitter:title" content={defaultSEO.twitter.title} />
-        <meta name="twitter:description" content={defaultSEO.twitter.description} />
+        <meta
+          name="twitter:description"
+          content={defaultSEO.twitter.description}
+        />
         <meta name="twitter:image" content={defaultSEO.twitter.image} />
 
         {/* Google Verification */}
-        <meta name="google-site-verification" content="google150fb2c865d14fa4" />
+        <meta
+          name="google-site-verification"
+          content="1sFVXvsdUNE_dPzbjjPqFU0GwE-YvxN0WX3UIrZ_ZwU"
+        />
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={`${geist.className} bg-gray-100 dark:bg-gray-900 antialiased`}>
+      <body
+        className={`${geist.className} bg-gray-100 dark:bg-gray-900 antialiased`}
+      >
         <SpeedInsights />
         <Navbar />
         <main className="mt-16">{children}</main>
         <MobileNavbar />
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
