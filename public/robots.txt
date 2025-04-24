@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://collegefinder.vercel.app
+
+# Sitemaps
+Sitemap: https://collegefinder.vercel.app/sitemap.xml
