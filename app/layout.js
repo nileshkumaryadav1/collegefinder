@@ -14,6 +14,7 @@ export const metadata = {
   title: defaultSEO.title,
   description: defaultSEO.description,
   keywords: defaultSEO.keywords,
+  image: defaultSEO.openGraph.image,
   openGraph: {
     type: defaultSEO.openGraph.type,
     url: defaultSEO.openGraph.url,

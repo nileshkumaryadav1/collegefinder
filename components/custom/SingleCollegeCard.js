@@ -152,14 +152,16 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* address and traveling options */}
       <Section id="address" title="Address and Reaching Options">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-base md:text-lg text-gray-800 mx-auto max-w-4xl">
+        <div className="grid grid-cols-1 gap-6 text-base md:text-lg text-gray-800 mx-auto max-w-4xl">
           <Detail
             icon={MapPin}
             label="Address"
             value={`${college.slug}, ${college.location}`}
           />
-          <Detail icon={Phone} label="Phone" value={college.phone} />
-          <Detail icon={Mail} label="Email" value={college.email} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Detail icon={Phone} label="Phone" value={college.phone} />
+            <Detail icon={Mail} label="Email" value={college.email} />
+          </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 items-center justify-center mt-6">
           <p>Travel Options:</p>
@@ -306,7 +308,7 @@ const SingleCollegeCard = ({ college }) => {
                 <td className="p-3 font-medium text-gray-800">
                   ₹
                   {college.fees
-                    ? college.fees.toLocaleString()
+                    ? college.fees?.toLocaleString()
                     : "Fee information not available."}
                 </td>
               </tr>
@@ -315,7 +317,7 @@ const SingleCollegeCard = ({ college }) => {
                 <td className="p-3 font-medium text-gray-800">
                   ₹
                   {college.hostelFees
-                    ? college.hostelFees.toLocaleString()
+                    ? college.hostelFees?.toLocaleString()
                     : "Hostel fee information not available."}
                 </td>
               </tr>
@@ -324,7 +326,7 @@ const SingleCollegeCard = ({ college }) => {
                 <td className="p-3 font-semibold text-blue-700">
                   ₹
                   {college.otherFees
-                    ? college.otherFees.toLocaleString()
+                    ? college.otherFees?.toLocaleString()
                     : "Other fee information not available."}
                 </td>
               </tr>
@@ -419,23 +421,25 @@ const SingleCollegeCard = ({ college }) => {
           ]}
         />
 
+        {/* placement ratio */}
+        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto mt-5">
+          <div className="flex items-center">
+            <Users size={24} />
+            <span className="font-semibold">Placement Ratio:</span>
+          </div>
+        </p>
+
+        {/* nirf */}
         <a
           href={college.nirfPdf}
           rel="noopener noreferrer"
-          className="text-gray-700 md:text-md flex items-center justify-center gap-2 md:w-1/7 w-1/2 mx-auto mb-2 mt-5 btn"
+          className="text-gray-700 md:text-md flex items-center justify-center gap-2 md:w-1/7 w-1/2 mx-auto mb-6 mt-2 btn"
         >
           <div className="flex items-center">
             <FileText size={24} />
             <span className="font-semibold">NIRF Report</span>
           </div>
         </a>
-
-        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto mb-2 mt-5">
-          <div className="flex items-center">
-            <Users size={24} />
-            <span className="font-semibold">Placement Ratio:</span>
-          </div>
-        </p>
         <img
           src={college.placementRatio}
           alt="Past Recruiters"
@@ -496,6 +500,7 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </div>
 
+      {/* reviews */}
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           {/* <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
@@ -509,6 +514,7 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </section>
 
+      {/* faqs */}
       <section className="w-full py-6 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           {/* <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
@@ -522,6 +528,7 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </section>
 
+      {/* similar colleges */}
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
@@ -542,6 +549,7 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </section>
 
+      {/* similar courses */}
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200 hidden">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
@@ -569,6 +577,7 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </section>
 
+      {/* important insights */}
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
@@ -588,13 +597,14 @@ const SingleCollegeCard = ({ college }) => {
   );
 };
 
+// Reusable components
 const Section = ({ id, title, children }) => (
   <section
     id={id}
     className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200"
   >
     <div className="max-w-6xl mx-auto text-center">
-      <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8 hover:underline decoration-sky-500/30 hover:decoration-sky-500 text-gray-800 dark:text-white">
+      <h2 className="text-2xl md:text-4xl font-semibold text-gray-800 md:mb-8 mb-5 hover:underline decoration-sky-500/30 hover:decoration-sky-500 text-gray-800 dark:text-white">
         {title}
       </h2>
       {children}
