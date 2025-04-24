@@ -1,9 +1,3 @@
-# *
 User-agent: *
-Allow: /
 
-# Host
-Host: https://collegefinder.site
-
-# Sitemaps
-Sitemap: https://collegefinder.site/sitemap.xml
+Sitemap: https://www.collegefinder.site/sitemap.xml

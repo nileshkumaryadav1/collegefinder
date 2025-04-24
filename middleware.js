@@ -1,26 +1,25 @@
-// middleware.js
 import { NextResponse } from 'next/server';
 
 export function middleware(request) {
-  const url = request.nextUrl;
-  const path = url.pathname;
+  const { pathname } = request.nextUrl;
 
-  // Allow public assets and home page
+  // Allow public files and homepage
   if (
-    path.startsWith('/_next') ||
-    path.startsWith('/favicon.ico') ||
-    path === '/' ||
-    path.startsWith('/fonts')
+    pathname === '/' ||
+    pathname.startsWith('/_next') ||
+    pathname === '/favicon.ico' ||
+    pathname.startsWith('/fonts')
   ) {
     return NextResponse.next();
   }
 
-  // Block suspicious requests without a proper user-agent (non-browser)
   const userAgent = request.headers.get('user-agent') || '';
 
-  const isRealBrowser = userAgent.includes('Mozilla') || userAgent.includes('Chrome') || userAgent.includes('Safari');
+  // Allow common browser or bot user-agents
+  const allowedUserAgents = ['Mozilla', 'Chrome', 'Safari', 'Googlebot', 'Bingbot', 'DuckDuckBot'];
+  const isAllowed = allowedUserAgents.some(agent => userAgent.includes(agent));
 
-  if (!isRealBrowser) {
+  if (!isAllowed) {
     return new NextResponse('Access denied: unauthorized request.', { status: 403 });
   }
 
@@ -28,5 +27,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!api/auth).*)'], // apply to everything except auth if needed
+  matcher: ['/((?!api/auth).*)'], // Apply to all routes except auth
 };

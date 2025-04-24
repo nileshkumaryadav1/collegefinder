@@ -1,20 +1,16 @@
 import { defaultSEO } from "@/lib/seo.config";
 import { Geist } from "next/font/google";
 import "./globals.css";
-
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/navigation/Footer";
 import MobileNavbar from "@/components/navigation/MobileNavbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-// import ClientThemeWrapper from "@/components/theme/ClientThemeWrapper";
 
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata = {
   title: defaultSEO.title,
   description: defaultSEO.description,
-  keywords: defaultSEO.keywords,
-  image: defaultSEO.openGraph.image,
   openGraph: {
     type: defaultSEO.openGraph.type,
     url: defaultSEO.openGraph.url,
@@ -66,15 +62,10 @@ export default function RootLayout({ children }) {
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body
-        className={`${geist.className} bg-gray-100 dark:bg-gray-900 antialiased`}
-      >
+      <body className={`${geist.className} bg-gray-100 dark:bg-gray-900 antialiased`}>
         <SpeedInsights />
         <Navbar />
-        <main className="mt-16">
-          {/* <ClientThemeWrapper>{children}</ClientThemeWrapper> */}
-          {children}
-        </main>
+        <main className="mt-16">{children}</main>
         <MobileNavbar />
         <Footer />
       </body>
