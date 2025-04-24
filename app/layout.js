@@ -37,7 +37,13 @@ export const Metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth" data-theme="cupcake">
-      <head>{/* Dynamic SEO */}</head>
+      <head>
+        {/* Dynamic SEO */}
+        <meta
+          name="google-site-verification"
+          content="google150fb2c865d14fa4"
+        />
+      </head>
       <body
         className={`${geist.className} bg-gray-100 dark:bg-gray-900 antialiased`}
       >
