@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Head from "next/head";
-import { Skeleton } from "@mui/material";
 
 export default function InsightsPageCard() {
   const [posts, setPosts] = useState([]);
@@ -109,9 +108,9 @@ export default function InsightsPageCard() {
           <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
             {Array.isArray(posts) &&
               posts.map((item) => (
-                <Link key={item._id} href={`/insights/${item.slug}`}>
+                <Link key={item._id} href={`/insights/${item.slug}`} aria-label="View Post">
                   <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer">
-                    <img src={item.thumbnail} alt={item.title} className="" />
+                    <img src={item.thumbnail} alt="Post Image" className="" />
                     <h2 className="text-xl font-bold text-blue-700 mb-2">
                       {item.title}
                     </h2>

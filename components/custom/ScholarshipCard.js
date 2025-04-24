@@ -23,7 +23,7 @@ export default function ScholarshipCard({ query }) {
   }, []);
 
   const filteredScholarships = scholarships.filter((scholarship) =>
-    scholarship.name.toLowerCase().includes(query.toLowerCase())
+    scholarship.name?.toLowerCase().includes(query.toLowerCase())
   );
 
   if (errorMessage) {
@@ -53,6 +53,7 @@ export default function ScholarshipCard({ query }) {
             <h3 className="text-xl font-semibold text-blue-800 mb-1">
               {scholarship.name}
             </h3>
+            <p className="text-gray-700 text-xs">{scholarship.slug}</p>
             <p className="text-gray-700 mb-2">{scholarship.about}</p>
             <p className="text-sm text-green-600 mb-1">
               Eligibility: {scholarship.eligibility}

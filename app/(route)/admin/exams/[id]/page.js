@@ -8,6 +8,7 @@ export default function EditExamPage() {
   const { id } = useParams(); // Get exam ID from URL params
   const [formData, setFormData] = useState({
     name: "",
+    slug: "",
     type: "",
     date: "",
     eligibility: "",
@@ -77,6 +78,15 @@ export default function EditExamPage() {
           name="name"
           placeholder="Exam Name"
           value={formData.name}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="slug"
+          placeholder="Slug"
+          value={formData.slug}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required

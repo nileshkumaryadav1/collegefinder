@@ -382,6 +382,7 @@ export default function AddCollegePage() {
         </form>
       </div>
 
+      {/* college manage list */}
       <div className="max-w-7xl mx-auto px-4 mt-10">
         <h1 className="text-2xl font-bold mb-6">College List</h1>
 
@@ -391,7 +392,7 @@ export default function AddCollegePage() {
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {colleges.map((college) => (
               <div
-                key={college._id}
+                key={college.slug}
                 className="bg-white rounded-lg shadow-md p-4 flex flex-col mb-2"
               >
                 <div className="flex items-center justify-between mb-4">
@@ -521,7 +522,7 @@ export default function AddCollegePage() {
                   </a>
                   <button
                     onClick={() =>
-                      router.push(`/admin/colleges/${college._id}`)
+                      router.push(`/admin/colleges/${college.slug}`)
                     }
                     className="bg-blue-500 text-white px-4 py-1 rounded-lg text-sm"
                   >

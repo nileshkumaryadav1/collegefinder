@@ -145,10 +145,10 @@ function Page() {
       <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredColleges.map((college) => (
           <div
-            key={college._id}
+            key={college.slug}
             className="bg-white rounded-lg shadow-md p-4 flex flex-col"
           >
-            <Link href={`/colleges/${college._id}`}>
+            <Link href={`/colleges/${college.slug}`}>
               <div className="flex items-center justify-between mb-4">
                 <img
                   src={college.logoUrl}

@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link"; // Import the Link component from Next.js
-import Loading from "@/components/custom/Loading";
+import Link from "next/link";
 import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 
 function Page() {
@@ -65,16 +64,6 @@ function Page() {
           Explore and find the best NIT colleges in India. Filter by name,
           location, and more.
         </p>
-
-        {/* Dark/Light Mode Toggle */}
-        {/* <div className="flex justify-center mb-4">
-          <button
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="px-6 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md shadow-md dark:bg-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-200"
-          >
-            {isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          </button>
-        </div> */}
       </header>
 
       {/* Search Bar Section */}
@@ -99,7 +88,7 @@ function Page() {
       {/* College Listings Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 hidden">
         {filteredColleges.map((college) => (
-          <Link key={college._id} href={`/colleges/${college._id}`}>
+          <Link key={college.slug} href={`/colleges/${college.slug}`}>
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-blue-400 transition-transform transform hover:scale-[1.03] duration-200 ease-in-out overflow-hidden cursor-pointer">
               <div className="p-6">
                 <img

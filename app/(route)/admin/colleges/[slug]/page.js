@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 
 export default function EditCollegePage() {
+  const { slug } = useParams();
   const router = useRouter();
-  const params = useParams(); // ✅ Use useParams() to unwrap the Promise
-  const id = params?.id; // Ensure id is extracted correctly
 
   const [formData, setFormData] = useState({
     name: "",
@@ -44,22 +43,22 @@ export default function EditCollegePage() {
 
   // ✅ Fetch the existing college details
   useEffect(() => {
-    if (!id) return;
+    if (!slug) return;
 
     const fetchCollege = async () => {
       try {
-        const res = await fetch(`/api/colleges/${id}`);
+        const res = await fetch(`/api/colleges/${slug}`);
         if (!res.ok) throw new Error("Failed to fetch college");
 
         const data = await res.json();
-        setFormData(data);
+        setFormData(data.data);
       } catch (error) {
         setMessage("Error fetching college details");
       }
     };
 
     fetchCollege();
-  }, [id]);
+  }, [slug]);
 
   // Handle input change
   const handleChange = (e) => {

@@ -7,6 +7,7 @@ export default function AddExamPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
+    slug: "",
     type: "",
     date: "",
     eligibility: "",
@@ -56,6 +57,7 @@ export default function AddExamPage() {
       // Reset form
       setFormData({
         name: "",
+        slug: "",
         type: "",
         date: "",
         eligibility: "",
@@ -101,6 +103,15 @@ export default function AddExamPage() {
           name="name"
           placeholder="Exam Name"
           value={formData.name}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="slug"
+          placeholder="Slug"
+          value={formData.slug}
           onChange={handleChange}
           className="border p-2 rounded w-full"
           required
@@ -192,6 +203,7 @@ export default function AddExamPage() {
                 </h3>
                 <p className="text-sm text-gray-500 mb-1">
                   <strong>Type:</strong> {exam.type}
+                  <strong>Slug:</strong> {exam.slug}
                 </p>
                 <p className="text-sm text-gray-500 mb-1">
                   <strong>Date:</strong> {exam.date}

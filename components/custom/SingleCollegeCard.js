@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Heart,
   MapPin,
@@ -14,7 +14,6 @@ import {
   BedSingle,
   Wallet,
   Landmark,
-  Building2,
   School,
   Building,
   Phone,
@@ -23,7 +22,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import CollegeCardForHome from "./CollegeCardForHome";
-import NewsCardForHome from "./NewsCardForHome";
 import ExamCardSmall from "./ExamCardSmall";
 import FAQs from "./FaQs";
 import ReviewRating from "./ReviewRating";
@@ -39,13 +37,13 @@ const SingleCollegeCard = ({ college }) => {
         <div className="relative w-full h-64 md:h-96">
           <img
             src={college.imageUrl}
-            alt={college.name}
+            alt="College Image"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
             <img
               src={college.logoUrl}
-              alt={`${college.name} logo`}
+              alt="College Logo"
               className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-lg bg-white"
             />
           </div>
@@ -99,6 +97,8 @@ const SingleCollegeCard = ({ college }) => {
               key={item.id}
               href={`#${item.id}`}
               className="mx-3 my-1 flex items-center text-gray-600 hover:text-blue-600 transition"
+              title={item.label}
+              aria-label="scroll to College section"
             >
               <item.icon size={18} className="mr-1" />
               {item.label}
@@ -142,7 +142,7 @@ const SingleCollegeCard = ({ college }) => {
       <Section id="about" title={`About ${college.name}`}>
         <img
           src={college.imageUrl}
-          alt={college.name}
+          alt="College Image"
           className="mb-3 rounded-lg shadow md:w-5/6 mx-auto"
         />
         <p className="text-gray-700 leading-relaxed md:text-lg max-w-5xl mx-auto text-justify">
@@ -171,6 +171,9 @@ const SingleCollegeCard = ({ college }) => {
             )}`}
             target="_blank"
             className="btn btn-primary"
+            rel="noopener noreferrer"
+            title="Open in Google Maps"
+            aria-label="Open in Google Maps"
           >
             Open in Google Maps
           </a>
@@ -202,7 +205,7 @@ const SingleCollegeCard = ({ college }) => {
         />
         <img
           src="https://avit.ac.in/wp-content/uploads/2024/11/facilities-img.webp"
-          alt={college.name}
+          alt="College Facilities Image"
           className="mt-6 rounded-lg shadow md:w-7/9 mx-auto"
         />
       </Section>
@@ -442,7 +445,7 @@ const SingleCollegeCard = ({ college }) => {
         </a>
         <img
           src={college.placementRatio}
-          alt="Past Recruiters"
+          alt="Placement Ratio Image"
           className="rounded-md shadow max-w-4/5 mx-auto mb-8"
         />
 
@@ -454,7 +457,7 @@ const SingleCollegeCard = ({ college }) => {
         </p>
         <img
           src={college.pastRecruitor}
-          alt="Past Recruiters"
+          alt="Past Recruiters Image"
           className="rounded-md shadow max-w-4/5 mx-auto"
         />
       </Section>
@@ -474,7 +477,7 @@ const SingleCollegeCard = ({ college }) => {
             </li>
             <li>
               <Link href="/exams" className="hover:underline">
-                How to Crack JEE Advanced – Strategy Guide
+                How to Crack JEE Advanced 2026 Strategy Guide
               </Link>
             </li>
             <li>
@@ -492,7 +495,7 @@ const SingleCollegeCard = ({ college }) => {
           <Link href="/sponsors" className="hover:underline">
             <img
               src="/sponsors.jpg"
-              alt="Ad Banner"
+              alt="Advertisement Image"
               className="rounded-lg w-full h-auto object-cover"
             />
           </Link>
@@ -503,13 +506,8 @@ const SingleCollegeCard = ({ college }) => {
       {/* reviews */}
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
-          {/* <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-            Reviews
-          </h2> */}
           <div className="max-w-4xl mx-auto">
             <ReviewRating collegeId={college._id} />
-            {/* <Reviews data={college.reviews} /> */}
-            {/* <h2>Reviews are not available for this college.</h2> */}
           </div>
         </div>
       </section>
@@ -517,13 +515,8 @@ const SingleCollegeCard = ({ college }) => {
       {/* faqs */}
       <section className="w-full py-6 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
-          {/* <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-            Frequently Asked Questions
-          </h2> */}
           <FAQs data={college.faq} />
           <div className="max-w-4xl mx-auto">
-            {/* <Accordion data={college.faq} /> */}
-            {/* <h2>FAQs are not available for this college.</h2> */}
           </div>
         </div>
       </section>
@@ -588,7 +581,6 @@ const SingleCollegeCard = ({ college }) => {
             View Updates
           </Link>
           <div className="max-w-4xl mx-auto">
-            {/* <NewsCardForHome category="Important" /> */}
             <SmallCardOfInsights />
           </div>
         </div>

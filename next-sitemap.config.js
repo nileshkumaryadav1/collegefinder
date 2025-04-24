@@ -1,5 +1,5 @@
 // next-sitemap.config.js
 module.exports = {
-  siteUrl: "https://collegefinder.vercel.app",
+  siteUrl: "https://collegefinder.site",
   generateRobotsTxt: true,
 };

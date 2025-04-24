@@ -6,6 +6,7 @@ export default function ManageScholarships() {
   const [scholarships, setScholarships] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
+    slug: "",
     about: "",
     amount: "",
     eligibility: "",
@@ -84,6 +85,7 @@ export default function ManageScholarships() {
   function handleEdit(item) {
     setFormData({
       name: item.name,
+      slug: item.slug,
       about: item.about,
       amount: item.amount,
       eligibility: item.eligibility,
@@ -96,6 +98,7 @@ export default function ManageScholarships() {
   function resetForm() {
     setFormData({
       name: "",
+      slug: "",
       about: "",
       amount: "",
       eligibility: "",
@@ -127,6 +130,15 @@ export default function ManageScholarships() {
         />
         <input
           type="text"
+          name="slug"
+          placeholder="Slug"
+          value={formData.slug}
+          onChange={handleChange}
+          className="p-2 bg-gray-700 rounded w-full mb-2"
+          required
+        />
+        <input
+          type="text"
           name="about"
           placeholder="About"
           value={formData.about}
@@ -150,12 +162,13 @@ export default function ManageScholarships() {
           className="p-2 bg-gray-700 rounded w-full mb-2"
         />
         <input
-          type="date"
+          type="text"
           name="deadline"
           placeholder="Deadline"
           value={formData.deadline}
           onChange={handleChange}
           className="p-2 bg-gray-700 rounded w-full mb-2"
+          required
         />
         <input
           type="text"
@@ -184,7 +197,7 @@ export default function ManageScholarships() {
                 <h3 className="text-lg font-bold">
                   {scholarship.name} - ₹{scholarship.amount}
                 </h3>
-                <p className="text-gray-400">{scholarship.about}</p>
+                <p className="text-gray-400">{scholarship.slug} | {scholarship.about}</p>
                 <p className="text-green-400">Eligibility: {scholarship.eligibility}</p>
                 <p className="text-yellow-400">Deadline: {scholarship.deadline}</p>
                 <a

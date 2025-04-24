@@ -41,6 +41,7 @@ export default function ScholarshipDetail({ params }) {
         <h1 className="text-3xl font-bold mb-2 text-blue-800">
           {scholarship.name}
         </h1>
+        <p className="text-gray-600 text-xs">{scholarship.slug}</p>
         <p className="text-gray-700 mb-6">{scholarship.about}</p>
 
         <div className="grid md:grid-cols-2 gap-6">

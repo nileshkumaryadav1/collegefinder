@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const ExamSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    slug: { type: String, unique: true, required: true },
     type: { type: String, required: true },
     date: { type: String, required: true },
     eligibility: { type: String, required: true },

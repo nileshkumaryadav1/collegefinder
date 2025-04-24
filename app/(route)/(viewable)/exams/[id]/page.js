@@ -39,7 +39,7 @@ export default function ExamDetailsPage() {
       )}
       <h1 className="text-3xl font-bold mt-4">{exam.name}</h1>
       <p className="text-gray-700">{exam.date}</p>
-      <p className="text-gray-700 mt-2">Category: {exam.type}</p>
+      <p className="text-gray-700 mt-2">Category: {exam.type} | Slug: {exam.slug}</p>
       <p className="text-gray-800 mt-2 text-justify">
         Eligibility: {exam.eligibility}
       </p>

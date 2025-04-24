@@ -72,13 +72,13 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredColleges.map((college) => (
           <div
-            key={college._id}
+            key={college.slug}
             className="bg-white rounded-lg shadow-md p-4 flex flex-col mb-2"
           >
             <div className="flex items-center justify-between mb-4">
               <img
                 src={college.logoUrl}
-                alt={`${college.name} logo`}
+                alt="College logo"
                 className="w-16 h-16 object-contain rounded"
               />
               {college.nirfRanking && (
@@ -88,15 +88,18 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
               )}
             </div>
 
-            <Link href={`/colleges/${college._id}`}>
+            <Link href={`/colleges/${college.slug}`}>
               <img
                 src={college.imageUrl}
-                alt={college.name}
+                alt="Engineering College Image"
                 className="w-full h-40 object-cover rounded-md mb-4"
               />
             </Link>
 
-            <Link href={`/colleges/${college._id}`}>
+            <Link
+              href={`/colleges/${college.slug}`}
+              aria-label="view full College details"
+            >
               <h2 className="text-xl font-bold mb-1">{college.name}</h2>
             </Link>
 
@@ -121,8 +124,9 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
                 </a>
               )}
               <Link
-                href={`/colleges/${college._id}`}
+                href={`/colleges/${college.slug}`}
                 className="btn btn-primary my-1"
+                aria-label="view full College details"
               >
                 View full Details →
               </Link>

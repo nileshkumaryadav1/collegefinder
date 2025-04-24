@@ -6,16 +6,16 @@ import Loading from "@/components/custom/Loading";
 import SingleCollegeCard from "@/components/custom/SingleCollegeCard";
 
 export default function DetailCollegeCard() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [college, setCollege] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCollege = async () => {
       try {
-        const res = await fetch(`/api/colleges/${id}`);
+        const res = await fetch(`/api/colleges/${slug}`);
         const data = await res.json();
-        setCollege(data);
+        setCollege(data.data);
       } catch (error) {
         console.error("Error fetching college:", error);
       }
@@ -23,7 +23,7 @@ export default function DetailCollegeCard() {
     };
 
     fetchCollege();
-  }, [id]);
+  }, [slug]);
 
   if (loading) return <Loading />;
   if (!college) return <p className="text-center md:mt-10">College not found.</p>;
