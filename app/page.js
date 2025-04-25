@@ -5,7 +5,7 @@ import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 import NewsCardForHome from "@/components/custom/NewsCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
 import Image from "next/image";
-import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
+// import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
 
 export default function Home() {
   const exploreData = [
@@ -76,8 +76,8 @@ export default function Home() {
               View All Insights
             </Link>
           </div>
-          {/* <NewsCardForHome category="Important" /> */}
-          <SmallCardOfInsights />
+          <NewsCardForHome category="Important" />
+          {/* <SmallCardOfInsights /> */}
         </div>
       </section>
 

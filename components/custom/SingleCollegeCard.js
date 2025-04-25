@@ -25,7 +25,7 @@ import CollegeCardForHome from "./CollegeCardForHome";
 import ExamCardSmall from "./ExamCardSmall";
 import FAQs from "./FaQs";
 import ReviewRating from "./ReviewRating";
-import SmallCardOfInsights from "./SmallCardOfInsights";
+// import SmallCardOfInsights from "./SmallCardOfInsights";
 import Cutoff from "../singleCollege/Cutoff";
 import Placement from "../singleCollege/Placement";
 import FeeStructure from "../singleCollege/FeeStructure";
@@ -426,7 +426,7 @@ const SingleCollegeCard = ({ college }) => {
       </section>
 
       {/* important insights */}
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200 hidden">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
             Important Insights
@@ -436,7 +436,7 @@ const SingleCollegeCard = ({ college }) => {
             View Updates
           </Link>
           <div className="max-w-5xl mx-auto">
-            <SmallCardOfInsights />
+            {/* <SmallCardOfInsights /> */}
           </div>
         </div>
       </section>
