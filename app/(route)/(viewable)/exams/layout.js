@@ -2,7 +2,7 @@
 
 export const metadata = {
   title: "Exams",
-  description: "Explore the latest Exams with regular updates.",
+  description: "Explore the latest Exams with regular updates & notices.",
 };
 
 export default function ExamsLayout({ children }) {
