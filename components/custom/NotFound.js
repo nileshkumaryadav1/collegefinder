@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-function notFound() {
+function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-10 bg-gray-50 text-center">
       <div className="max-w-lg p-10 bg-white rounded-lg shadow-md">
@@ -16,4 +16,4 @@ function notFound() {
   );
 }
 
-export default notFound;
+export default NotFound;

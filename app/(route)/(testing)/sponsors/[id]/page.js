@@ -64,7 +64,7 @@ export default function SponsorsPage() {
       {/* Sponsor Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sponsors.map((sponsor) => (
-          <Link key={sponsor._id} href={`/sponsors/${sponsor._id}`}>
+          <div key={sponsor._id}>
             <div className="border rounded-lg shadow-md p-6 hover:shadow-lg transition-all cursor-pointer">
               <img
                 src={sponsor.logoUrl}
@@ -89,7 +89,7 @@ export default function SponsorsPage() {
                 </a>
               </p>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 

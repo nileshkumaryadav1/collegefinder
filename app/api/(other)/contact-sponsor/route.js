@@ -1,45 +1,56 @@
 // app/api/contact-sponsor/route.js
 
+import { sendSponsorDetailMail } from "@/lib/mailer";
+
 export async function POST(req) {
   const { name, email, company, message } = await req.json();
 
-  // console.log("Name:", name);
-  // console.log("Email:", email);
-  // console.log("Company:", company);
-  // console.log("Message:", message);
-
   // Fetch API domain from environment variables
-  const API_DOMAIN =
-    process.env.NEXT_PUBLIC_BASE_URL;
-  try {
-    const response = await fetch(`${API_DOMAIN}/api/sponsor-detail-email`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        email,
-        company,
-        message,
-      }),
-    });
+  const API_DOMAIN = process.env.NEXT_PUBLIC_BASE_URL;
 
-    if (!response.ok) {
-      throw new Error(`Email Sending API failed: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    console.log("Email Sent Successfully to:", data.info.accepted);
-  } catch (error) {
-    console.error("Failed to send email from API:", error.message);
+  if (!API_DOMAIN) {
+    console.error("API domain is not set in the environment variables.");
+    return new Response(
+      JSON.stringify({ success: false, error: "API domain not configured." }),
+      { status: 500 }
+    );
   }
 
-  return new Response(JSON.stringify({ success: true }), {
-    status: 200,
+  // Send sponsors detail email
+  await sendSponsorDetailMail({
+    to: "kumarnileshayan@gmail.com",
+    subject: "📩 New Sponsor Form Submission",
+    html: `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #f1f3f5; padding: 20px;">
+      <table style="width: 100%; border-collapse: collapse; background-color: #ffffff; border-radius: 10px; overflow: hidden;">
+        <tr>
+          <td style="background-color: #0d6efd; color: white; padding: 20px 30px;">
+            <h2 style="margin: 0; font-size: 22px;">🤝 Sponsor Form Submitted</h2>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 20px 30px;">
+            <p style="margin-bottom: 10px;"><strong>Name:</strong> ${name}</p>
+            <p style="margin-bottom: 10px;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #0d6efd; text-decoration: none;">${email}</a></p>
+            <p style="margin-bottom: 10px;"><strong>Company:</strong> ${company}</p>
+            <p style="margin-bottom: 10px;"><strong>Message:</strong></p>
+            <p>${message}</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+   `,
   });
+
+  return new Response(
+    JSON.stringify({ success: true, message: "POST request successful." }),
+    { status: 200 }
+  );
 }
 
 export async function GET(req) {
-  return new Response(JSON.stringify({ success: true }), {
-    status: 200,
-  });
+  return new Response(
+    JSON.stringify({ success: true, message: "GET request successful." }),
+    { status: 200 }
+  );
 }

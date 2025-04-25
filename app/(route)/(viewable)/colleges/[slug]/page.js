@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Loading from "@/components/custom/Loading";
 import SingleCollegeCard from "@/components/custom/SingleCollegeCard";
+import NotFound from "@/components/custom/NotFound";
+import CollegeLoading from "@/components/loading/CollegeLoading";
 
 export default function DetailCollegeCard() {
   const { slug } = useParams();
@@ -25,8 +26,8 @@ export default function DetailCollegeCard() {
     fetchCollege();
   }, [slug]);
 
-  if (loading) return <Loading />;
-  if (!college) return <p className="text-center md:mt-10">College not found.</p>;
+  if (loading) return <CollegeLoading />;
+  if (!college) return <NotFound />;
 
   return (
     <section className="text-gray-600 body-font w-full overflow-hidden bg-gray-100">

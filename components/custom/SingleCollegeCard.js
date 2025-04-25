@@ -26,6 +26,9 @@ import ExamCardSmall from "./ExamCardSmall";
 import FAQs from "./FaQs";
 import ReviewRating from "./ReviewRating";
 import SmallCardOfInsights from "./SmallCardOfInsights";
+import Cutoff from "../singleCollege/Cutoff";
+import Placement from "../singleCollege/Placement";
+import FeeStructure from "../singleCollege/FeeStructure";
 
 const SingleCollegeCard = ({ college }) => {
   const [liked, setLiked] = useState(false);
@@ -180,36 +183,6 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </Section>
 
-      {/* facilities */}
-      <Section id="facilities" title="Facilities">
-        <ul className="list-disc pl-6 max-w-4xl text-center text-gray-700 space-y-2 md:text-lg">
-          {/* {college.facilities.map((facility, i) => <li key={i}>{facility}</li>)} */}
-          {/* {college.facilities} */}
-          {/* <ul>
-            {college.facilities.split(",").map((item, index) => (
-              <li key={index}>{item.trim()}</li>
-            ))}
-          </ul> */}
-        </ul>
-        <Table
-          head={["Campus Facilities"]}
-          rows={[
-            [
-              <ul key="facilities-list">
-                {college.facilities?.split(",").map((item, i) => (
-                  <li key={i}>{item.trim()}</li>
-                ))}
-              </ul>,
-            ],
-          ]}
-        />
-        <img
-          src="https://avit.ac.in/wp-content/uploads/2024/11/facilities-img.webp"
-          alt="College Facilities Image"
-          className="mt-6 rounded-lg shadow md:w-7/9 mx-auto"
-        />
-      </Section>
-
       {/* promotion */}
       <Section id="promotion" title="">
         <div className="text-gray-700 mx-auto leading-relaxed space-y-2 text-left">
@@ -290,53 +263,38 @@ const SingleCollegeCard = ({ college }) => {
         </div>
       </Section>
 
-      {/* fee structure */}
-      <Section id="fees" title="Fees Structure">
-        <p className="text-gray-700 text-sm mb-4 italic">
-          * Fees are indicative and may vary. Annual academic and hostel charges
-          for all categories are listed below.
-        </p>
-
-        <div className="overflow-x-auto">
-          <table className="w-6/8 mx-auto text-sm md:text-base text-left border border-gray-200 rounded-lg shadow-sm">
-            <thead className="bg-gray-100 text-gray-700">
-              <tr>
-                <th className="p-3 border-b border-gray-200">Particulars</th>
-                <th className="p-3 border-b border-gray-200">Amount (₹)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b">
-                <td className="p-3">Academic Fee</td>
-                <td className="p-3 font-medium text-gray-800">
-                  ₹
-                  {college.fees
-                    ? college.fees?.toLocaleString()
-                    : "Fee information not available."}
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-3">Hostel + Mess Fee</td>
-                <td className="p-3 font-medium text-gray-800">
-                  ₹
-                  {college.hostelFees
-                    ? college.hostelFees?.toLocaleString()
-                    : "Hostel fee information not available."}
-                </td>
-              </tr>
-              <tr>
-                <td className="p-3 font-semibold">Total Estimated Fee</td>
-                <td className="p-3 font-semibold text-blue-700">
-                  ₹
-                  {college.otherFees
-                    ? college.otherFees?.toLocaleString()
-                    : "Other fee information not available."}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      {/* facilities */}
+      <Section id="facilities" title="Facilities">
+        <ul className="list-disc pl-6 max-w-4xl text-center text-gray-700 space-y-2 md:text-lg">
+          {/* {college.facilities.map((facility, i) => <li key={i}>{facility}</li>)} */}
+          {/* {college.facilities} */}
+          {/* <ul>
+            {college.facilities.split(",").map((item, index) => (
+              <li key={index}>{item.trim()}</li>
+            ))}
+          </ul> */}
+        </ul>
+        <Table
+          head={["Campus Facilities"]}
+          rows={[
+            [
+              <ul key="facilities-list">
+                {college.facilities?.split(",").map((item, i) => (
+                  <li key={i}>{item.trim()}</li>
+                ))}
+              </ul>,
+            ],
+          ]}
+        />
+        <img
+          src="https://avit.ac.in/wp-content/uploads/2024/11/facilities-img.webp"
+          alt="College Facilities Image"
+          className="mt-6 rounded-lg shadow md:w-7/9 mx-auto"
+        />
       </Section>
+
+      {/* fee structure */}
+      <FeeStructure college={college} />
 
       {/* fee waiver */}
       <Section id="feeWaiver" title="Fee Waiver">
@@ -355,112 +313,10 @@ const SingleCollegeCard = ({ college }) => {
       </Section>
 
       {/* Cutoff section */}
-      {college.cutOff ? (
-        <Section id="cutoff" title="Cutoff Details">
-          <p className="text-gray-700 text-sm italic">
-            * Below are the JOSAA 2024 round 5 closing ranks for male-only
-            candidates, specific to the CSE (B.Tech) program.
-          </p>
-          <p className="text-gray-700 text-sm mb-4 italic">
-            * All mentioned ranks are category-wise.
-          </p>
-
-          <Table
-            head={["Category", "Cut Offs"]}
-            rows={[
-              [
-                <ul key="courses-list">
-                  {["General", "OBC", "EWS", "SC", "ST"].map(
-                    (category, index) => (
-                      <li key={index} className="border-b mb-1">
-                        {category}
-                      </li>
-                    )
-                  )}
-                </ul>,
-                <ul key="courses-list">
-                  {college.cutOff
-                    ? college.cutOff
-                        .split(",")
-                        .filter((sentence) => sentence.trim().length > 0)
-                        .map((sentence, index) => (
-                          <p
-                            key={index}
-                            className="text-gray-800 border-b mb-1"
-                          >
-                            {sentence.trim()}
-                          </p>
-                        ))
-                    : "Cut off information not available."}
-                </ul>,
-              ],
-            ]}
-          />
-        </Section>
-      ) : (
-        <Section id="cutoff" title="Cutoff Details">
-          <p className="text-gray-500 italic text-sm">
-            Cutoff data is currently not available.
-          </p>
-        </Section>
-      )}
+      <Cutoff college={college} />
 
       {/* placement stats */}
-      <Section id="placement" title="Placement Stats">
-        <Table
-          head={[
-            "Course",
-            "Highest Package",
-            "Average Package",
-            "Median Package",
-          ]}
-          rows={[
-            [
-              college.courses,
-              college.highestPlacement,
-              college.averagePlacement,
-              college.medianSalary,
-            ],
-          ]}
-        />
-
-        {/* placement ratio */}
-        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto mt-5">
-          <div className="flex items-center">
-            <Users size={24} />
-            <span className="font-semibold">Placement Ratio:</span>
-          </div>
-        </p>
-
-        {/* nirf */}
-        <a
-          href={college.nirfPdf}
-          rel="noopener noreferrer"
-          className="text-gray-700 md:text-md flex items-center justify-center gap-2 md:w-1/7 w-1/2 mx-auto mb-6 mt-2 btn"
-        >
-          <div className="flex items-center">
-            <FileText size={24} />
-            <span className="font-semibold">NIRF Report</span>
-          </div>
-        </a>
-        <img
-          src={college.placementRatio}
-          alt="Placement Ratio Image"
-          className="rounded-md shadow max-w-4/5 mx-auto mb-8"
-        />
-
-        <p className="text-gray-700 md:text-lg flex items-left justify-center gap-2 max-w-4xl mx-auto mb-2">
-          <div className="flex items-center">
-            <Building size={24} />
-            <span className="font-semibold">Past Recruiters:</span>
-          </div>
-        </p>
-        <img
-          src={college.pastRecruitor}
-          alt="Past Recruiters Image"
-          className="rounded-md shadow max-w-4/5 mx-auto"
-        />
-      </Section>
+      <Placement college={college} />
 
       {/* Advertisement & Promotions */}
       <h2 className="text-2xl font-semibold text-gray-800 bg-white text-center hidden">
@@ -516,8 +372,7 @@ const SingleCollegeCard = ({ college }) => {
       <section className="w-full py-6 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           <FAQs data={college.faq} />
-          <div className="max-w-4xl mx-auto">
-          </div>
+          <div className="max-w-4xl mx-auto"></div>
         </div>
       </section>
 
