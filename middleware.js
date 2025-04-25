@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export function middleware(request) {
   const { pathname } = request.nextUrl;
 
-  // Allow public files and homepage
+  // ✅ Allow static files and public assets
   if (
     pathname === '/' ||
     pathname.startsWith('/_next') ||
@@ -13,10 +13,25 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  const userAgent = request.headers.get('user-agent') || '';
+  // ✅ Skip all API routes
+  if (pathname.startsWith('/api')) {
+    return NextResponse.next();
+  }
 
-  // Allow common browser or bot user-agents
-  const allowedUserAgents = ['Mozilla', 'Chrome', 'Safari', 'Googlebot', 'Bingbot', 'DuckDuckBot'];
+  // ✅ Allow requests from common browsers and bots
+  const userAgent = request.headers.get('user-agent') || '';
+  const allowedUserAgents = [
+    'Mozilla',
+    'Chrome',
+    'Safari',
+    'Googlebot',
+    'Bingbot',
+    'DuckDuckBot',
+    'node-fetch',
+    'Next.js',
+    'undici', // Node.js native fetch
+  ];
+
   const isAllowed = allowedUserAgents.some(agent => userAgent.includes(agent));
 
   if (!isAllowed) {
@@ -27,5 +42,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!api/auth).*)'], // Apply to all routes except auth
+  matcher: ['/((?!api).*)'], // Apply to all routes except API
 };

@@ -29,7 +29,7 @@ function SmallCardOfInsights() {
           No posts found for the selected filters.
         </p>
       ) : (
-        <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 bg-white">
           {Array.isArray(posts) &&
             posts.map((item) => (
               <Link key={item._id} href={`/insights/${item.slug}`}>
@@ -40,7 +40,7 @@ function SmallCardOfInsights() {
                     className="mx-auto h-20"
                   />
                   <h2 className="text-md font-bold text-blue-700 mb-2">
-                    {item.title}
+                    {item.title?.slice(0, 30)+"..."}
                   </h2>
                   <p className="text-gray-600 text-xs mb-2">
                     {item.summary?.slice(0, 120)}...

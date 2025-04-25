@@ -1,6 +1,10 @@
-"use client";
-
+// pages/terms.js
 import React from "react";
+
+export const metadata = {
+  title: "Terms & Conditions",
+  description: "Learn about College Finder's terms and conditions.",
+};
 
 export default function TermsPage() {
   return (
@@ -96,18 +100,17 @@ export default function TermsPage() {
         <p className="text-gray-600">
           If you have any questions regarding these Terms, please contact us at{" "}
           <a
-            href="mailto:contact@collegefinder.com"
+            href="mailto:kumarnileshayan@gmail.com"
             className="text-blue-600 underline"
           >
-            contact@collegefinder.com
+            contact@collegefinder.site
           </a>
           .
         </p>
         <p className="mt-10 text-sm text-gray-500 text-center">
-        Last updated on: April 21, 2025
-      </p>
+          Last updated on: April 21, 2025
+        </p>
       </section>
-
     </div>
   );
 }

@@ -1,6 +1,10 @@
-"use client";
-
+// pages/privacy.js
 import React from "react";
+
+export const metadata = {
+  title: "Privacy Policy",
+  description: "Learn about College Finder's privacy policy.",
+};
 
 export default function PrivacyPolicyPage() {
   return (
@@ -64,8 +68,8 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-2xl font-semibold text-gray-700 mb-2">8. Contact Us</h2>
         <p className="text-gray-600">
           If you have questions about this Privacy Policy, contact us at{" "}
-          <a href="mailto:contact@collegefinder.com" className="text-blue-600 underline">
-            contact@collegefinder.com
+          <a href="mailto:kumarnileshayan@gmail.com" className="text-blue-600 underline">
+            contact@collegefinder.site
           </a>.
         </p>
         <p className="mt-10 text-sm text-gray-500 text-center">

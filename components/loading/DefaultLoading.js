@@ -1,14 +1,14 @@
-// CollegeLoading.js
+// DefaultLoading.js
 import Head from "next/head";
 
-export default function CollegeLoading() {
+export default function DefaultLoading() {
   return (
     <>
       <Head>
-        <title>Loading College | College Finder</title>
+        <title>Loading Page | College Finder</title>
         <meta
           name="description"
-          content="Searching for detailed college information including courses, placement, ranking, and facilities."
+          content="Searching for detailed college, exams, and scholarships information including courses, placement, ranking, and facilities."
         />
       </Head>
 
@@ -39,17 +39,18 @@ export default function CollegeLoading() {
 
         {/* Branding Text */}
         <h1 className="text-3xl font-bold text-blue-700 mb-4">
-          Loading College Information...
+          Loading Page Information...
         </h1>
         <p className="text-lg text-gray-600 text-center mt-2 max-w-md">
-          Please wait while we load verified data about courses, fees, rankings, placements, and more.
+          Please wait while we load verified data about page.
         </p>
 
         {/* Static Fallback Content for SEO */}
         <section className="sr-only">
-          <h2>Explore Top Colleges in India</h2>
+          <h2>Explore Top Colleges, Exams, and Scholarships in India</h2>
           <p>
-            Find details like admission process, facilities, cutoffs, placement records, and student reviews on College Finder.
+            Discover the best colleges, exams, and scholarships in India. Get
+            information about courses, placement, ranking, and facilities.
           </p>
         </section>
       </main>

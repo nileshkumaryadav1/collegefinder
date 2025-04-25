@@ -386,7 +386,7 @@ const SingleCollegeCard = ({ college }) => {
           <Link href="/colleges" className="btn btn-link">
             View all
           </Link>
-          <div className="max-w-4xl mx-auto mt-4">
+          <div className="max-w-5xl mx-auto mt-4">
             <CollegeCardForHome
               query="#"
               collegeType=""
@@ -419,7 +419,7 @@ const SingleCollegeCard = ({ college }) => {
           <Link href="/exams" className="btn btn-link">
             View all
           </Link>
-          <div className="max-w-4xl mx-auto mt-4">
+          <div className="max-w-5xl mx-auto mt-4">
             <ExamCardSmall query="" />
           </div>
         </div>
@@ -435,7 +435,7 @@ const SingleCollegeCard = ({ college }) => {
           <Link href="/news" className="btn btn-link">
             View Updates
           </Link>
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <SmallCardOfInsights />
           </div>
         </div>

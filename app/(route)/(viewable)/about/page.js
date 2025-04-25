@@ -1,7 +1,12 @@
-"use client";
-import { Mail, Github, Linkedin, Instagram } from "lucide-react";
+// app/(route)/(viewable)/about/page.js
+import { Github, Linkedin, Instagram } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata = {
+  title: "About",
+  description: "Learn more about College Finder.",
+}
 
 export default function AboutUs() {
   return (

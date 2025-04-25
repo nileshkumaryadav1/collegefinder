@@ -5,6 +5,7 @@ import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 import NewsCardForHome from "@/components/custom/NewsCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
 import Image from "next/image";
+import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
 
 export default function Home() {
   const exploreData = [
@@ -69,13 +70,14 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center md:mb-6">
             <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
-              Latest News
+              Latest Insights
             </h2>
-            <Link href="/news" className="text-blue-600 hover:underline">
-              View All News
+            <Link href="/insights" className="text-blue-600 hover:underline">
+              View All Insights
             </Link>
           </div>
-          <NewsCardForHome category="Important" />
+          {/* <NewsCardForHome category="Important" /> */}
+          <SmallCardOfInsights />
         </div>
       </section>
 
