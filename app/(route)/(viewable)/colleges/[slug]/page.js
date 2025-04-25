@@ -2,14 +2,14 @@
 import SingleCollegeCard from "@/components/custom/SingleCollegeCard";
 import NotFound from "@/components/custom/NotFound";
 
-export async function generateStaticParams() {
-  const res = await fetch(`https://collegefinder.site/api/colleges`);
-  const colleges = await res.json();
+// export async function generateStaticParams() {
+//   const res = await fetch(`https://collegefinder.site/api/colleges`);
+//   const colleges = await res.json();
 
-  return colleges.map((college) => ({
-    slug: college.slug,
-  })).slice(0, 15);
-}
+//   return colleges.map((college) => ({
+//     slug: college.slug,
+//   })).slice(0, 15);
+// }
 
 export async function generateMetadata({ params }) {
   const slug = params.slug;
