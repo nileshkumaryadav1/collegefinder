@@ -1,39 +1,66 @@
-"use client";
-
-import { useParams } from "next/navigation";
+// app/(route)/(viewable)/scholarships/[slug]/page.js
+import NotFound from "@/components/custom/NotFound";
 import Link from "next/link";
-import Loading from "@/components/custom/Loading";
-import { useState, useEffect } from "react";
 
-export default function ScholarshipDetail({ params }) {
-  const { id } = useParams() || params;
-  const [loading, setLoading] = useState(true);
-  const [scholarship, setScholarship] = useState(null);
+// export async function generateStaticParams() {
+//   const res = await fetch(`https://collegefinder.site/api/scholarships`);
+//   const scholarships = await res.json();
 
-  useEffect(() => {
-    const fetchScholarship = async () => {
-      try {
-        const res = await fetch(`/api/scholarships/${id}`);
-        const data = await res.json();
-        setScholarship(data);
-      } catch (error) {
-        console.error("Error fetching scholarship:", error);
-      }
-      setLoading(false);
+//   return scholarships.map((scholarship) => ({
+//     slug: scholarship.slug,
+//   })).slice(0, 15);
+// }
+
+export async function generateMetadata({ params }) {
+  const slug = params.slug;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/scholarships/${slug}`
+  );
+
+  if (!res.ok) {
+    console.log("error");
+  }
+
+  const data = await res.json();
+  const scholarship = data;
+
+  if (!scholarship)
+    return {
+      title: "Scholarship not found",
+      description: "Scholarship not found",
     };
 
-    if (id) fetchScholarship();
-  }, [id]);
+  return {
+    title: scholarship.name + " - College Finder",
+    description: `${scholarship.name} - Date, Eligibility, Syllabus, Deadline, Website, and more.`,
+    openGraph: {
+      images: [
+        {
+          url: scholarship.imageUrl,
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+  };
+}
 
-  if (loading) return <Loading />;
+export default async function Page({ params }) {
+  const slug = params.slug;
 
-  if (!id || !scholarship) {
-    return (
-      <p className="text-center mt-10 text-lg text-red-600">
-        Scholarship not found.
-      </p>
-    );
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/scholarships/${slug}`
+  );
+
+  if (!res.ok) {
+    console.log(res);
   }
+
+  const data = await res.json();
+  const scholarship = data;
+
+  if (!scholarship) return <NotFound />;
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">

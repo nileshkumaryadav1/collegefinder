@@ -1,90 +1,70 @@
-"use client";
+// app/(route)/(viewable)/insights/[slug]/page.js
+import NotFound from "@/components/custom/NotFound";
 
-import { useRouter } from "next/router";
-import Head from "next/head";
-import { useState, useEffect } from "react";
+// export async function generateStaticParams() {
+//   const res = await fetch(`https://collegefinder.site/api/posts`);
+//   const insights = await res.json();
 
-export default function EditPostPage({ params }) {
-  const { slug } = params;
-  const [post, setPost] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+//   return insights
+//     .map((insight) => ({
+//       slug: insight.slug,
+//     }))
+//     .slice(0, 15);
+// }
 
-  useEffect(() => {
-    async function fetchPost() {
-      try {
-        const res = await fetch(`/api/posts/${slug}`);
-        const data = await res.json();
+export async function generateMetadata({ params }) {
+  const slug = params.slug;
 
-        if (!res.ok) throw new Error(data.message || "Failed to fetch post");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`
+  );
 
-        setPost({
-          ...data.data,
-          tags: data.data.tags?.join(",") || "",
-        });
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    }
-
-    fetchPost();
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="text-center py-12 text-gray-500 text-lg">
-        Loading post...
-      </div>
-    );
+  if (!res.ok) {
+    console.log("error");
   }
 
-  if (error) {
-    return (
-      <div className="text-center py-12 text-red-600 text-lg">
-        Failed to load post: {error}
-      </div>
-    );
+  const data = await res.json();
+  const insight = data.data;
+
+  if (!insight)
+    return {
+      title: "Insight not found",
+      description: "Insight not found",
+    };
+
+  return {
+    title: insight.title + " - College Finder",
+    description: `${insight.summary?.slice(0, 30) + "..."} `,
+    openGraph: {
+      images: [
+        {
+          url: insight.imageUrl,
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+  };
+}
+
+export default async function Page({ params }) {
+  const slug = params.slug;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`
+  );
+
+  if (!res.ok) {
+    console.log(res);
   }
+
+  const data = await res.json();
+  const post = data.data;
+
+  if (!post) return <NotFound />;
 
   return (
     <>
-      <Head>
-        <title>
-          {post.seoMeta?.title || post.title || "Edit Post"} | College Finder
-        </title>
-        <meta
-          name="description"
-          content={
-            post.seoMeta?.description ||
-            post.summary ||
-            "Edit your blog post on College Finder."
-          }
-        />
-        <meta
-          name="keywords"
-          content={
-            post.seoMeta?.keywords?.join(", ") || "college, blog, education"
-          }
-        />
-        <meta property="og:title" content={post.seoMeta?.title || post.title} />
-        <meta
-          property="og:description"
-          content={post.seoMeta?.description || post.summary}
-        />
-        <meta
-          property="og:image"
-          content={post.seoMeta?.image || post.thumbnail || "/default-og.png"}
-        />
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link
-          rel="canonical"
-          href={`https://collegefinder.com/insights/${slug}`}
-        />
-      </Head>
-
       <main className="max-w-4xl mx-auto px-4 py-10">
         <header className="mb-8">
           <h1 className="text-4xl font-extrabold text-gray-900 leading-tight mb-3">

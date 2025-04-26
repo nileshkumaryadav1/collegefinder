@@ -3,7 +3,7 @@
 export const metadata = {
   title: "Insights",
   description:
-    "Get the latest insights and updates on colleges, scholarships, exams, and more with College Finder. Stay informed and make informed decisions for your academic future.",
+    "Get the latest insights and updates on colleges, scholarships, exams, and more with College Finder.",
 };
 
 export default function InsightsLayout({ children }) {

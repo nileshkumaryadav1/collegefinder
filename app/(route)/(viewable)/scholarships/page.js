@@ -14,7 +14,8 @@ export default function Scholarships() {
       </h1>
 
       <p className="text-gray-500 text-lg text-center mb-8">
-        Find a <strong>Scholarship</strong> that fits your needs and apply to it now!
+        Find a <strong>Scholarship</strong> that fits your needs and apply to it
+        now!
       </p>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -38,11 +39,16 @@ export default function Scholarships() {
         {/* Right Column: Promotions / Advertisement */}
         <div className="">
           <div className="bg-white rounded-lg p-4 shadow-lg">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Sponsored</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+              Sponsored
+            </h2>
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-              <h3 className="text-lg font-bold text-blue-600">Featured Scholarship</h3>
+              <h3 className="text-lg font-bold text-blue-600">
+                Featured Scholarship
+              </h3>
               <p className="text-gray-600 mt-2">
-                Check out this exclusive scholarship opportunity for students in the tech field.
+                Check out this exclusive scholarship opportunity for students in
+                the tech field.
               </p>
               <Link
                 href="/sponsors"
@@ -53,9 +59,12 @@ export default function Scholarships() {
             </div>
 
             <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4">
-              <h3 className="text-lg font-bold text-yellow-600">Apply Now for a Full Scholarship</h3>
+              <h3 className="text-lg font-bold text-yellow-600">
+                Apply Now for a Full Scholarship
+              </h3>
               <p className="text-gray-600 mt-2">
-                Do not miss out on the chance to apply for this amazing scholarship with a full tuition fee cover!
+                Do not miss out on the chance to apply for this amazing
+                scholarship with a full tuition fee cover!
               </p>
               <Link
                 href="/sponsors"

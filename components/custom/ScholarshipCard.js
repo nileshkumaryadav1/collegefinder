@@ -46,7 +46,7 @@ export default function ScholarshipCard({ query }) {
     <div className="mt-6 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {filteredScholarships.map((scholarship) => (
         <div
-          key={scholarship._id}
+          key={scholarship.slug}
           className="bg-white border border-gray-200 rounded-xl shadow-md p-6 flex flex-col justify-between"
         >
           <div>
@@ -72,7 +72,7 @@ export default function ScholarshipCard({ query }) {
           </div>
 
           <Link
-            href={`/scholarships/${scholarship._id}`}
+            href={`/scholarships/${scholarship.slug}`}
             className="mt-4 bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700 transition"
           >
             View Details

@@ -33,10 +33,10 @@ function ExamCard({ query }) {
         })
         .map((exam) => (
           <div
-            key={exam._id}
+            key={exam.slug}
             className="bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
           >
-            <Link href={`/exams/${exam._id}`}>
+            <Link href={`/exams/${exam.slug}`}>
               {/* Conditionally rendering image */}
               {exam.imageUrl ? (
                 <img
@@ -70,7 +70,7 @@ function ExamCard({ query }) {
 
                 {/* View Details Link */}
                 <Link
-                  href={`/exams/${exam._id}`}
+                  href={`/exams/${exam.slug}`}
                   className="text-blue-500 hover:text-blue-700 w-full btn btn-primary transition duration-300 text-sm"
                 >
                   View Details →
