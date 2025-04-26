@@ -12,9 +12,10 @@ export default function ManageScholarships() {
     eligibility: "",
     deadline: "",
     officialLink: "",
+    id: "",
   });
 
-  const [editId, setEditId] = useState(null);
+  const [editSlug, setEditSlug] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -47,9 +48,9 @@ export default function ManageScholarships() {
 
     try {
       const res = await fetch("/api/scholarships", {
-        method: editId ? "PUT" : "POST",
+        method: editSlug ? "PUT" : "POST", // Use PUT if editing
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editId ? { id: editId, ...formData } : formData),
+        body: JSON.stringify(editSlug ? { slug: editSlug, ...formData } : formData), // Pass slug for editing
       });
 
       const data = await res.json();
@@ -64,14 +65,13 @@ export default function ManageScholarships() {
     }
   }
 
-  async function handleDelete(id) {
+  async function handleDelete(slug) {
     if (!confirm("Are you sure you want to delete this scholarship?")) return;
 
     try {
-      const res = await fetch("/api/scholarships", {
+      const res = await fetch(`/api/scholarships/${slug}`, { // Send the slug in the URL for deletion
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id }),
       });
 
       if (!res.ok) throw new Error("Error deleting scholarship");
@@ -92,7 +92,7 @@ export default function ManageScholarships() {
       deadline: item.deadline,
       officialLink: item.officialLink,
     });
-    setEditId(item._id);
+    setEditSlug(item.slug); // Set slug for editing
   }
 
   function resetForm() {
@@ -105,7 +105,7 @@ export default function ManageScholarships() {
       deadline: "",
       officialLink: "",
     });
-    setEditId(null);
+    setEditSlug(null);
   }
 
   function handleChange(e) {
@@ -183,7 +183,7 @@ export default function ManageScholarships() {
           className="bg-blue-500 p-2 rounded hover:bg-blue-600 w-full disabled:bg-gray-500"
           disabled={loading}
         >
-          {loading ? "Processing..." : editId ? "Update Scholarship" : "Add Scholarship"}
+          {loading ? "Processing..." : editSlug ? "Update Scholarship" : "Add Scholarship"}
         </button>
       </form>
 
@@ -192,7 +192,7 @@ export default function ManageScholarships() {
           <p className="text-center text-gray-400">No scholarships available.</p>
         ) : (
           scholarships.map((scholarship) => (
-            <div key={scholarship._id} className="flex justify-between bg-gray-800 p-4 rounded shadow mb-3">
+            <div key={scholarship.slug} className="flex justify-between bg-gray-800 p-4 rounded shadow mb-3">
               <div>
                 <h3 className="text-lg font-bold">
                   {scholarship.name} - ₹{scholarship.amount}
@@ -213,7 +213,7 @@ export default function ManageScholarships() {
                 <button onClick={() => handleEdit(scholarship)} className="text-yellow-400 hover:text-yellow-300">
                   <Pencil size={20} />
                 </button>
-                <button onClick={() => handleDelete(scholarship._id)} className="text-red-400 hover:text-red-300">
+                <button onClick={() => handleDelete(scholarship.slug)} className="text-red-400 hover:text-red-300">
                   <Trash size={20} />
                 </button>
               </div>

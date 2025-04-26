@@ -40,8 +40,9 @@ export default function EditCollegePage() {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-  // ✅ Fetch the existing college details
+  // ✅ Fetch existing college details
   useEffect(() => {
     if (!slug) return;
 
@@ -52,8 +53,9 @@ export default function EditCollegePage() {
 
         const data = await res.json();
         setFormData(data.data);
-      } catch (error) {
-        setMessage("Error fetching college details");
+      } catch (err) {
+        console.error("Error fetching college details:", err);
+        setError("Failed to load college details. Please try again.");
       }
     };
 
@@ -62,291 +64,108 @@ export default function EditCollegePage() {
 
   // Handle input change
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submission
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+    setError("");
 
     try {
-      const res = await fetch(`/api/colleges/${id}`, {
+      const res = await fetch(`/api/colleges/${slug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (!res.ok) throw new Error("Failed to update college");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to update college");
+      }
 
-      setMessage("College updated successfully!");
-      router.push("/admin/colleges"); // Redirect after updating
-    } catch (error) {
-      setMessage("Error updating college");
+      setMessage("✅ College updated successfully!");
+      router.push("/admin/colleges");
+    } catch (err) {
+      console.error("Error updating college:", err);
+      setError(err.message || "Something went wrong while updating.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
-      <h1 className="text-2xl font-bold mb-4">Edit College</h1>
-      {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
+      <h1 className="text-3xl font-bold mb-6 text-center">Edit College</h1>
+
+      {error && <p className="text-center text-red-500 mb-4">{error}</p>}
+      {message && <p className="text-center text-green-600 mb-4">{message}</p>}
+
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="College Name"
-          value={formData.name}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="slug"
-          placeholder="Slug"
-          value={formData.slug}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-          value={formData.location}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone"
-          value={formData.phone}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="number"
-          name="nirfRanking"
-          placeholder="NIRF Ranking"
-          value={formData.nirfRanking}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="imageUrl"
-          placeholder="Image URL"
-          value={formData.imageUrl}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="logoUrl"
-          placeholder="Logo URL"
-          value={formData.logoUrl}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={formData.description}
-          onChange={handleChange}
-          className="border p-2 rounded w-full h-70"
-          required
-        />
-        <input
-          type="text"
-          name="courses"
-          placeholder="Courses Offered"
-          value={formData.courses}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="affiliation"
-          placeholder="Affiliation"
-          value={formData.affiliation}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="type"
-          placeholder="Type"
-          value={formData.type}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="facilities"
-          placeholder="Facilities"
-          value={formData.facilities}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="number"
-          name="noOfStudents"
-          placeholder="Number of Students"
-          value={formData.noOfStudents}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="number"
-          name="noOfFaculties"
-          placeholder="Number of Faculties"
-          value={formData.noOfFaculties}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <textarea
-          name="admissionProcess"
-          placeholder="Admission Process"
-          value={formData.admissionProcess}
-          onChange={handleChange}
-          className="border p-2 rounded w-full h-50"
-          required
-        />
-        <input
-          type="text"
-          name="fees"
-          placeholder="Fees"
-          value={formData.fees}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="hostelFees"
-          placeholder="Hostel Fees"
-          value={formData.hostelFees}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="otherFees"
-          placeholder="Total Fees"
-          value={formData.otherFees}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="feeWaiver"
-          placeholder="Fee Waiver"
-          value={formData.feeWaiver}
-          onChange={handleChange}
-          className="border p-2 rounded w-full h-25"
-          required
-        />
-        <textarea
-          name="cutOff"
-          placeholder="Cut-off"
-          value={formData.cutOff}
-          onChange={handleChange}
-          className="border p-2 rounded w-full h-50"
-          required
-        />
-        <input
-          type="text"
-          name="highestPlacement"
-          placeholder="Highest Placement"
-          value={formData.highestPlacement}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="averagePlacement"
-          placeholder="Average Placement"
-          value={formData.averagePlacement}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="medianSalary"
-          placeholder="Median Salary"
-          value={formData.medianSalary}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="url"
-          name="websiteUrl"
-          placeholder="Website URL"
-          value={formData.websiteUrl}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="placementRatio"
-          placeholder="Placement Ratio"
-          value={formData.placementRatio}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="text"
-          name="pastRecruitor"
-          placeholder="Past Recruiters Image URL"
-          value={formData.pastRecruitor}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
-        <input
-          type="url"
-          name="nirfPdf"
-          placeholder="NIRF PDF URL"
-          value={formData.nirfPdf}
-          onChange={handleChange}
-          className="border p-2 rounded w-full"
-          required
-        />
+        {/* All Inputs */}
+        {[
+          { name: "name", placeholder: "College Name" },
+          { name: "slug", placeholder: "Slug" },
+          { name: "location", placeholder: "Location" },
+          { name: "phone", placeholder: "Phone" },
+          { name: "email", placeholder: "Email", type: "email" },
+          { name: "nirfRanking", placeholder: "NIRF Ranking", type: "number" },
+          { name: "imageUrl", placeholder: "Image URL" },
+          { name: "logoUrl", placeholder: "Logo URL" },
+          { name: "courses", placeholder: "Courses Offered" },
+          { name: "affiliation", placeholder: "Affiliation" },
+          { name: "type", placeholder: "Type" },
+          { name: "facilities", placeholder: "Facilities" },
+          { name: "noOfStudents", placeholder: "Number of Students", type: "number" },
+          { name: "noOfFaculties", placeholder: "Number of Faculties", type: "number" },
+          { name: "fees", placeholder: "Fees" },
+          { name: "hostelFees", placeholder: "Hostel Fees" },
+          { name: "otherFees", placeholder: "Other Fees" },
+          { name: "feeWaiver", placeholder: "Fee Waiver" },
+          { name: "highestPlacement", placeholder: "Highest Placement" },
+          { name: "averagePlacement", placeholder: "Average Placement" },
+          { name: "medianSalary", placeholder: "Median Salary" },
+          { name: "websiteUrl", placeholder: "Website URL", type: "url" },
+          { name: "placementRatio", placeholder: "Placement Ratio" },
+          { name: "pastRecruitor", placeholder: "Past Recruiters Image URL" },
+          { name: "nirfPdf", placeholder: "NIRF PDF URL", type: "url" },
+        ].map(({ name, placeholder, type = "text" }) => (
+          <input
+            key={name}
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            value={formData[name]}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+        ))}
+
+        {/* Textareas */}
+        {[
+          { name: "description", placeholder: "Description" },
+          { name: "admissionProcess", placeholder: "Admission Process" },
+          { name: "cutOff", placeholder: "Cut-off" },
+        ].map(({ name, placeholder }) => (
+          <textarea
+            key={name}
+            name={name}
+            placeholder={placeholder}
+            value={formData[name]}
+            onChange={handleChange}
+            className="border p-2 rounded w-full h-32"
+            required
+          />
+        ))}
+
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded-lg"
           disabled={loading}
+          className="bg-blue-600 hover:bg-blue-700 transition text-white font-semibold py-2 rounded-lg mt-4"
         >
           {loading ? "Updating..." : "Update College"}
         </button>

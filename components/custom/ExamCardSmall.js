@@ -88,10 +88,10 @@ function ExamCardSmall({ query = "", collegeType = "", sortBy = "", sortOrder = 
         ) : (
           filteredExams.map((exam) => (
             <div
-              key={exam._id}
+              key={exam.slug}
               className="w-[280px] flex-shrink-0 bg-white rounded-lg shadow-md p-4"
             >
-              <Link href={`/exams/${exam._id}`}>
+              <Link href={`/exams/${exam.slug}`}>
                 <img
                   src={exam.imageUrl}
                   alt={exam.name}
@@ -113,10 +113,10 @@ function ExamCardSmall({ query = "", collegeType = "", sortBy = "", sortOrder = 
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExams.map((exam) => (
             <div
-              key={exam._id}
+              key={exam.slug}
               className="bg-white rounded-lg shadow-md p-4 flex flex-col"
             >
-              <Link href={`/exams/${exam._id}`}>
+              <Link href={`/exams/${exam.slug}`}>
                 <img
                   src={exam.imageUrl}
                   alt={exam.name}

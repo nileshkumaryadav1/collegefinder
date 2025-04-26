@@ -5,7 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 
 export default function EditExamPage() {
   const router = useRouter();
-  const { id } = useParams(); // Get exam ID from URL params
+  const { slug } = useParams();
   const [formData, setFormData] = useState({
     name: "",
     slug: "",
@@ -23,23 +23,24 @@ export default function EditExamPage() {
   useEffect(() => {
     const fetchExam = async () => {
       try {
-        const res = await fetch(`/api/exams/${id}`);
-        if (!res.ok) throw new Error("Failed to fetch exam");
-        const data = await res.json();
+        const res = await fetch(`/api/exams/${slug}`);
+        if (!res.ok) throw new Error("Failed to fetch exam details");
+        const { data } = await res.json(); // Expecting { success: true, data: {...} }
         setFormData(data);
       } catch (error) {
-        console.error(error);
+        console.error("Fetch Exam Error:", error);
         setMessage("Error loading exam details");
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) fetchExam();
-  }, [id]);
+    if (slug) fetchExam();
+  }, [slug]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -47,39 +48,56 @@ export default function EditExamPage() {
     setMessage("");
 
     try {
-      const res = await fetch(`/api/exams/${id}`, {
+      const res = await fetch(`/api/exams/${slug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (!res.ok) throw new Error("Failed to update exam");
-      setMessage("Exam updated successfully!");
 
-      // Redirect to manage exams page after update
+      setMessage("✅ Exam updated successfully!");
       setTimeout(() => {
         router.push("/admin/exams");
       }, 1500);
     } catch (error) {
-      console.error(error);
-      setMessage("Error updating exam");
+      console.error("Update Exam Error:", error);
+      setMessage("❌ Error updating exam. Please try again.");
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-gray-600 text-lg">Loading exam details...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10 m-10">
-      <h1 className="text-2xl font-bold mb-4">Edit Exam</h1>
-      {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
-      <form onSubmit={handleSubmit} className="grid gap-4">
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+      <h1 className="text-3xl font-bold mb-6 text-center">Edit Exam</h1>
+
+      {message && (
+        <div
+          className={`text-center mb-6 p-3 rounded ${
+            message.startsWith("✅")
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {message}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="grid gap-5">
         <input
           type="text"
           name="name"
           placeholder="Exam Name"
           value={formData.name}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-3 rounded w-full"
           required
         />
         <input
@@ -88,14 +106,14 @@ export default function EditExamPage() {
           placeholder="Slug"
           value={formData.slug}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-3 rounded w-full"
           required
         />
         <select
           name="type"
           value={formData.type}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-3 rounded w-full"
           required
         >
           <option value="">Select Type</option>
@@ -106,46 +124,51 @@ export default function EditExamPage() {
         <input
           type="text"
           name="date"
+          placeholder="Exam Date (e.g. 10 June 2025)"
           value={formData.date}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-3 rounded w-full"
           required
         />
         <input
           type="text"
           name="eligibility"
-          placeholder="eligibility"
+          placeholder="Eligibility Criteria"
           value={formData.eligibility}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-3 rounded w-full"
           required
         />
         <textarea
           name="syllabus"
-          placeholder="syllabus"
+          placeholder="Syllabus Overview"
           value={formData.syllabus}
           onChange={handleChange}
-          className="border p-2 rounded w-full h-24"
+          className="border p-3 rounded w-full h-28"
           required
         />
         <input
-          type="text"
+          type="url"
           name="website"
-          placeholder="website"
+          placeholder="Official Website URL"
           value={formData.website}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-3 rounded w-full"
           required
         />
         <input
-          type="text"
+          type="url"
           name="imageUrl"
-          placeholder="Image URL"
+          placeholder="Image URL (optional)"
           value={formData.imageUrl}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-3 rounded w-full"
         />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg">
+
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg transition-all"
+        >
           Update Exam
         </button>
       </form>

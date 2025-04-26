@@ -27,19 +27,56 @@ export async function GET(req) {
   }
 }
 
-// Update exam
+// UPDATE exam by slug
 export async function PUT(req, { params }) {
   await connectToDatabase();
-  const { id } = params;
+  const { slug } = params;
   const data = await req.json();
-  const updatedExam = await Exam.findByIdAndUpdate(id, data, { new: true });
-  return NextResponse.json(updatedExam);
+
+  try {
+    const updatedExam = await Exam.findOneAndUpdate({ slug }, data, {
+      new: true,
+    });
+
+    if (!updatedExam) {
+      return NextResponse.json(
+        { success: false, message: "Exam not found for update" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true, data: updatedExam });
+  } catch (err) {
+    return NextResponse.json(
+      { success: false, message: "Error updating exam" },
+      { status: 500 }
+    );
+  }
 }
 
-// Delete exam
+// DELETE exam by slug
 export async function DELETE(req, { params }) {
   await connectToDatabase();
-  const { id } = params;
-  await Exam.findByIdAndDelete(id);
-  return NextResponse.json({ message: "Exam deleted successfully!" });
+  const { slug } = params;
+
+  try {
+    const deletedExam = await Exam.findOneAndDelete({ slug });
+
+    if (!deletedExam) {
+      return NextResponse.json(
+        { success: false, message: "Exam not found for deletion" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Exam deleted successfully!",
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { success: false, message: "Error deleting exam" },
+      { status: 500 }
+    );
+  }
 }

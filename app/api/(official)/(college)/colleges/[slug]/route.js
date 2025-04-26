@@ -2,15 +2,16 @@ import { NextResponse } from "next/server";
 import College from "@/models/College";
 import { connectToDatabase } from "@/lib/mongodb";
 
+// GET College by Slug
 export async function GET(req) {
   await connectToDatabase();
 
-  // Extract `slug` from URL
   const url = new URL(req.url);
-  const slug = url.pathname.split("/").pop(); // gets the [slug] from the path
+  const slug = url.pathname.split("/").pop();
 
   try {
     const college = await College.findOne({ slug });
+
     if (!college) {
       return NextResponse.json(
         { success: false, message: "College not found" },
@@ -19,7 +20,8 @@ export async function GET(req) {
     }
 
     return NextResponse.json({ success: true, data: college });
-  } catch (err) {
+  } catch (error) {
+    console.error("GET College Error:", error);
     return NextResponse.json(
       { success: false, message: "Error fetching college" },
       { status: 500 }
@@ -28,17 +30,25 @@ export async function GET(req) {
 }
 
 // DELETE College by Slug
-export async function DELETE(req, context) {
+export async function DELETE(req) {
   await connectToDatabase();
 
-  // Extract `slug` from URL
   const url = new URL(req.url);
-  const slug = url.pathname.split("/").pop(); // gets the [slug] from the path
+  const slug = url.pathname.split("/").pop();
 
   try {
-    await College.findOneAndDelete({ slug });
-    return NextResponse.json({ success: true, message: "College deleted" });
-  } catch (err) {
+    const deletedCollege = await College.findOneAndDelete({ slug });
+
+    if (!deletedCollege) {
+      return NextResponse.json(
+        { success: false, message: "College not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true, message: "College deleted successfully" });
+  } catch (error) {
+    console.error("DELETE College Error:", error);
     return NextResponse.json(
       { success: false, message: "Error deleting college" },
       { status: 500 }
@@ -47,18 +57,20 @@ export async function DELETE(req, context) {
 }
 
 // PUT (Update) College by Slug
-export async function PUT(req, context) {
+export async function PUT(req) {
   await connectToDatabase();
-  
-  // Extract `slug` from URL
+
   const url = new URL(req.url);
-  const slug = url.pathname.split("/").pop(); // gets the [slug] from the path
-  const data = await req.json();
+  const slug = url.pathname.split("/").pop();
 
   try {
-    const updatedCollege = await College.findOneAndUpdate({ slug }, data, {
-      new: true,
-    });
+    const body = await req.json(); // ✅ Parse the JSON body correctly
+
+    const updatedCollege = await College.findOneAndUpdate(
+      { slug },
+      body,
+      { new: true }
+    );
 
     if (!updatedCollege) {
       return NextResponse.json(
@@ -68,7 +80,8 @@ export async function PUT(req, context) {
     }
 
     return NextResponse.json({ success: true, data: updatedCollege });
-  } catch (err) {
+  } catch (error) {
+    console.error("PUT College Error:", error);
     return NextResponse.json(
       { success: false, message: "Error updating college" },
       { status: 500 }

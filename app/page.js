@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
-import NewsCardForHome from "@/components/custom/NewsCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
 import Image from "next/image";
-// import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
+import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
 
 export default function Home() {
   const exploreData = [
@@ -29,9 +28,9 @@ export default function Home() {
     },
     {
       i: 4,
-      href: "/news",
-      label: "News",
-      link: "https://d27p2a3djqwgnt.cloudfront.net/wp-content/uploads/2017/04/20050020/newspapers-444448_1280.jpg",
+      href: "/insights",
+      label: "Insights",
+      link:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ljHw5E36UIMToNEUtAFpJSn_88U7PO8WyQ&s",
     },
   ];
 
@@ -76,8 +75,7 @@ export default function Home() {
               View All Insights
             </Link>
           </div>
-          <NewsCardForHome category="Important" />
-          {/* <SmallCardOfInsights /> */}
+          <SmallCardOfInsights />
         </div>
       </section>
 
