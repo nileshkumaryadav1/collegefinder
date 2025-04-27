@@ -37,6 +37,14 @@ const Footer = () => {
                     href: "/find-scholarships/post-graduation",
                     label: "Masters Scholarships",
                   },
+                  {
+                    href: "/college-comparison",
+                    label: "Compare Colleges",
+                  },
+                  {
+                    href: "/rank-predictor",
+                    label: "Rank Predictor",
+                  },
                 ].map(({ href, label }) => (
                   <li key={href}>
                     <Link

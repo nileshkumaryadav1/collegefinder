@@ -34,17 +34,22 @@ export default function CollegesPage() {
   return (
     <div className="bg-gray-50 min-h-screen px-4 md:py-8 py-4 md:px-10 lg:px-20">
       <h1 className="text-3xl text-blue-600 dark:text-blue-400 md:text-4xl font-semibold text-center mb-2">
-        Find Your Dream College 
+        Find Your Dream College
       </h1>
       <p className="text-center text-gray-500 mb-4 max-w-2xl mx-auto">
-        Explore detailed information about top <strong>Engineering, Medical & Management</strong> Colleges in India by
-        filtering through <strong>institute types, placement stats, fees</strong>, and more.
+        Explore detailed information about top{" "}
+        <strong>Engineering, Medical & Management</strong> Colleges in India by
+        filtering through{" "}
+        <strong>institute types, placement stats, fees</strong>, and more.
       </p>
 
       {/* Filters Container */}
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 md:p-6 mb-4">
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">
-          Filter Colleges
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-3 md:p-6 mb-4">
+        <h2 className="text-lg font-semibold text-gray-700 mb-4 flex justify-between">
+          <p>Filter Colleges</p>
+          <Link href="/college-comparison" className="text-blue-600">
+            Compare Colleges
+          </Link>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <input

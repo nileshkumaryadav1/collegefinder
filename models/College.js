@@ -30,6 +30,7 @@ const CollegeSchema = new mongoose.Schema(
     placementRatio: String,
     pastRecruitor: String,
     nirfPdf: String,
+    virtualTourLink: { type: String },
   },
   { timestamps: true }
 );

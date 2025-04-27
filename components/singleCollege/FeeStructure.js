@@ -9,8 +9,8 @@ function FeeStructure({ college }) {
           for all categories are listed below.
         </p>
 
-        <div className="overflow-x-auto">
-          <table className="w-6/8 mx-auto text-sm md:text-base text-left border border-gray-200 rounded-lg shadow-sm">
+        <div className="max-w-4xl mx-auto">
+          <table className="w-8/8 mx-auto text-sm md:text-base text-left border border-gray-200 rounded-lg shadow-sm">
             <thead className="bg-gray-100 text-gray-700">
               <tr>
                 <th className="p-3 border-b border-gray-200">Particulars</th>

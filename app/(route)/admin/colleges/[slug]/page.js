@@ -36,6 +36,7 @@ export default function EditCollegePage() {
     placementRatio: "",
     pastRecruitor: "",
     nirfPdf: "",
+    virtualTourLink: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -132,6 +133,7 @@ export default function EditCollegePage() {
           { name: "placementRatio", placeholder: "Placement Ratio" },
           { name: "pastRecruitor", placeholder: "Past Recruiters Image URL" },
           { name: "nirfPdf", placeholder: "NIRF PDF URL", type: "url" },
+          { name: "virtualTourLink", placeholder: "Virtual Tour Link", type: "text" },
         ].map(({ name, placeholder, type = "text" }) => (
           <input
             key={name}

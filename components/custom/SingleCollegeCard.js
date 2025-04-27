@@ -293,6 +293,23 @@ const SingleCollegeCard = ({ college }) => {
         />
       </Section>
 
+      {/* virtual tour */}
+      {college.virtualTourLink && (
+        <Section id="virtualTour" title="🎥 Virtual Tour">
+          <div className="md:mt-10">
+            {/* <h2 className="text-2xl font-bold mb-4">🎥 Virtual Tour</h2> */}
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                src={college.virtualTourLink.replace("watch?v=", "embed/")}
+                title="Virtual College Tour"
+                allowFullScreen
+                className="w-full md:h-100 rounded-lg shadow-md"
+              ></iframe>
+            </div>
+          </div>
+        </Section>
+      )}
+
       {/* fee structure */}
       <FeeStructure college={college} />
 

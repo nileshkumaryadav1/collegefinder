@@ -36,6 +36,7 @@ export default function AddCollegePage() {
     placementRatio: "",
     pastRecruitor: "",
     nirfPdf: "",
+    virtualTourLink: "",
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -89,6 +90,7 @@ export default function AddCollegePage() {
           placementRatio: "",
           pastRecruitor: "",
           nirfPdf: "",
+          virtualTourLink: "",
         });
       }
     } catch (error) {
@@ -372,6 +374,15 @@ export default function AddCollegePage() {
             className="border p-2 rounded w-full"
             required
           />
+          <input
+            type="text"
+            name="virtualTourLink"
+            placeholder="Virtual Tour Link"
+            value={formData.virtualTourLink}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
           <button
             type="submit"
             className="bg-blue-500 text-white p-2 rounded-lg"
@@ -502,6 +513,8 @@ export default function AddCollegePage() {
                     className="w-full h-20 object-cover rounded-md"
                   />
                 </div>
+
+                <div>{college.virtualTourLink}</div>
 
                 <div className="mt-auto flex justify-between items-center">
                   <a
