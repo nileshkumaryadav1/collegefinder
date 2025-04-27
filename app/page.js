@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
@@ -30,7 +28,7 @@ export default function Home() {
       i: 4,
       href: "/insights",
       label: "Insights",
-      link:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ljHw5E36UIMToNEUtAFpJSn_88U7PO8WyQ&s",
+      link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ljHw5E36UIMToNEUtAFpJSn_88U7PO8WyQ&s",
     },
   ];
 
@@ -67,12 +65,12 @@ export default function Home() {
       {/* Latest News */}
       <section className="md:py-12 py-6 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center md:mb-6">
+          <div className="flex justify-between items-center md:mb-6 mb-4">
             <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
               Latest Insights
             </h2>
             <Link href="/insights" className="text-blue-600 hover:underline">
-              View All Insights
+              View Insights
             </Link>
           </div>
           <SmallCardOfInsights />
@@ -82,12 +80,12 @@ export default function Home() {
       {/* Popular Colleges */}
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center md:mb-6 mb-4">
             <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
               Popular Colleges
             </h2>
             <Link href="/colleges" className="text-blue-600 hover:underline">
-              Browse All Colleges
+              View Colleges
             </Link>
           </div>
           <CollegeCardForHome query="#" collegeType="" sortBy="" sortOrder="" />

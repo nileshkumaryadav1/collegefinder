@@ -19,7 +19,7 @@ function Cutoff({ college }) {
             rows={[
               [
                 <ul key="courses-list">
-                  {["General", "OBC", "EWS", "SC", "ST"].map(
+                  {["General", "OBC-NCL", "Genereal-EWS", "Scheduled Castes", "Scheduled Tribes"].map(
                     (category, index) => (
                       <li key={index} className="border-b mb-1">
                         {category}

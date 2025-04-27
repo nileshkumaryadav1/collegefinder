@@ -8,7 +8,10 @@
 
 @custom-variant dark (&:is(.dark *));
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake;
+  themes:
+    light --default,
+    dark --prefersdark,
+    cupcake;
 }
 
 @theme {
@@ -143,4 +146,21 @@
 
 .animate-scroll {
   animation: scroll 40s linear infinite;
+}
+
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
 }

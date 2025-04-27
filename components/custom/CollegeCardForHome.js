@@ -91,20 +91,21 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
               <div className="flex items-center justify-between mb-4">
                 <img
                   src={college.logoUrl}
-                  alt={`${college.name} logo`}
-                  className="w-16 h-16 object-contain rounded"
+                  alt={`College logo`}
+                  className="w-10 h-10 md:w-16 md:h-16 object-contain rounded"
                 />
-                <span className="text-sm font-medium text-gray-600 btn btn-primary">
+                <span className="text-xs md:text-sm font-medium text-gray-600 btn btn-primary">
                   #{college.nirfRanking}
                 </span>
               </div>
               <img
                 src={college.imageUrl}
-                alt={college.name}
+                alt="College Image"
                 className="w-full h-40 object-cover rounded-md mb-4"
               />
-              <h2 className="text-md font-bold mb-1">{college.name}</h2>
-              <p className="text-gray-600 text-sm mb-2">{college.location}</p>
+              <h2 className="md:text-md text-sm font-bold mb-1">{college.name}</h2>
+              <p className="text-gray-600 md:text-sm text-xs mb-2">{college.location}</p>
+              <p className="text-gray-500 text-xs">View Details → Cutoff | Admission | Placements | Facilities</p>
             </Link>
           </div>
         ))}

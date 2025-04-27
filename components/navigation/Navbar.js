@@ -85,7 +85,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/logo.jpg"
+              src="/favicon.jpg"
               alt="CollegeFinder Logo"
               width={36}
               height={36}

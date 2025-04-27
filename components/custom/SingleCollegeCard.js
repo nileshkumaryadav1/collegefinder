@@ -52,18 +52,18 @@ const SingleCollegeCard = ({ college }) => {
           </div>
         </div>
         <div className="pt-16 pb-8 px-4 md:px-8 text-center">
-          <h1 className="text-2xl md:text-4xl font-bold">{college.name}</h1>
+          <h1 className="text-xl md:text-4xl font-bold">{college.name}</h1>
           <p className="text-gray-600 mt-2 flex justify-center items-center gap-2">
             <MapPin size={18} />
             {college.slug}, {college.location}
           </p>
-          <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+          <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-justify">
             {college.description
               ? college.description.slice(0, 200)
               : "Description not available."}
             ...
             <a href="#about" className="text-blue-600 hover:underline ml-1">
-              Read More
+              read more
             </a>
           </p>
 
@@ -90,16 +90,18 @@ const SingleCollegeCard = ({ college }) => {
           {[
             { id: "overview", label: "Overview", icon: Landmark },
             { id: "about", label: "About", icon: BookUser },
-            { id: "facilities", label: "Facilities", icon: School },
             { id: "courses", label: "Courses", icon: Notebook },
             { id: "admission", label: "Admission", icon: BedSingle },
             { id: "fees", label: "Fees", icon: Wallet },
+            { id: "facilities", label: "Facilities", icon: School },
+            { id: "cutoff", label: "Cutoff", icon: Wallet },
             { id: "placement", label: "Placement", icon: Wallet },
+            { id: "reviews", label: "Reviews", icon: Star },
           ].map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
-              className="mx-3 my-1 flex items-center text-gray-600 hover:text-blue-600 transition"
+              className="mx-3 my-2.5 flex items-center text-gray-600 hover:text-blue-600 transition md:hover:translate-y-1"
               title={item.label}
               aria-label="scroll to College section"
             >
@@ -155,7 +157,7 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* address and traveling options */}
       <Section id="address" title="Address and Reaching Options">
-        <div className="grid grid-cols-1 gap-6 text-base md:text-lg text-gray-800 mx-auto max-w-4xl">
+        <div className="grid grid-cols-1 gap-3 text-base md:text-lg text-gray-800 mx-auto max-w-4xl">
           <Detail
             icon={MapPin}
             label="Address"
@@ -377,7 +379,10 @@ const SingleCollegeCard = ({ college }) => {
       </div>
 
       {/* reviews */}
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+      <section
+        id="reviews"
+        className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200"
+      >
         <div className="max-w-6xl mx-auto text-center">
           <div className="max-w-4xl mx-auto">
             <ReviewRating collegeId={college._id} />
@@ -386,7 +391,10 @@ const SingleCollegeCard = ({ college }) => {
       </section>
 
       {/* faqs */}
-      <section className="w-full py-6 px-4 md:px-8 bg-white border-t border-gray-200">
+      <section
+        id="faqs"
+        className="w-full py-6 px-4 md:px-8 bg-white border-t border-gray-200"
+      >
         <div className="max-w-6xl mx-auto text-center">
           <FAQs data={college.faq} />
           <div className="max-w-4xl mx-auto"></div>
@@ -477,9 +485,10 @@ const Section = ({ id, title, children }) => (
 );
 
 const Detail = ({ icon: Icon, label, value }) => (
-  <p className="flex items-center gap-3">
+  <p className="flex gap-2">
     <Icon size={22} className="text-blue-600" />
-    <span className="font-semibold">{label}:</span> {value}
+    <span className="font-semibold">{label}:</span>
+    <p className="text-left">{value}</p>
   </p>
 );
 
