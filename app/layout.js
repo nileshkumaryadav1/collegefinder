@@ -11,20 +11,21 @@ const geist = Geist({ subsets: ["latin"] });
 
 export const metadata = {
   title: {
-    default: "College Finder",
+    default: "College Finder - Find Your Ideal College",
     template: "%s | College Finder",
   },
-  description: "Find your ideal College.",
+  description:
+    "Explore top colleges, exams, scholarships, placements and more with College Finder. Find your ideal college easily!",
   twitter: {
-    card: "summary_large_image"
-  }
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth" data-theme="cupcake">
       <head>
-        {/* Google Verification */}
+        {/* Google Search Console Verification */}
         <meta
           name="google-site-verification"
           content="1sFVXvsdUNE_dPzbjjPqFU0GwE-YvxN0WX3UIrZ_ZwU"

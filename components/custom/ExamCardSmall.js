@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 function ExamCardSmall({ query = "", collegeType = "", sortBy = "", sortOrder = "asc" }) {
   const [exams, setExams] = useState([]);
@@ -92,9 +93,11 @@ function ExamCardSmall({ query = "", collegeType = "", sortBy = "", sortOrder = 
               className="w-[280px] flex-shrink-0 bg-white rounded-lg shadow-md p-4"
             >
               <Link href={`/exams/${exam.slug}`}>
-                <img
+                <Image
                   src={exam.imageUrl}
-                  alt={exam.name}
+                  alt="Exam Image"
+                  width={280}
+                  height={200}
                   className="w-full h-40 object-cover rounded-md mb-4"
                 />
                 <h2 className="text-md font-bold mb-1">{exam.name}</h2>
@@ -117,9 +120,11 @@ function ExamCardSmall({ query = "", collegeType = "", sortBy = "", sortOrder = 
               className="bg-white rounded-lg shadow-md p-4 flex flex-col"
             >
               <Link href={`/exams/${exam.slug}`}>
-                <img
+                <Image
                   src={exam.imageUrl}
                   alt={exam.name}
+                  width={280}
+                  height={200}
                   className="w-full h-40 object-cover rounded-md mb-2"
                 />
                 <h2 className="text-md font-bold mb-1">{exam.name}</h2>

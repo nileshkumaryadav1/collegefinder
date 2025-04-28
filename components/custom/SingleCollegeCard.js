@@ -29,6 +29,7 @@ import ReviewRating from "./ReviewRating";
 import Cutoff from "../singleCollege/Cutoff";
 import Placement from "../singleCollege/Placement";
 import FeeStructure from "../singleCollege/FeeStructure";
+import Image from "next/image";
 
 const SingleCollegeCard = ({ college }) => {
   const [liked, setLiked] = useState(false);
@@ -44,9 +45,11 @@ const SingleCollegeCard = ({ college }) => {
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
-            <img
+            <Image
               src={college.logoUrl}
               alt="College Logo"
+              width={100}
+              height={100}
               className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-lg bg-white"
             />
           </div>
@@ -288,9 +291,11 @@ const SingleCollegeCard = ({ college }) => {
             ],
           ]}
         />
-        <img
+        <Image
           src="https://avit.ac.in/wp-content/uploads/2024/11/facilities-img.webp"
           alt="College Facilities Image"
+          width={800}
+          height={600}
           className="mt-6 rounded-lg shadow md:w-7/9 mx-auto"
         />
       </Section>
@@ -368,9 +373,11 @@ const SingleCollegeCard = ({ college }) => {
             Advertisement
           </h4>
           <Link href="/sponsors" className="hover:underline">
-            <img
+            <Image
               src="/sponsors.jpg"
               alt="Advertisement Image"
+              width={800}
+              height={600}
               className="rounded-lg w-full h-auto object-cover"
             />
           </Link>

@@ -2,7 +2,8 @@ import Link from "next/link";
 import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
 import Image from "next/image";
-import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
+// import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
+import NewsCardForHome from "@/components/custom/NewsCardForHome";
 
 export default function Home() {
   const exploreData = [
@@ -50,9 +51,11 @@ export default function Home() {
                 href={i.href}
                 className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition p-4"
               >
-                <img
+                <Image
                   src={i.link}
                   alt="College & Exam Images"
+                  width={300}
+                  height={300}
                   className="rounded-md mb-3 h-32 w-full object-cover"
                 />
                 <h3 className="text-lg font-medium">{i.label}</h3>
@@ -73,7 +76,8 @@ export default function Home() {
               View Insights
             </Link>
           </div>
-          <SmallCardOfInsights />
+          {/* <SmallCardOfInsights /> */}
+          <NewsCardForHome category={"Important"} />
         </div>
       </section>
 

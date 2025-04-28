@@ -142,7 +142,7 @@ function Page() {
       {loading && <p className="text-center p-30">Loading...</p>}
 
       {/* colleges card */}
-      <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredColleges.map((college) => (
           <div
             key={college.slug}

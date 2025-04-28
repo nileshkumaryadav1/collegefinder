@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
   const [colleges, setColleges] = useState([]);
@@ -89,9 +90,11 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
           >
             <Link href={`/colleges/${college.slug}`}>
               <div className="flex items-center justify-between mb-4">
-                <img
+                <Image
                   src={college.logoUrl}
                   alt={`College logo`}
+                  width={40}
+                  height={40}
                   className="w-10 h-10 md:w-16 md:h-16 object-contain rounded"
                 />
                 <span className="text-xs md:text-sm font-medium text-gray-600 btn btn-primary">

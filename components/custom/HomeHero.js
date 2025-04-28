@@ -1,36 +1,54 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import SearchModal from "./SearchModal";
 
-function HomeHero() {
+export default function HomeHero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
-      className="bg-blue-50 dark:bg-gray-900 md:py-16 py-12 px-4 text-center"
-      style={{ backgroundImage: "url('/hero.jpg')" }}
+      className="relative overflow-hidden bg-gray-700 dark:bg-gray-900 md:py-20 py-16 px-4 text-center"
+      aria-label="Hero Section"
     >
-      <h1 className="md:text-4xl text-3xl font-bold mb-4 text-white dark:text-gray-900">
-        Discover Top Colleges, Exams, Scholarships & More
-      </h1>
-      <p className="max-w-xl mx-auto mb-6 text-white dark:text-gray-900">
-        Explore the latest and most accurate info to plan your academic future.
-      </p>
-      <div className="max-w-2xl mx-auto">
-        <input
-          type="text"
-          onClick={() => setIsModalOpen(true)}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-black dark:text-white"
-          placeholder={"Search Colleges, Exams & Scholarships ...."}
-        />
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-30 dark:opacity-20 opacity-30 blur-xs"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=3000&q=60')",
+        }}
+        aria-hidden="true"
+      />
 
-        <SearchModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
+      {/* Content */}
+      <div className="relative z-10 max-w-3xl mx-auto">
+        <h1 className="text-2xl md:text-5xl font-extrabold text-white dark:text-gray-100 leading-tight md:mb-6 mb-4">
+          Discover Top Colleges, Exams, Scholarships & More
+        </h1>
+        <p className="text-lg md:text-xl text-white/90 dark:text-gray-300 md:mb-8 mb-6">
+          Explore the latest and most accurate information to plan your academic
+          future.
+        </p>
+
+        <div className="max-w-2xl mx-auto">
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className="w-full px-6 md:py-4 py-3 rounded-lg bg-white/90 dark:bg-gray-800 text-black dark:text-white md:font-semibold border border-gray-300 dark:border-gray-700 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-500 transition-all"
+            aria-label="Open Search Modal"
+          >
+            <p className="md:text-lg text-xs">
+              Search Colleges, Exams & Scholarships...
+            </p>
+          </button>
+
+          <SearchModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        </div>
       </div>
     </section>
   );
 }
-
-export default HomeHero;
