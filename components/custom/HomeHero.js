@@ -8,16 +8,16 @@ export default function HomeHero() {
 
   return (
     <section
-      className="relative overflow-hidden bg-gray-700 dark:bg-gray-900 md:py-20 py-16 px-4 text-center"
+      className="relative overflow-hidden md:py-20 py-16 px-4 text-center"
       aria-label="Hero Section"
     >
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-30 dark:opacity-20 opacity-30 blur-xs"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=3000&q=60')",
-        }}
+        className="absolute inset-0 bg-cover bg-gradient-to-br from-blue-600 via-gray-700 to-black bg-center dark:opacity-20 blur-xs"
+        // style={{
+        //   backgroundImage:
+        //     "url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=3000&q=60')",
+        // }}
         aria-hidden="true"
       />
 

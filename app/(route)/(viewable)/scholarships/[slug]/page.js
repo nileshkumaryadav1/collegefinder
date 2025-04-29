@@ -95,7 +95,9 @@ export default async function Page({ params }) {
                 Deadline
               </h2>
               <p className="text-gray-600">
-                {scholarship.deadline?.slice(0, 10)}
+                {scholarship.deadline
+                  ? new Date(scholarship.deadline).toISOString().slice(0, 10)
+                  : "No deadline"}
               </p>
             </div>
 

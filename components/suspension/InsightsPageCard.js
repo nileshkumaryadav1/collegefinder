@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Head from "next/head";
+import DefaultLoading from "../loading/DefaultLoading";
 
 export default function InsightsPageCard() {
   const [posts, setPosts] = useState([]);
@@ -97,8 +98,8 @@ export default function InsightsPageCard() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
         {/* Posts List */}
         {loading ? (
-          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 px-5">
-            Loading...
+          <div className="lg:col-span-3">
+            <DefaultLoading />
           </div>
         ) : posts.length === 0 ? (
           <p className="text-gray-600">
