@@ -17,8 +17,8 @@ export const metadata = {
   description:
     "Explore top colleges, exams, scholarships, placements and more with College Finder. Find your ideal college easily!",
   keywords:
-    "College Finder, Colleges, Exams, Scholarships, Placements, University, Colleges in India",
-  author: "College Finder Team",
+    "College Finder, Find Colleges, Colleges, Exams, Scholarships, Placements, University, Colleges in India, Top Colleges, Best Colleges, Best Colleges in India",
+  author: "Nilesh Kumar",
   twitter: {
     card: "summary_large_image",
   },
@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth" data-theme="cupcake">
       <head>
+        <meta name="application-name" content="College Finder" />
         {/* Google Search Console Verification */}
         <meta
           name="google-site-verification"
