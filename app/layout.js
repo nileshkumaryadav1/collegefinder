@@ -16,6 +16,9 @@ export const metadata = {
   },
   description:
     "Explore top colleges, exams, scholarships, placements and more with College Finder. Find your ideal college easily!",
+  keywords:
+    "College Finder, Colleges, Exams, Scholarships, Placements, University, Colleges in India",
+  author: "College Finder Team",
   twitter: {
     card: "summary_large_image",
   },
