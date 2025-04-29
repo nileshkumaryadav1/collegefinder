@@ -1,5 +1,6 @@
+import { Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
-import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -15,8 +16,8 @@ const Footer = () => {
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-2 text-sm text-gray-700 dark:text-gray-300">
                 {[
-                  { href: "/find-colleges/iits", label: "IIT Colleges" },
-                  { href: "/find-colleges/nits", label: "NIT Colleges" },
+                  { href: "/find-colleges/iits", label: "Explore All IITs" },
+                  { href: "/find-colleges/nits", label: "Explore All NITs" },
                   {
                     href: "/find-colleges/state-wise",
                     label: "State-wise Colleges",
@@ -42,8 +43,8 @@ const Footer = () => {
                     label: "Compare Colleges",
                   },
                   {
-                    href: "/rank-predictor",
-                    label: "Rank Predictor",
+                    href: "/college-predictor",
+                    label: "College Predictor",
                   },
                 ].map(({ href, label }) => (
                   <li key={href}>
@@ -95,7 +96,10 @@ const Footer = () => {
                   <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                     {[
                       { href: "/insights", label: "Latest Insights" },
-                      { href: "/find-news/colleges", label: "Colleges Insights" },
+                      {
+                        href: "/find-news/colleges",
+                        label: "Colleges Insights",
+                      },
                       { href: "/find-news/exams", label: "Exams Insights" },
                       {
                         href: "/find-news/scholarships",
@@ -138,6 +142,10 @@ const Footer = () => {
             </h5>
             <div className="md:mt-3 mt-2 flex space-x-4">
               {[
+                {
+                  href: "/contact-us",
+                  icon: <MessageCircle />,
+                },
                 {
                   href: "https://github.com/nileshkumaryadav1",
                   icon: <FaGithub />,

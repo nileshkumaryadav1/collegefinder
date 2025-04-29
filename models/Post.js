@@ -5,7 +5,11 @@ const PostSchema = new mongoose.Schema({
   slug: { type: String, unique: true, required: true },
   summary: String,
   content: String,
-  tags: [String],
+  tags: {
+    type: String,
+    enum: ["college", "exam", "scholarship"],
+    default: "college",
+  },
   type: { type: String, enum: ["blog", "news", "update"], default: "blog" },
   author: String,
   featured: { type: Boolean, default: false },
@@ -14,10 +18,10 @@ const PostSchema = new mongoose.Schema({
     title: String,
     description: String,
     keywords: [String],
-    image: String
+    image: String,
   },
   createdAt: { type: Date, default: Date.now },
-  updatedAt: Date
+  updatedAt: Date,
 });
 
 export default mongoose.models.Post || mongoose.model("Post", PostSchema);

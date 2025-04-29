@@ -31,13 +31,6 @@ export default function AdminDashboard() {
           Manage Scholarships
         </button>
 
-        <button
-          onClick={() => router.push("/admin/news")}
-          className="bg-red-500 hover:bg-red-600 text-lg text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"
-        >
-          Manage News
-        </button>
-
         <Link
           href="/admin/reviews"
           className="bg-purple-500 hover:bg-purple-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"

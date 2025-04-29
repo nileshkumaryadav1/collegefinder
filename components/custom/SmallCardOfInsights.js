@@ -41,6 +41,9 @@ function SmallCardOfInsights() {
     return () => clearInterval(interval);
   }, [posts]);
 
+  // Slice the posts array to show only the 3 latest posts
+  const latestPosts = posts.slice(0, 3);
+
   return (
     <section>
       {loading ? (
@@ -54,7 +57,7 @@ function SmallCardOfInsights() {
             ref={scrollContainerRef}
             className="flex md:hidden gap-4 overflow-x-auto px-2 pb-4 scroll-smooth"
           >
-            {posts.map((item) => (
+            {latestPosts.map((item) => (
               <Link key={item._id} href={`/insights/${item.slug}`}>
                 <div className="w-[280px] flex-shrink-0 border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer bg-white">
                   <img
@@ -83,7 +86,7 @@ function SmallCardOfInsights() {
 
           {/* Desktop View: Grid */}
           <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-white">
-            {posts.map((item) => (
+            {latestPosts.map((item) => (
               <Link key={item._id} href={`/insights/${item.slug}`}>
                 <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer bg-white">
                   <img

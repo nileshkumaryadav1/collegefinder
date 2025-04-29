@@ -7,12 +7,12 @@ export default function ManageScholarships() {
   const [formData, setFormData] = useState({
     name: "",
     slug: "",
+    level: "graduate",
     about: "",
     amount: "",
     eligibility: "",
     deadline: "",
     officialLink: "",
-    id: "",
   });
 
   const [editSlug, setEditSlug] = useState(null);
@@ -50,7 +50,9 @@ export default function ManageScholarships() {
       const res = await fetch("/api/scholarships", {
         method: editSlug ? "PUT" : "POST", // Use PUT if editing
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editSlug ? { slug: editSlug, ...formData } : formData), // Pass slug for editing
+        body: JSON.stringify(
+          editSlug ? { slug: editSlug, ...formData } : formData
+        ), // Pass slug for editing
       });
 
       const data = await res.json();
@@ -69,7 +71,8 @@ export default function ManageScholarships() {
     if (!confirm("Are you sure you want to delete this scholarship?")) return;
 
     try {
-      const res = await fetch(`/api/scholarships/${slug}`, { // Send the slug in the URL for deletion
+      const res = await fetch(`/api/scholarships/${slug}`, {
+        // Send the slug in the URL for deletion
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
@@ -86,6 +89,7 @@ export default function ManageScholarships() {
     setFormData({
       name: item.name,
       slug: item.slug,
+      level: item.level,
       about: item.about,
       amount: item.amount,
       eligibility: item.eligibility,
@@ -99,6 +103,7 @@ export default function ManageScholarships() {
     setFormData({
       name: "",
       slug: "",
+      level: "graduate",
       about: "",
       amount: "",
       eligibility: "",
@@ -114,11 +119,18 @@ export default function ManageScholarships() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">Manage Scholarships</h1>
+      <h1 className="text-3xl font-bold text-center mb-6">
+        Manage Scholarships
+      </h1>
 
-      {errorMessage && <p className="text-red-500 text-center mb-4">{errorMessage}</p>}
+      {errorMessage && (
+        <p className="text-red-500 text-center mb-4">{errorMessage}</p>
+      )}
 
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-md max-w-2xl mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-800 p-6 rounded-lg shadow-md max-w-2xl mx-auto"
+      >
         <input
           type="text"
           name="name"
@@ -137,6 +149,15 @@ export default function ManageScholarships() {
           className="p-2 bg-gray-700 rounded w-full mb-2"
           required
         />
+        <select
+          name="level"
+          value={formData.level}
+          onChange={handleChange}
+          className="p-2 bg-gray-700 rounded w-full mb-2"
+        >
+          <option value="graduate">Graduate</option>
+          <option value="postgraduate">Post graduate</option>
+        </select>
         <input
           type="text"
           name="about"
@@ -183,23 +204,39 @@ export default function ManageScholarships() {
           className="bg-blue-500 p-2 rounded hover:bg-blue-600 w-full disabled:bg-gray-500"
           disabled={loading}
         >
-          {loading ? "Processing..." : editSlug ? "Update Scholarship" : "Add Scholarship"}
+          {loading
+            ? "Processing..."
+            : editSlug
+              ? "Update Scholarship"
+              : "Add Scholarship"}
         </button>
       </form>
 
       <div className="mt-6 max-w-4xl mx-auto">
         {scholarships.length === 0 ? (
-          <p className="text-center text-gray-400">No scholarships available.</p>
+          <p className="text-center text-gray-400">
+            No scholarships available.
+          </p>
         ) : (
           scholarships.map((scholarship) => (
-            <div key={scholarship.slug} className="flex justify-between bg-gray-800 p-4 rounded shadow mb-3">
+            <div
+              key={scholarship.slug}
+              className="flex justify-between bg-gray-800 p-4 rounded shadow mb-3"
+            >
               <div>
                 <h3 className="text-lg font-bold">
                   {scholarship.name} - ₹{scholarship.amount}
                 </h3>
-                <p className="text-gray-400">{scholarship.slug} | {scholarship.about}</p>
-                <p className="text-green-400">Eligibility: {scholarship.eligibility}</p>
-                <p className="text-yellow-400">Deadline: {scholarship.deadline}</p>
+                <p className="text-gray-400">
+                  {scholarship.slug} | {scholarship.about}
+                </p>
+                <p className="text-gray-400">Level: {scholarship.level}</p>
+                <p className="text-green-400">
+                  Eligibility: {scholarship.eligibility}
+                </p>
+                <p className="text-yellow-400">
+                  Deadline: {scholarship.deadline}
+                </p>
                 <a
                   href={scholarship.officialLink}
                   className="text-blue-400 hover:underline"
@@ -210,10 +247,16 @@ export default function ManageScholarships() {
                 </a>
               </div>
               <div className="flex space-x-3">
-                <button onClick={() => handleEdit(scholarship)} className="text-yellow-400 hover:text-yellow-300">
+                <button
+                  onClick={() => handleEdit(scholarship)}
+                  className="text-yellow-400 hover:text-yellow-300"
+                >
                   <Pencil size={20} />
                 </button>
-                <button onClick={() => handleDelete(scholarship.slug)} className="text-red-400 hover:text-red-300">
+                <button
+                  onClick={() => handleDelete(scholarship.slug)}
+                  className="text-red-400 hover:text-red-300"
+                >
                   <Trash size={20} />
                 </button>
               </div>

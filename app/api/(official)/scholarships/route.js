@@ -11,7 +11,7 @@ const errorResponse = (message, status, error = null) => {
   );
 };
 
-// Get all scholarships
+// GET: Fetch all scholarships
 export async function GET() {
   try {
     await connectToDatabase();
@@ -25,7 +25,7 @@ export async function GET() {
   }
 }
 
-// Create a new scholarship
+// POST: Create a new scholarship
 export async function POST(req) {
   try {
     await connectToDatabase();
@@ -39,16 +39,9 @@ export async function POST(req) {
     console.log("Received data:", body); // Debugging
 
     // Validate required fields
-    if (
-      !body.name ||
-      !body.about ||
-      !body.amount ||
-      !body.eligibility ||
-      !body.deadline ||
-      !body.officialLink
-    ) {
+    if (!body.name) {
       return NextResponse.json(
-        { message: "All fields are required" },
+        { message: "At least name is required" },
         { status: 400 }
       );
     }
@@ -63,7 +56,10 @@ export async function POST(req) {
     }
 
     const newScholarship = await Scholarship.create(body);
-    return NextResponse.json(newScholarship, { status: 201 });
+    return NextResponse.json(
+      { success: true, data: newScholarship },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
@@ -73,15 +69,15 @@ export async function POST(req) {
   }
 }
 
-// Delete a scholarship
+// DELETE: Delete a scholarship by slug
 export async function DELETE(req) {
   try {
     await connectToDatabase();
-    const { id } = await req.json();
+    const { slug } = await req.json();
 
-    if (!id) return errorResponse("Scholarship ID is required", 400);
+    if (!slug) return errorResponse("Scholarship slug is required", 400);
 
-    const deletedScholarship = await Scholarship.findByIdAndDelete(id);
+    const deletedScholarship = await Scholarship.findOneAndDelete({ slug });
     if (!deletedScholarship) return errorResponse("Scholarship not found", 404);
 
     return NextResponse.json(
@@ -93,26 +89,17 @@ export async function DELETE(req) {
   }
 }
 
-// Update a scholarship// Update a scholarship
+// PUT: Update a scholarship by slug
 export async function PUT(req) {
   try {
     await connectToDatabase();
     const body = await req.json();
-    const { id, slug, ...updateData } = body;
+    const { slug, ...updateData } = body;
 
-    if (!id) return errorResponse("Scholarship ID is required", 400);
+    if (!slug) return errorResponse("Scholarship slug is required", 400);
 
-    // If slug is being updated, check for uniqueness
-    if (slug) {
-      const existingScholarship = await Scholarship.findOne({ slug });
-      if (existingScholarship && existingScholarship._id.toString() !== id) {
-        return errorResponse("Scholarship with this slug already exists", 400);
-      }
-    }
-
-    // Update scholarship
-    const updatedScholarship = await Scholarship.findByIdAndUpdate(
-      id,
+    const updatedScholarship = await Scholarship.findOneAndUpdate(
+      { slug },
       updateData,
       { new: true }
     );

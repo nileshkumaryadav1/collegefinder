@@ -2,8 +2,7 @@ import Link from "next/link";
 import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
 import Image from "next/image";
-// import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
-import NewsCardForHome from "@/components/custom/NewsCardForHome";
+import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
 
 export default function Home() {
   const exploreData = [
@@ -65,7 +64,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest News */}
+      {/* Latest Insights */}
       <section className="md:py-12 py-6 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center md:mb-6 mb-4">
@@ -76,8 +75,7 @@ export default function Home() {
               View Insights
             </Link>
           </div>
-          {/* <SmallCardOfInsights /> */}
-          <NewsCardForHome category={"Important"} />
+          <SmallCardOfInsights />
         </div>
       </section>
 

@@ -1,72 +1,90 @@
-// app/(route)/(viewable)/colleges/[slug]/page.js
 import SingleCollegeCard from "@/components/custom/SingleCollegeCard";
 import NotFound from "@/components/custom/NotFound";
+// import { connectDB } from "@/utils/db"; // MongoDB connection utility
+import College from "@/models/College"; // Mongoose College model
+import connectToDatabase from "@/lib/mongodb";
 
-// export async function generateStaticParams() {
-//   const res = await fetch(`https://collegefinder.site/api/colleges`);
-//   const colleges = await res.json();
+// Generate static params for all colleges
+export async function generateStaticParams() {
+  try {
+    await connectToDatabase(); // Connect to MongoDB
 
-//   return colleges.map((college) => ({
-//     slug: college.slug,
-//   })).slice(0, 15);
-// }
+    // Fetch college slugs from MongoDB
+    const colleges = await College.find({}, "slug").limit(15); // Get only the 'slug' field
 
-export async function generateMetadata({ params }) {
-  const slug = params.slug;
+    // Return the slugs in the required format for static generation
+    return colleges.map((college) => ({
+      slug: college.slug,
+    }));
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/colleges/${slug}`
-  );
-
-  if (!res.ok) {
-    console.log("error");
+  } catch (error) {
+    console.error("generateStaticParams DB error:", error);
+    return []; // Fallback to empty array if error occurs
   }
+}
 
-  const data = await res.json();
-  const college = data.data;
+// Generate metadata for each college page
+export async function generateMetadata({ params }) {
+  const { slug } = params;
 
-  if (!college)
+  try {
+    await connectToDatabase(); // Connect to MongoDB
+
+    // Fetch the specific college based on slug
+    const college = await College.findOne({ slug }).exec();
+
+    if (!college) {
+      return {
+        title: "College not found",
+        description: "College not found",
+      };
+    }
+
+    // Metadata based on college
+    return {
+      title: `${college.name} - College Finder`,
+      description: `${college.name} - Fees, placements, cutoffs, admission process, courses, and more.`,
+      openGraph: {
+        images: [
+          {
+            url: college.imageUrl,
+            width: 800,
+            height: 600,
+          },
+        ],
+      },
+    };
+
+  } catch (error) {
+    console.error("generateMetadata DB error:", error);
     return {
       title: "College not found",
       description: "College not found",
     };
-
-  return {
-    title: college.name + " - College Finder",
-    description: `${college.name} - Fees, placemets, cutoffs, admission process, courses, and more.`,
-    openGraph: {
-      images: [
-        {
-          url: college.imageUrl,
-          width: 800,
-          height: 600,
-        },
-      ],
-    },
-  };
+  }
 }
 
+// Default page to render for each college slug
 export default async function DetailCollegeCard({ params }) {
-  const slug = params.slug;
+  const { slug } = params;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/colleges/${slug}`
-  );
+  try {
+    await connectToDatabase(); // Connect to MongoDB
 
-  if (!res.ok) {
-    console.log(res);
+    // Fetch the college based on slug
+    const college = await College.findOne({ slug }).exec();
+
+    if (!college) return <NotFound />; // Render NotFound if no college is found
+
+    return (
+      <section className="text-gray-600 body-font w-full overflow-hidden bg-gray-100">
+        <div className="md:max-w-11/12 mx-auto md:p-6">
+          <SingleCollegeCard college={college} />
+        </div>
+      </section>
+    );
+  } catch (error) {
+    console.error("Page DB error:", error);
+    return <NotFound />;
   }
-
-  const data = await res.json();
-  const college = data.data;
-
-  if (!college) return <NotFound />;
-
-  return (
-    <section className="text-gray-600 body-font w-full overflow-hidden bg-gray-100">
-      <div className="md:max-w-11/12 mx-auto md:p-6">
-        <SingleCollegeCard college={college} />
-      </div>
-    </section>
-  );
 }

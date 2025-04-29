@@ -2,35 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import ScholarshipCard from "@/components/custom/ScholarshipCard";
 
 export default function GraduationScholarshipsPage() {
   const [scholarships, setScholarships] = useState([]);
   const [filteredScholarships, setFilteredScholarships] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchScholarships = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch("/api/scholarships");
-        const data = await res.json();
-
-        const graduationOnly = data.filter((item) =>
-          item.level?.toLowerCase().includes("graduation")
-        );
-
-        setScholarships(graduationOnly);
-        setFilteredScholarships(graduationOnly);
-      } catch (error) {
-        console.error("Error fetching scholarships:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchScholarships();
-  }, []);
+  const [level, setLevel] = useState("graduate");
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -70,33 +48,7 @@ export default function GraduationScholarshipsPage() {
         />
       </div>
 
-      {/* Count */}
-      <div className="text-center text-lg font-medium text-gray-700 mb-6">
-        Total Scholarships: {filteredScholarships.length}
-      </div>
-
-      {/* loading indicator */}
-      {loading && <p className="text-center p-30>">Loading...</p>}
-
-      {/* Scholarships Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredScholarships.map((item) => (
-          <Link key={item._id} href={`/scholarships/${item._id}`}>
-            <div className="border rounded-lg shadow hover:shadow-lg p-6 cursor-pointer transition-transform hover:scale-105">
-              <h2 className="text-xl font-semibold text-blue-700 mb-2">
-                {item.name}
-              </h2>
-              <p className="text-gray-600 mb-1">
-                {item.description?.slice(0, 100)}...
-              </p>
-              <p className="text-sm text-gray-500">Level: {item.level}</p>
-              <p className="text-sm text-gray-500">
-                Deadline: {item.deadline || "N/A"}
-              </p>
-            </div>
-          </Link>
-        ))}
-      </div>
+      <ScholarshipCard query={searchQuery} />
 
       {/* Promo Section */}
       <div className="bg-yellow-500 text-black text-center py-4 mt-10 rounded-lg shadow-lg">
