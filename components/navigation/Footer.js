@@ -159,14 +159,14 @@ const Footer = () => {
                   icon: <FaInstagram />,
                 },
               ].map(({ href, icon }, i) => (
-                <a
+                <Link
                   key={i}
                   href={href}
-                  target="_blank"
+                  aria-label="Social Media Link"
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition text-2xl"
                 >
                   {icon}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

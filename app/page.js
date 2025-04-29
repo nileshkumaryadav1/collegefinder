@@ -136,7 +136,7 @@ export default function Home() {
             {/* Sponsored by */}
           </h2>
           <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-4 mx-auto">
-            <h4 className="text-md font-bold text-blue-700 mb-2 text-center">
+            <h4 className="text-2xl font-bold text-blue-700 mb-2 text-center">
               Advertisement
             </h4>
             <Link href="/sponsors" className="hover:underline md:flex gap-4">
@@ -162,7 +162,7 @@ export default function Home() {
                 className="rounded-lg object-cover mx-auto pb-4 md:pb-0 hidden md:block"
               />
             </Link>
-            <p className="text-xs text-gray-500 mt-2 text-center">
+            <p className="text-sm text-gray-900 mt-2 text-center">
               Sponsored Content
             </p>
           </div>
