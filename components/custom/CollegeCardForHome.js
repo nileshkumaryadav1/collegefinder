@@ -101,9 +101,11 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
                   #{college.nirfRanking}
                 </span>
               </div>
-              <img
+              <Image
                 src={college.imageUrl}
                 alt="College Image"
+                width={280}
+                height={200}
                 className="w-full h-40 object-cover rounded-md mb-4"
               />
               <h2 className="md:text-md text-sm font-bold mb-1">{college.name}</h2>
@@ -126,18 +128,22 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
           >
             <Link href={`/colleges/${college.slug}`}>
               <div className="flex items-center justify-between mb-4">
-                <img
+                <Image
                   src={college.logoUrl}
                   alt={`${college.name} logo`}
+                  width={40}
+                  height={40}
                   className="w-16 h-16 object-contain rounded"
                 />
                 <span className="text-sm font-medium text-gray-600 btn btn-primary">
                   #{college.nirfRanking}
                 </span>
               </div>
-              <img
+              <Image
                 src={college.imageUrl}
                 alt={college.name}
+                width={400}
+                height={400}
                 className="w-full h-40 object-cover rounded-md mb-4"
               />
               <h2 className="text-md font-bold mb-1">{college.name}</h2>

@@ -133,12 +133,12 @@ export default function Home() {
       <section className="md:py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-semibold mb-8 underline decoration-sky-500/30 hover:decoration-sky-500 text-gray-800 dark:text-white">
-            {/* Sponsored by */}
+            Advertisement
           </h2>
           <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-4 mx-auto">
-            <h4 className="text-2xl font-bold text-blue-700 mb-2 text-center">
+            {/* <h4 className="text-2xl font-bold text-blue-700 mb-2 text-center">
               Advertisement
-            </h4>
+            </h4> */}
             <Link href="/sponsors" className="hover:underline md:flex gap-4">
               <Image
                 src="/sponsors.jpg"

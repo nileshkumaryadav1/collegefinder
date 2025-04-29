@@ -35,12 +35,10 @@ export default function HomeHero() {
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="w-full px-6 md:py-4 py-3 rounded-lg bg-white/90 dark:bg-gray-800 text-black dark:text-white md:font-semibold border border-gray-300 dark:border-gray-700 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-500 transition-all"
-            aria-label="Open Search Modal"
+            className="w-full md:px-6 px-4 md:py-4 py-3 rounded-lg bg-white/90 dark:bg-gray-800 text-black dark:text-white md:font-semibold border border-gray-300 dark:border-gray-700 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-500 transition-all"
+            aria-label="Open Search Modal Button"
           >
-            <p className="md:text-lg text-xs">
-              Search Colleges, Exams & Scholarships...
-            </p>
+            Search Colleges, Exams & Scholarships...
           </button>
 
           <SearchModal

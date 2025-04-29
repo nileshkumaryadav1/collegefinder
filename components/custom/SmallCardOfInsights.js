@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -60,9 +61,11 @@ function SmallCardOfInsights() {
             {latestPosts.map((item) => (
               <Link key={item._id} href={`/insights/${item.slug}`}>
                 <div className="w-[280px] flex-shrink-0 border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer bg-white">
-                  <img
+                  <Image
                     src={item.thumbnail}
                     alt="Thumbnail"
+                    width={200}
+                    height={200}
                     className="mx-auto h-20"
                   />
                   <h2 className="text-sm md:text-md font-bold text-blue-700 mb-2">
@@ -89,9 +92,11 @@ function SmallCardOfInsights() {
             {latestPosts.map((item) => (
               <Link key={item._id} href={`/insights/${item.slug}`}>
                 <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer bg-white">
-                  <img
+                  <Image
                     src={item.thumbnail}
                     alt={item.title}
+                    width={200}
+                    height={200}
                     className="mx-auto h-20"
                   />
                   <h2 className="text-md font-bold text-blue-700 mb-2">
