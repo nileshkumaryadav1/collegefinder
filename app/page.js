@@ -3,6 +3,7 @@ import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
 import Image from "next/image";
 import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
+import SponsorsCard from "@/components/custom/SponsorsCard";
 
 export default function Home() {
   const exploreData = [
@@ -130,48 +131,23 @@ export default function Home() {
       </section>
 
       {/* Advertisement */}
-      <section className="md:py-12 px-4">
+      <section className="md:py-12 py-4 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-semibold mb-8 underline decoration-sky-500/30 hover:decoration-sky-500 text-gray-800 dark:text-white">
-            Advertisement
-          </h2>
-          <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-4 mx-auto">
-            {/* <h4 className="text-2xl font-bold text-blue-700 mb-2 text-center">
-              Advertisement
-            </h4> */}
-            <Link href="/sponsors" className="hover:underline md:flex gap-4">
-              <Image
-                src="/sponsors.jpg"
-                alt="Ad Banner"
-                width={300}
-                height={150}
-                className="rounded-lg object-cover mx-auto pb-4 md:pb-0"
-              />
-              <Image
-                src="/sponsors.jpg"
-                alt="Ad Banner"
-                width={300}
-                height={150}
-                className="rounded-lg object-cover mx-auto pb-4 md:pb-0 hidden md:block"
-              />
-              <Image
-                src="/sponsors.jpg"
-                alt="Ad Banner"
-                width={300}
-                height={150}
-                className="rounded-lg object-cover mx-auto pb-4 md:pb-0 hidden md:block"
-              />
+          <div className="flex justify-between items-center">
+            <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
+              Our Sponsors
+            </h2>
+            <Link href="/sponsors" className="text-blue-600 hover:underline">
+              Sponsor Us
             </Link>
-            <p className="text-sm text-gray-900 mt-2 text-center">
-              Sponsored Content
-            </p>
           </div>
+          <SponsorsCard />
         </div>
       </section>
 
       {/* Footer Section */}
       <footer className="mt-12 text-center text-gray-600">
-        <p className="text-sm">
+        <p className="text-sm px-2">
           Sponsored by <strong>College Finder</strong> | Helping you achieve
           your career goals.
         </p>
