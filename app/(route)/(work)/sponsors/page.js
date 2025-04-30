@@ -2,51 +2,28 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SponsorsPage() {
   const [sponsors, setSponsors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const mockSponsors = [
-    {
-      _id: "1",
-      name: "TechCorp",
-      logoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsUTHAz2ss7DkM30-1UvfvZTbYhBQIAOLoMw&s",
-      description: "Leading the way in tech innovation.",
-      website: "https://techcorp.com",
-    },
-    {
-      _id: "2",
-      name: "Innovative Solutions",
-      logoUrl: "https://media.licdn.com/dms/image/v2/C4E0BAQGlxtdYQ8pgVQ/company-logo_200_200/company-logo_200_200/0/1630568662986/innovative_solutions_group_inc_logo?e=2147483647&v=beta&t=faStjHrmbMqdI0Twi-Q1oE2Hv1wJnGJ86clejQ0fjKY",
-      description: "Pioneers in IT solutions.",
-      website: "https://innovativesolutions.com",
-    },
-  ];
-
   useEffect(() => {
-    setSponsors(mockSponsors);
-    setLoading(false);
+    const fetchSponsors = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch("/api/sponsors");
+        const data = await res.json();
+        setSponsors(data);
+      } catch (error) {
+        console.error("Error fetching sponsors:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSponsors();
   }, []);
-
-  // useEffect(() => {
-  //   const fetchSponsors = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const res = await fetch("/api/sponsors");
-  //       const data = await res.json();
-  //       setSponsors(data);
-  //     } catch (error) {
-  //       console.error("Error fetching sponsors:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchSponsors();
-  // }, []);
-
-  if (loading) return <div className="text-center p-30">Loading...</div>;
 
   return (
     <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-white text-gray-800">
@@ -61,31 +38,48 @@ export default function SponsorsPage() {
         </p>
       </div>
 
+      {/* Loading */}
+      {loading && (
+        <div className="flex justify-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900"></div>
+        </div>
+      )}
+
+      {/* No Sponsors */}
+      {!loading && sponsors.length === 0 && (
+        <div className="text-center text-gray-500 text-lg">
+          No sponsors found.
+        </div>
+      )}
+
       {/* Sponsor Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sponsors.map((sponsor) => (
-          <div key={sponsor._id}>
-            <div className="border rounded-lg shadow-md p-6 hover:shadow-lg transition-all cursor-pointer">
-              <img
-                src={sponsor.logoUrl}
+          <div
+            key={sponsor._id}
+            className="hover:scale-105 transition-transform duration-300"
+          >
+            <div className="border rounded-lg shadow-md p-6 hover:shadow-lg transition-all cursor-pointer bg-white">
+              <Image
+                src={sponsor.imageUrl}
                 alt={sponsor.name}
+                width={200}
+                height={200}
                 className="w-full h-40 object-contain mb-4"
               />
               <h2 className="text-xl font-semibold text-blue-700">
                 {sponsor.name}
               </h2>
-              <p className="text-gray-600 text-sm mb-2">
-                {sponsor.description}
-              </p>
+              <p className="text-gray-600 text-sm mb-2">{sponsor.about}</p>
               <p className="text-sm text-gray-500">
                 <span className="font-medium">Website:</span>{" "}
                 <a
-                  // href={sponsor.website}
+                  href={sponsor.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
                 >
-                  {sponsor.website}
+                  {sponsor.websiteUrl}
                 </a>
               </p>
             </div>
@@ -99,8 +93,8 @@ export default function SponsorsPage() {
           Want to become a sponsor?
         </h2>
         <p className="text-sm mt-2 mb-4 text-gray-700">
-          If you are interested in sponsoring our upcoming events, we would love to
-          partner with you.
+          If you are interested in sponsoring our upcoming events, we would love
+          to partner with you.
         </p>
         <Link
           href="/sponsor-us"

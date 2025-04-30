@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Head from "next/head";
+import Image from "next/image";
 
 function FilterScholarship() {
   const [posts, setPosts] = useState([]);
@@ -45,7 +46,8 @@ function FilterScholarship() {
           Scholarship Insights
         </h1>
         <p className="text-gray-500 text-lg">
-          Get the latest <strong>News, Updates, Notice and Blogs</strong> on scholarships across India.
+          Get the latest <strong>News, Updates, Notice and Blogs</strong> on
+          scholarships across India.
         </p>
       </div>
 
@@ -88,7 +90,13 @@ function FilterScholarship() {
           posts.map((item) => (
             <Link key={item._id} href={`/insights/${item.slug}`}>
               <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer">
-                <img src={item.thumbnail} alt={item.title} className="" />
+                <Image
+                  src={item.thumbnail}
+                  alt={item.title}
+                  width={500}
+                  height={500}
+                  className=""
+                />
                 <h2 className="text-xl font-bold text-blue-700 mb-2">
                   {item.title}
                 </h2>

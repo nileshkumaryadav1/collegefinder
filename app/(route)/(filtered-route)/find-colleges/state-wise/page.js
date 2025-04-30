@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 // All 28 states + 9 union territories
 const statesAndUTs = [
@@ -150,18 +151,22 @@ function Page() {
           >
             <Link href={`/colleges/${college.slug}`}>
               <div className="flex items-center justify-between mb-4">
-                <img
+                <Image
                   src={college.logoUrl}
                   alt={`${college.name} logo`}
+                  width={100}
+                  height={100}
                   className="w-16 h-16 object-contain rounded"
                 />
                 <span className="text-sm font-medium text-gray-600 btn btn-primary">
                   #{college.nirfRanking}
                 </span>
               </div>
-              <img
+              <Image
                 src={college.imageUrl}
                 alt={college.name}
+                width={400}
+                height={300}
                 className="w-full h-40 object-cover rounded-md mb-4"
               />
               <h2 className="text-md font-bold mb-1">{college.name}</h2>

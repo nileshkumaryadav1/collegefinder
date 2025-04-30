@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Head from "next/head";
+import Image from "next/image";
 
 function FilterExam() {
   const [posts, setPosts] = useState([]);
@@ -131,9 +132,11 @@ function FilterExam() {
             posts.map((item) => (
               <Link key={item._id} href={`/insights/${item.slug}`}>
                 <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer bg-white">
-                  <img
+                  <Image
                     src={item.thumbnail}
                     alt={item.title}
+                    width={500}
+                    height={500}
                     className="mb-4 rounded-md w-full h-40 object-cover"
                   />
                   <h2 className="text-xl font-bold text-blue-700 mb-2">

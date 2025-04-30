@@ -1,5 +1,5 @@
 module.exports = {
-    darkMode: "class", // or 'media' but 'class' gives you full control
+    darkMode: "class",
     content: [
       "./app/**/*.{js,ts,jsx,tsx}",
       "./components/**/*.{js,ts,jsx,tsx}",

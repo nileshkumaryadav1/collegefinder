@@ -39,9 +39,11 @@ function ExamCard({ query }) {
             <Link href={`/exams/${exam.slug}`}>
               {/* Conditionally rendering image */}
               {exam.imageUrl ? (
-                <img
+                <Image
                   src={exam.imageUrl}
                   alt={exam.name}
+                  width={400}
+                  height={300}
                   className="h-40 mx-auto mt-2 rounded object-cover"
                 />
               ) : (

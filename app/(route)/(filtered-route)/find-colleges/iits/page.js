@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
+import Image from "next/image";
 
 function Page() {
   const [colleges, setColleges] = useState([]);
@@ -89,9 +90,11 @@ function Page() {
           <Link key={college.slug} href={`/colleges/${college.slug}`}>
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-blue-400 transition-transform transform hover:scale-[1.03] duration-200 ease-in-out overflow-hidden cursor-pointer">
               <div className="p-6">
-                <img
+                <Image
                   src={college.image}
                   alt={college.name}
+                  width={500}
+                  height={500}
                   className=""
                 />
                 <h2 className="text-2xl font-bold text-blue-700 mb-1">

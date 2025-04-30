@@ -1,6 +1,7 @@
 {
   "name": "collegefinder",
   "version": "3.0.1",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

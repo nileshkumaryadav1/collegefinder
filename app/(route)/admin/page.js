@@ -44,6 +44,13 @@ export default function AdminDashboard() {
         >
           Manage Insights
         </Link>
+
+        <Link
+          href="/admin/sponsors"
+          className="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
+        >
+          Manage Sponsors
+        </Link>
       </div>
     </div>
   );

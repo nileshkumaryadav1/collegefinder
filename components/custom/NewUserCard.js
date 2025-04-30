@@ -6,6 +6,7 @@ import Link from "next/link";
 import EditProfileModal from "./EditProfileModal";
 
 import { Instagram, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 const UserCardAlt = ({ user }) => {
   const router = useRouter();
@@ -46,9 +47,11 @@ const UserCardAlt = ({ user }) => {
 
   return (
     <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-50 shadow-lg rounded-2xl p-6 flex flex-col md:flex-row md:gap-6 items-center justify-between w-full mx-auto md:max-w-3xl">
-      <img
+      <Image
         src={user.profileImage ? user.profileImage : "/default-user.jpg"}
         alt={user.name}
+        width={100}
+        height={100}
         className="w-24 h-24 rounded-full border-4 border-white shadow-md"
       />
 

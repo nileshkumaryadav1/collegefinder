@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Head from "next/head";
 import DefaultLoading from "../loading/DefaultLoading";
+import Image from "next/image";
 
 export default function InsightsPageCard() {
   const [posts, setPosts] = useState([]);
@@ -115,7 +116,13 @@ export default function InsightsPageCard() {
                   aria-label="View Post"
                 >
                   <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer">
-                    <img src={item.thumbnail} alt="Post Image" className="" />
+                    <Image
+                      src={item.thumbnail}
+                      alt="Post Image"
+                      width={500}
+                      height={500}
+                      className=""
+                    />
                     <h2 className="text-xl font-bold text-blue-700 mb-2">
                       {item.title}
                     </h2>
@@ -169,9 +176,11 @@ export default function InsightsPageCard() {
               href="/sponsors"
               className="block hover:opacity-90 transition"
             >
-              <img
+              <Image
                 src="/sponsors.jpg"
                 alt="Sponsored Ad"
+                width={500}
+                height={500}
                 className="rounded-lg w-full h-auto object-cover"
               />
             </Link>

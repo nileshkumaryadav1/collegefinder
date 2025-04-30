@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 function FilterCollege() {
   const [posts, setPosts] = useState([]);
@@ -100,9 +101,11 @@ function FilterCollege() {
           <Link key={item._id} href={`/insights/${item.slug}`}>
             <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer">
               {item.thumbnail && (
-                <img
+                <Image
                   src={item.thumbnail}
                   alt={item.title}
+                  width={500}
+                  height={500}
                   className="w-full h-48 object-cover rounded mb-3"
                 />
               )}

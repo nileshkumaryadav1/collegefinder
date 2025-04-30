@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function AddCollegePage() {
   const [colleges, setColleges] = useState([]);
@@ -407,9 +408,11 @@ export default function AddCollegePage() {
                 className="bg-white rounded-lg shadow-md p-4 flex flex-col mb-2"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <img
+                  <Image
                     src={college.logoUrl}
                     alt={`${college.name} logo`}
+                    width={100}
+                    height={100}
                     className="w-16 h-16 object-contain rounded"
                   />
                   <span className="text-sm font-medium text-gray-600">
@@ -417,9 +420,11 @@ export default function AddCollegePage() {
                   </span>
                 </div>
 
-                <img
+                <Image
                   src={college.imageUrl}
                   alt={college.name}
+                  width={400}
+                  height={300}
                   className="w-full h-40 object-cover rounded-md mb-4"
                 />
 
@@ -502,19 +507,42 @@ export default function AddCollegePage() {
                 </p>
 
                 <div className="my-3">
-                  <img
+                  <Image
                     src={college.placementRatio}
                     alt="Placement Ratio"
+                    width={400}
+                    height={300}
                     className="w-full h-20 object-cover rounded-md"
                   />
-                  <img
+                  <Image
                     src={college.pastRecruitor}
                     alt="Past Recruitor"
+                    width={400}
+                    height={300}
                     className="w-full h-20 object-cover rounded-md"
                   />
                 </div>
 
-                <div>{college.virtualTourLink}</div>
+                {/* <div>{college.virtualTourLink}</div> */}
+                {/* virtual tour */}
+                {college.virtualTourLink && (
+                  <section id="virtualTour" title="🎥 Virtual Tour">
+                    <div className="">
+                      {/* <h2 className="text-2xl font-bold mb-4">🎥 Virtual Tour</h2> */}
+                      <div className="aspect-w-16 aspect-h-9">
+                        <iframe
+                          src={college.virtualTourLink.replace(
+                            "watch?v=",
+                            "embed/"
+                          )}
+                          title="Virtual College Tour"
+                          allowFullScreen
+                          className="w-full h-30 rounded-lg shadow-md"
+                        ></iframe>
+                      </div>
+                    </div>
+                  </section>
+                )}
 
                 <div className="mt-auto flex justify-between items-center">
                   <a

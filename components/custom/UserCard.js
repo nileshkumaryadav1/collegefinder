@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import EditProfileModal from "./EditProfileModal";
+import Image from "next/image";
 
 export default function UserDashboardCard({ user }) {
   const router = useRouter();
@@ -25,9 +26,11 @@ export default function UserDashboardCard({ user }) {
         {/* Profile Section */}
         <div className="mb-6 text-center flex flex-col items-center">
           <div className="w-24 h-24 rounded-full border-3 border-blue-400 overflow-hidden mb-4">
-            <img
+            <Image
               src={user.profileImage ? user.profileImage : "/hero.jpg"}
               alt="Profile"
+              width={100}
+              height={100}
               className="w-full h-full object-cover"
             />
           </div>

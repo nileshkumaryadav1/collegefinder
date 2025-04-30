@@ -1,4 +1,5 @@
 import { Mail, MessageCircle } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { FaInstagram, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 
@@ -176,9 +177,11 @@ const Footer = () => {
         <div className="text-center md:mt-8 mt-3 border-t border-gray-300 dark:border-gray-700 pt-4 flex flex-col items-center justify-center">
           <div className="flex items-center gap-3 mb-4">
             <Link href="/">
-              <img
+              <Image
                 src="/logo.jpg"
                 alt="College finder"
+                width={48}
+                height={48}
                 className="w-12 h-12 rounded-full"
               />
             </Link>

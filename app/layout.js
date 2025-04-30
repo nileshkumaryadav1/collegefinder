@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL("https://collegefinder.site"),
   title: {
     default: "College Finder - Find Your Ideal College",
     template: "%s | College Finder",
@@ -18,9 +19,43 @@ export const metadata = {
     "Explore top colleges, exams, scholarships, placements and more with College Finder. Find your ideal college easily!",
   keywords:
     "College Finder, Find Colleges, Colleges, Exams, Scholarships, Placements, University, Colleges in India, Top Colleges, Best Colleges, Best Colleges in India",
-  author: "Nilesh Kumar",
+  authors: [{ name: "Nilesh Kumar", url: "https://collegefinder.site" }],
+  creator: "Nilesh Kumar",
+  openGraph: {
+    title: "College Finder - Find Your Ideal College",
+    description:
+      "Discover and compare colleges across India by courses, fees, placements, reviews, and more.",
+    url: "https://collegefinder.site",
+    siteName: "College Finder",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "College Finder – Discover Top Colleges in India",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
   twitter: {
     card: "summary_large_image",
+    title: "College Finder - Find Your Ideal College",
+    description:
+      "Search, compare and choose the best colleges in India with real data on placements, courses, and scholarships.",
+    creator: "@collegefinder",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      maxVideoPreview: -1,
+      maxImagePreview: "large",
+      maxSnippet: -1,
+    },
   },
 };
 

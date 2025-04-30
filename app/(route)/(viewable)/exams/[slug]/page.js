@@ -2,6 +2,7 @@ import NotFound from "@/components/custom/NotFound";
 import Link from "next/link";
 import Exam from "@/models/Exam"; // Mongoose Exam model
 import connectToDatabase from "@/lib/mongodb";
+import Image from "next/image";
 
 // Generate static params for all exams
 export async function generateStaticParams() {
@@ -15,7 +16,6 @@ export async function generateStaticParams() {
     return exams.map((exam) => ({
       slug: exam.slug,
     }));
-
   } catch (error) {
     console.error("generateStaticParams DB error:", error);
     return []; // Fallback to empty array if error occurs
@@ -53,7 +53,6 @@ export async function generateMetadata({ params }) {
         ],
       },
     };
-
   } catch (error) {
     console.error("generateMetadata DB error:", error);
     return {
@@ -78,9 +77,11 @@ export default async function Page({ params }) {
     return (
       <div className="max-w-4xl mx-auto p-6">
         {exam.imageUrl && (
-          <img
+          <Image
             src={exam.imageUrl}
             alt={exam.name}
+            width={800}
+            height={600}
             className="w-full object-cover object-center border rounded-lg shadow-md"
           />
         )}

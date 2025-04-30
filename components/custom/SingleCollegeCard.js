@@ -39,9 +39,11 @@ const SingleCollegeCard = ({ college }) => {
       {/* Header Section */}
       <div className="w-full bg-white border rounded-lg shadow-md overflow-hidden">
         <div className="relative w-full h-64 md:h-96">
-          <img
+          <Image
             src={college.imageUrl}
             alt="College Image"
+            width={1300}
+            height={500}
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
@@ -148,9 +150,11 @@ const SingleCollegeCard = ({ college }) => {
 
       {/* About */}
       <Section id="about" title={`About ${college.name}`}>
-        <img
+        <Image
           src={college.imageUrl}
           alt="College Image"
+          width={1000}
+          height={600}
           className="mb-3 rounded-lg shadow md:w-5/6 mx-auto"
         />
         <p className="text-gray-700 leading-relaxed md:text-lg max-w-5xl mx-auto text-justify">

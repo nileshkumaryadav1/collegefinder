@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const CollegeComparison = () => {
@@ -124,9 +125,11 @@ const CollegeComparison = () => {
             >
               <div className="flex items-center mb-4">
                 {college.logoUrl && (
-                  <img
+                  <Image
                     src={college.logoUrl}
                     alt={college.name}
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-full mr-3"
                   />
                 )}
@@ -134,9 +137,11 @@ const CollegeComparison = () => {
               </div>
 
               {college.imageUrl && (
-                <img
+                <Image
                   src={college.imageUrl}
                   alt={`${college.name} campus`}
+                  width={400}
+                  height={300}
                   className="w-full h-40 object-cover rounded-lg mb-4"
                 />
               )}

@@ -1,6 +1,7 @@
 import NotFound from "@/components/custom/NotFound";
 import Post from "@/models/Post"; // Mongoose Post model
 import connectToDatabase from "@/lib/mongodb";
+import Image from "next/image";
 
 // Generate static params for all insights
 export async function generateStaticParams() {
@@ -86,9 +87,11 @@ export default async function Page({ params }) {
 
           <section className="bg-white shadow-sm rounded-lg border border-gray-200 p-6 mb-10">
             {post.thumbnail && (
-              <img
+              <Image
                 src={post.thumbnail}
                 alt={post.title}
+                width={800}
+                height={600}
                 className="w-full h-auto rounded-md mb-4 object-cover"
               />
             )}

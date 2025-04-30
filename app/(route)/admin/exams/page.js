@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function AddExamPage() {
   const router = useRouter();
@@ -231,9 +232,11 @@ export default function AddExamPage() {
                 className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex flex-col"
               >
                 {exam.imageUrl && (
-                  <img
+                  <Image
                     src={exam.imageUrl}
                     alt={exam.name}
+                    width={400}
+                    height={300}
                     className="h-40 w-full object-cover rounded mb-4"
                   />
                 )}

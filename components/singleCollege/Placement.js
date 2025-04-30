@@ -1,4 +1,5 @@
 import { Building, FileText, Users } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 function Placement({ college }) {
@@ -42,9 +43,11 @@ function Placement({ college }) {
             <span className="font-semibold">NIRF Report</span>
           </div>
         </a>
-        <img
+        <Image
           src={college.placementRatio}
           alt="Placement Ratio Image"
+          width={1000}
+          height={1000}
           className="rounded-md shadow max-w-4/5 mx-auto mb-8"
         />
 
@@ -54,9 +57,11 @@ function Placement({ college }) {
             <span className="font-semibold">Past Recruiters:</span>
           </div>
         </p>
-        <img
+        <Image
           src={college.pastRecruitor}
           alt="Past Recruiters Image"
+          width={1000}
+          height={1000}
           className="rounded-md shadow max-w-4/5 mx-auto"
         />
       </Section>

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
   const [colleges, setColleges] = useState([]);
@@ -76,9 +77,11 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
             className="bg-white rounded-lg shadow-md p-4 flex flex-col mb-2"
           >
             <div className="flex items-center justify-between mb-4">
-              <img
+              <Image
                 src={college.logoUrl}
                 alt="College logo"
+                width={50}
+                height={50}
                 className="w-16 h-16 object-contain rounded"
               />
               {college.nirfRanking && (
@@ -89,9 +92,11 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
             </div>
 
             <Link href={`/colleges/${college.slug}`}>
-              <img
+              <Image
                 src={college.imageUrl}
                 alt="Engineering College Image"
+                width={500}
+                height={500}
                 className="w-full h-40 object-cover rounded-md mb-4"
               />
             </Link>
