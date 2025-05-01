@@ -16,6 +16,7 @@ export default function AddExamPage() {
     website: "",
     imageUrl: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [exams, setExams] = useState([]);
@@ -30,6 +31,7 @@ export default function AddExamPage() {
         setExams(data);
       } catch (error) {
         console.error(error);
+        setMessage("❌ Failed to load exams");
       }
     };
 
@@ -40,7 +42,6 @@ export default function AddExamPage() {
     const { name, value } = e.target;
 
     if (name === "name") {
-      // Auto-generate slug from name
       const generatedSlug = value
         .toLowerCase()
         .replace(/\s+/g, "-")
@@ -49,7 +50,11 @@ export default function AddExamPage() {
       setFormData((prev) => ({
         ...prev,
         name: value,
-        slug: prev.slug ? prev.slug : generatedSlug, // Only auto-fill if slug is empty
+        slug:
+          prev.slug === "" ||
+          prev.slug === prev.name.toLowerCase().replace(/\s+/g, "-")
+            ? generatedSlug
+            : prev.slug,
       }));
     } else {
       setFormData((prev) => ({
@@ -64,9 +69,8 @@ export default function AddExamPage() {
     setLoading(true);
     setMessage("");
 
-    // Basic manual validation
     if (!formData.name || !formData.slug || !formData.type || !formData.date) {
-      setMessage("Please fill all required fields.");
+      setMessage("❌ Please fill all required fields.");
       setLoading(false);
       return;
     }
@@ -81,7 +85,6 @@ export default function AddExamPage() {
       if (!res.ok) throw new Error("Failed to add exam");
       setMessage("✅ Exam added successfully!");
 
-      // Reset form
       setFormData({
         name: "",
         slug: "",
@@ -93,18 +96,16 @@ export default function AddExamPage() {
         imageUrl: "",
       });
 
-      // Refresh exams list
       const newExams = await fetch("/api/exams").then((res) => res.json());
       setExams(newExams);
     } catch (error) {
       console.error(error);
-      setMessage("❌ Error adding exam");
+      setMessage(`❌ Error adding exam: ${error.message}`);
     }
 
     setLoading(false);
   };
 
-  // Delete exam
   const handleDelete = async (slug) => {
     if (!confirm("Are you sure you want to delete this exam?")) return;
 
@@ -116,14 +117,17 @@ export default function AddExamPage() {
       setMessage("✅ Exam deleted successfully!");
     } catch (error) {
       console.error(error);
-      setMessage("❌ Error deleting exam");
+      setMessage(`❌ Error deleting exam: ${error.message}`);
     }
   };
 
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white shadow-md rounded-lg py-10 my-10">
       {/* Add Exam Form */}
-      <form onSubmit={handleSubmit} className="grid gap-4 bg-gray-100 p-6 rounded">
+      <form
+        onSubmit={handleSubmit}
+        className="grid gap-4 bg-gray-100 p-6 rounded"
+      >
         <h1 className="text-2xl font-bold mb-4 text-center">Add a New Exam</h1>
         {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
 
@@ -179,12 +183,13 @@ export default function AddExamPage() {
           required
         />
 
-        <textarea
+        <input
+          type="url"
           name="syllabus"
-          placeholder="Syllabus Details"
+          placeholder="Syllabus PDF Link"
           value={formData.syllabus}
           onChange={handleChange}
-          className="border p-2 rounded w-full h-24"
+          className="border p-2 rounded w-full"
           required
         />
 
@@ -207,13 +212,34 @@ export default function AddExamPage() {
           className="border p-2 rounded w-full"
         />
 
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg"
-          disabled={loading}
-        >
-          {loading ? "Adding..." : "Add Exam"}
-        </button>
+        <div className="flex gap-4">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg w-full"
+            disabled={loading}
+          >
+            {loading ? "Adding..." : "Add Exam"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              setFormData({
+                name: "",
+                slug: "",
+                type: "",
+                date: "",
+                eligibility: "",
+                syllabus: "",
+                website: "",
+                imageUrl: "",
+              })
+            }
+            className="bg-gray-300 hover:bg-gray-400 text-black p-2 rounded-lg w-full"
+          >
+            Clear
+          </button>
+        </div>
       </form>
 
       {/* Manage Exams Section */}
@@ -228,7 +254,7 @@ export default function AddExamPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {exams.map((exam) => (
               <div
-                key={exam.slug}
+                key={exam.slug || exam._id}
                 className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex flex-col"
               >
                 {exam.imageUrl && (
@@ -241,7 +267,9 @@ export default function AddExamPage() {
                   />
                 )}
 
-                <h3 className="text-lg font-semibold text-gray-800 mb-1">{exam.name}</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                  {exam.name}
+                </h3>
 
                 <p className="text-sm text-gray-500 mb-1">
                   <strong>Type:</strong> {exam.type}
@@ -253,10 +281,14 @@ export default function AddExamPage() {
                   <strong>Date:</strong> {exam.date}
                 </p>
                 <p className="text-sm text-gray-500 mb-1">
-                  <strong>Eligibility:</strong> {exam.eligibility?.slice(0, 80) + "..."}
+                  <strong>Eligibility:</strong>{" "}
+                  {exam.eligibility
+                    ? exam.eligibility.slice(0, 80) + "..."
+                    : "N/A"}
                 </p>
                 <p className="text-sm text-gray-500 mb-1">
-                  <strong>Syllabus:</strong> {exam.syllabus?.slice(0, 80) + "..."}
+                  <strong>Syllabus:</strong>{" "}
+                  {exam.syllabus ? exam.syllabus.slice(0, 30) + "..." : "N/A"}
                 </p>
 
                 <a

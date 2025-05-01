@@ -27,9 +27,7 @@ function ExamCard({ query }) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {exams
         .filter((exam) => {
-          return (
-            exam.name?.toLowerCase().includes(query.toLowerCase())
-          );
+          return exam.name?.toLowerCase().includes(query.toLowerCase());
         })
         .map((exam) => (
           <div
@@ -62,12 +60,18 @@ function ExamCard({ query }) {
                 <p className="text-gray-600 text-sm mb-2">
                   <strong>Category:</strong> {exam.type}
                 </p>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-gray-600 text-sm mb-1">
                   <strong>Eligibility:</strong> {exam.eligibility?.slice(0, 40)}
                   ...
                 </p>
                 <p className="text-gray-600 text-sm mb-4">
-                  <strong>Syllabus:</strong> {exam.syllabus?.slice(0, 40)}...
+                  <strong>Syllabus: </strong>
+                  <Link
+                    href={exam.syllabus}
+                    className="text-blue-500 hover:text-blue-700"
+                  >
+                    View Syllabus
+                  </Link>
                 </p>
 
                 {/* View Details Link */}

@@ -93,7 +93,12 @@ export default async function Page({ params }) {
         <p className="text-gray-800 mt-2 text-justify">
           Eligibility: {exam.eligibility}
         </p>
-        <p className="mt-4 text-justify">Syllabus: {exam.syllabus}</p>
+        <p className="mt-4 text-justify">
+          Syllabus:{""}
+          <Link href={exam.syllabus} className="text-blue-700">
+            View Syllabus
+          </Link>
+        </p>
         <div className="flex justify-between">
           <Link
             href="/exams"

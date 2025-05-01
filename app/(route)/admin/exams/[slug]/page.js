@@ -139,9 +139,10 @@ export default function EditExamPage() {
           className="border p-3 rounded w-full"
           required
         />
-        <textarea
+        <input
+          type="url"
           name="syllabus"
-          placeholder="Syllabus Overview"
+          placeholder="Syllabus PDF URL"
           value={formData.syllabus}
           onChange={handleChange}
           className="border p-3 rounded w-full h-28"
