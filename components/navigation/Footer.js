@@ -1,7 +1,13 @@
 import { Mail, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaInstagram, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaLinkedin,
+  FaGithub,
+  FaTwitter,
+  FaFacebook,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -148,15 +154,15 @@ const Footer = () => {
                   icon: <MessageCircle />,
                 },
                 {
-                  href: "https://github.com/nileshkumaryadav1",
-                  icon: <FaGithub />,
+                  href: "https://facebook.com/collegefinder_official",
+                  icon: <FaFacebook />,
                 },
                 {
-                  href: "https://linkedin.com/in/nileshkumar123",
+                  href: "https://linkedin.com/in/collegefinder",
                   icon: <FaLinkedin />,
                 },
                 {
-                  href: "https://instagram.com/nileshnayan_",
+                  href: "https://instagram.com/collegefinder_official",
                   icon: <FaInstagram />,
                 },
               ].map(({ href, icon }, i) => (

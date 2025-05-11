@@ -2,7 +2,7 @@
 
 Welcome to **College Finder** – a platform designed to help students research and explore colleges, exams, and scholarships with ease. Our goal is to provide accurate and up-to-date information to assist students in making informed decisions about their education.
 
-🌍 **Live Website:** [College Finder](https://collegefinder.vercel.app)
+🌍 **Live Website:** [College Finder](https://collegefinder.site)
 
 ## 🚀 Features
 - 🔍 **Search & Explore** – Find colleges based on location, courses, and ranking.
@@ -18,7 +18,7 @@ Welcome to **College Finder** – a platform designed to help students research 
 - **Frontend:** Next.js (App Router), React, Tailwind
 - **Backend:** Express.js, Node.js, MongoDB
 - **Authentication:** JWT-based authentication
-- **Email System:** Brevo (SMTP for emails)
+- **Email System:** Nodemailer (SMTP for emails)
 - **Hosting:** Vercel
 
 ## 🔧 Installation & Setup
