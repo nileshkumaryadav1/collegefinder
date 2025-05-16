@@ -1,17 +1,18 @@
-import { Mail, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   FaInstagram,
   FaLinkedin,
-  FaGithub,
   FaTwitter,
   FaFacebook,
+  FaYoutube,
 } from "react-icons/fa";
+import Top from "../ad/Top";
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 py-8 transition-colors duration-300">
+    <footer className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 pt-8 transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="flex justify-center md:justify-between md:flex-row flex-col md:gap-10 gap-6">
           {/* combining for mobile style */}
@@ -154,16 +155,24 @@ const Footer = () => {
                   icon: <MessageCircle />,
                 },
                 {
-                  href: "https://facebook.com/collegefinder_official",
+                  href: "https://instagram.com/collegefinder_official",
+                  icon: <FaInstagram />,
+                },
+                {
+                  href: "https://www.facebook.com/findercollege/",
                   icon: <FaFacebook />,
                 },
                 {
-                  href: "https://linkedin.com/in/collegefinder",
+                  href: "https://x.com/findercollege",
+                  icon: <FaTwitter />,
+                },
+                {
+                  href: "https://www.linkedin.com/in/collegefinder",
                   icon: <FaLinkedin />,
                 },
                 {
-                  href: "https://instagram.com/collegefinder_official",
-                  icon: <FaInstagram />,
+                  href: "https://www.youtube.com/channel/UCDigkzXi0gI66dmT2PZyWvw",
+                  icon: <FaYoutube />,
                 },
               ].map(({ href, icon }, i) => (
                 <Link
@@ -180,7 +189,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="text-center md:mt-8 mt-3 border-t border-gray-300 dark:border-gray-700 pt-4 flex flex-col items-center justify-center">
+        <div className="text-center md:mt-8 mt-3 mb-4 border-t border-gray-300 dark:border-gray-700 pt-4 flex flex-col items-center justify-center">
           <div className="flex items-center gap-3 mb-4">
             <Link href="/">
               <Image
@@ -222,6 +231,9 @@ const Footer = () => {
           </p>
         </div>
       </div>
+
+      {/* Ad */}
+      <Top />
     </footer>
   );
 };

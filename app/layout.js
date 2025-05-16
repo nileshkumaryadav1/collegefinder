@@ -6,6 +6,7 @@ import Footer from "@/components/navigation/Footer";
 import MobileNavbar from "@/components/navigation/MobileNavbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+// import PopUp from "@/components/ad/PopUp";
 
 const geist = Geist({ subsets: ["latin"] });
 
@@ -73,6 +74,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geist.className} bg-gray-100 dark:bg-gray-900 antialiased`}
       >
+        {/* <PopUp /> */}
         <Navbar />
         <main className="mt-16">{children}</main>
         <MobileNavbar />

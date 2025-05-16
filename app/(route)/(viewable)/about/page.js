@@ -6,11 +6,11 @@ import Link from "next/link";
 export const metadata = {
   title: "About",
   description: "Learn more about College Finder.",
-}
+};
 
 export default function AboutUs() {
   return (
-    <div className="h-auto md:h-150 bg-gray-100 dark:bg-gray-900 md:py-12 py-4">
+    <div className="h-auto md:min-h-screen bg-gray-100 dark:bg-gray-900 md:py-12 py-4">
       <div className="max-w-5xl mx-auto px-6">
         {/* Page Title */}
         <h1 className="md:text-4xl text-2xl font-bold text-center text-gray-900 dark:text-white md:mb-8 mb-4">
@@ -18,11 +18,25 @@ export default function AboutUs() {
         </h1>
 
         {/* Description */}
-        <p className="text-lg text-gray-700 dark:text-gray-300 text-center md:mb-10 mb-4">
-          College Finder is your go-to platform for discovering top colleges and exams
-          across various fields. We help students make informed decisions 
+        <p className="text-lg text-gray-700 dark:text-gray-300 text-center">
+          College Finder is your go-to platform for discovering top colleges and
+          exams across various fields. We help students make informed decisions
           about their academic future with accurate and up-to-date information.
         </p>
+
+        {/* Contact Section */}
+        <div className="mb-8 w-full flex flex-col justify-center items-center">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+            Contact Us
+          </h2>
+          <p className="text-center">
+            If you have any questions or feedback, please do not hesitate to
+            reach out to us.
+          </p>
+          <Link href="/contact-us">
+            <p className="text-blue-500 underline">Contact Us</p>
+          </Link>
+        </div>
 
         {/* Developer Section */}
         <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-8 text-center">
@@ -37,21 +51,33 @@ export default function AboutUs() {
             Meet the Developer
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mt-2">
-            This project is developed by <strong>Nilesh Kumar</strong>, 
-            a passionate NextJS full stack developer dedicated to building 
-            modern, high-performance web applications.
+            This project is developed by <strong>Nilesh Kumar</strong>, a
+            passionate NextJS full stack developer dedicated to building modern,
+            high-performance web applications.
           </p>
 
           {/* Social Links */}
           <div className="flex justify-center gap-6 mt-4">
-            <Link href="https://www.instagram.com/nileshnayan_/" target="_blank">
-              <Instagram className="text-gray-900 dark:text-white hover:text-blue-500 transition" size={28} />
+            <Link
+              href="https://www.instagram.com/nileshnayan_/"
+              target="_blank"
+            >
+              <Instagram
+                className="text-gray-900 dark:text-white hover:text-blue-500 transition"
+                size={28}
+              />
             </Link>
             <Link href="https://github.com/nileshkumaryadav1" target="_blank">
-              <Github className="text-gray-900 dark:text-white hover:text-blue-500 transition" size={28} />
+              <Github
+                className="text-gray-900 dark:text-white hover:text-blue-500 transition"
+                size={28}
+              />
             </Link>
             <Link href="https://linkedin.com/in/nileshkumar123" target="_blank">
-              <Linkedin className="text-gray-900 dark:text-white hover:text-blue-500 transition" size={28} />
+              <Linkedin
+                className="text-gray-900 dark:text-white hover:text-blue-500 transition"
+                size={28}
+              />
             </Link>
           </div>
         </div>
