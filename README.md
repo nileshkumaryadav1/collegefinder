@@ -35,12 +35,14 @@ To run this project locally, follow these steps:
    npm install
    ```
 
-3. **Set Up Environment Variables** (Create a `.env` file and add the required variables)
-   ```
+### 3. **Set Up Environment Variables**
 
+Create a `.env` file in the root directory of your project and add the following environment variables:
+
+```env
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
-MONGODB_URI = mongodb://localhost:27017/collegefinder
+MONGODB_URI=mongodb://localhost:27017/collegefinder
 JWT_SECRET=YOUR_JWT_SECRET
 
 SENDER_EMAIL=YOUR_EMAIL
@@ -49,10 +51,7 @@ SENDER_EMAIL_APP_PASSWORD=YOUR_EMAIL_APP_PASSWORD
 EMAIL_USER=YOUR_EMAIL
 EMAIL_PASS=YOUR_EMAIL_APP_PASSWORD
 
-MONGO_URI=localhost:27017/collegefinder
 SESSION_SECRET=YOUR_SESSION_SECRET
-
-   ```
 
 4. **Run the Development Server**
    ```bash
