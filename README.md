@@ -37,13 +37,21 @@ To run this project locally, follow these steps:
 
 3. **Set Up Environment Variables** (Create a `.env` file and add the required variables)
    ```
-   NEXT_PUBLIC_API_URL=your_backend_api_url
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   BREVO_SMTP_HOST=smtp-relay.brevo.com
-   BREVO_SMTP_PORT=587
-   BREVO_SMTP_USER=your_brevo_email
-   BREVO_SMTP_PASS=your_brevo_smtp_key
+
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+MONGODB_URI = mongodb://localhost:27017/collegefinder
+JWT_SECRET=YOUR_JWT_SECRET
+
+SENDER_EMAIL=YOUR_EMAIL
+SENDER_EMAIL_APP_PASSWORD=YOUR_EMAIL_APP_PASSWORD
+
+EMAIL_USER=YOUR_EMAIL
+EMAIL_PASS=YOUR_EMAIL_APP_PASSWORD
+
+MONGO_URI=localhost:27017/collegefinder
+SESSION_SECRET=YOUR_SESSION_SECRET
+
    ```
 
 4. **Run the Development Server**
@@ -71,7 +79,7 @@ Check out our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📬 Contact
 For any questions or support, reach out to us:
-- Email: nileshkumarextra@gmail.com
+- Email: collegefindermail@gmail.com
 - GitHub Issues: [Report an Issue](https://github.com/nileshkumaryadav1/collegefinder/issues)
 
 Happy coding! 🎓🚀

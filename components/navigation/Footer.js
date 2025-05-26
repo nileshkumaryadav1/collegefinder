@@ -2,11 +2,8 @@ import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  FaInstagram,
-  FaLinkedin,
-  FaTwitter,
-  FaFacebook,
-  FaYoutube,
+  FaMailBulk,
+  FaPhone,
 } from "react-icons/fa";
 import Top from "../ad/Top";
 
@@ -143,10 +140,10 @@ const Footer = () => {
               accurate and up-to-date information.
             </p>
           </div>
-          {/* Social Media */}
+          {/* Contact Us */}
           <div className="flex flex-col justify-center md:justify-start items-center my-4">
             <h5 className="text-lg font-semibold text-black dark:text-white">
-              Follow Us
+              Reach Us
             </h5>
             <div className="md:mt-3 mt-2 flex space-x-4">
               {[
@@ -155,25 +152,13 @@ const Footer = () => {
                   icon: <MessageCircle />,
                 },
                 {
-                  href: "https://instagram.com/collegefinder_official",
-                  icon: <FaInstagram />,
+                  href: "mailto:collegefindermail@gmail.com",
+                  icon: <FaMailBulk />,
                 },
                 {
-                  href: "https://www.facebook.com/findercollege/",
-                  icon: <FaFacebook />,
-                },
-                {
-                  href: "https://x.com/findercollege",
-                  icon: <FaTwitter />,
-                },
-                {
-                  href: "https://www.linkedin.com/in/collegefinder",
-                  icon: <FaLinkedin />,
-                },
-                {
-                  href: "https://www.youtube.com/channel/UCDigkzXi0gI66dmT2PZyWvw",
-                  icon: <FaYoutube />,
-                },
+                  href: "tel:6205530252",
+                  icon: <FaPhone />,
+                }
               ].map(({ href, icon }, i) => (
                 <Link
                   key={i}

@@ -10,6 +10,15 @@ export default function AdmissionPredictorPage() {
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(null);
 
+   const [category, setCategory] = useState("");
+   const categories = [
+    "General",
+    "OBC-NCL",
+    "General-EWS",
+    "Scheduled Castes",
+    "Scheduled Tribes",
+  ];
+
   useEffect(() => {
     const fetchColleges = async () => {
       try {
@@ -62,6 +71,19 @@ export default function AdmissionPredictorPage() {
         onSubmit={handlePrediction}
         className="w-full max-w-xl bg-white p-8 rounded-2xl shadow-lg flex flex-col gap-6 mb-16"
       >
+                <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-lg"
+        >
+          <option value="">Select your category</option>
+          {categories.map((cat, idx) => (
+            <option key={idx} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
         <input
           type="number"
           min="0"

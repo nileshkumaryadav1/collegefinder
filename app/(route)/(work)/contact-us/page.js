@@ -52,7 +52,7 @@ export default function ContactPage() {
         {/* Company Support */}
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <h3 className="text-xl font-semibold mb-2 text-blue-700">Support</h3>
-          <p className="text-gray-700 mb-1">Phone: +91 98765 43210</p>
+          <p className="text-gray-700 mb-1">Phone: +91 62055 30252</p>
           <p className="text-gray-700">Support Email: collegefindermail@gmail.com</p>
         </div>
 

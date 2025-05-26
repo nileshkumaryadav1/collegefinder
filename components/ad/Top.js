@@ -52,9 +52,7 @@ function Top() {
       {/* Right: Subscribe + Close */}
       <div className="flex items-center gap-2 sm:gap-3">
         <Link
-          href="https://www.youtube.com/@collegefinder_official"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/sponsors"
           className="bg-white text-red-600 font-medium px-2 py-1 rounded text-xs sm:text-sm hover:bg-gray-100 transition shadow"
         >
           Subscribe
