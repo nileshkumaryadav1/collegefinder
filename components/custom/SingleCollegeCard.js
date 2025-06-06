@@ -15,21 +15,19 @@ import {
   Wallet,
   Landmark,
   School,
-  Building,
   Phone,
   Mail,
-  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import CollegeCardForHome from "./CollegeCardForHome";
 import ExamCardSmall from "./ExamCardSmall";
 import FAQs from "./FaQs";
 import ReviewRating from "./ReviewRating";
-// import SmallCardOfInsights from "./SmallCardOfInsights";
 import Cutoff from "../singleCollege/Cutoff";
 import Placement from "../singleCollege/Placement";
 import FeeStructure from "../singleCollege/FeeStructure";
 import Image from "next/image";
+import SmallCardOfInsights from "./SmallCardOfInsights";
 
 const SingleCollegeCard = ({ college }) => {
   const [liked, setLiked] = useState(false);
@@ -462,7 +460,7 @@ const SingleCollegeCard = ({ college }) => {
       </section>
 
       {/* important insights */}
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200 hidden">
+      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
             Important Insights
@@ -472,7 +470,7 @@ const SingleCollegeCard = ({ college }) => {
             View Updates
           </Link>
           <div className="max-w-5xl mx-auto">
-            {/* <SmallCardOfInsights /> */}
+            <SmallCardOfInsights />
           </div>
         </div>
       </section>

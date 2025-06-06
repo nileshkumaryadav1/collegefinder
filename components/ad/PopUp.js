@@ -19,7 +19,7 @@ function PopUp() {
           alt="College Finder Logo"
           width={200}
           height={200}
-          className="mx-auto mb-4 h-20"
+          className="mx-auto h-20 w-20"
         />
 
         {/* Welcome Message */}

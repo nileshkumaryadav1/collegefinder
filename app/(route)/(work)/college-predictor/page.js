@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function AdmissionPredictorPage() {
@@ -10,8 +11,8 @@ export default function AdmissionPredictorPage() {
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(null);
 
-   const [category, setCategory] = useState("");
-   const categories = [
+  const [category, setCategory] = useState("");
+  const categories = [
     "General",
     "OBC-NCL",
     "General-EWS",
@@ -39,29 +40,61 @@ export default function AdmissionPredictorPage() {
 
   const handlePrediction = (e) => {
     e.preventDefault();
-    if (!score) return;
+    if (!score || !category) return;
 
     setIsLoading(true);
 
-    const results = colleges.map((college) => ({
-      name: college.name,
-      year: college.year,
-      eligible: parseInt(score) >= college.cutOff ? "Eligible" : "Not Eligible",
-      cutOff: college.cutOff,
-    }));
+    const categoryMap = {
+      General: 0,
+      "OBC-NCL": 1,
+      "General-EWS": 2,
+      "Scheduled Castes": 3,
+      "Scheduled Tribes": 4,
+    };
+
+    const catIndex = categoryMap[category];
+
+    const results = colleges
+      .map((college) => {
+        const cutOffs = college.cutOff
+          .split(",")
+          .map((c) => parseInt(c.trim(), 10));
+        const categoryCutoff = cutOffs[catIndex];
+
+        const isEligible = parseInt(score) <= categoryCutoff;
+
+        return isEligible
+          ? {
+              name: college.name,
+              slug: college.slug,
+              year: college.year,
+              location: college.location,
+              phone: college.phone,
+              email: college.email,
+              nirfRanking: college.nirfRanking,
+              imageUrl: college.imageUrl,
+              logoUrl: college.logoUrl,
+              cutOff: college.cutOff,
+              eligible: "Eligible",
+              _id: college._id,
+            }
+          : null;
+      })
+      .filter((college) => college !== null);
 
     setPredictedColleges(results);
+
     setIsLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col items-center py-12 px-6">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col items-center md:py-12 py-6 px-6">
       {/* Hero */}
-      <div className="max-w-2xl text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-4">
+      <div className="max-w-2xl text-center md:mb-12 mb-6">
+        <h1 className="text-2xl md:text-5xl font-bold text-blue-800 md:mb-4">
           College Admission Predictor
         </h1>
-        <p className="text-gray-600 text-lg md:text-xl">
+        <p className="text-gray-600 text-sm md:text-lg">
           Enter your exam score and find colleges you are eligible for!
         </p>
       </div>
@@ -69,13 +102,16 @@ export default function AdmissionPredictorPage() {
       {/* Input Form */}
       <form
         onSubmit={handlePrediction}
-        className="w-full max-w-xl bg-white p-8 rounded-2xl shadow-lg flex flex-col gap-6 mb-16"
+        className="w-full max-w-xl bg-white p-8 rounded-2xl shadow-lg flex flex-col gap-6 md:mb-16 mb-8"
       >
-                <select
+        <p className="text-gray-600 text-xs">
+          * Only General categories are working now.
+        </p>
+        <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-lg"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
         >
           <option value="">Select your category</option>
           {categories.map((cat, idx) => (
@@ -87,10 +123,10 @@ export default function AdmissionPredictorPage() {
         <input
           type="number"
           min="0"
-          placeholder="Enter your score..."
+          placeholder="Enter your JEE Adv. Rank..."
           value={score}
           onChange={(e) => setScore(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-lg"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
           required
         />
         <button
@@ -109,6 +145,7 @@ export default function AdmissionPredictorPage() {
         </div>
       )}
 
+      {/* Predicted college result */}
       {/* Loading */}
       {isFetching ? (
         <div className="text-gray-500 text-lg">Loading colleges...</div>
@@ -116,24 +153,80 @@ export default function AdmissionPredictorPage() {
         <>
           {/* Prediction Results */}
           {predictedColleges.length > 0 && (
-            <section className="w-full max-w-6xl mb-20">
-              <h2 className="text-3xl font-bold text-green-700 text-center mb-10">
-                Prediction Results
+            <section className="w-full max-w-6xl md:mb-20 md:mb-10 mb-6">
+              <h2 className="text-2xl font-bold text-green-700 text-center">
+                Predicted Colleges
               </h2>
+              <p className="md:text-xl text-md text-gray-600 md:mb-10 mb-6 text-center">
+                Based on your score: <strong>{score}</strong>, CSE in these
+                colleges are :
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {predictedColleges.map((college, index) => (
                   <div
                     key={index}
-                    className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition"
+                    className="flex flex-col h-full p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition border border-gray-200"
                   >
-                    <h3 className="text-xl font-bold text-blue-700 mb-2">
-                      {college.name}
-                    </h3>
-                    <p className="text-gray-600 mb-1">
-                      Cut-off Score: {college.cutOff}
-                    </p>
+                    <div className="flex flex-col items-center">
+                      {/* College Logo */}
+                      <img
+                        src={college.logoUrl || "/logo.png"}
+                        alt={`Logo`}
+                        className="w-25 h-25"
+                      />
+
+                      {/* College Name */}
+                      <h3 className="text-lg md:text-xl font-bold text-blue-800 mb-2 text-center line-clamp-2">
+                        {college.name}
+                      </h3>
+
+                      {/* Location */}
+                      <p className="text-sm text-gray-600 mb-2">
+                        {college.location}
+                      </p>
+                    </div>
+
+                    {/* Cut-off Section */}
+                    <div className="text-sm text-gray-700 mb-3">
+                      <p className="font-semibold text-gray-600">
+                        Cut-off Ranks:
+                      </p>
+                      <ul className="pl-4 list-disc space-y-1 mt-1 flex">
+                        {college.cutOff
+                          .split(",")
+                          .filter((c) => c.trim().length > 0)
+                          .map((cut, idx) => (
+                            <li key={idx} className="text-sm text-gray-800 pr-5">
+                              {cut.trim()}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+
+                    {/* Facilities (optional) */}
+                    {college.facilities && (
+                      <div className="mb-3">
+                        <p className="font-semibold text-gray-600 text-sm mb-1">
+                          Facilities:
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {college.facilities
+                            .split(",")
+                            .map((facility, idx) => (
+                              <span
+                                key={idx}
+                                className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full"
+                              >
+                                {facility.trim()}
+                              </span>
+                            ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Eligibility */}
                     <p
-                      className={`font-semibold ${
+                      className={`mt-auto font-semibold text-sm ${
                         college.eligible === "Eligible"
                           ? "text-green-600"
                           : "text-red-500"
@@ -141,23 +234,35 @@ export default function AdmissionPredictorPage() {
                     >
                       {college.eligible}
                     </p>
+
+                    {/* View Details Button */}
+                    <Link
+                      href={`/colleges/${college.slug}`}
+                      className="mt-3 inline-block text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition"
+                    >
+                      View Details →
+                    </Link>
                   </div>
                 ))}
               </div>
+
+              <p className="md:text-xl text-md text-gray-600 md:mt-10 mt-4 text-center">
+                {predictedColleges.length > 8 ? "more Colleges..." : ""}
+              </p>
             </section>
           )}
 
           {/* Previous Year Cut-offs */}
           <section className="w-full max-w-6xl">
-            <h2 className="text-3xl font-bold text-blue-800 text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-blue-800 text-center md:mb-10 mb-3">
               Previous Year Cut-offs
             </h2>
 
-            <p className="text-gray-700 text-sm italic">
+            <p className="text-gray-700 text-xs md:text-sm italic">
               * Below are the JOSAA 2024 round 5 closing ranks for male-only
               candidates, specific to the CSE (B.Tech) program.
             </p>
-            <p className="text-gray-700 text-sm mb-4 italic">
+            <p className="text-gray-700 text-xs md:text-sm mb-4 italic">
               * All mentioned ranks are category-wise.
             </p>
 
@@ -174,20 +279,24 @@ export default function AdmissionPredictorPage() {
                   <tbody>
                     {colleges.map((college, idx) => (
                       <tr key={idx} className="border-b hover:bg-gray-50">
-                        <td className="px-6 py-4">{college.name}</td>
-                        <td className="px-6 py-4">{college.year || 2024}</td>
-                        <td className="px-6 py-4">
+                        <td className="md:px-6 px-4 md:py-4 py-2 text-xs md:text-sm">
+                          {college.name}
+                        </td>
+                        <td className="md:px-6 px-4 md:py-4 py-2 text-xs md:text-sm">
+                          {college.year || 2024}
+                        </td>
+                        <td className="md:px-6 px-4 md:py-4 py-2 text-xs md:text-sm">
                           <Table
-                            head={["Category", "Cut Offs"]}
+                            // head={["Category", "Cut Offs"]}
                             rows={[
                               [
                                 <ul key="category-list">
                                   {[
                                     "General",
                                     "OBC-NCL",
-                                    "General-EWS",
-                                    "Scheduled Castes",
-                                    "Scheduled Tribes",
+                                    "G-EWS",
+                                    "SC",
+                                    "ST",
                                   ].map((category, index) => (
                                     <li key={index} className="mb-1 border-b">
                                       {category}

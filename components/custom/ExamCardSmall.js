@@ -87,7 +87,7 @@ function ExamCardSmall({ query = "", collegeType = "", sortBy = "", sortOrder = 
         {loading ? (
           <p className="text-center py-10">Loading...</p>
         ) : (
-          filteredExams.map((exam) => (
+          filteredExams.slice(0, 3).map((exam) => (
             <div
               key={exam.slug}
               className="w-[280px] flex-shrink-0 bg-white rounded-lg shadow-md p-4"
@@ -114,7 +114,7 @@ function ExamCardSmall({ query = "", collegeType = "", sortBy = "", sortOrder = 
         <p className="text-center py-10">Loading...</p>
       ) : (
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredExams.map((exam) => (
+          {filteredExams.slice(0, 3).map((exam) => (
             <div
               key={exam.slug}
               className="bg-white rounded-lg shadow-md p-4 flex flex-col"

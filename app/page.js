@@ -4,6 +4,7 @@ import HomeHero from "@/components/custom/HomeHero";
 import Image from "next/image";
 import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
 import SponsorsCard from "@/components/custom/SponsorsCard";
+import PopUp from "@/components/ad/PopUp";
 
 export default function Home() {
   const exploreData = [
@@ -35,6 +36,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200">
+      <PopUp />
+      
       {/* Hero Section */}
       <HomeHero />
 
