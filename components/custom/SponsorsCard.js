@@ -33,8 +33,7 @@ export default function SponsorsCard() {
           Our Esteemed Sponsors
         </h1>
         <p className="text-gray-500 text-sm">
-          We are grateful for the support of our sponsors who make everything
-          possible.
+          We are grateful for the support of our sponsors who make everything possible.
         </p>
       </div>
 
@@ -48,9 +47,7 @@ export default function SponsorsCard() {
 
       {/* No Sponsors */}
       {!loading && sponsors.length === 0 && (
-        <div className="text-center text-gray-500 text-lg">
-          No sponsors found.
-        </div>
+        <div className="text-center text-gray-500 text-lg">No sponsors found.</div>
       )}
 
       {/* Sponsor Grid */}
@@ -58,34 +55,34 @@ export default function SponsorsCard() {
         {sponsors.map((sponsor) => (
           <div
             key={sponsor._id}
-            className="hover:scale-105 transition-transform duration-300"
+            className="group transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl rounded-2xl bg-white border p-6"
           >
-            <div className="border rounded-lg shadow-md p-6 hover:shadow-lg transition-all cursor-pointer bg-white">
-              <Link href="/sponsors">
+            <Link href="/sponsors">
+              <div className="w-full h-40 overflow-hidden flex items-center justify-center mb-4">
                 <Image
                   src={sponsor.imageUrl}
                   alt={sponsor.name}
                   width={200}
                   height={200}
-                  className="w-full h-40 object-contain mb-2"
+                  className="object-contain h-full transition-transform duration-300 group-hover:scale-105"
                 />
-              </Link>
-              <h2 className="md:text-xl text-md font-semibold text-blue-700">
-                {sponsor.name}
-              </h2>
-              <p className="text-gray-600 text-sm mb-2">{sponsor.about}</p>
-              <p className="text-sm text-gray-500">
-                <span className="font-medium">Website:</span>{" "}
-                <a
-                  href={sponsor.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  {sponsor.websiteUrl}
-                </a>
-              </p>
-            </div>
+              </div>
+            </Link>
+            <h2 className="md:text-xl text-md font-semibold text-blue-700 mb-1">
+              {sponsor.name}
+            </h2>
+            <p className="text-gray-600 text-sm mb-2">{sponsor.about}</p>
+            <p className="text-sm text-gray-500">
+              <span className="font-medium">Website:</span>{" "}
+              <a
+                href={sponsor.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                {sponsor.websiteUrl}
+              </a>
+            </p>
           </div>
         ))}
       </div>
@@ -96,8 +93,7 @@ export default function SponsorsCard() {
           Want to become a sponsor?
         </h2>
         <p className="text-sm mt-2 mb-4 px-2 text-gray-700">
-          If you are interested in sponsoring our upcoming events, we would love
-          to partner with you.
+          If you are interested in sponsoring our upcoming events, we would love to partner with you.
         </p>
         <Link
           href="/sponsor-us"

@@ -65,17 +65,27 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
 
   return (
     <section>
-      {/* Total Colleges */}
       <div className="text-center text-lg font-medium text-gray-700 mb-2">
         <p>Total Colleges: {filteredColleges.length}</p>
       </div>
+
       {loading && <p className="text-center p-10">Loading Colleges...</p>}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredColleges.map((college) => (
-          <div
+          <Link
             key={college.slug}
-            className="bg-white rounded-lg shadow-md p-4 flex flex-col mb-2"
+            href={`/colleges/${college.slug}`}
+            className="block bg-white rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-4 relative"
           >
+            {/* Featured Ribbon */}
+            {college.nirfRanking && college.nirfRanking <= 100 && (
+              <div className="absolute top-2 left-2 bg-yellow-400 text-white text-xs font-bold px-2 py-1 rounded shadow">
+                ⭐ Featured
+              </div>
+            )}
+
+            {/* Logo & Rank */}
             <div className="flex items-center justify-between mb-4">
               <Image
                 src={college.logoUrl}
@@ -85,58 +95,47 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
                 className="w-16 h-16 object-contain rounded"
               />
               {college.nirfRanking && (
-                <span className="text-sm font-medium text-gray-600 btn btn-primary">
+                <span className="text-sm font-medium text-gray-600 border border-blue-500 text-blue-600 px-2 py-1 rounded-full">
                   #{college.nirfRanking}
                 </span>
               )}
             </div>
 
-            <Link href={`/colleges/${college.slug}`}>
+            {/* Cover Image */}
+            <div className="overflow-hidden rounded-md mb-4">
               <Image
                 src={college.imageUrl}
                 alt="Engineering College Image"
                 width={500}
                 height={500}
-                className="w-full h-40 object-cover rounded-md mb-4"
+                className="w-full h-40 object-cover transition-transform duration-300 hover:scale-105"
               />
-            </Link>
+            </div>
 
-            <Link
-              href={`/colleges/${college.slug}`}
-              aria-label="view full College details"
-            >
-              <h2 className="text-xl font-bold mb-1">{college.name}</h2>
-            </Link>
-
+            {/* Name & Location */}
+            <h2 className="text-xl font-bold mb-1 hover:text-blue-700 transition">
+              {college.name}
+            </h2>
             <p className="text-gray-600 text-sm mb-2">{college.location}</p>
 
+            {/* Description */}
             <p className="text-sm text-gray-700 mb-2">
               <span className="font-semibold">Description:</span>{" "}
               {college.description
-                ? college.description?.slice(0, 100) + "..."
+                ? college.description.slice(0, 100) + "..."
                 : "No description available."}
             </p>
 
-            <div className="mt-auto flex justify-between items-center">
-              {college.websiteUrl && (
-                <a
-                  href={college.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 font-medium hover:underline"
-                >
-                  Visit Website
-                </a>
-              )}
-              <Link
-                href={`/colleges/${college.slug}`}
-                className="btn btn-primary my-1"
-                aria-label="view full College details"
-              >
-                View full Details →
-              </Link>
+            {/* Tags & Button */}
+            <div className="mt-2 text-xs font-medium flex justify-between">
+              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                {college.type}
+              </span>
+              <span className="bg-blue-600 text-white text-sm px-4 py-1 rounded-md">
+                View Details
+              </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

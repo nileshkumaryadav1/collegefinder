@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion"; // Framer Motion import
 
 function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
   const [colleges, setColleges] = useState([]);
@@ -37,7 +38,7 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
       ) {
         container.scrollTo({ left: 0, behavior: "smooth" });
       }
-    }, 3000); // scroll every 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [colleges]);
@@ -75,24 +76,25 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
 
   return (
     <div>
-      {/* Mobile View: Horizontal Scroll with auto scroll */}
+      {/* Mobile View: Horizontal Scroll */}
       <div
         ref={scrollContainerRef}
         className="flex md:hidden gap-4 overflow-x-auto px-2 pb-4 scroll-smooth"
       >
-        {/* loading indicator */}
         {loading && <p className="text-center p-30 hidden">Loading...</p>}
 
         {filteredColleges.map((college) => (
-          <div
+          <motion.div
             key={college.slug}
-            className="w-[280px] flex-shrink-0 bg-white rounded-lg shadow-md p-4"
+            whileHover={{ scale: 1.03, boxShadow: "0px 6px 20px rgba(0,0,0,0.1)" }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="w-[280px] flex-shrink-0 bg-white rounded-lg shadow-md p-4 cursor-pointer"
           >
             <Link href={`/colleges/${college.slug}`}>
               <div className="flex items-center justify-between mb-4">
                 <Image
                   src={college.logoUrl}
-                  alt={`College logo`}
+                  alt="College logo"
                   width={40}
                   height={40}
                   className="w-10 h-10 md:w-16 md:h-16 object-contain rounded"
@@ -109,22 +111,26 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
                 className="w-full h-40 object-cover rounded-md mb-4"
               />
               <h2 className="md:text-md text-sm font-bold mb-1">{college.name}</h2>
-              <p className="text-gray-600 md:text-sm text-xs mb-2">{college.location}</p>
-              <p className="text-gray-500 text-xs">View Details → Cutoff | Admission | Placements | Facilities</p>
+              <p className="text-gray-600 md:text-sm text-xs mb-2">
+                {college.location}
+              </p>
+              <p className="text-gray-500 text-xs">
+                View Details → Cutoff | Admission | Placements | Facilities
+              </p>
             </Link>
-          </div>
+          </motion.div>
         ))}
       </div>
 
-      {/* loading indicator */}
-      {loading && <p className="text-center p-30">Loading...</p>}
-
       {/* Desktop View: Grid */}
+      {loading && <p className="text-center p-30">Loading...</p>}
       <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredColleges.map((college) => (
-          <div
+          <motion.div
             key={college.slug}
-            className="bg-white rounded-lg shadow-md p-4 flex flex-col"
+            whileHover={{ scale: 1.03, boxShadow: "0px 6px 20px rgba(0,0,0,0.1)" }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="bg-white rounded-lg shadow-md p-4 flex flex-col cursor-pointer"
           >
             <Link href={`/colleges/${college.slug}`}>
               <div className="flex items-center justify-between mb-4">
@@ -149,7 +155,7 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
               <h2 className="text-md font-bold mb-1">{college.name}</h2>
               <p className="text-gray-600 text-sm mb-2">{college.location}</p>
             </Link>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

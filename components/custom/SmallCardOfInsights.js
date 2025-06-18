@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
@@ -24,7 +25,6 @@ function SmallCardOfInsights() {
     fetchPosts();
   }, []);
 
-  // Auto scroll for mobile view
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -37,12 +37,11 @@ function SmallCardOfInsights() {
       ) {
         container.scrollTo({ left: 0, behavior: "smooth" });
       }
-    }, 3000); // scroll every 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [posts]);
 
-  // Slice the posts array to show only the 3 latest posts
   const latestPosts = posts.slice(0, 3);
 
   return (
@@ -53,14 +52,18 @@ function SmallCardOfInsights() {
         <p className="text-gray-600">No posts found for the selected filters.</p>
       ) : (
         <>
-          {/* Mobile View: Horizontal Scroll with Auto Scroll */}
+          {/* Mobile View */}
           <div
             ref={scrollContainerRef}
-            className="flex md:hidden gap-4 overflow-x-auto px-2 pb-4 scroll-smooth"
+            className="flex md:hidden gap-4 overflow-x-auto px-2 pb-4 scroll-smooth bg-gray-50"
           >
             {latestPosts.map((item) => (
               <Link key={item._id} href={`/insights/${item.slug}`}>
-                <div className="w-[280px] flex-shrink-0 border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer bg-white">
+                <motion.div
+                  whileHover={{ scale: 1.03, boxShadow: "0 8px 24px rgba(0,0,0,0.1)" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="w-[280px] flex-shrink-0 border rounded-lg shadow-md p-5 cursor-pointer bg-white"
+                >
                   <Image
                     src={item.thumbnail}
                     alt="Thumbnail"
@@ -75,23 +78,23 @@ function SmallCardOfInsights() {
                     {item.summary?.slice(0, 100)}...
                   </p>
                   <p className="text-sm text-gray-500 flex justify-between">
-                    <span className="font-medium">
-                      Tag: {item.tags || "All"}
-                    </span>
-                    <span className="font-medium">
-                      Type: {item.type || "N/A"}
-                    </span>
+                    <span className="font-medium">Tag: {item.tags || "All"}</span>
+                    <span className="font-medium">Type: {item.type || "N/A"}</span>
                   </p>
-                </div>
+                </motion.div>
               </Link>
             ))}
           </div>
 
-          {/* Desktop View: Grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-white">
+          {/* Desktop View */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-gray-50">
             {latestPosts.map((item) => (
               <Link key={item._id} href={`/insights/${item.slug}`}>
-                <div className="border rounded-lg shadow-md p-5 hover:shadow-lg hover:scale-[1.01] transition-transform cursor-pointer bg-white">
+                <motion.div
+                  whileHover={{ scale: 1.03, boxShadow: "0 8px 24px rgba(0,0,0,0.1)" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="border rounded-lg shadow-md p-5 cursor-pointer bg-white"
+                >
                   <Image
                     src={item.thumbnail}
                     alt={item.title}
@@ -106,14 +109,10 @@ function SmallCardOfInsights() {
                     {item.summary?.slice(0, 120)}...
                   </p>
                   <p className="text-sm text-gray-500 flex justify-between">
-                    <span className="font-medium">
-                      Tag: {item.tags || "All"}
-                    </span>
-                    <span className="font-medium">
-                      Type: {item.type || "N/A"}
-                    </span>
+                    <span className="font-medium">Tag: {item.tags || "All"}</span>
+                    <span className="font-medium">Type: {item.type || "N/A"}</span>
                   </p>
-                </div>
+                </motion.div>
               </Link>
             ))}
           </div>

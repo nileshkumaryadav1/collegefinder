@@ -36,15 +36,17 @@ export default function CollegesPage() {
       <h1 className="text-3xl text-blue-600 dark:text-blue-400 md:text-4xl font-semibold text-center mb-2">
         Find Your Dream College
       </h1>
-      <p className="text-center text-gray-500 mb-4 max-w-2xl mx-auto">
-        Explore detailed information about top{" "}
-        <strong>Engineering, Medical & Management</strong> Colleges in India by
-        filtering through{" "}
-        <strong>institute types, placement stats, fees</strong>, and more.
+      <p className="text-center text-gray-500 max-w-2xl mx-auto">
+        Explore top <strong>Engineering, Medical & Management</strong> colleges
+        in India
+      </p>
+      <p className="text-center text-gray-500 mb-4 max-w-2xl mx-auto hidden sm:block">
+        by filtering <strong>institute type, placements, fees</strong>,
+        and more.
       </p>
 
       {/* Filters Container */}
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-3 md:p-6 mb-4">
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-3 md:p-6 mb-4 mt-2">
         <h2 className="text-lg font-semibold text-gray-700 mb-4 flex justify-between">
           <p>Filter Colleges</p>
           <Link href="/college-comparison" className="text-blue-600">

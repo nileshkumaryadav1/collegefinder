@@ -1,10 +1,11 @@
 import Link from "next/link";
 import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
 import HomeHero from "@/components/custom/HomeHero";
-import Image from "next/image";
 import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
 import SponsorsCard from "@/components/custom/SponsorsCard";
 import PopUp from "@/components/ad/PopUp";
+import HomeExplore from "@/components/custom/HomeExplore";
+import TestimonialSection from "@/components/custom/home/Testimonal";
 
 export default function Home() {
   const exploreData = [
@@ -42,31 +43,7 @@ export default function Home() {
       <HomeHero />
 
       {/* Featured Categories */}
-      <section className="md:py-12 py-6 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-semibold mb-8 underline decoration-sky-500/30 hover:decoration-sky-500">
-            Start Exploring
-          </h2>
-          <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6">
-            {exploreData.map((i) => (
-              <Link
-                key={i}
-                href={i.href}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition p-4"
-              >
-                <Image
-                  src={i.link}
-                  alt="College & Exam Images"
-                  width={300}
-                  height={300}
-                  className="rounded-md mb-3 h-32 w-full object-cover"
-                />
-                <h3 className="text-lg font-medium">{i.label}</h3>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HomeExplore exploreData={exploreData} />
 
       {/* Latest Insights */}
       <section className="md:py-12 py-6 px-4 bg-gray-50 dark:bg-gray-900">
@@ -99,39 +76,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-blue-50 dark:bg-gray-900 py-12 px-4 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-semibold mb-8 text-center underline decoration-sky-500/30 hover:decoration-sky-500 text-gray-800 dark:text-white">
-            What Students Say
-          </h2>
-
-          <div className="relative w-full overflow-hidden flex items-center justify-center">
-            <div>
-              {[
-                {
-                  quote:
-                    "College Finder helped me compare IITs, track JEE updates, and even find a scholarship I did not know existed!",
-                  name: "Nilesh Kumar",
-                  detail: "B.Tech Student",
-                },
-              ].map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="min-w-[280px] sm:min-w-[500px] max-w-[500px] dark:bg-gray-800 p-4 sm:p-5 rounded-lg flex flex-col justify-center items-center"
-                >
-                  <p className="italic text-gray-700 dark:text-gray-300 text-sm mb-2 text-justify">
-                    “{testimonial.quote}”
-                  </p>
-                  <p className="md:mt-1 text-sm text-blue-900 dark:text-white">
-                    {testimonial.name} - {""}
-                    {testimonial.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <TestimonialSection />
 
       {/* Advertisement */}
       <section className="md:py-12 py-4 px-4">
