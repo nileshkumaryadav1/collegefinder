@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200">
-      <PopUp />
+      {/* <PopUp /> */}
       
       {/* Hero Section */}
       <HomeHero />
