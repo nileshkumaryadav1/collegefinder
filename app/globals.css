@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -178,3 +178,99 @@
   animation: slide-in 0.4s ease-out forwards;
 }
 
+ */
+
+
+
+@import "tailwindcss";
+
+/* ============================================
+   Root Theme Variables (Light Mode - Default)
+============================================ */
+:root {
+  /* Colors */
+  --background: #f8f8f8;        /* Light premium background */
+  --foreground: #0b0b0f;        /* Dark text for readability */
+  --accent: #f59e0b;            /* Warm yellow-orange accent */
+  --secondary: #696969;         /* Neutral gray for subtext */
+  --border: #e5e5e5;            /* Light subtle border */
+  --highlight: #84dccf;         /* Soft mint highlight */
+
+  /* Fonts */
+  --font-sans: 'Geist Sans', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --font-Orbitron: 'Orbitron', sans-serif;
+}
+
+/* ============================================
+   Optional Theme Tokens for Tailwind Inline Use
+============================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-secondary: var(--secondary);
+  --color-highlight: var(--highlight);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* ============================================
+   Dark Mode Theme Override (Auto System Preference)
+============================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: #0b0b0f;        /* Deep black-maroon */
+    --foreground: #f8f8f8;        /* Light foreground */
+    --accent: #f59e0b;            /* Muted warm red accent */
+    --secondary: #cccccc;         /* Mint for secondary */
+    --highlight: #84dccf;         /* Accent-inspired highlight */
+    --border: #2e2e2e;            /* Dark subtle border */
+  }
+}
+
+/* ============================================
+   Base Styling
+============================================ */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================
+   Input Styling
+============================================ */
+.input {
+  @apply w-full p-2 rounded-md mb-2;
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ============================================
+   Buttons / Accent Colors
+============================================ */
+.button {
+  background-color: var(--accent);
+  color: var(--foreground);
+  @apply px-4 py-2 rounded-md font-semibold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+/* ============================================
+   Card Example Styling
+============================================ */
+.card {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  @apply rounded-xl p-4 shadow-md;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

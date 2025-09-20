@@ -6,6 +6,7 @@ import SponsorsCard from "@/components/custom/SponsorsCard";
 import PopUp from "@/components/ad/PopUp";
 import HomeExplore from "@/components/custom/HomeExplore";
 import TestimonialSection from "@/components/custom/home/Testimonal";
+import FloatingTrendingNewsButton from "@/components/custom/myself/FloatingTrendingNewsButton";
 
 export default function Home() {
   const exploreData = [
@@ -38,7 +39,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200">
       {/* <PopUp /> */}
-      
+
+      {/* Floating Button */}
+      <FloatingTrendingNewsButton />
+
       {/* Hero Section */}
       <HomeHero />
 
