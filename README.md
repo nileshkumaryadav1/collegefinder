@@ -4,6 +4,11 @@ Welcome to **College Finder** – a platform designed to help students research 
 
 🌍 **Live Website:** [College Finder](https://collegefinder.site)
 
+![GitHub stars](https://img.shields.io/github/stars/nileshkumaryadav1/collegefinder)
+![GitHub forks](https://img.shields.io/github/forks/nileshkumaryadav1/collegefinder)
+![GitHub issues](https://img.shields.io/github/issues/nileshkumaryadav1/collegefinder)
+![GitHub license](https://img.shields.io/github/license/nileshkumaryadav1/collegefinder)
+
 ## 🚀 Features
 
 - 🔍 **Search & Explore** – Find colleges based on location, courses, and ranking.
@@ -41,22 +46,14 @@ To run this project locally, follow these steps:
    ```
 
 3. **Set Up Environment Variables**
-
-Create a `.env` file in the root directory of your project and add the following environment variables:
+   Create a `.env` file in the root directory and add the following:
 
    ```env
    NEXT_PUBLIC_BASE_URL=http://localhost:3000
-
    MONGODB_URI=mongodb://localhost:27017/collegefinder
    JWT_SECRET=YOUR_JWT_SECRET
-
    SENDER_EMAIL=YOUR_EMAIL
    SENDER_EMAIL_APP_PASSWORD=YOUR_EMAIL_APP_PASSWORD
-
-   EMAIL_USER=YOUR_EMAIL
-   EMAIL_PASS=YOUR_EMAIL_APP_PASSWORD
-
-   SESSION_SECRET=YOUR_SESSION_SECRET
    ```
 
 4. **Run the Development Server**
@@ -65,32 +62,36 @@ Create a `.env` file in the root directory of your project and add the following
    npm run dev
    ```
 
-   The project will be available at **http://localhost:3000**
+   Visit **http://localhost:3000** in your browser.
 
 5. **Build and Deploy**
+
    ```bash
    npm run build
    npm start
    ```
+
    Or deploy directly to **Vercel**.
 
 ## 🤝 Contributing
 
-We welcome contributions! If you’d like to contribute:
+We welcome contributions!
 
-1. **Fork the repository**
+1. **Fork** the repository
 2. **Create a new branch** (`feature-branch`)
 3. **Commit your changes**
 4. **Push to your fork**
 5. **Submit a Pull Request**
 
-Check out our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📬 Contact
 
-For any questions or support, reach out to us:
+For any questions or support:
 
-- Email: collegefindermail@gmail.com
-- GitHub Issues: [Report an Issue](https://github.com/nileshkumaryadav1/collegefinder/issues)
+- 📧 Email: nileshkumarextra@gmail.com
+- 🐙 GitHub Issues: [Report an Issue](https://github.com/nileshkumaryadav1/collegefinder/issues)
 
-Happy coding! 🎓🚀
+---
+
+🎓 _Happy coding!_ 🚀

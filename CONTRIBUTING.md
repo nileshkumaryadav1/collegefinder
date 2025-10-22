@@ -50,6 +50,6 @@ To ensure a positive environment for everyone, please:
 ### 📞 Need Help?
 If you have any questions or need guidance:
 - Open a **GitHub Issue** with your query.
-- Contact us at **collegefindermail@gmail.com**.
+- Contact us at **nileshkumarextra@gmail.com**.
 
 We appreciate your contributions and look forward to working with you! 🎉

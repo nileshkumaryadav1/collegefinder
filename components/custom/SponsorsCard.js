@@ -57,13 +57,13 @@ export default function SponsorsCard() {
             key={sponsor._id}
             className="group transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl rounded-2xl bg-white border p-6"
           >
-            <Link href="/sponsors">
+            <Link href={sponsor.websiteUrl}>
               <div className="w-full h-40 overflow-hidden flex items-center justify-center mb-4">
-                <Image
+                <img
                   src={sponsor.imageUrl}
                   alt={sponsor.name}
-                  width={200}
-                  height={200}
+                  // width={200}
+                  // height={200}
                   className="object-contain h-full transition-transform duration-300 group-hover:scale-105"
                 />
               </div>

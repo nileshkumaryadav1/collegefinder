@@ -13,7 +13,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
       try {
         const res = await fetch("/api/colleges");
         const data = await res.json();
-        setColleges(data);
+        setColleges(data.colleges);
       } catch (error) {
         console.error("Error fetching colleges:", error);
       }

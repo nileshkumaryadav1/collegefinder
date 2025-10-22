@@ -116,17 +116,17 @@ const Navbar = () => {
             />
             <NavItem
               href="/insights"
-              label="Insights"
+              label="Updates"
               active={pathname === "/insights"}
             />
-            <NavItem
+            {/* <NavItem
               href="/about"
               label="About"
               active={pathname === "/about"}
-            />
+            /> */}
             <NavItem
               href="/user/dashboard"
-              label="Profile"
+              label="Student login"
               icon={<User size={18} />}
               active={pathname.startsWith("/user")}
             />
@@ -195,21 +195,21 @@ const Navbar = () => {
             <NavItemMobile
               href="/insights"
               icon={<Newspaper size={18} />}
-              label="Insights"
+              label="Updates"
               active={pathname === "/insights"}
               onClick={closeMenu}
             />
-            <NavItemMobile
+            {/* <NavItemMobile
               href="/about"
               icon={<Book size={18} />}
               label="About"
               active={pathname === "/about"}
               onClick={closeMenu}
-            />
+            /> */}
             <NavItemMobile
               href="/user/dashboard"
               icon={<User size={18} />}
-              label="Profile"
+              label="Student login"
               active={pathname.startsWith("/user")}
               onClick={closeMenu}
             />
