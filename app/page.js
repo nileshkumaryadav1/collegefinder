@@ -37,7 +37,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* <PopUp /> */}
 
       {/* Floating Button */}
@@ -50,7 +50,7 @@ export default function Home() {
       <HomeExplore exploreData={exploreData} />
 
       {/* Latest Insights */}
-      <section className="md:py-12 py-6 px-4 bg-gray-50 dark:bg-gray-900">
+      <section className="md:py-12 py-6 px-4 bg-[var(--background)] text-[var(--foreground)]">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center md:mb-6 mb-4">
             <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* Footer Section */}
-      <footer className="mt-12 text-center text-gray-600">
+      <footer className="mt-12 text-center bg-[var(--background)] text-[var(--foreground)]">
         <p className="text-sm px-2">
           Sponsored by <strong>College Finder</strong> | Helping you achieve
           your career goals.

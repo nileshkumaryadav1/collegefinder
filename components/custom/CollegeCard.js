@@ -65,7 +65,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
 
   return (
     <section>
-      <div className="text-center text-lg font-medium text-gray-700 mb-2">
+      <div className="text-center text-lg font-medium bg-[var(--background)] text-[var(--foreground)] mb-2">
         <p>Total Colleges: {filteredColleges.length}</p>
       </div>
 
@@ -76,7 +76,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
           <Link
             key={college.slug}
             href={`/colleges/${college.slug}`}
-            className="block bg-white rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-4 relative"
+            className="block bg-[var(--background)] text-[var(--foreground)] border rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-4 relative"
           >
             {/* Featured Ribbon */}
             {college.nirfRanking && college.nirfRanking <= 100 && (

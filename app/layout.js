@@ -72,7 +72,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${geist.className} bg-gray-100 dark:bg-gray-900 antialiased`}
+        className={`${geist.className} bg-[var(--background)] text-[var(--foreground)] antialiased`}
       >
         {/* <PopUp /> */}
         <Navbar />

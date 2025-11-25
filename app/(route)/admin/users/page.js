@@ -8,12 +8,12 @@ import {
   GraduationCap,
   Calendar,
   XCircle,
+  Pen,
 } from "lucide-react";
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
-  // const [enrollments, setEnrollments] = useState([]);
 
   useEffect(() => {
     axios
@@ -21,24 +21,6 @@ export default function AdminUsers() {
       .then((res) => setUsers(res.data))
       .catch((err) => console.error("Error fetching users", err));
   }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("/api/admin/enrollments")
-  //     .then((res) => setEnrollments(res.data))
-  //     .catch((err) => console.error("Error fetching enrollments", err));
-  // }, []);
-
-  // Get events a user is enrolled in
-  // const getUserEvents = (user) => {
-  //   return enrollments
-  //     .filter((enrollment) =>
-  //       enrollment.participants.some(
-  //         (p) => p._id === user._id || p.email === user.email
-  //       )
-  //     )
-  //     .map((enrollment) => enrollment.eventDetails?.name || "Unnamed Event");
-  // };
 
   // console.log(users);
 
@@ -75,8 +57,6 @@ export default function AdminUsers() {
             user.name.toLowerCase().includes(search.toLowerCase())
           )
           .map((user) => {
-            // const events = getUserEvents(user);
-
             return (
               <div
                 key={user._id}
@@ -89,7 +69,6 @@ export default function AdminUsers() {
                     {user.name}
                   </h2>
                 </div>
-
                 {/* Info */}
                 <div className="space-y-2 text-sm border-t border-[color:var(--border)] pt-3">
                   <p className="flex items-center gap-2 text-[color:var(--secondary)]">
@@ -106,29 +85,11 @@ export default function AdminUsers() {
                   </p>
                 </div>
 
-                {/* Enrolled Events */}
-                {/* <div className="mt-5 border-t border-[color:var(--border)] pt-3">
-                  <p className="text-sm font-medium text-[color:var(--accent)] flex items-center gap-2 mb-2">
-                    <Calendar className="w-4 h-4" />
-                    Enrolled Events ({events.length})
-                  </p>
-                  {events.length > 0 ? (
-                    <div className="flex flex-wrap gap-2">
-                      {events.map((event, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 rounded-full text-xs bg-[color:var(--accent)]/10 text-[color:var(--accent)] border border-[color:var(--accent)]/30"
-                        >
-                          {event}
-                        </span>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="italic text-xs text-[color:var(--secondary)]">
-                      No events enrolled
-                    </p>
-                  )}
-                </div> */}
+                {/* Last Updated */}
+                <div className="flex items-center text-[color:var(--secondary)] flex flex-col border-t border-[color:var(--border)] my-2">
+                  <p>Registered on</p>
+                  <p>{new Date(user.updatedAt).toLocaleString()}</p>
+                </div>
               </div>
             );
           })}

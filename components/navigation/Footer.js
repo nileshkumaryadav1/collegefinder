@@ -9,14 +9,14 @@ import Top from "../ad/Top";
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 pt-8 transition-colors duration-300">
+    <footer className="bg-[var(--background)] text-[var(--foreground)] pt-8 transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="flex justify-center md:justify-between md:flex-row flex-col md:gap-10 gap-6">
           {/* combining for mobile style */}
           <div className="w-full max-w-6xl mx-auto md:px-4 space-y-6">
             {/* Explore Section - Full Width */}
             <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4 shadow-sm bg-white dark:bg-gray-900">
-              <h4 className="text-lg font-bold text-gray-800 dark:text-white border-b pb-2 mb-3 text-center">
+              <h4 className="text-lg font-bold text-gray-800 dark:text-white border-b border-gray-200 pb-2 mb-3 text-center">
                 Explore
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-2 text-sm text-gray-700 dark:text-gray-300">
@@ -69,7 +69,7 @@ const Footer = () => {
               {/* Quick Links */}
               <div className="w-1/2">
                 <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4 shadow-sm bg-white dark:bg-gray-900 h-full">
-                  <h5 className="text-lg font-bold text-gray-800 dark:text-white border-b pb-2 mb-3">
+                  <h5 className="text-lg font-bold text-gray-800 dark:text-white border-b border-gray-200 pb-2 mb-3">
                     Quick Links
                   </h5>
                   <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
@@ -95,7 +95,7 @@ const Footer = () => {
               {/* News */}
               <div className="w-1/2">
                 <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4 shadow-sm bg-white dark:bg-gray-900 h-full">
-                  <h5 className="text-lg font-bold text-gray-800 dark:text-white border-b pb-2 mb-3">
+                  <h5 className="text-lg font-bold text-gray-800 dark:text-white border-b border-gray-200 pb-2 mb-3">
                     Insights
                   </h5>
                   <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
@@ -152,7 +152,7 @@ const Footer = () => {
                   icon: <MessageCircle />,
                 },
                 {
-                  href: "mailto:collegefindermail@gmail.com",
+                  href: "mailto:nileshkumarextra@gmail.com",
                   icon: <FaMailBulk />,
                 },
                 {

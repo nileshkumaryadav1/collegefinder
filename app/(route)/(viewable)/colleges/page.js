@@ -32,7 +32,7 @@ export default function CollegesPage() {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen px-4 md:py-8 py-4 md:px-10 lg:px-20">
+    <div className="bg-[var(--background)] text-[var(--foreground)] min-h-screen px-4 md:py-8 py-4 md:px-10 lg:px-20">
       <h1 className="text-3xl text-blue-600 dark:text-blue-400 md:text-4xl font-semibold text-center mb-2">
         Find Your Dream College
       </h1>
@@ -46,7 +46,7 @@ export default function CollegesPage() {
       </p>
 
       {/* Filters Container */}
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-3 md:p-6 mb-4 mt-2">
+      <div className="bg-[var(--background)] text-[var(--foreground)] border border-gray-200 rounded-xl shadow-sm p-3 md:p-6 mb-4 mt-2">
         <h2 className="text-lg font-semibold text-gray-700 mb-4 flex justify-between">
           <p>Filter Colleges</p>
           <Link href="/college-comparison" className="text-blue-600">
@@ -59,13 +59,13 @@ export default function CollegesPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by college name, location, or type ..."
-            className="p-3 border border-gray-300 rounded-md bg-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition"
+            className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition"
           />
 
           <select
             value={collegeType}
             onChange={(e) => setCollegeType(e.target.value)}
-            className="p-3 border border-gray-300 rounded-md bg-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition cursor-pointer"
+            className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition cursor-pointer"
           >
             <option value="">All College Types</option>
             {collegeTypes.map((type) => (
@@ -79,7 +79,7 @@ export default function CollegesPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="p-3 w-1/2 border border-gray-300 rounded-md bg-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition"
+              className="p-3 w-1/2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition"
             >
               <option value="">Sort By</option>
               {sortFields.map((field) => (
@@ -92,7 +92,7 @@ export default function CollegesPage() {
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
-              className="p-3 w-1/2 border border-gray-300 rounded-md bg-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition"
+              className="p-3 w-1/2 border border-gray-300 rounded-md bg-[var(--background)] text-[var(--foreground)] shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition"
             >
               {sortOrders.map((order) => (
                 <option key={order.value} value={order.value}>

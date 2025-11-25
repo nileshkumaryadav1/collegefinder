@@ -26,7 +26,7 @@ export default function SponsorsCard() {
   }, []);
 
   return (
-    <div className="px-4 pt-8 bg-white text-gray-800">
+    <div className="px-4 pt-8 bg-[var(--background)] text-[var(--foreground)]">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="md:text-4xl text-2xl font-bold text-blue-600 mb-2">
@@ -55,7 +55,7 @@ export default function SponsorsCard() {
         {sponsors.map((sponsor) => (
           <div
             key={sponsor._id}
-            className="group transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl rounded-2xl bg-white border p-6"
+            className="group transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl rounded-2xl bg-[var(--background)] text-[var(--foreground)] border-2 border-gray-200 p-6"
           >
             <Link href={sponsor.websiteUrl}>
               <div className="w-full h-40 overflow-hidden flex items-center justify-center mb-4">

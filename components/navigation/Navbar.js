@@ -75,7 +75,7 @@ const Navbar = () => {
 
       {/* Main Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full bg-white shadow-md z-50 border-b border-gray-200 py-2 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 w-full bg-[var(--background)] text-[var(--foreground)] shadow-md z-50 border-b border-gray-200 py-2 transition-transform duration-300 ${
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -146,7 +146,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <div
           ref={menuRef}
-          className={`fixed top-0 left-0 min-h-screen w-64 bg-white shadow-xl transform ${
+          className={`fixed top-0 left-0 min-h-screen w-64 bg-[var(--background)] text-[var(--foreground)] shadow-xl transform ${
             isOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform duration-300 ease-in-out sm:hidden z-50`}
         >

@@ -21,7 +21,7 @@ const MobileNavbar = () => {
 
   return (
     <nav className="fixed bottom-0 left-0 w-full z-40 sm:hidden shadow-t">
-      <div className="flex justify-around items-center bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-2">
+      <div className="flex justify-around items-center bg-[var(--background)] text-[var(--foreground)] border-t border-gray-200 dark:border-gray-700 p-2">
         <NavItem href="/" icon={Home} label="Home" active={pathname === "/"} />
         <NavItem
           href="/colleges"

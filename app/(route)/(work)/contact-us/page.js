@@ -53,21 +53,21 @@ export default function ContactPage() {
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <h3 className="text-xl font-semibold mb-2 text-blue-700">Support</h3>
           <p className="text-gray-700 mb-1">Phone: +91 62055 30252</p>
-          <p className="text-gray-700">Support Email: collegefindermail@gmail.com</p>
+          <p className="text-gray-700">Support Email: nileshkumarextra@gmail.com</p>
         </div>
 
         {/* Help Mail */}
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <h3 className="text-xl font-semibold mb-2 text-blue-700">Help Desk</h3>
           <p className="text-gray-700 mb-1">General Queries</p>
-          <p className="text-gray-700">collegefindermail@gmail.com</p>
+          <p className="text-gray-700">Email: nileshkumarextra@gmail.com</p>
         </div>
 
         {/* Locations */}
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <h3 className="text-xl font-semibold mb-2 text-blue-700">Our Office</h3>
           <p className="text-gray-700 mb-1">CollegeFinder Office</p>
-          <p className="text-gray-700">KEC Campus, Katihar, Bihar, India</p>
+          <p className="text-gray-700">Katihar, Bihar, India - 84700</p>
         </div>
       </div>
 

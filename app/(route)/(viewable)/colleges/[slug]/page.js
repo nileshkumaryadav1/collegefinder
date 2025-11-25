@@ -1,15 +1,13 @@
 import SingleCollegeCard from "@/components/custom/SingleCollegeCard";
 import NotFound from "@/components/custom/NotFound";
-// import { connectDB } from "@/utils/db"; // MongoDB connection utility
-import College from "@/models/College"; // Mongoose College model
+import College from "@/models/College";
 import connectToDatabase from "@/lib/mongodb";
 
 // Generate static params for all colleges
 export async function generateStaticParams() {
   try {
-    await connectToDatabase(); // Connect to MongoDB
+    await connectToDatabase();
 
-    // Fetch college slugs from MongoDB
     const colleges = await College.find({}, "slug").limit(15); // Get only the 'slug' field
 
     // Return the slugs in the required format for static generation
@@ -28,10 +26,10 @@ export async function generateMetadata({ params }) {
   const { slug } = params;
 
   try {
-    await connectToDatabase(); // Connect to MongoDB
+    await connectToDatabase();
 
     // Fetch the specific college based on slug
-    const college = await College.findOne({ slug }).exec();
+    const college = await College.findOne({ slug }).lean();
 
     if (!college) {
       return {
@@ -69,15 +67,15 @@ export default async function DetailCollegeCard({ params }) {
   const { slug } = params;
 
   try {
-    await connectToDatabase(); // Connect to MongoDB
-
+    await connectToDatabase();
+    
     // Fetch the college based on slug
-    const college = await College.findOne({ slug }).exec();
+    const college = await College.findOne({ slug }).lean();
 
     if (!college) return <NotFound />; // Render NotFound if no college is found
 
     return (
-      <section className="text-gray-600 body-font w-full overflow-hidden bg-gray-100">
+      <section className="body-font w-full overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
         <div className="md:max-w-11/12 mx-auto md:p-6">
           <SingleCollegeCard college={college} />
         </div>
