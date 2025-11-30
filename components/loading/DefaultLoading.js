@@ -14,7 +14,7 @@ export default function DefaultLoading() {
         <link rel="canonical" href="https://collegefinder.site" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-blue-800 px-6">
+      <main className="flex flex-col items-center justify-center min-h-screen bg-[var(--background)] text-[var(--foreground)] px-6">
         {/* Logo or Branding Icon */}
         <div className="mb-6">
           <svg

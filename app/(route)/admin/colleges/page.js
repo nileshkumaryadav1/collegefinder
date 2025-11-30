@@ -4,12 +4,12 @@ import { Building2, PlusCircle, Pencil } from "lucide-react";
 
 export default function AdminCollegesHome() {
   return (
-    <section className="md:pt-24 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl md:p-10 p-4 flex flex-col items-center gap-8 border border-gray-200">
+    <section className="md:pt-24 flex flex-col items-center justify-center bg-[var(--background)] text-[var(--foreground)]">
+      <div className="w-full max-w-3xl bg-[var(--background)] text-[var(--foreground)] rounded-2xl shadow-xl md:p-10 p-4 flex flex-col items-center gap-8 border border-gray-200">
         {/* Header */}
         <div className="flex flex-col items-center gap-2">
           <Building2 className="w-12 h-12 text-accent" />
-          <h1 className="md:text-3xl font-bold text-gray-900">College Management</h1>
+          <h1 className="md:text-3xl font-bold text-[var(--accent)]">College Management</h1>
           <p className="text-gray-500 text-sm text-center">
             Manage and update all college information from one place.
           </p>
@@ -27,7 +27,7 @@ export default function AdminCollegesHome() {
 
           <Link
             href="/admin/colleges/add"
-            className="flex flex-col items-center justify-center bg-green-100 hover:bg-green-500 hover:text-white text-green-600 border border-green-500 rounded-xl p-6 transition-all duration-300 shadow-sm"
+            className="flex flex-col items-center justify-center bg-green-50 hover:bg-green-500 hover:text-white text-green-600 border border-green-500 rounded-xl p-6 transition-all duration-300 shadow-sm"
           >
             <PlusCircle className="w-8 h-8 mb-2" />
             <span className="font-semibold">Add College</span>

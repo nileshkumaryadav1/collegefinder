@@ -7,10 +7,10 @@
   /* Colors */
   --background: #ffffff; /* Light premium background */
   --foreground: #000000; /* Dark text for readability */
-  --accent: #0b97f5; /* Warm yellow-orange accent */
-  --secondary: #dedede; /* Neutral gray for subtext */
-  --border: #cacaca; /* Light subtle border */
-  --highlight: #84dccf; /* Soft mint highlight */
+  --accent: #009dff;
+  --secondary: #27b7ff;
+  --highlight: #63cebe;
+  --border: #cfcfcf;
 
   /* Fonts */
   --font-sans: "Geist Sans", sans-serif;
@@ -38,10 +38,10 @@
   :root {
     --background: #000002; /* Deep black-maroon */
     --foreground: #ffffff; /* Light foreground */
-    --accent: #0bdaf5; /* Muted warm red accent */
-    --secondary: #dedede; /* Mint for secondary */
-    --highlight: #84dccf; /* Accent-inspired highlight */
-    --border: #d7d7d7; /* Dark subtle border */
+    --accent: #009dff;
+    --secondary: #d8efff;
+    --highlight: #63cebe;
+    --border: #3d3d3d;
   }
 }
 

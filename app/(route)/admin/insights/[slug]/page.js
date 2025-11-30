@@ -122,18 +122,18 @@ export default function EditPostPage({ params }) {
           onChange={(e) => setPost({ ...post, tags: e.target.value })}
           className="w-full border p-2 rounded"
         >
-          <option value="college">College</option>
-          <option value="exam">Exam</option>
-          <option value="scholarship">Scholarship</option>
+          <option value="college" className="bg-[var(--background)] text-[var(--foreground)]">College</option>
+          <option value="exam" className="bg-[var(--background)] text-[var(--foreground)]">Exam</option>
+          <option value="scholarship" className="bg-[var(--background)] text-[var(--foreground)]">Scholarship</option>
         </select>
         <select
           value={post.type}
           onChange={(e) => setPost({ ...post, type: e.target.value })}
           className="w-full border p-2 rounded"
         >
-          <option value="blog">Blog</option>
-          <option value="news">News</option>
-          <option value="update">Update</option>
+          <option value="blog" className="bg-[var(--background)] text-[var(--foreground)]">Blog</option>
+          <option value="news" className="bg-[var(--background)] text-[var(--foreground)]">News</option>
+          <option value="update" className="bg-[var(--background)] text-[var(--foreground)]">Update</option>
         </select>
         <input
           type="text"

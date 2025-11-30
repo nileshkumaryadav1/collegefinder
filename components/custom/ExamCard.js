@@ -32,7 +32,7 @@ function ExamCard({ query }) {
         .map((exam) => (
           <div
             key={exam.slug}
-            className="bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
+            className="bg-[var(--background)] text-[var(--foreground)] border border-gray-300 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
           >
             <Link href={`/exams/${exam.slug}`}>
               {/* Conditionally rendering image */}
@@ -42,7 +42,7 @@ function ExamCard({ query }) {
                   alt={exam.name}
                   width={400}
                   height={300}
-                  className="h-40 mx-auto mt-2 rounded object-cover"
+                  className="h-40 mx-auto rounded object-cover"
                 />
               ) : (
                 <div className="w-full h-40 bg-gray-200 flex justify-center items-center">
@@ -51,7 +51,7 @@ function ExamCard({ query }) {
               )}
 
               <div className="px-6 py-3">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+                <h2 className="text-2xl font-semibold text-[var(--accent)] mb-2">
                   {exam.name} | {exam.slug}
                 </h2>
                 <p className="text-gray-600 text-sm mb-2">

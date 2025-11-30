@@ -159,8 +159,8 @@ export default function AdminAddCollegePage() {
   }, []);
 
   return (
-    <section className="bg-gray-50 min-h-screen p-6">
-      <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6">
+    <section className="bg-[var(--background)] text-[var(--foreground)] min-h-screen p-6">
+      <div className="max-w-5xl mx-auto bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow-md p-6">
         <h1 className="text-2xl font-bold mb-4">Add a New College</h1>
         {message && (
           <p className="text-center text-gray-700 mb-4 font-medium">
@@ -425,7 +425,7 @@ export default function AdminAddCollegePage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {colleges.map((college) => (
-              <div key={college._id} className="bg-white p-4 rounded-lg shadow">
+              <div key={college._id} className="bg-[var(--background)] text-[var(--foreground)] border p-4 rounded-lg shadow">
                 <Image
                   src={college.logoUrl}
                   alt={college.name}
@@ -440,7 +440,7 @@ export default function AdminAddCollegePage() {
                 </p>
                 <button
                   onClick={() => router.push(`/admin/colleges/${college.slug}`)}
-                  className="mt-3 text-blue-600 underline text-sm"
+                  className="mt-3 text-yellow-500 hover:bg-yellow-600 text-sm w-full py-2 rounded border border-yellow-500 cursor-pointer hover:text-white transition-colors duration-300"
                 >
                   Edit
                 </button>

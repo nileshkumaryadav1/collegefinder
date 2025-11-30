@@ -30,8 +30,8 @@ function Row({ label, value }) {
   if (value === undefined || value === null || value === "") return null;
   return (
     <div className="flex gap-4 py-1">
-      <div className="w-40 text-sm text-gray-600">{label}</div>
-      <div className="text-sm text-gray-800 break-words">{value}</div>
+      <div className="w-40 text-sm">{label}</div>
+      <div className="text-sm break-words text-[var(--secondary)]">{value}</div>
     </div>
   );
 }
@@ -76,9 +76,9 @@ export default function SingleCollegePage({ college }) {
   console.log(college);
 
   return (
-    <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-4 md:p-8">
+    <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-4 md:p-8 rounded-lg shadow-md">
       {/* Header */}
-      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow p-6">
+      <div className="max-w-6xl mx-auto rounded-xl shadow p-6">
         <div className="flex flex-col md:flex-row gap-6 items-start">
           {/* Banner and Logo */}
           <div className="relative w-full md:w-1/2 h-64 md:h-96 mb-6">
@@ -87,7 +87,7 @@ export default function SingleCollegePage({ college }) {
               alt="College Image"
               width={1300}
               height={500}
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-center rounded-lg"
             />
             <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
               <Image
@@ -102,7 +102,7 @@ export default function SingleCollegePage({ college }) {
 
           <div className="flex-1">
             <h1 className="text-3xl md:text-4xl font-bold">{college.name}</h1>
-            <p className="text-gray-600 mt-1">
+            <p className="text-[var(--secondary)] mt-1">
               {college.shortName ? `${college.shortName} • ` : ""}
               {college.location ? college.location : ""}
             </p>
@@ -122,7 +122,7 @@ export default function SingleCollegePage({ college }) {
               )}
             </div>
 
-            {/* Upadeted and Virtual tour */}
+            {/* State, City, Website */}
             <div className="text-sm text-gray-500">
               {college.state || ""} {college.city ? ` • ${college.city}` : ""}
             </div>
@@ -161,7 +161,7 @@ export default function SingleCollegePage({ college }) {
       </div>
 
       {/* Navigation Links */}
-      <div className="flex flex-wrap justify-center border-t border-gray-200 bg-gray-50 py-4 px-2 text-sm     md:text-base">
+      <div className="flex flex-wrap justify-center border-gray-200 bg-[var(--background)] py-4 px-2 text-sm md:text-base">
         {[
           { id: "overview", label: "Overview", icon: Landmark },
           { id: "about", label: "About", icon: BookUser },
@@ -176,7 +176,7 @@ export default function SingleCollegePage({ college }) {
           <a
             key={item.id}
             href={`#${item.id}`}
-            className="mx-3 my-2.5 flex items-center text-gray-600 hover:text-blue-600 transition md:hover:translate-y-1"
+            className="mx-3 my-2.5 flex items-center text-[var(--secondary)] hover:text-[var(--highlight)] transition md:hover:translate-y-1"
             title={item.label}
             aria-label="scroll to College section"
           >
@@ -189,9 +189,9 @@ export default function SingleCollegePage({ college }) {
       {/* Sections container */}
       <div className="max-w-6xl mx-auto mt-6 space-y-6">
         {/* About */}
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-xl font-semibold">About</h2>
-          <p className="mt-2 text-gray-700 leading-relaxed">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow p-6">
+          <h2 className="text-xl font-semibold text-[var(--highlight)]">About</h2>
+          <p className="mt-2 leading-relaxed">
             {safe(
               college.about || college.description,
               "No description added."
@@ -216,24 +216,24 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Basic Info */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("basics")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Basic Information</h3>
-              <div className="text-xs text-gray-500 mt-1">
+              <h3 className="text-lg font-medium text-[var(--highlight)]">Basic Information</h3>
+              <div className="text-xs mt-1">
                 Core details, address, contact and identifiers
               </div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.basics ? "Hide" : "Show"}
             </div>
           </button>
 
           {openSections.basics && (
-            <div className="p-6 border-t">
+            <div className="p-6 border-t border-[color:var(--border)]">
               <Row label="Name" value={college.name} />
               <Row label="Slug" value={college.slug} />
               <Row label="Short Name" value={college.shortName} />
@@ -269,18 +269,18 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Institutional Details */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("institutional")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Institutional Details</h3>
-              <div className="text-xs text-gray-500 mt-1">
+              <h3 className="text-lg font-medium text-[var(--highlight)]">Institutional Details</h3>
+              <div className="text-xs mt-1">
                 Type, approvals, departments, governing body
               </div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.institutional ? "Hide" : "Show"}
             </div>
           </button>
@@ -321,7 +321,7 @@ export default function SingleCollegePage({ college }) {
         </div>
         {/* promotion */}
         <section id="promotion" title="">
-          <div className="text-gray-700 mx-auto leading-relaxed space-y-2 text-left">
+          <div className="bg-[var(--background)] text-[var(--foreground)] mx-auto leading-relaxed space-y-2 text-left">
             {/* {college.promotion
             ? college.promotion
                 .split(".")
@@ -354,18 +354,18 @@ export default function SingleCollegePage({ college }) {
         </section>
 
         {/* Academics (Courses + Cutoffs) */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("academics")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Academic Information</h3>
-              <div className="text-xs text-gray-500 mt-1">
+              <h3 className="text-lg font-medium text-[var(--highlight)]">Academic Information</h3>
+              <div className="text-xs mt-1">
                 Courses, eligibility, intake, entrance exams, cutoffs
               </div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.academics ? "Hide" : "Show"}
             </div>
           </button>
@@ -435,7 +435,7 @@ export default function SingleCollegePage({ college }) {
                 {college.cutOff?.length > 0 ? (
                   <div className="overflow-auto">
                     <table className="w-full text-sm">
-                      <thead className="text-left text-xs text-gray-500 border-b">
+                      <thead className="text-left text-xs border-b">
                         <tr>
                           <th className="py-2 pr-4">Year</th>
                           <th className="py-2 pr-4">Program</th>
@@ -472,18 +472,18 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Fees & Scholarships */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("fees")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Fees & Scholarships</h3>
-              <div className="text-xs text-gray-500 mt-1">
+              <h3 className="text-lg font-medium text-[var(--foreground)]">Fees & Scholarships</h3>
+              <div className="text-xs mt-1">
                 Tuition, hostel, payments and scholarships
               </div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.fees ? "Hide" : "Show"}
             </div>
           </button>
@@ -557,18 +557,18 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Facilities */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("facilities")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Facilities & Campus</h3>
+              <h3 className="text-lg font-medium text-[var(--highlight)]">Facilities & Campus</h3>
               <div className="text-xs text-gray-500 mt-1">
                 Hostels, sports, clubs, campus area
               </div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.facilities ? "Hide" : "Show"}
             </div>
           </button>
@@ -642,18 +642,18 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Placements */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("placements")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Placements</h3>
+              <h3 className="text-lg font-medium text-[var(--highlight)]">Placements</h3>
               <div className="text-xs text-gray-500 mt-1">
                 Stats for B.Tech and M.Tech
               </div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.placements ? "Hide" : "Show"}
             </div>
           </button>
@@ -927,18 +927,18 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Rankings */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("rankings")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Rankings & Recognition</h3>
+              <h3 className="text-lg font-medium text-[var(--highlight)]">Rankings & Recognition</h3>
               <div className="text-xs text-gray-500 mt-1">
                 NIRF, other rankings, PDFs
               </div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.rankings ? "Hide" : "Show"}
             </div>
           </button>
@@ -984,16 +984,16 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Gallery */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("gallery")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Gallery</h3>
+              <h3 className="text-lg font-medium text-[var(--highlight)]">Gallery</h3>
               <div className="text-xs text-gray-500 mt-1">Campus images</div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.gallery ? "Hide" : "Show"}
             </div>
           </button>
@@ -1030,18 +1030,18 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Contact & Social */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("contact")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
           >
             <div>
-              <h3 className="text-lg font-medium">Contact & Social Links</h3>
+              <h3 className="text-lg font-medium text-[var(--highlight)]">Contact & Social Links</h3>
               <div className="text-xs text-gray-500 mt-1">
                 Email, phone & social presence
               </div>
             </div>
-            <div className="text-gray-500">
+            <div className="text-[var(--highlight)]">
               {openSections.contact ? "Hide" : "Show"}
             </div>
           </button>
@@ -1111,7 +1111,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Analytics, SEO, Metadata */}
-        <div className="bg-white rounded-xl shadow grid md:grid-cols-3">
+        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow grid md:grid-cols-3">
           <div className="p-6 border-b md:border-b-0 md:border-r">
             <h4 className="font-semibold">Analytics & Engagement</h4>
             <Row label="Views" value={college.views} />
@@ -1163,7 +1163,7 @@ export default function SingleCollegePage({ college }) {
       </div>
 
       {/* Advertisement & Promotions */}
-      <section className="bg-gray-50 flex justify-center mb-4">
+      <section className="bg-[var(--background)] text-[var(--foreground)] flex justify-center mb-4">
         <div className="bg-blue-50 border border-blue-200 rounded-xl shadow p-4">
           <h4 className="text-md font-bold text-blue-700 mb-2 text-center">
             Advertisement
@@ -1184,7 +1184,7 @@ export default function SingleCollegePage({ college }) {
       {/* reviews */}
       <section
         id="reviews"
-        className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200"
+        className="w-full py-14 px-4 md:px-8 bg-[var(--background)] text-[var(--foreground)] border-t border-gray-200"
       >
         <div className="max-w-6xl mx-auto text-center">
           <div className="max-w-4xl mx-auto">
@@ -1196,7 +1196,7 @@ export default function SingleCollegePage({ college }) {
       {/* faqs */}
       <section
         id="faqs"
-        className="w-full py-6 px-4 md:px-8 bg-white border-t border-gray-200"
+        className="w-full py-6 px-4 md:px-8 bg-[var(--background)] text-[var(--foreground)] border-t border-gray-200"
       >
         <div className="max-w-6xl mx-auto text-center">
           <FAQs data={college.faq} />
@@ -1205,9 +1205,9 @@ export default function SingleCollegePage({ college }) {
       </section>
 
       {/* similar colleges */}
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+      <section className="w-full py-14 px-4 md:px-8 bg-[var(--background)] text-[var(--foreground)] border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--highlight)]">
             Similar Colleges
           </h2>
           <Link href="/colleges" className="btn btn-link">
@@ -1225,9 +1225,9 @@ export default function SingleCollegePage({ college }) {
       </section>
 
       {/* similar courses */}
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200 hidden">
+      <section className="w-full py-14 px-4 md:px-8 bg-[var(--background)] text-[var(--foreground)] border-t border-gray-200 hidden">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--highlight)] mb-8">
             Similar Courses
           </h2>
           <div className="max-w-4xl mx-auto">
@@ -1238,9 +1238,9 @@ export default function SingleCollegePage({ college }) {
       </section>
 
       {/* similar exam section */}
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+      <section className="w-full py-14 px-4 md:px-8 bg-[var(--background)] text-[var(--foreground)] border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--highlight)]">
             Entrance Exams
           </h2>
           <Link href="/exams" className="btn btn-link">
@@ -1253,15 +1253,15 @@ export default function SingleCollegePage({ college }) {
       </section>
 
       {/* important insights */}
-      <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
+      <section className="w-full py-14 px-4 md:px-8 bg-[var(--background)] text-[var(--foreground)] border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--highlight)]">
             Important Insights
           </h2>
-          <Link href="/news" className="btn btn-link">
+          <Link href="/news" className="btn btn-link mt-4">
             View Updates
           </Link>
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto my-2">
             <SmallCardOfInsights />
           </div>
         </div>

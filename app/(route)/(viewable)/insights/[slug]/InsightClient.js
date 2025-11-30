@@ -43,7 +43,7 @@ export default function InsightClient({ post }) {
 
       {/* Thumbnail & Summary */}
       <motion.section
-        className="bg-white shadow-md rounded-2xl border border-gray-200 p-6 mb-10"
+        className="bg-[var(--background)] text-[var(--foreground)] shadow-md rounded-2xl border border-gray-200 p-6 mb-10"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
@@ -58,7 +58,7 @@ export default function InsightClient({ post }) {
           />
         )}
         {post.summary && (
-          <p className="text-gray-700 text-lg leading-relaxed">
+          <p className="text-lg text-[var(--highlight)] leading-relaxed">
             {post.summary}
           </p>
         )}
@@ -66,14 +66,14 @@ export default function InsightClient({ post }) {
 
       {/* Content */}
       <motion.section
-        className="bg-white shadow-md rounded-2xl border border-gray-200 p-6"
+        className="bg-[var(--background)] text-[var(--foreground)] shadow-md rounded-2xl border border-gray-200 p-6"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.6 }}
       >
         <h2 className="text-2xl font-bold text-indigo-700 mb-4">Content</h2>
         <div
-          className="prose max-w-none text-gray-800 leading-relaxed"
+          className="prose max-w-none leading-relaxed"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
       </motion.section>

@@ -8,7 +8,7 @@ export default function Scholarships() {
   const [query, setQuery] = useState("");
 
   return (
-    <div className="min-h-screen bg-white p-6 md:px-16 lg:px-32">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-6 md:px-16 lg:px-32">
       <h1 className="text-4xl font-semibold text-blue-600 dark:text-blue-400 text-center">
         Explore Scholarships
       </h1>
@@ -38,8 +38,8 @@ export default function Scholarships() {
 
         {/* Right Column: Promotions / Advertisement */}
         <div className="">
-          <div className="bg-white rounded-lg p-4 shadow-lg">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="bg-[var(--background)] text-[var(--foreground)] border rounded-lg p-4 shadow-lg">
+            <h2 className="text-xl font-semibold text-[var(--accent)] mb-4">
               Sponsored
             </h2>
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">

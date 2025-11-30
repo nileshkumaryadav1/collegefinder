@@ -63,7 +63,7 @@ export default function ScholarshipCard({ query, level }) {
         {filteredScholarships.map((scholarship) => (
           <div
             key={scholarship.slug}
-            className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition-shadow p-6 flex flex-col justify-between"
+            className="bg-[var(--background)] text-[var(--foreground)] border border-gray-200 rounded-xl shadow hover:shadow-lg transition-shadow p-6 flex flex-col justify-between"
           >
             <div>
               <h3 className="text-2xl font-bold text-blue-800 mb-2">

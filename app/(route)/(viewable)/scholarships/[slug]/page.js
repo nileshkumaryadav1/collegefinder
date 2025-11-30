@@ -76,25 +76,25 @@ export default async function Page({ params }) {
 
     return (
       <div className="max-w-5xl mx-auto px-4 py-10">
-        <div className="bg-white shadow-xl rounded-xl p-8 border border-gray-200">
+        <div className="bg-[var(--background)] text-[var(--foreground)] shadow-xl rounded-xl p-8 border border-gray-200">
           <h1 className="text-3xl font-bold mb-2 text-blue-800">
             {scholarship.name}
           </h1>
-          <p className="text-gray-700 mb-6">{scholarship.about}</p>
+          <p className="text-[var(--foreground)] mb-6">{scholarship.about}</p>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-1">
+              <h2 className="text-xl font-semibold text-[var(--highlight)] mb-1">
                 Amount
               </h2>
-              <p className="text-gray-600">{scholarship.amount}</p>
+              <p className="text-[var(--foreground)]">{scholarship.amount}</p>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-1">
+              <h2 className="text-xl font-semibold text-[var(--highlight)] mb-1">
                 Deadline
               </h2>
-              <p className="text-gray-600">
+              <p className="text-[var(--foreground)]">
                 {scholarship.deadline
                   ? new Date(scholarship.deadline).toISOString().slice(0, 10)
                   : "No deadline"}
@@ -102,22 +102,22 @@ export default async function Page({ params }) {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-1">Type</h2>
-              <p className="text-gray-600">{scholarship.level}</p>
+              <h2 className="text-xl font-semibold text-[var(--highlight)] mb-1">Type</h2>
+              <p className="text-[var(--foreground)]">{scholarship.level}</p>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-1">
+              <h2 className="text-xl font-semibold text-[var(--highlight)] mb-1">
                 Eligibility
               </h2>
-              <p className="text-gray-600">{scholarship.eligibility}</p>
+              <p className="text-[var(--foreground)]">{scholarship.eligibility}</p>
             </div>
           </div>
 
           <div className="mt-6 flex justify-between items-center">
             <Link
               href="/scholarships"
-              className="text-gray-700 hover:text-white text-sm btn btn-primary"
+              className="text-[var(--highlight)] hover:text-[var(--accent)] text-sm btn btn-primary"
             >
               ← Back to Scholarships page
             </Link>

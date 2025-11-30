@@ -12,7 +12,7 @@ export default function CollegeLoading() {
         />
       </Head>
 
-      <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-100 to-gray-200 text-blue-700 px-4">
+      <main className="flex flex-col items-center justify-center min-h-screen bg-[var(--background)] text-[var(--foreground)] px-4">
         {/* SVG Spinner */}
         <svg
           className="animate-spin h-14 w-14 mb-6 text-blue-600"

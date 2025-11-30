@@ -9,7 +9,7 @@ export default function ExamsPage() {
   return (
     <>
       {/* Main Content */}
-      <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-white text-gray-800">
+      <div className="min-h-screen px-4 md:px-10 lg:px-20 py-8 bg-[var(--background)] text-[var(--foreground)] text-gray-800">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="md:text-4xl text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">

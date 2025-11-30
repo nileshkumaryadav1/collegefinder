@@ -27,8 +27,7 @@ export default function InsightsAdmin() {
 
   return (
     <div
-      className="max-w-6xl mx-auto p-6 rounded-xl shadow-md"
-      style={{ background: "var(--background)", color: "var(--foreground)" }}
+      className="max-w-6xl mx-auto p-6 rounded-xl shadow-md bg-[var(--background)] text-[var(--foreground)]"
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
@@ -55,7 +54,7 @@ export default function InsightsAdmin() {
       <div className="overflow-x-auto rounded-lg shadow-sm border border-[var(--border)]">
         <table className="min-w-full border-collapse">
           <thead
-            style={{ background: "var(--highlight)", color: "var(--foreground)" }}
+          className="bg-[var(--secondary)] border-b border-[var(--border)] text-black"
           >
             <tr>
               <th className="px-4 py-3 text-left font-semibold border border-[var(--border)]">
@@ -77,9 +76,9 @@ export default function InsightsAdmin() {
               posts.map((post, index) => (
                 <tr
                   key={post.slug}
-                  className={index % 2 === 0 ? "bg-white" : "bg-[var(--background)]"}
+                  className={"bg-[var(--background)]"}
                 >
-                  <td className="px-4 py-3 border border-[var(--border)]">
+                  <td className="px-4 py-3 border border-[var(--border)] text-sm text-[var(--highlight)]">
                     {post.title}
                   </td>
                   <td className="px-4 py-3 border border-[var(--border)] text-sm text-[var(--secondary)]">

@@ -51,7 +51,7 @@ export default function AdminAddCollegePage() {
   };
 
   return (
-    <section className="bg-gray-50 min-h-screen md:p-6">
+    <section className="bg-[var(--background)] text-[var(--foreground)] min-h-screen md:p-6">
       <div className="max-w-7xl mx-auto md:mt-10">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">
@@ -64,7 +64,7 @@ export default function AdminAddCollegePage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {colleges.map((college) => (
-              <div key={college._id} className="bg-white p-4 rounded-lg shadow">
+              <div key={college._id} className="bg-[var(--background)] text-[var(--foreground)] border p-4 rounded-lg shadow">
                 <Image
                   src={college.logoUrl}
                   alt={college.name}
@@ -87,14 +87,14 @@ export default function AdminAddCollegePage() {
                     onClick={() =>
                       router.push(`/admin/colleges/${college.slug}`)
                     }
-                    className="text-yellow-500 text-sm border rounded p-2"
+                    className="text-yellow-500 text-sm border rounded p-2 hover:bg-yellow-500 hover:text-white transition cursor-pointer w-1/2 mr-1"
                   >
                     Edit
                   </button>
 
                   <button
                     onClick={() => handleDelete(college._id)}
-                    className="text-red-600 text-sm border border-red-600 rounded p-2 hover:bg-red-600 hover:text-white transition"
+                    className="text-red-600 text-sm border border-red-600 rounded p-2 hover:bg-red-600 hover:text-white transition cursor-pointer w-1/2 ml-1"
                   >
                     Delete
                   </button>

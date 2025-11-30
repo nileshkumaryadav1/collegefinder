@@ -122,11 +122,11 @@ export default function AddExamPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-white shadow-md rounded-lg py-10 my-10">
+    <div className="max-w-7xl mx-auto p-6 bg-[var(--background)] text-[var(--foreground)] shadow-md rounded-lg py-10 my-10">
       {/* Add Exam Form */}
       <form
         onSubmit={handleSubmit}
-        className="grid gap-4 bg-gray-100 p-6 rounded"
+        className="grid gap-4 bg-[var(--background)] text-[var(--foreground)] p-6 rounded"
       >
         <h1 className="text-2xl font-bold mb-4 text-center">Add a New Exam</h1>
         {message && <p className="text-center text-gray-700 mb-4">{message}</p>}
@@ -243,7 +243,7 @@ export default function AddExamPage() {
       </form>
 
       {/* Manage Exams Section */}
-      <div className="mt-12 bg-gray-100 p-2 rounded">
+      <div className="mt-12 bg-[var(--background)] text-[var(--foreground)] p-2 rounded">
         <h2 className="text-2xl font-bold my-6 text-center border-t pt-6">
           Manage Exams
         </h2>
@@ -255,7 +255,7 @@ export default function AddExamPage() {
             {exams.map((exam) => (
               <div
                 key={exam.slug || exam._id}
-                className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex flex-col"
+                className="bg-[var(--background)] text-[var(--foreground)] border border-gray-200 rounded-lg shadow-sm p-4 flex flex-col"
               >
                 {exam.imageUrl && (
                   <Image
@@ -267,7 +267,7 @@ export default function AddExamPage() {
                   />
                 )}
 
-                <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                <h3 className="text-lg font-semibold text-[var(--highlight)] mb-1">
                   {exam.name}
                 </h3>
 
@@ -303,14 +303,14 @@ export default function AddExamPage() {
                 <div className="mt-4 flex justify-end space-x-2">
                   <button
                     onClick={() => router.push(`/admin/exams/${exam.slug}`)}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded w-1/2 cursor-pointer"
                   >
                     Edit
                   </button>
 
                   <button
                     onClick={() => handleDelete(exam.slug)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded w-1/2 cursor-pointer"
                   >
                     Delete
                   </button>

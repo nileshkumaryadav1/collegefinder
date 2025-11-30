@@ -75,7 +75,7 @@ const Navbar = () => {
 
       {/* Main Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full bg-[var(--background)] text-[var(--foreground)] shadow-md z-50 border-b border-gray-200 py-2 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 w-full bg-[var(--background)] text-[var(--foreground)] shadow-md z-50 border-b border-[var(--border)] py-2 transition-transform duration-300 ${
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -91,7 +91,7 @@ const Navbar = () => {
               height={36}
               className="rounded-full"
             />
-            <span className="text-lg font-bold text-gray-800 tracking-tight">
+            <span className="text-lg font-bold text-[var(--accent)] tracking-tight">
               COLLEGE FINDER
             </span>
           </Link>
@@ -136,7 +136,7 @@ const Navbar = () => {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="sm:hidden text-gray-800"
+            className="sm:hidden text-[var(--foreground)]"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -154,11 +154,11 @@ const Navbar = () => {
             <Link
               href="/"
               onClick={closeMenu}
-              className="text-lg font-bold text-gray-800"
+              className="text-lg font-bold text-[var(--accent)] tracking-tight"
             >
               CollegeFinder
             </Link>
-            <button onClick={closeMenu} className="text-gray-800">
+            <button onClick={closeMenu} className="text-[var(--foreground)]">
               <X size={26} />
             </button>
           </div>
@@ -226,7 +226,7 @@ const NavItem = ({ href, icon, label, active }) => (
     className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-all ${
       active
         ? "bg-blue-100 text-blue-700"
-        : "text-gray-600 hover:text-blue-600 hover:bg-gray-100"
+        : "text-[color:var(--accent)] hover:text-blue-600 hover:bg-gray-100"
     }`}
   >
     {icon && <span className="mr-2">{icon}</span>}
@@ -241,7 +241,7 @@ const NavItemMobile = ({ href, icon, label, active, onClick }) => (
     className={`flex items-center space-x-3 p-3 text-sm font-medium rounded-md ${
       active
         ? "bg-blue-100 text-blue-700"
-        : "text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+        : "text-[color:var(--accent)] hover:bg-gray-100 hover:text-blue-600"
     }`}
   >
     {icon}

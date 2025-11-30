@@ -118,7 +118,7 @@ export default function ManageScholarships() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-6">
       <h1 className="text-3xl font-bold text-center mb-6">
         Manage Scholarships
       </h1>
@@ -137,7 +137,7 @@ export default function ManageScholarships() {
           placeholder="Scholarship Name"
           value={formData.name}
           onChange={handleChange}
-          className="p-2 bg-gray-700 rounded w-full mb-2"
+          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
           required
         />
         <input
@@ -146,14 +146,14 @@ export default function ManageScholarships() {
           placeholder="Slug"
           value={formData.slug}
           onChange={handleChange}
-          className="p-2 bg-gray-700 rounded w-full mb-2"
+          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
           required
         />
         <select
           name="level"
           value={formData.level}
           onChange={handleChange}
-          className="p-2 bg-gray-700 rounded w-full mb-2"
+          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
         >
           <option value="graduate">Graduate</option>
           <option value="postgraduate">Post graduate</option>
@@ -164,7 +164,7 @@ export default function ManageScholarships() {
           placeholder="About"
           value={formData.about}
           onChange={handleChange}
-          className="p-2 bg-gray-700 rounded w-full mb-2"
+          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
         />
         <input
           type="number"
@@ -172,7 +172,7 @@ export default function ManageScholarships() {
           placeholder="Scholarship Amount"
           value={formData.amount}
           onChange={handleChange}
-          className="p-2 bg-gray-700 rounded w-full mb-2"
+          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
         />
         <input
           type="text"
@@ -180,7 +180,7 @@ export default function ManageScholarships() {
           placeholder="Eligibility Criteria"
           value={formData.eligibility}
           onChange={handleChange}
-          className="p-2 bg-gray-700 rounded w-full mb-2"
+          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
         />
         <input
           type="text"
@@ -188,7 +188,7 @@ export default function ManageScholarships() {
           placeholder="Deadline"
           value={formData.deadline}
           onChange={handleChange}
-          className="p-2 bg-gray-700 rounded w-full mb-2"
+          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
           required
         />
         <input
@@ -197,7 +197,7 @@ export default function ManageScholarships() {
           placeholder="Official Website"
           value={formData.officialLink}
           onChange={handleChange}
-          className="p-2 bg-gray-700 rounded w-full mb-2"
+          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
         />
         <button
           type="submit"

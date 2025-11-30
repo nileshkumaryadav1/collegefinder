@@ -86,8 +86,8 @@ export default function CreatePostPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md">
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+    <div className="max-w-2xl mx-auto p-6 bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow-md">
+      <h1 className="text-3xl font-bold mb-6 text-center text-[var(--accent)]">
         ✍️ Create New Post
       </h1>
 
@@ -156,10 +156,30 @@ export default function CreatePostPage() {
           onChange={(e) => setPost({ ...post, type: e.target.value })}
           className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500"
         >
-          <option value="blog">Blog</option>
-          <option value="news">News</option>
-          <option value="exams">Exams</option>
-          <option value="update">Update</option>
+          <option
+            value="blog"
+            className="bg-[var(--background)] text-[var(--foreground)]"
+          >
+            Blog
+          </option>
+          <option
+            value="news"
+            className="bg-[var(--background)] text-[var(--foreground)]"
+          >
+            News
+          </option>
+          <option
+            value="exams"
+            className="bg-[var(--background)] text-[var(--foreground)]"
+          >
+            Exams
+          </option>
+          <option
+            value="update"
+            className="bg-[var(--background)] text-[var(--foreground)]"
+          >
+            Update
+          </option>
         </select>
 
         {/* Featured / Pinned */}
@@ -168,9 +188,7 @@ export default function CreatePostPage() {
             <input
               type="checkbox"
               checked={post.featured}
-              onChange={(e) =>
-                setPost({ ...post, featured: e.target.checked })
-              }
+              onChange={(e) => setPost({ ...post, featured: e.target.checked })}
             />
             Featured
           </label>
@@ -204,13 +222,13 @@ export default function CreatePostPage() {
         <button
           type="button"
           onClick={() => setSeoOpen(!seoOpen)}
-          className="text-blue-600 text-sm font-medium underline"
+          className="text-blue-600 text-sm font-medium cursor-pointer"
         >
           {seoOpen ? "▼ Hide SEO Settings" : "▶ Show SEO Settings"}
         </button>
 
         {seoOpen && (
-          <div className="space-y-3 border p-4 rounded-lg bg-gray-50">
+          <div className="space-y-3 border p-4 rounded-lg bg-[var(--background)]">
             <input
               type="text"
               placeholder="SEO Title"

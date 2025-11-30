@@ -151,7 +151,7 @@ export default function EditCollegePage() {
   // ⭐ UI FORM
   // --------------------------------------------
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+    <div className="max-w-4xl mx-auto p-6 bg-[var(--background)] text-[var(--foreground)] shadow-md rounded-lg mt-10">
       <h1 className="text-3xl font-bold mb-6 text-center">Edit College</h1>
 
       {error && <p className="text-red-500 text-center mb-3">{error}</p>}

@@ -40,7 +40,7 @@ export default function InsightsPageCard() {
   }
 
   return (
-    <div className="mx-auto p-4 bg-white md:px-20 px-4 md:py-8 py-4">
+    <div className="mx-auto p-4 bg-[var(--background)] text-[var(--foreground)] md:px-20 px-4 md:py-8 py-4">
       <Head>
         <title>
           {typeFilter
