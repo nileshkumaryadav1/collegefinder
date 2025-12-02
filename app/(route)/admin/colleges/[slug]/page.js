@@ -186,11 +186,11 @@ export default function EditCollegePage() {
 
         {/* Type */}
         <select name="type" value={formData.type} onChange={handleChange} className="border p-2 rounded">
-          <option value="">Select Type</option>
-          <option value="Government">Government</option>
-          <option value="Private">Private</option>
-          <option value="Deemed">Deemed</option>
-          <option value="Autonomous">Autonomous</option>
+          <option value="" className="bg-[var(--background)] text-[var(--foreground)]">Select Type</option>
+          <option value="Government" className="bg-[var(--background)] text-[var(--foreground)]">Government</option>
+          <option value="Private" className="bg-[var(--background)] text-[var(--foreground)]">Private</option>
+          <option value="Deemed" className="bg-[var(--background)] text-[var(--foreground)]">Deemed</option>
+          <option value="Autonomous" className="bg-[var(--background)] text-[var(--foreground)]">Autonomous</option>
         </select>
 
         {/* Admission */}
