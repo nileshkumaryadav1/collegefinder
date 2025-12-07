@@ -32,7 +32,7 @@ import SmallCardOfInsights from "./SmallCardOfInsights";
 const SingleCollegeCardOld = ({ college }) => {
   const [liked, setLiked] = useState(false);
 
-  console.log(college);
+  // console.log(college);
 
   return (
     <div className="bg-gray-50 text-gray-800">

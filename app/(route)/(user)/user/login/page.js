@@ -45,14 +45,14 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4 py-10">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 flex items-center justify-center px-4 py-10">
+      <div className="bg-[var(--background)] rounded-xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
         {/* Left - Login Form */}
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-3xl font-bold text-center text-blue-600 mb-2">
             Welcome Back
           </h2>
-          <p className="text-center text-gray-500 mb-6">
+          <p className="text-center text-[var(--foreground)] mb-6">
             Login to your College Finder account
           </p>
 
@@ -69,7 +69,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* Email */}
             <div>
-              <label className="block mb-1 text-sm font-medium text-gray-700">
+              <label className="block mb-1 text-sm font-medium text-[var(--foreground)]">
                 Email
               </label>
               <input
@@ -86,7 +86,7 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label className="block mb-1 text-sm font-medium text-gray-700">
+              <label className="block mb-1 text-sm font-medium text-[var(--foreground)]">
                 Password
               </label>
               <input
@@ -105,7 +105,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition duration-200"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition duration-200 cursor-pointer"
             >
               {loading ? "Logging in..." : "Login"}
             </button>
@@ -131,13 +131,13 @@ export default function LoginPage() {
         </div>
 
         {/* Right - Features */}
-        <div className="w-full md:w-1/2 bg-blue-50 p-8 flex flex-col justify-center">
-          <h3 className="text-xl font-semibold text-gray-700 mb-4 text-center">
+        <div className="w-full md:w-1/2 bg-blue-50 dark:bg-slate-800 p-8 flex flex-col justify-center">
+          <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4 text-center">
             ✨ What you will get after signing in
           </h3>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
             <li className="flex items-center gap-2">
-              <span className="text-blue-500">📬</span>
+              <span className="text-green-500">📬</span>
               Regular Exam Notifications
             </li>
             <li className="flex items-center gap-2">

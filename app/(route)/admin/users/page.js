@@ -22,8 +22,6 @@ export default function AdminUsers() {
       .catch((err) => console.error("Error fetching users", err));
   }, []);
 
-  // console.log(users);
-
   return (
     <div className="max-w-7xl mx-auto md:p-6 p-3 bg-[color:var(--background)] text-[color:var(--foreground)]">
       {/* Header */}
@@ -64,7 +62,12 @@ export default function AdminUsers() {
               >
                 {/* User Header */}
                 <div className="flex flex-col items-center mb-4">
-                  <UserCircle className="w-14 h-14 text-[color:var(--accent)] mb-2" />
+                  {/* <UserCircle className="w-14 h-14 text-[color:var(--accent)] mb-2" /> */}
+                  <img
+                    src={user.profileImage}
+                    alt={user.name}
+                    className="w-14 h-14 rounded-full"
+                  />
                   <h2 className="text-lg font-semibold text-[color:var(--foreground)] text-center">
                     {user.name}
                   </h2>

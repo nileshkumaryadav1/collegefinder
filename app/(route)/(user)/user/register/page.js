@@ -94,13 +94,13 @@ export default function RegisterPage() {
 
   return (
     // <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex flex-col lg:flex-row items-center justify-center px-6 py-10 gap-10 lg:gap-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 flex flex-col lg:flex-row items-center justify-center px-6 py-10 gap-10 lg:gap-20">
       {/* Features Section */}
       <div className="w-full lg:w-1/2 max-w-xl text-center lg:text-left">
-        <h2 className="text-3xl font-bold mb-4 text-gray-800">
+        <h2 className="text-3xl font-bold mb-4 text-[var(--foreground)]">
           Why Join <span className="text-blue-600">College Finder?</span>
         </h2>
-        <ul className="space-y-3 text-gray-700 text-base">
+        <ul className="space-y-3 text-[var(--foreground)] text-base">
           <li className="flex items-center gap-2">
             <span className="text-blue-500">📬</span>
             Get regular <strong>exam updates</strong>
@@ -122,14 +122,14 @@ export default function RegisterPage() {
             Free & easy to use
           </li>
         </ul>
-        <p className="mt-6 text-sm text-gray-600">
+        <p className="mt-6 text-sm text-gray-600 dark:text-gray-400">
           Already a member?{" "}
           <Link href="/user/login" className="text-blue-500 hover:underline">
             Login here
           </Link>
           .
         </p>
-        <p className="mt-1 text-sm text-gray-600">
+        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
           <Link
             href="/forgot-password"
             className="text-blue-500 hover:underline"
@@ -137,7 +137,7 @@ export default function RegisterPage() {
             Forgot password?
           </Link>
         </p>
-        <p className="mt-2 text-sm text-gray-600">
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           By registering, you agree to our{" "}
           <Link href="/terms" className="text-blue-500 hover:underline">
             Terms of Service
@@ -151,9 +151,9 @@ export default function RegisterPage() {
       </div>
 
       {/* Form Section */}
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+      <div className="w-full max-w-md bg-[var(--background)] p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-blue-500 mb-1">Welcome!</h2>
-        <p className="text-sm mb-5 text-center text-gray-600">Please fill in the form below to <strong>Register</strong>.</p>
+        <p className="text-sm mb-5 text-center text-[var(--foreground)]">Please fill in the form below to <strong>Register</strong>.</p>
 
         {message && (
           <div
@@ -228,7 +228,7 @@ export default function RegisterPage() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded disabled:opacity-60"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded disabled:opacity-60 cursor-pointer transition duration-300 ease-in-out"
             disabled={loading}
           >
             {loading ? "Processing..." : step === 1 ? "Send OTP" : "Register"}

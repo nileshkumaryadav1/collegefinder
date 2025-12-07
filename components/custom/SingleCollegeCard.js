@@ -73,7 +73,7 @@ export default function SingleCollegePage({ college }) {
   const safe = (v, fallback = "N/A") =>
     v === undefined || v === null || v === "" ? fallback : v;
 
-  console.log(college);
+  // console.log(college);
 
   return (
     <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-4 md:p-8 rounded-lg shadow-md">
@@ -446,7 +446,7 @@ export default function SingleCollegePage({ college }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {/* {college.cutOff?.map((co, i) => (
+                        {college.cutOff?.map((co, i) => (
                           <tr key={i} className="border-b">
                             <td className="py-2 pr-4">{co.year ?? "-"}</td>
                             <td className="py-2 pr-4">{co.program ?? "-"}</td>
@@ -459,7 +459,7 @@ export default function SingleCollegePage({ college }) {
                               {co.closingRank ?? "-"}
                             </td>
                           </tr>
-                        ))} */}
+                        ))}
                       </tbody>
                     </table>
                   </div>

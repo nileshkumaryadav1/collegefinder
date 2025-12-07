@@ -68,14 +68,14 @@ const DashboardPage = () => {
   if (loading || !user)
     return (
       <>
-        <div className="md:min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4 py-10">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
+        <div className="md:min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 flex items-center justify-center px-4 py-10">
+          <div className="bg-[var(--background)] rounded-xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
             {/* Right - Features */}
-            <div className="w-full bg-blue-50 py-20 flex flex-col justify-center">
-              <h3 className="md:text-3xl text-2xl font-semibold text-gray-700 md:mb-4 text-center">
+            <div className="w-full bg-blue-50 dark:bg-slate-800 py-20 flex flex-col justify-center">
+              <h3 className="md:text-3xl text-2xl font-semibold text-gray-700 dark:text-white md:mb-4 text-center">
                 ✨ What you will get after signing in
               </h3>
-              <ul className="flex flex-col md:items-center gap-2 text-md text-gray-700 p-4">
+              <ul className="flex flex-col md:items-center gap-2 text-md text-gray-700 dark:text-white p-4">
                 <li className="flex items-center gap-2">
                   <span className="text-blue-500">📬</span>
                   Regular Exam Notifications
@@ -108,7 +108,7 @@ const DashboardPage = () => {
     );
 
   return (
-    <main className="min-h-screen bg-gray-50 md:py-5 py-4 px-4 max-w-6xl mx-auto space-y-6">
+    <main className="min-h-screen bg-gray-50 dark:bg-slate-900 md:py-5 py-4 px-4 rounded-3xl max-w-6xl mx-auto space-y-6">
       {/* title and setting btn */}
       <section className="flex justify-between items-center px-4">
         {/* title */}
@@ -120,7 +120,7 @@ const DashboardPage = () => {
         <div className="">
           <button
             onClick={() => setOpenSettings(!openSettings)}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 cursor-pointer"
+            className="p-2 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-[var(--background)] cursor-pointer"
           >
             <Settings size={22} />
           </button>
@@ -131,7 +131,7 @@ const DashboardPage = () => {
               <div className="">
                 <button
                   onClick={() => deleteUser(user.email)}
-                  className="pr-18 pt-2 pb-2 pl-4 text-sm hover:bg-gray-100 cursor-pointer"
+                  className="pr-18 pt-2 pb-2 pl-4 text-sm hover:bg-red-50 text-red-500 cursor-pointer"
                 >
                   Delete Account
                 </button>
@@ -148,7 +148,7 @@ const DashboardPage = () => {
         <UserCardAlt user={user} />
       </div>
       {/* Email Opt-In */}
-      <div className="bg-white p-6 rounded-xl shadow-md border">
+      <div className="bg-[var(--background)] p-6 rounded-xl shadow-md border">
         <h3 className="text-xl font-semibold mb-2">Get Regular Updates</h3>
         <p className="text-gray-600 mb-4">
           Subscribe to receive emails about new colleges, exams, and
@@ -170,7 +170,7 @@ const DashboardPage = () => {
       {/* Favorites Section */}
       <div className="grid md:grid-cols-3 gap-4">
         {["Colleges", "Exams", "Scholarships"].map((item) => (
-          <div key={item} className="bg-white p-4 rounded-xl shadow-md border">
+          <div key={item} className="bg-[var(--background)] p-4 rounded-xl shadow-md border">
             <h4 className="text-lg font-semibold mb-2">Favorite {item}</h4>
             <p className="text-gray-600">
               You have not saved any {item.toLowerCase()} yet.
@@ -179,7 +179,7 @@ const DashboardPage = () => {
         ))}
       </div>
       {/* Counseling Section */}
-      <div className="bg-white p-6 rounded-xl shadow-md border">
+      <div className="bg-[var(--background)] p-6 rounded-xl shadow-md border">
         <h3 className="text-xl font-semibold mb-2">Personalized Counseling</h3>
         <p className="text-gray-600 mb-4">
           Need help finding the right college? Book a session with our
@@ -193,7 +193,7 @@ const DashboardPage = () => {
         </Link>
       </div>
       {/* Helpful Links */}
-      <div className="bg-white p-6 rounded-xl shadow-md border">
+      <div className="bg-[var(--background)] p-6 rounded-xl shadow-md border">
         <h3 className="text-xl font-semibold mb-4">Useful Links</h3>
         <ul className="grid sm:grid-cols-2 gap-3 text-blue-600">
           {[

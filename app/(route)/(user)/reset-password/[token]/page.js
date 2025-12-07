@@ -38,7 +38,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 dark:from-slate-900 dark:to-slate-950 p-4">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ export default function ResetPasswordPage() {
           <h2 className="text-2xl font-bold text-green-700 mb-3 text-center md:text-left">
             Reset Your Password
           </h2>
-          <p className="text-gray-600 text-sm mb-4 text-center md:text-left">
+          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 text-center md:text-left">
             Set a new password for your account.
           </p>
 
@@ -99,7 +99,7 @@ export default function ResetPasswordPage() {
         </div>
 
         {/* Desktop & mobile shared Helpful Sections */}
-        <div className="text-sm text-gray-700 space-y-4">
+        <div className="text-sm space-y-4">
           <div className="bg-blue-50 border border-blue-200 p-5 rounded-lg">
             <h3 className="text-blue-700 font-semibold mb-2">
               ✅ After Password Reset

@@ -46,7 +46,7 @@ const UserCardAlt = ({ user }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-50 shadow-lg rounded-2xl p-6 flex flex-col md:flex-row md:gap-6 items-center justify-between w-full mx-auto md:max-w-3xl">
+    <div className="bg-gradient-to-br from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 border border-blue-50 shadow-lg rounded-2xl p-6 flex flex-col md:flex-row md:gap-6 items-center justify-between w-full mx-auto md:max-w-3xl">
       <Image
         src={user.profileImage ? user.profileImage : "/default-user.jpg"}
         alt={user.name}

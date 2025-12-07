@@ -17,7 +17,7 @@ export async function POST(req) {
   try {
     await connectToDatabase();
     let data = await req.json();
-    console.log("📥 Incoming data:", data);
+    // console.log("📥 Incoming data:", data);
 
     // --- Slug handling ---
     if (!data.slug && data.title) {

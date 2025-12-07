@@ -36,7 +36,7 @@ export async function POST(req) {
       body.slug = slugify(body.name, { lower: true, strict: true });
     }
 
-    console.log("Received data:", body); // Debugging
+    // console.log("Received data:", body); // Debugging
 
     // Validate required fields
     if (!body.name) {
