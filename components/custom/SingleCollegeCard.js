@@ -123,7 +123,7 @@ export default function SingleCollegePage({ college }) {
             </div>
 
             {/* State, City, Website */}
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-500 mt-2">
               {college.state || ""} {college.city ? ` • ${college.city}` : ""}
             </div>
             <div className="mt-4 flex flex-col gap-2">
@@ -163,14 +163,14 @@ export default function SingleCollegePage({ college }) {
       {/* Navigation Links */}
       <div className="flex flex-wrap justify-center border-gray-200 bg-[var(--background)] py-4 px-2 text-sm md:text-base">
         {[
-          { id: "overview", label: "Overview", icon: Landmark },
+          { id: "basic-info", label: "Overview", icon: Landmark },
           { id: "about", label: "About", icon: BookUser },
           { id: "courses", label: "Courses", icon: Notebook },
-          { id: "admission", label: "Admission", icon: BedSingle },
-          { id: "fees", label: "Fees", icon: Wallet },
+          { id: "academics", label: "Admission", icon: BedSingle },
+          { id: "fees-scholarships", label: "Fees", icon: Wallet },
           { id: "facilities", label: "Facilities", icon: School },
-          { id: "cutoff", label: "Cutoff", icon: Wallet },
-          { id: "placement", label: "Placement", icon: Wallet },
+          { id: "cut-offs", label: "Cutoff", icon: Wallet },
+          { id: "placements", label: "Placement", icon: Wallet },
           { id: "reviews", label: "Reviews", icon: Star },
         ].map((item) => (
           <a
@@ -189,7 +189,7 @@ export default function SingleCollegePage({ college }) {
       {/* Sections container */}
       <div className="max-w-6xl mx-auto mt-6 space-y-6">
         {/* About */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow p-6">
+        <div id="about" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow p-6">
           <h2 className="text-xl font-semibold text-[var(--highlight)]">About</h2>
           <p className="mt-2 leading-relaxed">
             {safe(
@@ -216,7 +216,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Basic Info */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="basic-info" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("basics")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -269,7 +269,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Institutional Details */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="institute-details" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("institutional")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -354,7 +354,7 @@ export default function SingleCollegePage({ college }) {
         </section>
 
         {/* Academics (Courses + Cutoffs) */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="academics" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("academics")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -373,7 +373,7 @@ export default function SingleCollegePage({ college }) {
           {openSections.academics && (
             <div className="p-6 border-t space-y-6">
               {/* Courses Offered */}
-              <div>
+              <div id="courses">
                 <h4 className="font-semibold mb-3">Courses Offered</h4>
                 {college.coursesOffered?.length > 0 ? (
                   <div className="grid gap-4">
@@ -430,7 +430,7 @@ export default function SingleCollegePage({ college }) {
               </div>
 
               {/* Cut Offs */}
-              <div>
+              <div id="cut-offs">
                 <h4 className="font-semibold mb-3">Cut Offs</h4>
                 {college.cutOff?.length > 0 ? (
                   <div className="overflow-auto">
@@ -472,7 +472,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Fees & Scholarships */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="fees-scholarships" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("fees")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -557,7 +557,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Facilities */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="facilities" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("facilities")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -642,7 +642,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Placements */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="placements" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("placements")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -927,7 +927,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Rankings */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="ranking" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("rankings")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -984,7 +984,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Gallery */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="gallery" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("gallery")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -1030,7 +1030,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Contact & Social */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
+        <div id="contact-social" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow">
           <button
             onClick={() => toggle("contact")}
             className="w-full px-6 py-4 text-left flex justify-between items-center"
@@ -1111,7 +1111,7 @@ export default function SingleCollegePage({ college }) {
         </div>
 
         {/* Analytics, SEO, Metadata */}
-        <div className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow grid md:grid-cols-3">
+        <div id="analytics" className="bg-[var(--background)] text-[var(--foreground)] rounded-xl shadow grid md:grid-cols-3">
           <div className="p-6 border-b md:border-b-0 md:border-r">
             <h4 className="font-semibold">Analytics & Engagement</h4>
             <Row label="Views" value={college.views} />
@@ -1148,7 +1148,7 @@ export default function SingleCollegePage({ college }) {
             />
           </div>
 
-          <div className="p-6">
+          <div id="metadata" className="p-6">
             <h4 className="font-semibold">Metadata</h4>
             <Row label="Number of Students" value={college.noOfStudents} />
             <Row label="Number of Faculties" value={college.noOfFaculties} />

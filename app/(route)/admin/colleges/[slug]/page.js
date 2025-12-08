@@ -832,6 +832,43 @@ function FacilitiesTab({ formData, onChange, pushToArray, removeFromArray, setAt
 
         <textarea value={formData.hostels?.description || ""} onChange={(e) => setAtPath("hostels.description", e.target.value)} placeholder="Hostel description" className="w-full border rounded p-2 mt-2" />
       </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">Sports Facilities (list)</label>
+        <div className="space-y-2">
+          {(formData.sportsFacilities || []).map((f, i) => (
+            <div key={i} className="flex gap-2">
+              <input className="flex-1 border rounded p-2" value={f} onChange={(e) => setAtPath(`sportsFacilities.${i}`, e.target.value)} />
+              <button className="px-2 py-1 rounded bg-red-500 text-white" onClick={() => removeFromArray("sportsFacilities", i)}>Remove</button>
+            </div>
+          ))}
+          <button className="px-3 py-1 rounded bg-blue-600 text-white" onClick={() => pushToArray("sportsFacilities", "")}>Add Facility</button>
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">Clubs (list)</label>
+        <div className="space-y-2">
+          {(formData.clubs || []).map((f, i) => (
+            <div key={i} className="flex gap-2">
+              <input className="flex-1 border rounded p-2" value={f} onChange={(e) => setAtPath(`clubs.${i}`, e.target.value)} />
+              <button className="px-2 py-1 rounded bg-red-500 text-white" onClick={() => removeFromArray("clubs", i)}>Remove</button>
+            </div>
+          ))}
+          <button className="px-3 py-1 rounded bg-blue-600 text-white" onClick={() => pushToArray("clubs", "")}>Add Club</button>
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">Events (list)</label>
+        {formData.events.map((f, i) => (
+          <div key={i} className="flex gap-2">
+            <input className="flex-1 border rounded p-2" value={f} onChange={(e) => setAtPath(`events.${i}`, e.target.value)} />
+            <button className="px-2 py-1 rounded bg-red-500 text-white" onClick={() => removeFromArray("events", i)}>Remove</button>
+          </div>
+        ))}
+         <button className="px-3 py-1 rounded bg-blue-600 text-white" onClick={() => pushToArray("events", "")}>Add Event</button>
+      </div>
     </div>
   );
 }
@@ -860,11 +897,11 @@ function PlacementsTab({ formData, setAtPath, pushToArray, removeFromArray, upda
         <label className="block font-medium">BTech Yearwise Stats</label>
         {(formData.placements?.BTech?.yearwiseStats || []).map((s, i) => (
           <div key={i} className="grid grid-cols-6 gap-2 items-center border rounded p-2 mt-2">
-            <input value={s.year || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, year: Number(e.target.value) })} className="border rounded p-1" />
-            <input value={s.highest || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, highest: e.target.value })} className="border rounded p-1" />
-            <input value={s.average || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, average: e.target.value })} className="border rounded p-1" />
-            <input value={s.median || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, median: e.target.value })} className="border rounded p-1" />
-            <input value={s.placedStudents || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, placedStudents: Number(e.target.value) })} className="border rounded p-1" />
+            <input value={s.year || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, year: Number(e.target.value) })} placeholder="Year" className="border rounded p-1" />
+            <input value={s.highest || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, highest: e.target.value })} placeholder="Highest" className="border rounded p-1" />
+            <input value={s.average || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, average: e.target.value })} placeholder="Average" className="border rounded p-1" />
+            <input value={s.median || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, median: e.target.value })} placeholder="Median" className="border rounded p-1" />
+            <input value={s.placedStudents || ""} onChange={(e) => updateArrayItem("placements.BTech.yearwiseStats", i, { ...s, placedStudents: Number(e.target.value) })} placeholder="Placed Students" className="border rounded p-1" />
             <button className="px-2 py-1 rounded bg-red-500 text-white" onClick={() => removeFromArray("placements.BTech.yearwiseStats", i)}>Remove</button>
           </div>
         ))}
@@ -882,13 +919,14 @@ function PlacementsTab({ formData, setAtPath, pushToArray, removeFromArray, upda
         </div>
 
         <div className="mt-3">
+        <label className="block font-medium">MTech Yearwise Stats</label>
           {(formData.placements?.MTech?.yearwiseStats || []).map((s, i) => (
             <div key={i} className="grid grid-cols-6 gap-2 items-center border rounded p-2 mt-2">
-              <input value={s.year || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, year: Number(e.target.value) })} className="border rounded p-1" />
-              <input value={s.highest || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, highest: e.target.value })} className="border rounded p-1" />
-              <input value={s.average || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, average: e.target.value })} className="border rounded p-1" />
-              <input value={s.median || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, median: e.target.value })} className="border rounded p-1" />
-              <input value={s.placedStudents || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, placedStudents: Number(e.target.value) })} className="border rounded p-1" />
+              <input value={s.year || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, year: Number(e.target.value) })} placeholder="Year" className="border rounded p-1" />
+              <input value={s.highest || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, highest: e.target.value })} placeholder="Highest" className="border rounded p-1" />
+              <input value={s.average || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, average: e.target.value })} placeholder="Average" className="border rounded p-1" />
+              <input value={s.median || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, median: e.target.value })} placeholder="Median" className="border rounded p-1" />
+              <input value={s.placedStudents || ""} onChange={(e) => updateArrayItem("placements.MTech.yearwiseStats", i, { ...s, placedStudents: Number(e.target.value) })} placeholder="Placed students" className="border rounded p-1" />
               <button className="px-2 py-1 rounded bg-red-500 text-white" onClick={() => removeFromArray("placements.MTech.yearwiseStats", i)}>Remove</button>
             </div>
           ))}
