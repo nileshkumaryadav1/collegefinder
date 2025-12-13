@@ -461,11 +461,11 @@ const SingleCollegeCardOld = ({ college }) => {
         </div>
       </section>
 
-      {/* important insights */}
+      {/* important Updates */}
       <section className="w-full py-14 px-4 md:px-8 bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
-            Important Insights
+            Important Updates
           </h2>
 
           <Link href="/news" className="btn btn-link">

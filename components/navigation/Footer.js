@@ -96,19 +96,19 @@ const Footer = () => {
               <div className="w-1/2">
                 <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4 shadow-sm bg-white dark:bg-gray-900 h-full">
                   <h5 className="text-lg font-bold text-gray-800 dark:text-white border-b border-gray-200 pb-2 mb-3">
-                    Insights
+                    Updates
                   </h5>
                   <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                     {[
-                      { href: "/insights", label: "Latest Insights" },
+                      { href: "/insights", label: "Latest Updates" },
                       {
                         href: "/find-news/colleges",
-                        label: "Colleges Insights",
+                        label: "Colleges Updates",
                       },
-                      { href: "/find-news/exams", label: "Exams Insights" },
+                      { href: "/find-news/exams", label: "Exams Updates" },
                       {
                         href: "/find-news/scholarships",
-                        label: "Scholarships Insights",
+                        label: "Scholarships Updates",
                       },
                     ].map(({ href, label }) => (
                       <li key={href}>

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: post.seoMeta?.title || `${post.title} - College Finder`,
-    description: post.seoMeta?.description || post.summary?.slice(0, 150),
+    description: post.seoMeta?.description || post.description || "",
     keywords: post.seoMeta?.keywords || [],
     openGraph: {
       images: [

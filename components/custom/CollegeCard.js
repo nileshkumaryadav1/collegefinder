@@ -76,7 +76,7 @@ function CollegeCard({ query, collegeType, sortBy, sortOrder }) {
           <Link
             key={college.slug}
             href={`/colleges/${college.slug}`}
-            className="block bg-[var(--background)] text-[var(--foreground)] border rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-4 relative"
+            className="block bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-4 relative"
           >
             {/* Featured Ribbon */}
             {college.nirfRanking && college.nirfRanking <= 100 && (

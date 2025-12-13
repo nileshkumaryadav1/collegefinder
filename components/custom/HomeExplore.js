@@ -12,7 +12,7 @@ export default function FeaturedCategories({ exploreData }) {
           Start Exploring
         </h2>
 
-        <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-4 sm:grid-cols-2 md:gap-6 gap-4">
           {exploreData.map((i) => (
             <motion.div
               key={i.href}
@@ -22,7 +22,7 @@ export default function FeaturedCategories({ exploreData }) {
                 boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
               }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 cursor-pointer"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 cursor-pointer border border-[var(--border)]"
             >
               <Link href={i.href} className="block">
                 <Image

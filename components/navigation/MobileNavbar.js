@@ -17,7 +17,7 @@ const MobileNavbar = () => {
     setIsLoggedIn(!!token);
   }, []);
 
-  if (!isLoggedIn) return null;
+  // if (!isLoggedIn) return null;
 
   return (
     <nav className="fixed bottom-0 left-0 w-full z-40 sm:hidden shadow-t">
@@ -44,7 +44,7 @@ const MobileNavbar = () => {
         <NavItem
           href="/insights"
           icon={Newspaper}
-          label="Insights"
+          label="Updates"
           active={pathname === "/insights"}
         />
         <NavItem

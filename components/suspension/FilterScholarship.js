@@ -43,7 +43,7 @@ function FilterScholarship() {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-blue-600 mb-2">
-          Scholarship Insights
+          Scholarship Updates
         </h1>
         <p className="text-gray-500 text-lg">
           Get the latest <strong>News, Updates, Notice and Blogs</strong> on
@@ -78,7 +78,7 @@ function FilterScholarship() {
 
       {/* News Count */}
       <div className="text-center text-lg font-medium text-gray-700 mb-6">
-        Total Scholarship Insights: {posts.length}
+        Total Scholarship Updates: {posts.length}
       </div>
 
       {/* Loading Indicator */}

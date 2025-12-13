@@ -49,7 +49,7 @@ function FilterCollege() {
       {/* Header */}
       <header className="text-center mb-6">
         <h1 className="text-4xl font-bold text-blue-700 mb-3">
-          College Insights
+          College Updates
         </h1>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
           Stay updated with the latest{" "}
@@ -85,7 +85,7 @@ function FilterCollege() {
 
       {/* News Count */}
       <p className="text-center text-gray-500 mb-6">
-        Total College Insights: {posts.length}
+        Total College Updates: {posts.length}
       </p>
 
       {/* Loading */}

@@ -51,7 +51,7 @@ export default function SponsorsCard() {
       )}
 
       {/* Sponsor Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-4">
         {sponsors.map((sponsor) => (
           <div
             key={sponsor._id}

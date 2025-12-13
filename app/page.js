@@ -31,7 +31,7 @@ export default function Home() {
     {
       i: 4,
       href: "/insights",
-      label: "Insights",
+      label: "News",
       link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ljHw5E36UIMToNEUtAFpJSn_88U7PO8WyQ&s",
     },
   ];
@@ -49,21 +49,6 @@ export default function Home() {
       {/* Featured Categories */}
       <HomeExplore exploreData={exploreData} />
 
-      {/* Latest Insights */}
-      <section className="md:py-12 py-6 px-4 bg-[var(--background)] text-[var(--foreground)]">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center md:mb-6 mb-4">
-            <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
-              Latest Insights
-            </h2>
-            <Link href="/insights" className="text-blue-600 hover:underline">
-              View Insights
-            </Link>
-          </div>
-          <SmallCardOfInsights />
-        </div>
-      </section>
-
       {/* Popular Colleges */}
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
@@ -76,6 +61,21 @@ export default function Home() {
             </Link>
           </div>
           <CollegeCardForHome query="#" collegeType="" sortBy="" sortOrder="" />
+        </div>
+      </section>
+
+      {/* Latest News */}
+      <section className="md:py-12 py-6 px-4 bg-[var(--background)] text-[var(--foreground)]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-center md:mb-6 mb-4">
+            <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
+              Latest Updates
+            </h2>
+            <Link href="/insights" className="text-blue-600 hover:underline">
+              View Updates
+            </Link>
+          </div>
+          <SmallCardOfInsights />
         </div>
       </section>
 

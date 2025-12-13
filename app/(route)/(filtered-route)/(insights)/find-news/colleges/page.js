@@ -2,9 +2,9 @@ import { Suspense } from "react";
 import FilterCollege from "@/components/suspension/FilterCollege";
 
 export const metadata = {
-  title: "Colleges Insights",
+  title: "Colleges News",
   description:
-    "Get the latest insights and updates on colleges, scholarships, exams, and more with College Finder.",
+    "Get the latest news and updates on colleges, scholarships, exams, and more with College Finder.",
 };
 
 export default function Page() {

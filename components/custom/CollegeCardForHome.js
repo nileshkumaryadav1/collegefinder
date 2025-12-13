@@ -88,7 +88,7 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
             key={college.slug}
             whileHover={{ scale: 1.03, boxShadow: "0px 6px 20px rgba(0,0,0,0.1)" }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="w-[280px] flex-shrink-0 bg-[var(--background)] text-[var(--foreground)] rounded-lg shadow-md p-4 cursor-pointer"
+            className="w-[280px] flex-shrink-0 bg-[var(--background)] text-[var(--foreground)] shadow-md p-4 cursor-pointer border border-[var(--border)] rounded-lg"
           >
             <Link href={`/colleges/${college.slug}`}>
               <div className="flex items-center justify-between mb-4">
@@ -130,7 +130,7 @@ function CollegeCardForHome({ query, collegeType, sortBy, sortOrder }) {
             key={college.slug}
             whileHover={{ scale: 1.03, boxShadow: "0px 6px 20px rgba(0,0,0,0.1)" }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="bg-[var(--background)] text-[var(--foreground)] border border-border rounded-lg shadow-md p-4 flex flex-col cursor-pointer"
+            className="bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-lg shadow-md p-4 flex flex-col cursor-pointer"
           >
             <Link href={`/colleges/${college.slug}`}>
               <div className="flex items-center justify-between mb-4">

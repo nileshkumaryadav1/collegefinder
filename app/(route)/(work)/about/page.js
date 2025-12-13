@@ -10,8 +10,8 @@ export const metadata = {
 
 export default function AboutUs() {
   return (
-    <div className="h-auto md:min-h-screen bg-gray-100 dark:bg-gray-900 md:py-12 py-4">
-      <div className="max-w-5xl mx-auto px-6">
+    <div className="h-auto md:min-h-screen bg-[var(--background] md:py-12 py-4">
+      <div className="max-w-5xl mx-auto px-6 flex flex-col items-center">
         {/* Page Title */}
         <h1 className="md:text-4xl text-2xl font-bold text-center text-gray-900 dark:text-white md:mb-8 mb-4">
           About College Finder
@@ -39,7 +39,10 @@ export default function AboutUs() {
         </div>
 
         {/* Developer Section */}
-        <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-8 text-center">
+        <div className="bg-[var(--border] shadow-md rounded-xl p-8 text-center w-80 md:w-1/2 mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white underline mb-4">
+            Meet the Developer
+          </h2>
           <Image
             src="/profile.jpg"
             alt="Nilesh Kumar"
@@ -47,8 +50,8 @@ export default function AboutUs() {
             height={100}
             className="mx-auto rounded-full mb-4"
           />
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-            Meet the Developer
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            Nilesh Kumar
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mt-2">
             This project is developed by <strong>Nilesh Kumar</strong>, a

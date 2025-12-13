@@ -129,7 +129,7 @@ export default function ManageScholarships() {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-lg shadow-md max-w-2xl mx-auto"
+        className="bg-[var(--background)] border border-[var(--border)] p-6 rounded-lg shadow-md max-w-2xl mx-auto"
       >
         <input
           type="text"
@@ -137,7 +137,7 @@ export default function ManageScholarships() {
           placeholder="Scholarship Name"
           value={formData.name}
           onChange={handleChange}
-          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
+          className="p-2 border border-[var(--border)] rounded w-full mb-2"
           required
         />
         <input
@@ -146,14 +146,14 @@ export default function ManageScholarships() {
           placeholder="Slug"
           value={formData.slug}
           onChange={handleChange}
-          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
+          className="p-2 border border-[var(--border)] rounded w-full mb-2"
           required
         />
         <select
           name="level"
           value={formData.level}
           onChange={handleChange}
-          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
+          className="p-2 border border-[var(--border)] rounded w-full mb-2"
         >
           <option value="graduate">Graduate</option>
           <option value="postgraduate">Post graduate</option>
@@ -164,7 +164,7 @@ export default function ManageScholarships() {
           placeholder="About"
           value={formData.about}
           onChange={handleChange}
-          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
+          className="p-2 border border-[var(--border)] rounded w-full mb-2"
         />
         <input
           type="number"
@@ -172,7 +172,7 @@ export default function ManageScholarships() {
           placeholder="Scholarship Amount"
           value={formData.amount}
           onChange={handleChange}
-          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
+          className="p-2 border border-[var(--border)] rounded w-full mb-2"
         />
         <input
           type="text"
@@ -180,7 +180,7 @@ export default function ManageScholarships() {
           placeholder="Eligibility Criteria"
           value={formData.eligibility}
           onChange={handleChange}
-          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
+          className="p-2 border border-[var(--border)] rounded w-full mb-2"
         />
         <input
           type="text"
@@ -188,7 +188,7 @@ export default function ManageScholarships() {
           placeholder="Deadline"
           value={formData.deadline}
           onChange={handleChange}
-          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
+          className="p-2 border border-[var(--border)] rounded w-full mb-2"
           required
         />
         <input
@@ -197,11 +197,11 @@ export default function ManageScholarships() {
           placeholder="Official Website"
           value={formData.officialLink}
           onChange={handleChange}
-          className="p-2 bg-[var(--background)] text-[var(--foreground)] rounded w-full mb-2"
+          className="p-2 border border-[var(--border)] rounded w-full mb-2"
         />
         <button
           type="submit"
-          className="bg-blue-500 p-2 rounded hover:bg-blue-600 w-full disabled:bg-gray-500"
+          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full disabled:bg-gray-500"
           disabled={loading}
         >
           {loading
@@ -221,7 +221,7 @@ export default function ManageScholarships() {
           scholarships.map((scholarship) => (
             <div
               key={scholarship.slug}
-              className="flex justify-between bg-gray-800 p-4 rounded shadow mb-3"
+              className="flex justify-between p-4 rounded shadow-md border border-[var(--border)] mb-3"
             >
               <div>
                 <h3 className="text-lg font-bold">

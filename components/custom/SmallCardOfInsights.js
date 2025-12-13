@@ -62,7 +62,7 @@ function SmallCardOfInsights() {
                 <motion.div
                   whileHover={{ scale: 1.03, boxShadow: "0 8px 24px rgba(0,0,0,0.1)" }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="w-[280px] flex-shrink-0 rounded-lg shadow-md p-5 cursor-pointer bg-white"
+                  className="w-[280px] flex-shrink-0 shadow-md p-5 cursor-pointer bg-white border border-[var(--border)] rounded-lg"
                 >
                   <Image
                     src={item.thumbnail}
@@ -93,7 +93,7 @@ function SmallCardOfInsights() {
                 <motion.div
                   whileHover={{ scale: 1.03, boxShadow: "0 8px 24px rgba(0,0,0,0.1)" }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="rounded-lg shadow-md p-5 cursor-pointer bg-[var(--background)] text-[var(--foreground)] border border-gray-50"
+                  className="rounded-lg shadow-md p-5 cursor-pointer bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)]"
                 >
                   <Image
                     src={item.thumbnail}

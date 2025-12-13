@@ -1,52 +1,115 @@
 import { NextResponse } from "next/server";
+import connectToDatabase from "@/lib/mongodb";
 import Post from "@/models/Post";
-import { connectToDatabase } from "@/lib/mongodb"; // Optional if needed
 
-// GET Post by Slug
+// ============================
+// GET SINGLE POST (PUBLIC / ADMIN)
+// ============================
 export async function GET(req, { params }) {
-  await connectToDatabase(); // if required
-  const { slug } = params;
-
   try {
-    const post = await Post.findOne({ slug });
+    await connectToDatabase();
+
+    const post = await Post.findOne({ slug: params.slug });
+
     if (!post) {
-      return NextResponse.json({ success: false, message: "Post not found" }, { status: 404 });
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Post not found",
+        },
+        { status: 404 }
+      );
     }
 
-    return NextResponse.json({ success: true, data: post });
-  } catch (err) {
-    return NextResponse.json({ success: false, message: "Error fetching post" }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      data: post,
+    });
+  } catch (error) {
+    console.error("GET POST ERROR:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to fetch post",
+      },
+      { status: 500 }
+    );
   }
 }
 
-// DELETE Post by Slug
-export async function DELETE(req, { params }) {
-  await connectToDatabase(); // if required
-  const { slug } = params;
-
-  try {
-    await Post.findOneAndDelete({ slug });
-    return NextResponse.json({ success: true, message: "Post deleted" });
-  } catch (err) {
-    return NextResponse.json({ success: false, message: "Error deleting post" }, { status: 500 });
-  }
-}
-
-// PUT (Update) Post by Slug
+// ============================
+// UPDATE POST (ADMIN)
+// ============================
 export async function PUT(req, { params }) {
-  await connectToDatabase(); // if required
-  const { slug } = params;
-  const data = await req.json();
-
   try {
-    const updatedPost = await Post.findOneAndUpdate({ slug }, data, { new: true });
+    await connectToDatabase();
+    const body = await req.json();
+
+    const updatedPost = await Post.findOneAndUpdate(
+      { slug: params.slug },
+      body,
+      { new: true }
+    );
 
     if (!updatedPost) {
-      return NextResponse.json({ success: false, message: "Post not found" }, { status: 404 });
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Post not found",
+        },
+        { status: 404 }
+      );
     }
 
-    return NextResponse.json({ success: true, data: updatedPost });
-  } catch (err) {
-    return NextResponse.json({ success: false, message: "Error updating post" }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      data: updatedPost,
+    });
+  } catch (error) {
+    console.error("UPDATE ERROR:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to update post",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// ============================
+// DELETE POST (ADMIN)
+// ============================
+export async function DELETE(req, { params }) {
+  try {
+    await connectToDatabase();
+
+    const deleted = await Post.findOneAndDelete({
+      slug: params.slug,
+    });
+
+    if (!deleted) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Post not found",
+        },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Post deleted successfully",
+    });
+  } catch (error) {
+    console.error("DELETE ERROR:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to delete post",
+      },
+      { status: 500 }
+    );
   }
 }

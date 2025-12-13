@@ -48,7 +48,7 @@ function FilterExam() {
     <>
       {/* ✅ SEO Metadata */}
       <Head>
-        <title>Exam Insights - Latest News, Updates & Blogs</title>
+        <title>Exam Updates - Latest News, Updates & Blogs</title>
         <meta
           name="description"
           content="Stay up to date with the latest exam-related news, blogs, and updates in India. Find resources, tips, and important exam announcements."
@@ -57,7 +57,7 @@ function FilterExam() {
           name="keywords"
           content="Exam News, Exam Updates, Exam Blogs, Entrance Exams, Education News"
         />
-        <meta property="og:title" content="Exam Insights - Latest News & Blogs" />
+        <meta property="og:title" content="Exam Updates - Latest News & Blogs" />
         <meta
           property="og:description"
           content="Explore the most recent updates, blogs, and notices related to competitive and college exams across India."
@@ -81,7 +81,7 @@ function FilterExam() {
         {/* Header */}
         <header className="text-center">
           <h1 className="text-4xl font-bold text-blue-600 mb-4">
-            Exam Insights
+            Exam Updates
           </h1>
           <p className="text-gray-500 text-lg mb-2">
             Latest <strong>Notice, Update, News & Blogs</strong> on Exams

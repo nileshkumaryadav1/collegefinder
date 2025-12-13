@@ -28,7 +28,7 @@ const adminLinks = [
   { name: "Colleges", href: "/admin/colleges", icon: LayoutDashboard },
   { name: "Exams", href: "/admin/exams", icon: Trophy },
   { name: "Scholarships", href: "/admin/scholarships", icon: ArchiveRestore },
-  { name: "Insights", href: "/admin/insights", icon: CalendarRange },
+  { name: "Updates", href: "/admin/insights", icon: CalendarRange },
   { name: "Reviews", href: "/admin/reviews", icon: RectangleVertical },
   { name: "Sponsors", href: "/admin/sponsors", icon: DraftingCompassIcon },
   { name: "Registered Users", href: "/admin/users", icon: Users },
