@@ -1,10 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FaMailBulk,
-  FaPhone,
-} from "react-icons/fa";
+import { FaMailBulk, FaPhone } from "react-icons/fa";
 import Top from "../ad/Top";
 
 const Footer = () => {
@@ -100,7 +97,7 @@ const Footer = () => {
                   </h5>
                   <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                     {[
-                      { href: "/insights", label: "Latest Updates" },
+                      { href: "/insights", label: "Latest B" },
                       {
                         href: "/find-news/colleges",
                         label: "Colleges Updates",
@@ -158,7 +155,7 @@ const Footer = () => {
                 {
                   href: "tel:6205530252",
                   icon: <FaPhone />,
-                }
+                },
               ].map(({ href, icon }, i) => (
                 <Link
                   key={i}
@@ -175,7 +172,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="text-center md:mt-8 mt-3 mb-4 border-t border-gray-300 dark:border-gray-700 pt-4 flex flex-col items-center justify-center">
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-2">
             <Link href="/">
               <Image
                 src="/logo.jpg"
@@ -218,7 +215,9 @@ const Footer = () => {
       </div>
 
       {/* Ad */}
-      <Top />
+      <div className="hidden md:flex">
+        {/* <Top /> */}
+      </div>
     </footer>
   );
 };

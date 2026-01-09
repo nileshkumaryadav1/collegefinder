@@ -1,4 +1,4 @@
-// app/(route)/(viewable)/insights/layout.js
+// app/(route)/(viewable)/blogs/layout.js
 
 export const metadata = {
   title: "News and Updates",

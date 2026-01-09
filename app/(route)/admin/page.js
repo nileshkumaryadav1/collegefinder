@@ -1,56 +1,21 @@
 "use client";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
-  const router = useRouter();
-
   return (
-    <div className="md:min-h-screen flex flex-col items-center justify-center bg-[var(--background)] text-[color:var(--foreground)] p-6">
-      <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
+    <div className="md:min-h-screen flex items-center justify-center bg-[var(--background)] px-6 p-8">
+      <div className="max-w-xl w-full text-center bg-white dark:bg-[var(--background)] border border-[var(--border)] rounded-2xl shadow-lg p-8 space-y-4">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-[var(--foreground)]">
+          Admin Dashboard
+        </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <button
-          onClick={() => router.push("/admin/colleges")}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
-        >
-          Manage Colleges
-        </button>
+        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          This is the central admin panel to manage colleges, exams,
+          scholarships, reviews, insights, sponsors, and users.
+        </p>
 
-        <button
-          onClick={() => router.push("/admin/exams")}
-          className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
-        >
-          Manage Exams
-        </button>
-
-        <button
-          onClick={() => router.push("/admin/scholarships")}
-          className="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
-        >
-          Manage Scholarships
-        </button>
-
-        <Link
-          href="/admin/reviews"
-          className="bg-purple-500 hover:bg-purple-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
-        >
-          Manage Reviews
-        </Link>
-
-        <Link
-          href="/admin/insights"
-          className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
-        >
-          Manage Updates
-        </Link>
-
-        <Link
-          href="/admin/sponsors"
-          className="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition cursor-pointer"
-        >
-          Manage Sponsors
-        </Link>
+        <div className="mt-4 text-xs text-gray-400">
+          🚧 Dashboard widgets & analytics coming soon
+        </div>
       </div>
     </div>
   );

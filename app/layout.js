@@ -1,11 +1,9 @@
 // app/layout.js
 import { Geist } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navigation/Navbar";
-import Footer from "@/components/navigation/Footer";
-import MobileNavbar from "@/components/navigation/MobileNavbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import ClientWrapper from "./client-wrapper";
 // import PopUp from "@/components/ad/PopUp";
 
 const geist = Geist({ subsets: ["latin"] });
@@ -75,10 +73,7 @@ export default function RootLayout({ children }) {
         className={`${geist.className} bg-[var(--background)] text-[var(--foreground)] antialiased`}
       >
         {/* <PopUp /> */}
-        <Navbar />
-        <main className="mt-16">{children}</main>
-        <MobileNavbar />
-        <Footer />
+        <ClientWrapper>{children}</ClientWrapper>
         <SpeedInsights />
         <Analytics />
       </body>

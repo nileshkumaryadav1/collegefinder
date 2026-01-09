@@ -134,7 +134,7 @@ export default function AdminLayout({ children }) {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-4 overflow-y-auto">{children}</main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
 
       {/* Mobile overlay */}

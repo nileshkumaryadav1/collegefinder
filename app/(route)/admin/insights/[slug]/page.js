@@ -117,7 +117,6 @@ export default function EditPostPage({ params }) {
       </header>
 
       <form onSubmit={handleUpdate} className="space-y-12">
-
         {/* ================= BASIC INFO ================= */}
         <section className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
           <h2 className="text-xl font-semibold">Basic Information</h2>
@@ -126,9 +125,7 @@ export default function EditPostPage({ params }) {
             className="input"
             placeholder="Article Title"
             value={form.title}
-            onChange={(e) =>
-              setForm({ ...form, title: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
           />
 
           <input
@@ -140,9 +137,7 @@ export default function EditPostPage({ params }) {
           <select
             className="input"
             value={form.category}
-            onChange={(e) =>
-              setForm({ ...form, category: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
           >
             <option value="general-update">General Update</option>
             <option value="exam-news">Exam News</option>
@@ -157,9 +152,7 @@ export default function EditPostPage({ params }) {
             className="input"
             placeholder="Exam Type (JEE / NEET / GATE)"
             value={form.examType || ""}
-            onChange={(e) =>
-              setForm({ ...form, examType: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, examType: e.target.value })}
           />
         </section>
 
@@ -274,10 +267,7 @@ export default function EditPostPage({ params }) {
           </div>
 
           {form.contentBlocks?.map((block, i) => (
-            <div
-              key={i}
-              className="border rounded-xl p-4 space-y-3"
-            >
+            <div key={i} className="border rounded-xl p-4 space-y-3">
               <div className="flex justify-between items-center">
                 <span className="text-xs font-semibold uppercase text-gray-500">
                   {block.type}
@@ -292,15 +282,58 @@ export default function EditPostPage({ params }) {
                 </button>
               </div>
 
+              {/* ================= TEXT BLOCKS ================= */}
               {block.text !== undefined && (
                 <textarea
                   className="input"
                   rows={3}
                   value={block.text}
-                  onChange={(e) =>
-                    updateBlock(i, "text", e.target.value)
-                  }
+                  onChange={(e) => updateBlock(i, "text", e.target.value)}
                 />
+              )}
+
+              {/* ================= LIST BLOCK ================= */}
+              {block.type === "list" && (
+                <div className="space-y-2">
+                  {block.items?.map((item, idx) => (
+                    <div key={idx} className="flex gap-2">
+                      <input
+                        className="input flex-1"
+                        placeholder={`List item ${idx + 1}`}
+                        value={item}
+                        onChange={(e) => {
+                          const blocks = [...form.contentBlocks];
+                          blocks[i].items[idx] = e.target.value;
+                          setForm({ ...form, contentBlocks: blocks });
+                        }}
+                      />
+
+                      <button
+                        type="button"
+                        className="text-red-500 text-sm"
+                        onClick={() => {
+                          const blocks = [...form.contentBlocks];
+                          blocks[i].items.splice(idx, 1);
+                          setForm({ ...form, contentBlocks: blocks });
+                        }}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    className="text-sm text-blue-600"
+                    onClick={() => {
+                      const blocks = [...form.contentBlocks];
+                      blocks[i].items.push("");
+                      setForm({ ...form, contentBlocks: blocks });
+                    }}
+                  >
+                    + Add list item
+                  </button>
+                </div>
               )}
             </div>
           ))}

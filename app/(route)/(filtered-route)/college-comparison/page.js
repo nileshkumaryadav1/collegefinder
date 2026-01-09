@@ -93,7 +93,7 @@ const CollegeComparison = () => {
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-8">
         <select
           onChange={handleSelectCollege}
-          className="w-full md:w-72 p-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400"
+          className="w-full md:w-72 p-3 border border-[var(--border)] rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400"
         >
           <option value="">Select a college</option>
           {colleges.map((college) => (

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import DefaultLoading from "../loading/DefaultLoading";
 import Image from "next/image";
+import formatDate from "../small/DateFormatter";
 
 export default function InsightsPageCard() {
   const [posts, setPosts] = useState([]);
@@ -47,10 +48,8 @@ export default function InsightsPageCard() {
   ============================ */
   function updateFilter(key, value) {
     const params = new URLSearchParams(searchParams.toString());
-
     if (value) params.set(key, value);
     else params.delete(key);
-
     router.push(`/insights?${params.toString()}`);
   }
 
@@ -58,21 +57,23 @@ export default function InsightsPageCard() {
      UI
   ============================ */
   return (
-    <div className="mx-auto max-w-7xl px-4 md:px-20 py-8">
+    <div className="mx-auto max-w-7xl px-4 md:px-20 py-10">
       {/* Header */}
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold text-blue-700">Insights & Updates</h1>
-        <p className="text-gray-600 mt-1">
+      <header className="mb-8">
+        <h1 className="text-3xl font-extrabold text-blue-700">
+          Blogs & Updates
+        </h1>
+        <p className="text-gray-600 mt-1 max-w-2xl">
           Latest exam news, results, cutoffs, rankings, and college updates.
         </p>
       </header>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 mb-8">
+      <div className="flex flex-wrap gap-4 mb-10">
         <select
           value={categoryFilter}
           onChange={(e) => updateFilter("category", e.target.value)}
-          className="border px-4 py-2 rounded-lg"
+          className="border border-gray-300 px-4 py-2 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
         >
           <option value="">All Categories</option>
           <option value="exam-news">Exam News</option>
@@ -86,7 +87,7 @@ export default function InsightsPageCard() {
         <select
           value={tagFilter}
           onChange={(e) => updateFilter("tag", e.target.value)}
-          className="border px-4 py-2 rounded-lg"
+          className="border border-gray-300 px-4 py-2 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
         >
           <option value="">All Tags</option>
           <option value="college">College</option>
@@ -113,22 +114,22 @@ export default function InsightsPageCard() {
                   href={`/insights/${post.slug}`}
                   className="group"
                 >
-                  <article className="border rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+                  <article className="border border-[var(--border)] rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition">
                     {/* Hero Image */}
                     {post.hero?.image && (
-                      <div className="relative h-44">
+                      <div className="relative h-44 overflow-hidden">
                         <Image
                           src={post.hero.image}
                           alt={post.hero.imageAlt || post.title}
                           fill
-                          className="object-cover"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                     )}
 
                     {/* Content */}
                     <div className="p-5 space-y-2">
-                      <span className="text-xs font-semibold text-blue-600 uppercase">
+                      <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">
                         {post.category?.replace("-", " ")}
                       </span>
 
@@ -143,7 +144,7 @@ export default function InsightsPageCard() {
                       )}
 
                       <div className="text-xs text-gray-500 pt-2">
-                        {new Date(post.createdAt).toLocaleDateString()}
+                        {formatDate(post.createdAt)}
                       </div>
                     </div>
                   </article>
@@ -155,24 +156,30 @@ export default function InsightsPageCard() {
 
         {/* Sidebar */}
         <aside className="space-y-6">
-          {/* Promotions */}
-          <div className="border rounded-xl p-5">
+          {/* Popular Guides */}
+          <div className="border rounded-2xl p-5 bg-white shadow-sm">
             <h4 className="font-bold mb-3">Popular Guides</h4>
             <ul className="text-sm text-blue-700 space-y-2">
               <li>
-                <Link href="/colleges">Top Engineering Colleges in India</Link>
+                <Link href="/colleges" className="hover:underline">
+                  Top Engineering Colleges in India
+                </Link>
               </li>
               <li>
-                <Link href="/exams">JEE Advanced Preparation Strategy</Link>
+                <Link href="/exams" className="hover:underline">
+                  JEE Advanced Preparation Strategy
+                </Link>
               </li>
               <li>
-                <Link href="/scholarships">Best Scholarships for Students</Link>
+                <Link href="/scholarships" className="hover:underline">
+                  Best Scholarships for Students
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Ad */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
             <h4 className="font-bold text-blue-700 mb-2">Sponsored</h4>
             <Image
               src="/sponsors.jpg"

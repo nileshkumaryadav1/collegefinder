@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
+import CollegeCardHome from "@/components/custom/home/CollegeCardHome";
 import HomeHero from "@/components/custom/HomeHero";
 import SmallCardOfInsights from "@/components/custom/SmallCardOfInsights";
 import SponsorsCard from "@/components/custom/SponsorsCard";
@@ -60,19 +60,19 @@ export default function Home() {
               View Colleges
             </Link>
           </div>
-          <CollegeCardForHome query="#" collegeType="" sortBy="" sortOrder="" />
+          <CollegeCardHome query="#" collegeType="" sortBy="" sortOrder="" />
         </div>
       </section>
 
-      {/* Latest News */}
+      {/* Latest Blogs */}
       <section className="md:py-12 py-6 px-4 bg-[var(--background)] text-[var(--foreground)]">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center md:mb-6 mb-4">
             <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
-              Latest Updates
+              Latest Blogs
             </h2>
             <Link href="/insights" className="text-blue-600 hover:underline">
-              View Updates
+              View Blogs
             </Link>
           </div>
           <SmallCardOfInsights />

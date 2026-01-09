@@ -42,9 +42,9 @@ export default function NewPostPage() {
     const block = { type };
 
     if (type === "paragraph") block.text = "";
-    if (type === "heading") block.text = "", block.level = 2;
+    if (type === "heading") (block.text = ""), (block.level = 2);
     if (type === "list") block.items = [""];
-    if (type === "alert") block.text = "", block.alertType = "info";
+    if (type === "alert") (block.text = ""), (block.alertType = "info");
 
     setForm({
       ...form,
@@ -208,6 +208,7 @@ export default function NewPostPage() {
           <div key={i} className="border rounded p-3 space-y-2">
             <p className="text-xs text-gray-500 uppercase">{block.type}</p>
 
+            {/* PARAGRAPH / HEADING / ALERT */}
             {block.text !== undefined && (
               <textarea
                 className="input"
@@ -218,6 +219,37 @@ export default function NewPostPage() {
                   setForm({ ...form, contentBlocks: blocks });
                 }}
               />
+            )}
+
+            {/* ✅ LIST BLOCK */}
+            {block.type === "list" && (
+              <div className="space-y-2">
+                {block.items.map((item, idx) => (
+                  <input
+                    key={idx}
+                    className="input"
+                    placeholder={`List item ${idx + 1}`}
+                    value={item}
+                    onChange={(e) => {
+                      const blocks = [...form.contentBlocks];
+                      blocks[i].items[idx] = e.target.value;
+                      setForm({ ...form, contentBlocks: blocks });
+                    }}
+                  />
+                ))}
+
+                <button
+                  type="button"
+                  className="text-sm text-blue-600"
+                  onClick={() => {
+                    const blocks = [...form.contentBlocks];
+                    blocks[i].items.push("");
+                    setForm({ ...form, contentBlocks: blocks });
+                  }}
+                >
+                  + Add list item
+                </button>
+              </div>
             )}
           </div>
         ))}
@@ -250,7 +282,11 @@ export default function NewPostPage() {
         />
       </section>
 
-      <button type="submit" onClick={handleSubmit} className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold">
+      <button
+        type="submit"
+        onClick={handleSubmit}
+        className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold"
+      >
         Publish Article
       </button>
     </div>

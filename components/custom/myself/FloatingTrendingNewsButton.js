@@ -69,7 +69,7 @@ export default function FloatingTrendingNewsButton() {
       onClick={() => router.push("/insights")}
       style={{
         position: "fixed",
-        bottom: "10px",
+        bottom: "80px",
         right: "10px",
         display: "flex",
         alignItems: "center",

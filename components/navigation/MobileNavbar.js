@@ -44,7 +44,7 @@ const MobileNavbar = () => {
         <NavItem
           href="/insights"
           icon={Newspaper}
-          label="Updates"
+          label="Blogs"
           active={pathname === "/insights"}
         />
         <NavItem

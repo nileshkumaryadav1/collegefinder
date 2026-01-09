@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
@@ -10,30 +9,23 @@ function SmallCardOfInsights() {
   const [loading, setLoading] = useState(true);
   const scrollContainerRef = useRef(null);
 
-  /* ============================
-     FETCH POSTS
-  ============================ */
+  /* ================= FETCH POSTS ================= */
   useEffect(() => {
     async function fetchPosts() {
       try {
         const res = await fetch("/api/posts");
         const json = await res.json();
-
         setPosts(Array.isArray(json.data) ? json.data : []);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-        setPosts([]);
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
     }
-
     fetchPosts();
   }, []);
 
-  /* ============================
-     AUTO SCROLL
-  ============================ */
+  /* ================= AUTO SCROLL (MOBILE) ================= */
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container || posts.length === 0) return;
@@ -52,109 +44,112 @@ function SmallCardOfInsights() {
     return () => clearInterval(interval);
   }, [posts]);
 
-  const latestPosts = posts.slice(0, 3);
+  const latestPosts = posts.slice(0, 6);
+
+  if (loading) return <p className="text-center p-10">Loading...</p>;
 
   return (
     <section>
-      {loading ? (
-        <div className="text-center p-30">Loading...</div>
-      ) : latestPosts.length === 0 ? (
-        <p className="text-gray-600">
-          No posts found for the selected filters.
-        </p>
-      ) : (
-        <>
-          {/* ================= MOBILE ================= */}
-          <div
-            ref={scrollContainerRef}
-            className="flex md:hidden gap-4 overflow-x-auto px-2 pb-4 scroll-smooth bg-[var(--background)] text-[var(--foreground)]"
+      {/* ================= MOBILE: HORIZONTAL SCROLL ================= */}
+      <div
+        ref={scrollContainerRef}
+        className="
+          md:hidden flex gap-4 overflow-x-auto px-2 pb-4
+          scroll-smooth scrollbar-hide
+        "
+      >
+        {latestPosts.map((post) => (
+          <Link
+            key={post._id}
+            href={`/insights/${post.slug}`}
+            className="
+              min-w-[260px] max-w-[260px] flex-shrink-0
+              group rounded-xl border border-[var(--border)]
+              bg-[var(--background)] shadow-sm overflow-hidden
+            "
           >
-            {latestPosts.map((item) => (
-              <Link key={item._id} href={`/insights/${item.slug}`}>
-                <motion.div
-                  whileHover={{
-                    scale: 1.03,
-                    boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="w-[280px] flex-shrink-0 shadow-md p-5 cursor-pointer bg-white border border-[var(--border)] rounded-lg"
-                >
-                  {/* Hero Image */}
-                  {item.hero?.image && (
-                    <Image
-                      src={item.hero.image}
-                      alt={item.hero.imageAlt || item.title}
-                      width={200}
-                      height={200}
-                      className="mx-auto h-20 object-cover"
-                    />
-                  )}
+            {/* Image */}
+            {post.hero?.image && (
+              <div className="relative h-28">
+                <Image
+                  src={post.hero.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
 
-                  <h2 className="text-sm md:text-md font-bold text-blue-700 mb-2">
-                    {item.title?.slice(0, 30)}...
-                  </h2>
+            {/* Content */}
+            <div className="p-3">
+              <p className="text-xs text-blue-600 font-semibold uppercase">
+                {post.category?.replace("-", " ")}
+              </p>
 
-                  <p className="text-gray-600 text-xs mb-2 text-justify">
-                    {item.summary?.lead}
-                  </p>
+              <h3 className="text-sm font-semibold line-clamp-2 mt-1">
+                {post.title}
+              </h3>
 
-                  <p className="text-sm text-gray-500 flex justify-between">
-                    <span className="font-medium">
-                      {item.category?.replace("-", " ")}
-                    </span>
-                    <span className="font-medium">
-                      {new Date(item.createdAt).toLocaleDateString()}
-                    </span>
-                  </p>
-                </motion.div>
-              </Link>
-            ))}
-          </div>
+              <p className="text-[11px] text-gray-500 mt-1">
+                {new Date(post.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
 
-          {/* ================= DESKTOP ================= */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-[var(--background)] text-[var(--foreground)]">
-            {latestPosts.map((item) => (
-              <Link key={item._id} href={`/insights/${item.slug}`}>
-                <motion.div
-                  whileHover={{
-                    scale: 1.03,
-                    boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="rounded-lg shadow-md p-5 cursor-pointer bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)]"
-                >
-                  {item.hero?.image && (
-                    <Image
-                      src={item.hero.image}
-                      alt={item.hero.imageAlt || item.title}
-                      width={200}
-                      height={200}
-                      className="mx-auto h-20 object-cover"
-                    />
-                  )}
+      {/* ================= DESKTOP: GRID ================= */}
+      <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {latestPosts.map((post) => (
+          <Link
+            key={post._id}
+            href={`/insights/${post.slug}`}
+            className="
+              group relative rounded-xl border border-[var(--border)]
+              bg-[var(--background)] shadow-sm overflow-hidden
+              transition hover:shadow-lg
+            "
+          >
+            {/* Image (hide on hover) */}
+            {post.hero?.image && (
+              <div className="relative h-40 transition-opacity duration-300 group-hover:opacity-0">
+                <Image
+                  src={post.hero.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
 
-                  <h2 className="text-md font-bold text-blue-700 mb-2">
-                    {item.title?.slice(0, 30)}...
-                  </h2>
+            {/* Hover Content */}
+            <div
+              className="
+                absolute inset-0 opacity-0 group-hover:opacity-100
+                transition duration-300 p-5 flex flex-col justify-center
+              "
+            >
+              <p className="text-xs text-blue-600 font-semibold uppercase">
+                {post.category?.replace("-", " ")}
+              </p>
 
-                  <p className="text-gray-600 text-xs mb-2">
-                    {item.summary?.lead}
-                  </p>
+              <h3 className="text-sm font-semibold mt-2 line-clamp-2">
+                {post.title}
+              </h3>
 
-                  <p className="text-sm text-gray-500 flex justify-between">
-                    <span className="font-medium">
-                      {item.category?.replace("-", " ")}
-                    </span>
-                    <span className="font-medium">
-                      {new Date(item.createdAt).toLocaleDateString()}
-                    </span>
-                  </p>
-                </motion.div>
-              </Link>
-            ))}
-          </div>
-        </>
-      )}
+              {post.summary?.lead && (
+                <p className="text-xs text-gray-600 mt-2 line-clamp-3">
+                  {post.summary.lead}
+                </p>
+              )}
+
+              <p className="text-xs text-gray-400 mt-3">
+                {new Date(post.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }
