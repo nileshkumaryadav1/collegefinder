@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function AdminAddCollegePage() {
+export default function AdminManageCollegePage() {
   const router = useRouter();
   const [colleges, setColleges] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -51,7 +51,7 @@ export default function AdminAddCollegePage() {
   };
 
   return (
-    <section className="bg-[var(--background)] text-[var(--foreground)] min-h-screen md:p-6">
+    <section className="bg-[var(--background)] text-[var(--foreground)] min-h-screen md:p-6 p-4">
       <div className="max-w-7xl mx-auto md:mt-10">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">

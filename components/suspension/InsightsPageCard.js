@@ -111,7 +111,7 @@ export default function InsightsPageCard() {
               {posts.map((post) => (
                 <Link
                   key={post._id}
-                  href={`/insights/${post.slug}`}
+                  href={`/blog/${post.slug}`}
                   className="group"
                 >
                   <article className="border border-[var(--border)] rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition">

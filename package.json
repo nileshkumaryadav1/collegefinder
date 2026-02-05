@@ -1,6 +1,6 @@
 {
   "name": "collegefinder",
-  "version": "4.0.0",
+  "version": "4.1.1",
   "type": "module",
   "private": true,
   "scripts": {
@@ -34,6 +34,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-icons": "^5.5.0",
+    "recharts": "^3.7.0",
     "resend": "^4.2.0",
     "slugify": "^1.6.6",
     "tailwind-merge": "^3.0.2",

@@ -32,7 +32,7 @@ export default function CollegesPage() {
   ];
 
   return (
-    <div className="bg-[var(--background)] text-[var(--foreground)] min-h-screen px-4 md:py-8 py-4 md:px-10 lg:px-20">
+    <div className="bg-[var(--background)] text-[var(--foreground)] min-h-screen px-4 py-8 md:px-10 lg:px-20">
       <h1 className="text-3xl text-blue-600 dark:text-blue-400 md:text-4xl font-semibold text-center mb-2">
         Find Your Dream College
       </h1>

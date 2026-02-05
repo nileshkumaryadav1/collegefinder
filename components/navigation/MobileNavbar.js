@@ -42,10 +42,10 @@ const MobileNavbar = () => {
           active={pathname.startsWith("/scholarships")}
         /> */}
         <NavItem
-          href="/insights"
+          href="/blog"
           icon={Newspaper}
           label="Blogs"
-          active={pathname === "/insights"}
+          active={pathname === "/blog"}
         />
         <NavItem
           href="/user/dashboard"

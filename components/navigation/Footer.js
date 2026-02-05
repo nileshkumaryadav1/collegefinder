@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaMailBulk, FaPhone } from "react-icons/fa";
 import Top from "../ad/Top";
+import AppVersion from "../custom/myself/AppVersion";
 
 const Footer = () => {
   return (
@@ -97,7 +98,7 @@ const Footer = () => {
                   </h5>
                   <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                     {[
-                      { href: "/insights", label: "Latest B" },
+                      { href: "/blog", label: "Latest Blog" },
                       {
                         href: "/find-news/colleges",
                         label: "Colleges Updates",
@@ -208,16 +209,14 @@ const Footer = () => {
             </Link>
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            &copy; {new Date().getFullYear()} College Finder. All Rights
+           <AppVersion className="opacity-100" />  &copy; {new Date().getFullYear()} College Finder. All Rights
             Reserved.
           </p>
         </div>
       </div>
 
       {/* Ad */}
-      <div className="hidden md:flex">
-        {/* <Top /> */}
-      </div>
+      <div className="hidden md:flex">{/* <Top /> */}</div>
     </footer>
   );
 };

@@ -27,7 +27,7 @@ const adminLinks = [
   { name: "Colleges", href: "/admin/colleges", icon: GraduationCap },
   { name: "Exams", href: "/admin/exams", icon: Trophy },
   { name: "Scholarships", href: "/admin/scholarships", icon: Wallet },
-  { name: "Updates", href: "/admin/insights", icon: Newspaper },
+  { name: "Blog", href: "/admin/blog", icon: Newspaper },
   { name: "Reviews", href: "/admin/reviews", icon: Star },
   { name: "Sponsors", href: "/admin/sponsors", icon: Megaphone },
   { name: "Registered Users", href: "/admin/users", icon: Users },
@@ -64,9 +64,9 @@ export default function AdminSidebar({
           onClick={closeSidebar}
         >
           {sidebarOpen ? (
-            <X className="w-5 h-5" /> // Cross icon when open
+            <X className="w-5 h-5" /> // cross icon shown when open
           ) : (
-            <Menu className="w-5 h-5" /> // Menu icon when closed
+            <Menu className="w-5 h-5" /> // menu icon when closed
           )}
         </button>
       </div>
