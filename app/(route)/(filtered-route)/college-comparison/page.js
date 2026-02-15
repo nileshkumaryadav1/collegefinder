@@ -1,113 +1,139 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const MAX_COMPARE = 3;
+function parseNumber(value) {
+  if (!value) return 0;
+  return Number(
+    value
+      .toString()
+      .replace(/[^0-9.]/g, "")
+  );
+}
 
 export default function CollegeComparison() {
   const [colleges, setColleges] = useState([]);
-  const [selectedColleges, setSelectedColleges] = useState([]);
+  const [college1, setCollege1] = useState("");
+  const [college2, setCollege2] = useState("");
   const [comparisonData, setComparisonData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [winnerId, setWinnerId] = useState(null);
+  const [scoreBoard, setScoreBoard] = useState({});
 
-  // ==============================
   // Fetch colleges
-  // ==============================
   useEffect(() => {
     async function fetchColleges() {
-      try {
-        setLoading(true);
-        const res = await fetch("/api/colleges");
-        const data = await res.json();
-        setColleges(data.colleges || []);
-      } catch {
-        setMessage("Failed to load colleges.");
-      } finally {
-        setLoading(false);
-      }
+      const res = await fetch("/api/colleges");
+      const data = await res.json();
+      setColleges(data.colleges || []);
     }
     fetchColleges();
   }, []);
 
-  // ==============================
-  // Select college
-  // ==============================
-  const handleSelect = (e) => {
-    const id = e.target.value;
-    e.target.value = "";
-
-    if (!id) return;
-
-    if (selectedColleges.includes(id)) {
-      setMessage("College already selected.");
-      return;
-    }
-
-    if (selectedColleges.length >= MAX_COMPARE) {
-      setMessage(`Maximum ${MAX_COMPARE} colleges allowed.`);
-      return;
-    }
-
-    setMessage("");
-    setSelectedColleges((prev) => [...prev, id]);
-  };
-
-  // ==============================
-  // Compare
-  // ==============================
   const handleCompare = async () => {
-    if (selectedColleges.length < 2) {
-      setMessage("Select at least two colleges to compare.");
-      return;
-    }
+    if (!college1 || !college2 || college1 === college2) return;
 
-    try {
-      setLoading(true);
-      const url = new URL("/api/colleges/compare", window.location.origin);
-      selectedColleges.forEach((id) =>
-        url.searchParams.append("collegeIds", id)
-      );
+    const url = new URL("/api/colleges/compare", window.location.origin);
+    url.searchParams.append("collegeIds", college1);
+    url.searchParams.append("collegeIds", college2);
 
-      const res = await fetch(url.toString());
-      const data = await res.json();
-      setComparisonData(data || []);
-    } catch {
-      setMessage("Comparison failed.");
-    } finally {
-      setLoading(false);
-    }
+    const res = await fetch(url.toString());
+    const data = await res.json();
+
+    setComparisonData(data || []);
+    calculateWinner(data || []);
   };
 
-  const removeCollege = (id) => {
-    setSelectedColleges((prev) => prev.filter((c) => c !== id));
-    setComparisonData([]);
+  const calculateWinner = (data) => {
+    if (data.length !== 2) return;
+
+    const [c1, c2] = data;
+
+    let scores = {
+      [c1._id]: 0,
+      [c2._id]: 0,
+    };
+
+    // NIRF (lower better)
+    if (c1.nirfRanking && c2.nirfRanking) {
+      if (c1.nirfRanking < c2.nirfRanking)
+        scores[c1._id] += 3;
+      else scores[c2._id] += 3;
+    }
+
+    // Average package (higher better)
+    const avg1 = parseNumber(c1.placements?.BTech?.average);
+    const avg2 = parseNumber(c2.placements?.BTech?.average);
+
+    if (avg1 > avg2) scores[c1._id] += 3;
+    else if (avg2 > avg1) scores[c2._id] += 3;
+
+    // Highest package
+    const high1 = parseNumber(c1.placements?.BTech?.highest);
+    const high2 = parseNumber(c2.placements?.BTech?.highest);
+
+    if (high1 > high2) scores[c1._id] += 2;
+    else if (high2 > high1) scores[c2._id] += 2;
+
+    // Fees (lower better)
+    const fee1 = parseNumber(c1.fees?.total);
+    const fee2 = parseNumber(c2.fees?.total);
+
+    if (fee1 < fee2) scores[c1._id] += 1;
+    else if (fee2 < fee1) scores[c2._id] += 1;
+
+    // Established (older better)
+    if (c1.establishedYear < c2.establishedYear)
+      scores[c1._id] += 1;
+    else scores[c2._id] += 1;
+
+    setScoreBoard(scores);
+
+    const winner =
+      scores[c1._id] > scores[c2._id]
+        ? c1._id
+        : scores[c2._id] > scores[c1._id]
+        ? c2._id
+        : null;
+
+    setWinnerId(winner);
   };
 
-  // ==============================
-  // Winner (NIRF)
-  // ==============================
-  const winnerCollege =
-    comparisonData.length > 0
-      ? [...comparisonData]
-          .filter((c) => typeof c.nirfRanking === "number")
-          .sort((a, b) => a.nirfRanking - b.nirfRanking)[0]
-      : null;
+  const breakdownText = () => {
+    if (!winnerId || comparisonData.length !== 2) return "";
+
+    const winner = comparisonData.find((c) => c._id === winnerId);
+    const loser = comparisonData.find((c) => c._id !== winnerId);
+
+    return `${winner.name} outperforms ${loser.name} based on key metrics like NIRF ranking, placement performance, fee structure, and historical reputation. With a stronger overall score (${scoreBoard[winnerId]} points), it stands as the better choice in this comparison. However, students should also consider location, specialization, and personal preferences before making a final decision.`;
+  };
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <h1 className="text-4xl font-bold text-center text-blue-700 mb-8">
-        Compare Colleges
+      <h1 className="text-4xl font-bold text-center mb-10">
+        College Comparison Tool
       </h1>
 
-      {/* Selector */}
-      <div className="flex flex-col md:flex-row justify-center gap-4 mb-4">
+      {/* Selectors */}
+      <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
         <select
-          onChange={handleSelect}
-          className="w-full md:w-96 p-3 border rounded-xl"
+          value={college1}
+          onChange={(e) => setCollege1(e.target.value)}
+          className="p-3 border rounded-lg w-full md:w-80"
         >
-          <option value="">Select college</option>
+          <option value="">Select College 1</option>
+          {colleges.map((c) => (
+            <option key={c._id} value={c._id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={college2}
+          onChange={(e) => setCollege2(e.target.value)}
+          className="p-3 border rounded-lg w-full md:w-80"
+        >
+          <option value="">Select College 2</option>
           {colleges.map((c) => (
             <option key={c._id} value={c._id}>
               {c.name}
@@ -117,82 +143,82 @@ export default function CollegeComparison() {
 
         <button
           onClick={handleCompare}
-          disabled={loading || selectedColleges.length < 2}
-          className="px-6 py-3 bg-blue-600 text-white rounded-xl disabled:opacity-50"
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg"
         >
           Compare
         </button>
       </div>
 
-      {message && (
-        <p className="text-center text-sm text-red-500 mb-6">{message}</p>
-      )}
+      {/* Table */}
+      {comparisonData.length === 2 && (
+        <>
+          <div className="overflow-x-auto">
+            <table className="w-full border text-center">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="border p-3">Criteria</th>
+                  {comparisonData.map((c) => (
+                    <th
+                      key={c._id}
+                      className={`border p-3 ${
+                        winnerId === c._id
+                          ? "bg-green-200 font-bold"
+                          : ""
+                      }`}
+                    >
+                      {c.name}
+                      {winnerId === c._id && " 🏆"}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border p-3">NIRF Rank</td>
+                  <td className="border p-3">{comparisonData[0].nirfRanking}</td>
+                  <td className="border p-3">{comparisonData[1].nirfRanking}</td>
+                </tr>
 
-      {/* Selected */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
-        {selectedColleges.map((id) => {
-          const c = colleges.find((x) => x._id === id);
-          return (
-            <span
-              key={id}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-sm"
-            >
-              {c?.shortName || c?.name}
-              <button
-                onClick={() => removeCollege(id)}
-                className="text-red-600 font-bold"
-              >
-                ×
-              </button>
-            </span>
-          );
-        })}
-      </div>
+                <tr>
+                  <td className="border p-3">B.Tech Avg Package</td>
+                  <td className="border p-3">{comparisonData[0].placements?.BTech?.average}</td>
+                  <td className="border p-3">{comparisonData[1].placements?.BTech?.average}</td>
+                </tr>
 
-      {/* Winner */}
-      {winnerCollege && (
-        <div className="bg-yellow-400 text-black p-5 rounded-xl text-center mb-8">
-          <h2 className="text-xl font-bold">Best Ranked (NIRF)</h2>
-          <p>{winnerCollege.name} — Rank #{winnerCollege.nirfRanking}</p>
-        </div>
-      )}
+                <tr>
+                  <td className="border p-3">B.Tech Highest</td>
+                  <td className="border p-3">{comparisonData[0].placements?.BTech?.highest}</td>
+                  <td className="border p-3">{comparisonData[1].placements?.BTech?.highest}</td>
+                </tr>
 
-      {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {comparisonData.map((c) => (
-          <div
-            key={c._id}
-            className="bg-white p-6 rounded-2xl border shadow hover:shadow-xl"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              {c.logoUrl && (
-                <Image
-                  src={c.logoUrl}
-                  alt={c.name}
-                  width={48}
-                  height={48}
-                  className="rounded-full"
-                />
-              )}
-              <h2 className="font-semibold text-lg">{c.name}</h2>
-            </div>
+                <tr>
+                  <td className="border p-3">Total Fees</td>
+                  <td className="border p-3">{comparisonData[0].fees?.total}</td>
+                  <td className="border p-3">{comparisonData[1].fees?.total}</td>
+                </tr>
 
-            <div className="space-y-2 text-sm">
-              <p><strong>Type:</strong> {c.type}</p>
-              <p><strong>Location:</strong> {c.city}, {c.state}</p>
-              <p><strong>Established:</strong> {c.establishedYear}</p>
-              <p><strong>NIRF Rank:</strong> {c.nirfRanking ?? "N/A"}</p>
-              <p><strong>Total Fees:</strong> {c.fees?.total ?? "N/A"}</p>
-
-              <hr />
-
-              <p><strong>B.Tech Highest:</strong> {c.placements?.BTech?.highest ?? "N/A"}</p>
-              <p><strong>B.Tech Average:</strong> {c.placements?.BTech?.average ?? "N/A"}</p>
-              <p><strong>M.Tech Highest:</strong> {c.placements?.MTech?.highest ?? "N/A"}</p>
-            </div>
+                <tr>
+                  <td className="border p-3">Established</td>
+                  <td className="border p-3">{comparisonData[0].establishedYear}</td>
+                  <td className="border p-3">{comparisonData[1].establishedYear}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        ))}
-      </div>
+
+          {/* Breakdown Paragraph */}
+          {winnerId && (
+            <div className="mt-8 p-6 bg-yellow-100 rounded-xl">
+              <h2 className="text-xl font-semibold mb-3">
+                Comparison Summary
+              </h2>
+              <p className="text-gray-700 leading-relaxed">
+                {breakdownText()}
+              </p>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

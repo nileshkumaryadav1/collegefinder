@@ -68,7 +68,7 @@ function FilterExam() {
         />
         <meta
           property="og:url"
-          content="https://your-domain.com/find-news/exams"
+          content="https://your-domain.com/find-blog/exams"
         />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>

@@ -26,12 +26,12 @@ const Footer = () => {
                     label: "State-wise Colleges",
                   },
                   {
-                    href: "/find-exams/engineering-entrance",
-                    label: "Engineering Entrance",
+                    href: "/find-exams/engineering-exams",
+                    label: "Engineering Exams",
                   },
                   {
-                    href: "/find-exams/medical-entrance",
-                    label: "Medical Entrance",
+                    href: "/find-exams/state-wise",
+                    label: "State-wise Exams",
                   },
                   {
                     href: "/find-scholarships/graduation",
@@ -100,12 +100,12 @@ const Footer = () => {
                     {[
                       { href: "/blog", label: "Latest Blog" },
                       {
-                        href: "/find-news/colleges",
+                        href: "/find-blog/colleges",
                         label: "Colleges Updates",
                       },
-                      { href: "/find-news/exams", label: "Exams Updates" },
+                      { href: "/find-blog/exams", label: "Exams Updates" },
                       {
-                        href: "/find-news/scholarships",
+                        href: "/find-blog/scholarships",
                         label: "Scholarships Updates",
                       },
                     ].map(({ href, label }) => (

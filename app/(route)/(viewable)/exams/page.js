@@ -31,13 +31,7 @@ export default function ExamsPage() {
             className="border px-3 py-2 rounded w-full shadow"
           />
         </div>
-
-        {/* Count */}
-        <div className="text-center text-lg font-medium text-gray-700 mb-6">
-          Total Entrance Exams:
-          {/* {filteredExams.length} */}
-        </div>
-
+        
         {/* Exam Grid */}
         <div className="lg:col-span-3">
           <ExamCard query={query} />

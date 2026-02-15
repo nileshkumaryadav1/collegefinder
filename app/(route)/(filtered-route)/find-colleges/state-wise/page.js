@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import CollegeCard from "@/components/custom/CollegeCard";
 
 // All 28 states + 9 union territories
 const statesAndUTs = [
@@ -49,7 +49,7 @@ function Page() {
   const [colleges, setColleges] = useState([]);
   const [filteredColleges, setFilteredColleges] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedState, setSelectedState] = useState("");
+  const [selectedState, setSelectedState] = useState("Select State");
   const [loading, setLoading] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -60,9 +60,9 @@ function Page() {
         const res = await fetch("/api/colleges");
         const data = await res.json();
 
-        setColleges(data);
+        setColleges(Array.isArray(data) ? data : []);
         const filtered = data.filter((college) =>
-          college.location.toLowerCase().includes("")
+          college.location.toLowerCase().includes(""),
         );
         setFilteredColleges(filtered);
       } catch (error) {
@@ -76,10 +76,15 @@ function Page() {
   }, []);
 
   useEffect(() => {
-    // Filter colleges by selected state
+    if (selectedState === "Select State") {
+      setFilteredColleges(colleges);
+      return;
+    }
+
     const stateFiltered = colleges.filter((college) =>
-      college.location.toLowerCase().includes(selectedState.toLowerCase())
+      college.location?.toLowerCase().includes(selectedState.toLowerCase()),
     );
+
     setFilteredColleges(stateFiltered);
     setSearchQuery("");
   }, [selectedState, colleges]);
@@ -88,10 +93,10 @@ function Page() {
     setSearchQuery(query);
     const filtered = colleges
       .filter((college) =>
-        college.location.toLowerCase().includes(selectedState.toLowerCase())
+        college.location.toLowerCase().includes(selectedState.toLowerCase()),
       )
       .filter((college) =>
-        college.name.toLowerCase().includes(query.toLowerCase())
+        college.name.toLowerCase().includes(query.toLowerCase()),
       );
     setFilteredColleges(filtered);
   };
@@ -104,11 +109,16 @@ function Page() {
     >
       <header className="text-center mb-8">
         <h1 className="md:text-4xl text-3xl font-bold text-blue-600 mb-2">
-          {selectedState} Colleges 🏫
+          {selectedState === "Select State"
+            ? "All Colleges 🏫"
+            : `${selectedState} Colleges 🏫`}
         </h1>
         <p className="text-gray-500 text-lg mb-4">
-          Explore and find top {selectedState} Colleges. Filter by name,
-          location, and more.
+          Explore and find top{" "}
+          {selectedState === "Select State"
+            ? "All Colleges"
+            : `${selectedState} Colleges`}
+          . Filter by name, location, and more.
         </p>
       </header>
 
@@ -134,55 +144,28 @@ function Page() {
         />
       </div>
 
-      <div className="text-center text-lg font-medium text-gray-700 mb-6">
-        <p>
-          Total Colleges in {selectedState}: {filteredColleges.length}
-        </p>
-      </div>
-
-      {loading && <p className="text-center p-30">Loading...</p>}
-
-      {/* colleges card */}
-      <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredColleges.map((college) => (
-          <div
-            key={college.slug}
-            className="bg-white rounded-lg shadow-md p-4 flex flex-col"
-          >
-            <Link href={`/colleges/${college.slug}`}>
-              <div className="flex items-center justify-between mb-4">
-                <Image
-                  src={college.logoUrl}
-                  alt={`${college.name} logo`}
-                  width={100}
-                  height={100}
-                  className="w-16 h-16 object-contain rounded"
-                />
-                <span className="text-sm font-medium text-gray-600 btn btn-primary">
-                  #{college.nirfRanking}
-                </span>
-              </div>
-              <Image
-                src={college.imageUrl}
-                alt={college.name}
-                width={400}
-                height={300}
-                className="w-full h-40 object-cover rounded-md mb-4"
-              />
-              <h2 className="text-md font-bold mb-1">{college.name}</h2>
-              <p className="text-gray-600 text-sm mb-2">{college.location}</p>
-            </Link>
-          </div>
-        ))}
+      {/* College Listings Section */}
+      <div>
+        <CollegeCard
+          query={selectedState === "Select State" ? "" : selectedState}
+          collegeType={""}
+          sortBy={"nirfRanking"}
+          sortOrder={"asc"}
+        />
       </div>
 
       <div className="bg-yellow-500 text-black text-center py-4 my-8 rounded-lg shadow-lg">
         <h2 className="text-xl md:text-3xl font-semibold text-black">
-          Apply to Top {selectedState} Colleges Today!
+          Apply to Top{" "}
+          {selectedState === "Select State"
+            ? "All Colleges 🏫"
+            : `${selectedState} Colleges 🏫`}{" "}
+          Today!
         </h2>
         <p className="text-sm mt-2 mb-4">
-          Explore top-rated institutions in {selectedState} and secure your
-          future now.
+          Explore top-rated institutions in{" "}
+          {selectedState === "Select State" ? "India" : `${selectedState}`} and
+          secure your future now.
         </p>
         <Link
           href="/sponsors"

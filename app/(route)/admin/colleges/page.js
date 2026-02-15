@@ -108,12 +108,7 @@ export default function AdminCollegePage() {
         </div>
 
         {/* ================= ACTION BUTTONS ================= */}
-        <div className="grid sm:grid-cols-2 gap-6">
-          <Link href="/admin/colleges/manage" className="admin-card border border-[var(--border)] rounded-half p-4">
-            <Building2 />
-            <span>Manage Colleges</span>
-          </Link>
-
+        <div className="grid sm:grid-cols-1 gap-6">
           <Link
             href="/admin/colleges/add"
             className="admin-card bg-green-50 border-green-500 text-green-600 hover:bg-green-500 hover:text-white border border-[var(--border)] rounded-half p-4"

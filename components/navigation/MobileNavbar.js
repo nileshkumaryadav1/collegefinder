@@ -24,16 +24,16 @@ const MobileNavbar = () => {
       <div className="flex justify-around items-center bg-[var(--background)] text-[var(--foreground)] border-t border-gray-200 dark:border-gray-700 p-2">
         <NavItem href="/" icon={Home} label="Home" active={pathname === "/"} />
         <NavItem
-          href="/colleges"
-          icon={Building2}
-          label="Colleges"
-          active={pathname === "/colleges"}
-        />
-        <NavItem
           href="/exams"
           icon={PenBox}
           label="Exams"
           active={pathname === "/exams"}
+        />
+        <NavItem
+          href="/colleges"
+          icon={Building2}
+          label="Colleges"
+          active={pathname === "/colleges"}
         />
         {/* <NavItem
           href="/scholarships"

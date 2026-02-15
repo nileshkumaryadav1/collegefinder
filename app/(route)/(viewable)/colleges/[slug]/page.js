@@ -63,7 +63,7 @@ export async function generateMetadata({ params }) {
 }
 
 // Default page to render for each college slug
-export default async function DetailCollegeCard({ params }) {
+export default async function DetailCollegePage({ params }) {
   const { slug } = params;
 
   try {
@@ -75,7 +75,7 @@ export default async function DetailCollegeCard({ params }) {
     if (!college) return <NotFound />; // Render NotFound if no college is found
 
     return (
-      <section className="body-font w-full overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
+      <section className="body-font w-full bg-[var(--background)] text-[var(--foreground)]">
         <div className="md:max-w-11/12 mx-auto md:p-6">
           <SingleCollegeCard college={college} />
         </div>

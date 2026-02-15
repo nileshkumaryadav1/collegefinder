@@ -79,9 +79,18 @@ export default function AdminLayout({ children }) {
 
   if (!authChecked) {
     return (
-      <div className="flex flex-col justify-center items-center px-6 py-10 gap-2 text-[color:var(--foreground)] bg-[color:var(--background)]">
-        <LoadingSkeletonSmall />
-        <LoadingSkeleton />
+      <div className="text-[color:var(--foreground)] bg-[color:var(--background)] p-4">
+        <div className="md:flex gap-2 mb-4">
+          <LoadingSkeletonSmall />
+          <LoadingSkeletonSmall />
+          <LoadingSkeletonSmall />
+        </div>
+
+        <div className="md:flex gap-2">
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+        </div>
       </div>
     );
   }

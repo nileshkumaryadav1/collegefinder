@@ -186,13 +186,13 @@ export default function SponsorAdminPage() {
               <div className="mt-2 md:mt-0 flex gap-2">
                 <button
                   onClick={() => handleEdit(sponsor)}
-                  className="btn btn-sm btn-outline"
+                  className="btn btn-sm btn-outline cursor-pointer"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(sponsor.email)}
-                  className="btn btn-sm btn-error text-white"
+                  className="btn btn-sm btn-error text-red-500 cursor-pointer"
                 >
                   Delete
                 </button>

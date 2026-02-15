@@ -7,6 +7,7 @@ import PopUp from "@/components/ad/PopUp";
 import HomeExplore from "@/components/custom/HomeExplore";
 import TestimonialSection from "@/components/custom/home/Testimonal";
 import FloatingTrendingNewsButton from "@/components/custom/myself/FloatingTrendingNewsButton";
+import ExamCardSmall from "@/components/custom/ExamCardSmall";
 
 export default function Home() {
   const exploreData = [
@@ -76,6 +77,21 @@ export default function Home() {
             </Link>
           </div>
           <SmallCardOfInsights />
+        </div>
+      </section>
+
+      {/* Important Exams */}
+      <section className="md:py-12 py-6 px-4 bg-[var(--background)] text-[var(--foreground)]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-center md:mb-6 mb-4">
+            <h2 className="text-2xl font-semibold underline decoration-sky-500/30 hover:decoration-sky-500">
+              Important Exams
+            </h2>
+            <Link href="/insights" className="text-blue-600 hover:underline">
+              View Exams
+            </Link>
+          </div>
+          <ExamCardSmall query="" />
         </div>
       </section>
 

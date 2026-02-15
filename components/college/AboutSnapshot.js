@@ -4,7 +4,7 @@ export default function AboutSnapshot({ college }) {
   const description = college.about || college.description;
 
   return (
-    <section id="about" className="max-w-6xl mx-auto">
+    <section id="about" className="max-w-6xl mx-auto scroll-mt-28">
       <div className="p-6 rounded-2xl shadow bg-[var(--card)] space-y-6">
         {/* Title */}
         <h2 className="text-xl font-semibold">About</h2>

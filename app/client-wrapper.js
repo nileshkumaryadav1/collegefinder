@@ -12,7 +12,7 @@ export default function ClientWrapper({ children }) {
   return (
     <>
       {!isAdminRoute && <Navbar />}
-      <main className={isAdminRoute ? "" : "mt-12 md:mt-16"}>{children}</main>
+      <main className={isAdminRoute ? "" : "mt-16"}>{children}</main>
       {!isAdminRoute && <MobileNavbar />}
       {!isAdminRoute && <Footer />}
     </>

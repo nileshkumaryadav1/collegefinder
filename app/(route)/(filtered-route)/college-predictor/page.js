@@ -44,46 +44,42 @@ export default function AdmissionPredictorPage() {
 
     setIsLoading(true);
 
-    const categoryMap = {
-      General: 0,
-      "OBC-NCL": 1,
-      "General-EWS": 2,
-      "Scheduled Castes": 3,
-      "Scheduled Tribes": 4,
-    };
-
-    const catIndex = categoryMap[category];
+    const userRank = parseInt(score);
 
     const results = colleges
       .map((college) => {
-        const cutOffs = college.cutOff
-          .split(",")
-          .map((c) => parseInt(c.trim(), 10));
-        const categoryCutoff = cutOffs[catIndex];
+        if (!college.cutOff || college.cutOff.length === 0) return null;
 
-        const isEligible = parseInt(score) <= categoryCutoff;
+        // Find matching cut-off for B.Tech CSE + selected category
+        const matchingCutoff = college.cutOff.find(
+          (c) =>
+            c.program === "B.Tech" &&
+            c.specialization?.toLowerCase() === "cse" &&
+            c.category === category,
+        );
 
-        return isEligible
-          ? {
-              name: college.name,
-              slug: college.slug,
-              year: college.year,
-              location: college.location,
-              phone: college.phone,
-              email: college.email,
-              nirfRanking: college.nirfRanking,
-              imageUrl: college.imageUrl,
-              logoUrl: college.logoUrl,
-              cutOff: college.cutOff,
-              eligible: "Eligible",
-              _id: college._id,
-            }
-          : null;
+        if (!matchingCutoff) return null;
+
+        const closingRank = parseInt(matchingCutoff.closingRank);
+
+        if (userRank <= closingRank) {
+          return {
+            _id: college._id,
+            name: college.name,
+            slug: college.slug,
+            location: college.location,
+            logoUrl: college.logoUrl,
+            nirfRanking: college.nirfRanking,
+            closingRank,
+            eligible: "Eligible",
+          };
+        }
+
+        return null;
       })
-      .filter((college) => college !== null);
+      .filter(Boolean);
 
     setPredictedColleges(results);
-
     setIsLoading(false);
   };
 
@@ -146,96 +142,88 @@ export default function AdmissionPredictorPage() {
       )}
 
       {/* Predicted college result */}
-      {/* Loading */}
       {isFetching ? (
         <div className="text-gray-500 text-lg">Loading colleges...</div>
       ) : (
         <>
-          {/* Prediction Results */}
+          {/* ================= Prediction Results ================= */}
           {predictedColleges.length > 0 && (
-            <section className="w-full max-w-6xl md:mb-20 md:mb-10 mb-6">
+            <section className="w-full max-w-6xl md:mb-20 mb-10">
               <h2 className="text-2xl font-bold text-green-700 text-center">
                 Predicted Colleges
               </h2>
+
               <p className="md:text-xl text-md text-gray-600 md:mb-10 mb-6 text-center">
-                Based on your score: <strong>{score}</strong>, CSE in these
-                colleges are :
+                Based on your rank <strong>{score}</strong>, you are eligible
+                for CSE (B.Tech) in the following colleges:
               </p>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {predictedColleges.map((college, index) => (
+                {predictedColleges.map((college) => (
                   <div
-                    key={index}
+                    key={college._id}
                     className="flex flex-col h-full p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition border border-gray-200"
                   >
-                    <div className="flex flex-col items-center">
-                      {/* College Logo */}
+                    <div className="flex flex-col items-center text-center">
                       <img
                         src={college.logoUrl || "/logo.png"}
-                        alt={`Logo`}
-                        className="w-25 h-25"
+                        alt="College Logo"
+                        className="w-20 h-20 object-contain mb-3"
                       />
 
-                      {/* College Name */}
-                      <h3 className="text-lg md:text-xl font-bold text-blue-800 mb-2 text-center line-clamp-2">
+                      <h3 className="text-lg md:text-xl font-bold text-blue-800 mb-1">
                         {college.name}
                       </h3>
 
-                      {/* Location */}
-                      <p className="text-sm text-gray-600 mb-2">
+                      <p className="text-sm text-gray-600">
                         {college.location}
                       </p>
+
+                      {college.nirfRanking && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          NIRF Rank: {college.nirfRanking}
+                        </p>
+                      )}
                     </div>
 
-                    {/* Cut-off Section */}
-                    <div className="text-sm text-gray-700 mb-3">
-                      <p className="font-semibold text-gray-600">
-                        Cut-off Ranks:
+                    {/* Cutoff Section */}
+                    <div className="text-sm text-gray-700 mt-4">
+                      <p className="font-semibold text-gray-600 mb-1">
+                        Category-wise Closing Ranks:
                       </p>
-                      <ul className="pl-4 list-disc space-y-1 mt-1 flex">
-                        {college.cutOff
-                          .split(",")
-                          .filter((c) => c.trim().length > 0)
-                          .map((cut, idx) => (
-                            <li key={idx} className="text-sm text-gray-800 pr-5">
-                              {cut.trim()}
-                            </li>
-                          ))}
+
+                      <ul className="space-y-1">
+                        {college.cutOff?.map((cut, idx) => (
+                          <li key={idx} className="text-gray-800">
+                            {cut.category}: {cut.closingRank}
+                          </li>
+                        ))}
                       </ul>
                     </div>
 
-                    {/* Facilities (optional) */}
-                    {college.facilities && (
-                      <div className="mb-3">
+                    {/* Facilities */}
+                    {college.facilities?.length > 0 && (
+                      <div className="mt-4">
                         <p className="font-semibold text-gray-600 text-sm mb-1">
                           Facilities:
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          {college.facilities
-                            .split(",")
-                            .map((facility, idx) => (
-                              <span
-                                key={idx}
-                                className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full"
-                              >
-                                {facility.trim()}
-                              </span>
-                            ))}
+                          {college.facilities.map((facility, idx) => (
+                            <span
+                              key={idx}
+                              className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full"
+                            >
+                              {facility}
+                            </span>
+                          ))}
                         </div>
                       </div>
                     )}
 
-                    {/* Eligibility */}
-                    <p
-                      className={`mt-auto font-semibold text-sm ${
-                        college.eligible === "Eligible"
-                          ? "text-green-600"
-                          : "text-red-500"
-                      }`}
-                    >
-                      {college.eligible}
+                    <p className="mt-auto font-semibold text-green-600 text-sm mt-4">
+                      Eligible
                     </p>
 
-                    {/* View Details Button */}
                     <Link
                       href={`/colleges/${college.slug}`}
                       className="mt-3 inline-block text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition"
@@ -245,25 +233,17 @@ export default function AdmissionPredictorPage() {
                   </div>
                 ))}
               </div>
-
-              <p className="md:text-xl text-md text-gray-600 md:mt-10 mt-4 text-center">
-                {predictedColleges.length > 8 ? "more Colleges..." : ""}
-              </p>
             </section>
           )}
 
-          {/* Previous Year Cut-offs */}
+          {/* ================= Previous Year Cutoffs ================= */}
           <section className="w-full max-w-6xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-blue-800 text-center md:mb-10 mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-blue-800 text-center md:mb-6 mb-3">
               Previous Year Cut-offs
             </h2>
 
-            <p className="text-gray-700 text-xs md:text-sm italic">
-              * Below are the JOSAA 2024 round 5 closing ranks for male-only
-              candidates, specific to the CSE (B.Tech) program.
-            </p>
-            <p className="text-gray-700 text-xs md:text-sm mb-4 italic">
-              * All mentioned ranks are category-wise.
+            <p className="text-gray-600 text-xs md:text-sm italic text-center mb-6">
+              Below are JOSAA 2024 Round 5 closing ranks for B.Tech (CSE).
             </p>
 
             {colleges.length > 0 ? (
@@ -272,60 +252,23 @@ export default function AdmissionPredictorPage() {
                   <thead className="bg-blue-100 text-blue-800 text-xs uppercase">
                     <tr>
                       <th className="px-6 py-4 text-left">College</th>
-                      <th className="px-6 py-4 text-left">Year</th>
-                      <th className="px-6 py-4 text-left">Cut-off</th>
+                      <th className="px-6 py-4 text-left">Category</th>
+                      <th className="px-6 py-4 text-left">Closing Rank</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {colleges.map((college, idx) => (
-                      <tr key={idx} className="border-b hover:bg-gray-50">
-                        <td className="md:px-6 px-4 md:py-4 py-2 text-xs md:text-sm">
-                          {college.name}
-                        </td>
-                        <td className="md:px-6 px-4 md:py-4 py-2 text-xs md:text-sm">
-                          {college.year || 2024}
-                        </td>
-                        <td className="md:px-6 px-4 md:py-4 py-2 text-xs md:text-sm">
-                          <Table
-                            // head={["Category", "Cut Offs"]}
-                            rows={[
-                              [
-                                <ul key="category-list">
-                                  {[
-                                    "General",
-                                    "OBC-NCL",
-                                    "G-EWS",
-                                    "SC",
-                                    "ST",
-                                  ].map((category, index) => (
-                                    <li key={index} className="mb-1 border-b">
-                                      {category}
-                                    </li>
-                                  ))}
-                                </ul>,
-                                <ul key="cutoff-list">
-                                  {college.cutOff
-                                    ? college.cutOff
-                                        .split(",")
-                                        .filter(
-                                          (line) => line.trim().length > 0
-                                        )
-                                        .map((line, idx) => (
-                                          <li
-                                            key={idx}
-                                            className="mb-1 border-b text-gray-800"
-                                          >
-                                            {line.trim()}
-                                          </li>
-                                        ))
-                                    : "Cut-off data not available."}
-                                </ul>,
-                              ],
-                            ]}
-                          />
-                        </td>
-                      </tr>
-                    ))}
+                    {colleges.map((college) =>
+                      college.cutOff?.map((cut, idx) => (
+                        <tr
+                          key={`${college._id}-${idx}`}
+                          className="border-b hover:bg-gray-50"
+                        >
+                          <td className="px-6 py-3">{college.name}</td>
+                          <td className="px-6 py-3">{cut.category}</td>
+                          <td className="px-6 py-3">{cut.closingRank}</td>
+                        </tr>
+                      )),
+                    )}
                   </tbody>
                 </table>
               </div>

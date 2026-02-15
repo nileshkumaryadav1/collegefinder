@@ -6,7 +6,10 @@ export default function HeroSnapshot({ college }) {
   if (!college) return null;
 
   return (
-    <section className="max-w-6xl mx-auto space-y-8">
+    <section
+      className="max-w-6xl mx-auto space-y-8 scroll-mt-28"
+      id="hero"
+    >
       {/* ================= HERO ================= */}
       <div className="p-6 rounded-2xl shadow bg-[var(--card)]">
         <div className="flex flex-col md:flex-row gap-6">

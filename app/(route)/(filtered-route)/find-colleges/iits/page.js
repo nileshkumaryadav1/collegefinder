@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
-import Image from "next/image";
+import CollegeCard from "@/components/custom/CollegeCard";
 
 function Page() {
   const [colleges, setColleges] = useState([]);
@@ -21,7 +20,7 @@ function Page() {
 
         // Filter colleges that have 'IIT' in their name (case-insensitive)
         const iitColleges = data.filter((college) =>
-          college.name.toLowerCase().includes("indian institute of technology")
+          college.name.toLowerCase().includes("indian institute of technology"),
         );
         setColleges(iitColleges);
         setFilteredColleges(iitColleges); // Initialize filtered colleges with IIT list
@@ -42,7 +41,7 @@ function Page() {
       setFilteredColleges(colleges); // If search query is empty, show all IIT colleges
     } else {
       const filtered = colleges.filter((college) =>
-        college.name.toLowerCase().includes(query.toLowerCase())
+        college.name.toLowerCase().includes(query.toLowerCase()),
       );
       setFilteredColleges(filtered);
     }
@@ -56,9 +55,7 @@ function Page() {
     >
       {/* Header Section */}
       <header className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-blue-600 mb-4">
-          IIT Colleges in India
-        </h1>
+        <h1 className="text-4xl font-bold text-blue-600 mb-4">IIT Colleges</h1>
         <p className="text-gray-500 text-lg mb-4">
           Explore and find the best IIT colleges in India. Filter by name,
           location, and more.
@@ -69,56 +66,21 @@ function Page() {
       <div className="flex justify-center mb-6 gap-4">
         <input
           type="text"
-          placeholder="Search IIT Colleges..."
+          placeholder="Search IITs 🔍..."
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
           className="p-3 w-2/3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
         />
       </div>
 
-      {/* Total Count of IIT Colleges */}
-      <div className="text-center text-lg font-medium text-gray-700 mb-6">
-        <p>Total IIT Colleges: {filteredColleges.length}</p>
-      </div>
-
-      {/* Loading Indicator */}
-      {loading && <p className="text-center p-30">Loading...</p>}
-
       {/* College Listings Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 hidden">
-        {filteredColleges.map((college) => (
-          <Link key={college.slug} href={`/colleges/${college.slug}`}>
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-blue-400 transition-transform transform hover:scale-[1.03] duration-200 ease-in-out overflow-hidden cursor-pointer">
-              <div className="p-6">
-                <Image
-                  src={college.image}
-                  alt={college.name}
-                  width={500}
-                  height={500}
-                  className=""
-                />
-                <h2 className="text-2xl font-bold text-blue-700 mb-1">
-                  {college.name}
-                </h2>
-                <p className="text-sm text-gray-500 mb-2">{college.location}</p>
-                <div className="text-sm text-gray-700 space-y-1">
-                  <p className="text-blue-500 px-2 py-1 text-md rounded-lg border">
-                    <span className="font-medium text-gray-800">
-                      NIRF Ranking:
-                    </span>{" "}
-                    <span className="text-blue-500">
-                      {college.nirfRanking || "NA"}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-
       <div>
-        <CollegeCardForHome query={'indian institute of technology'} collegeType={''} sortBy={''} sortOrder={''} />
+        <CollegeCard
+          query={"indian institute of technology"}
+          collegeType={""}
+          sortBy={"nirfRanking"}
+          sortOrder={"asc"}
+        />
       </div>
 
       {/* Ad Banner Promotion Section */}

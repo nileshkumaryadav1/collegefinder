@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import CollegeCardForHome from "@/components/custom/CollegeCardForHome";
-import Image from "next/image";
+import CollegeCard from "@/components/custom/CollegeCard";
 
 function Page() {
   const [colleges, setColleges] = useState([]);
@@ -78,49 +77,9 @@ function Page() {
         />
       </div>
 
-      {/* Total Count of NIT Colleges */}
-      <div className="text-center text-lg font-medium text-gray-700 mb-6">
-        <p>Total NIT Colleges: {filteredColleges.length}</p>
-      </div>
-
-      {/* Loading Indicator */}
-      {loading && <p className="text-center p-30">Loading...</p>}
-
       {/* College Listings Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 hidden">
-        {filteredColleges.map((college) => (
-          <Link key={college.slug} href={`/colleges/${college.slug}`}>
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-blue-400 transition-transform transform hover:scale-[1.03] duration-200 ease-in-out overflow-hidden cursor-pointer">
-              <div className="p-6">
-                <Image
-                  src={college.image}
-                  alt={college.name}
-                  width={500}
-                  height={500}
-                  className="mb-4 w-full"
-                />
-                <h2 className="text-2xl font-bold text-blue-700 mb-1">
-                  {college.name}
-                </h2>
-                <p className="text-sm text-gray-500 mb-2">{college.location}</p>
-                <div className="text-sm text-gray-700 space-y-1">
-                  <p className="text-blue-500 px-2 py-1 text-md rounded-lg border">
-                    <span className="font-medium text-gray-800">
-                      NIRF Ranking:
-                    </span>{" "}
-                    <span className="text-blue-500">
-                      {college.nirfRanking || "NA"}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-
       <div>
-        <CollegeCardForHome query={'national institute of technology'} collegeType={''} sortBy={''} sortOrder={''} />
+        <CollegeCard query={'national institute of technology'} collegeType={''} sortBy={'nirfRanking'} sortOrder={'asc'} />
       </div>
 
       {/* Ad Banner Promotion Section */}
