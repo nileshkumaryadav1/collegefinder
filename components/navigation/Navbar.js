@@ -126,7 +126,7 @@ const Navbar = () => {
             /> */}
             <NavItem
               href="/user/dashboard"
-              label="Student login"
+              label="Login"
               icon={<User size={18} />}
               active={pathname.startsWith("/user")}
             />
@@ -209,7 +209,7 @@ const Navbar = () => {
             <NavItemMobile
               href="/user/dashboard"
               icon={<User size={18} />}
-              label="Student login"
+              label="Login"
               active={pathname.startsWith("/user")}
               onClick={closeMenu}
             />
